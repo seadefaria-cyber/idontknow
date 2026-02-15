@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="#fed446" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Speech bubble -->
+  <path d="M6 8h36v24H20l-8 8v-8H6z"/>
+  <!-- Text lines "Aa" -->
+  <text x="14" y="24" font-family="sans-serif" font-size="14" font-weight="700" fill="#fed446" stroke="none">Aa</text>
+</svg>

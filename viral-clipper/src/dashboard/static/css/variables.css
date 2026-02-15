@@ -1,0 +1,30 @@
+:root {
+    /* Colors */
+    --bg: #000000;
+    --text: #ffffff;
+    --text-muted: #9BA1A5;
+    --accent: #fed446;
+    --accent-cyan: #0099ff;
+    --surface: #0a0a0a;
+    --surface-light: #111111;
+
+    /* Fonts */
+    --font-headline: 'Oswald', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+    --space-xl: 6rem;
+    --space-2xl: 8rem;
+
+    /* Sizes */
+    --container: 1200px;
+    --nav-height: 72px;
+
+    /* Transitions */
+    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --duration: 0.3s;
+}
