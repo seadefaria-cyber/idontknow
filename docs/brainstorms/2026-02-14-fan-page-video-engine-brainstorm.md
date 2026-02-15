@@ -85,86 +85,70 @@ Long-form content → AI finds viral moments → Auto-clip → Add captions + ho
 
 ---
 
-## Viral Content Strategy
-
-This is not just a clipping tool — it's a **viral content engine**. The AI brain must deeply understand:
-
-- **Hooks are everything** — first 1-3 seconds determine if someone watches. Every clip needs a scroll-stopping hook.
-- **Rage-baiting** — provocative framing that drives comments ("He ACTUALLY said this...")
-- **Click-baiting** — hooks and captions that compel engagement
-- **Platform-specific virality** — what works on TikTok is different from IG Reels vs YouTube Shorts vs X
-- **Trend awareness** — system must monitor real-time trends (sounds, formats, challenges) and incorporate them
-- **Engagement optimization** — captions designed to drive comments, shares, saves
-- **Clean hooks, dirty content OK** — no profanity in the first few seconds, mute cuss words in body
-
----
-
 ## System Components
 
-### 1. Asset Library & Ingestion
+### Core — The system doesn't work without these
+
+**1. Asset Library & Ingestion**
 - Accept uploads (local files, cloud links) and auto-download from URLs
 - Per-client content isolation
 - Track which moments have been clipped to avoid exact duplication
 - Catalog source content metadata (artist, type, date, topics)
 
-### 2. AI Brain (Content Strategy Engine)
+**2. AI Brain (Content Strategy Engine)**
 - Analyzes long-form content to find viral moments
 - Generates daily clip plans for all 30 accounts
-- Crafts hooks and selects caption strategies per clip
-- Writes post captions, hashtags, descriptions
+- Crafts hooks and selects caption strategies per clip — rage-bait, click-bait, engagement-optimized framing
+- Writes platform-specific post captions, hashtags, descriptions
 - Ensures uniqueness across all 1,860 monthly clips
-- Learns from performance data — what gets views, what doesn't
-- Incorporates trending formats and sounds
 - Respects per-client strategy/rules set by the user
+- Understands platform-specific virality (what works on TikTok differs from IG Reels vs YouTube Shorts vs X)
 
-### 3. Clip Generation Pipeline
+**3. Clip Generation Pipeline**
 - **FFmpeg Core**: Extract, crop, resize, overlay text, burn captions, mute profanity
 - **Smart Cropping**: Auto-detect and track speakers for vertical framing
 - **Caption Engine**: Burned-in subtitles with research-optimized styling
 - **Hook Engine**: Text overlays, compelling start selection, scroll-stop optimization
 - **Profanity Filter**: Detect and mute cuss words without losing surrounding context
-- **Variation Engine**: For content-limited clients, create multiple unique versions of the same moment (different hooks, crops, caption styles, lengths)
+- **Variation Engine**: Create multiple unique versions of the same moment (different hooks, crops, caption styles, lengths). **This is load-bearing** — a mid-tier artist with ~20 hours of content yields 200-400 raw clip-worthy moments. Hitting 1,860/month requires the variation engine to reliably produce distinct-feeling clips from the same source moments.
 - **Quality Checks**: Resolution, audio levels, no blank frames, proper duration
 
-### 4. Distribution System
+**4. Distribution & Scheduling**
 - Auto-post to TikTok, Instagram (Reels), YouTube Shorts, X/Twitter
 - Full automation — no manual approval step
+- Queue management across all accounts and clients
+- 12-hour posting intervals, smart staggering to avoid platform detection
 - Platform-specific upload handling
 - Credential management for 30+ accounts per client
-- Anti-detection measures: staggered timing, human-like posting patterns, proxy rotation
+- Anti-detection measures: human-like posting patterns, proxy rotation
+- Retry logic for failed posts, timezone awareness
 
-### 5. Account Management
-- System creates and manages fan page accounts across all 4 platforms
-- Profile setup: bio, profile pic, display name matching artist brand
-- Accept client-provided accounts alongside system-created ones
-- Secure credential storage
-- Monitor account health (shadow bans, restrictions, etc.)
+**5. Client Dashboard (Web UI)**
+- Add/manage artist clients
+- Upload source content + provide URLs for auto-download
+- Set per-client strategy, rules, and content guidelines
+- View content calendar (what's been posted, what's queued)
+- Manage accounts and credentials
 
-### 6. Trend Monitoring Engine
-- Real-time tracking of trending sounds, formats, and challenges across all 4 platforms
-- Feed trends into the AI Brain for automatic incorporation into clip plans
-- Platform-specific trend detection
+### Supporting — Makes the system better, not required to function
 
-### 7. Performance Analytics & Learning
+**6. Performance Analytics & Learning**
 - Track clip performance (views, likes, comments, shares, saves) across all accounts
 - Feed performance data back to AI Brain to improve future clip selection
 - Identify what hooks, caption styles, and content types perform best
 - Per-client performance dashboards
 
-### 8. Scheduling Engine
-- Queue management for all accounts across all clients
-- 12-hour posting intervals per account
-- Smart staggering to avoid platform detection
-- Retry logic for failed posts
-- Handle timezone awareness
+**7. Trend Monitoring Engine**
+- Real-time tracking of trending sounds, formats, and challenges across all 4 platforms
+- Feed trends into the AI Brain for automatic incorporation into clip plans
+- Platform-specific trend detection
 
-### 9. Client Dashboard (Web UI)
-- Add/manage artist clients
-- Upload source content + provide URLs for auto-download
-- Set per-client strategy, rules, and content guidelines
-- View content calendar (what's been posted, what's queued)
-- Performance analytics per account, per client
-- Manage accounts and credentials
+**8. Account Creation & Management** *(Highest-risk item)*
+- Automated creation of fan page accounts across all 4 platforms
+- Profile setup: bio, profile pic, display name matching artist brand
+- Accept client-provided accounts alongside system-created ones
+- Secure credential storage, monitor account health (shadow bans, restrictions)
+- **Risk**: Platforms aggressively block automated account creation. This may require browser automation, phone number verification services, or manual creation with system tracking. Feasibility must be validated early in planning.
 
 ---
 
@@ -184,7 +168,7 @@ This is not just a clipping tool — it's a **viral content engine**. The AI bra
 12. **Profanity handling** — clean hooks always, muted cuss words in body content.
 13. **Copyright risk accepted** — fan page model inherently involves using artist content. Accept takedowns as cost of doing business.
 14. **Caption style TBD** — needs research on what performs best. Will be determined in planning phase.
-15. **Full system from day 1** — user wants complete system, not incremental MVP.
+15. **Complete vision, practical build order** — the full system has 8 components. All are wanted. Planning phase must determine a build sequence that gets the core pipeline (ingest → clip → post) working first, then layers on supporting systems. User doesn't want a "stripped MVP" — they want the real thing, built in a smart order.
 16. **User's daily role** — feed content into the system and set strategy per client. System handles everything else.
 
 ---
