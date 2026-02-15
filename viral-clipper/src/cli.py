@@ -110,11 +110,30 @@ def main():
     status_parser = subparsers.add_parser("status", help="Show client status")
     status_parser.add_argument("client_id", type=int)
 
+    # serve
+    serve_parser = subparsers.add_parser("serve", help="Start the web dashboard")
+    serve_parser.add_argument("--host", default="127.0.0.1", help="Host to bind")
+    serve_parser.add_argument("--port", type=int, default=8000, help="Port to bind")
+    serve_parser.add_argument("--reload", action="store_true", help="Auto-reload on changes")
+
     args = parser.parse_args()
 
     if not args.command:
         parser.print_help()
         sys.exit(1)
+
+    # Serve doesn't need the database
+    if args.command == "serve":
+        import uvicorn
+
+        uvicorn.run(
+            "src.dashboard.app:create_app",
+            factory=True,
+            host=args.host,
+            port=args.port,
+            reload=args.reload,
+        )
+        return
 
     # Initialize database
     settings = get_settings()
