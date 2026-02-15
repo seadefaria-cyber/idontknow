@@ -559,15 +559,15 @@ class PostingError(ViralClipperError):
 ```
 
 **Security checklist (do first):**
-- [ ] `.gitignore` includes `.env`, `storage/`, `*.key`, `credentials*`
-- [ ] `.env.example` with placeholder values (never real secrets)
-- [ ] Fernet encryption for all stored credentials
+- [x] `.gitignore` includes `.env`, `storage/`, `*.key`, `credentials*`
+- [x] `.env.example` with placeholder values (never real secrets)
+- [x] Fernet encryption for all stored credentials
 - [ ] Dashboard authentication (session-based, HTTPS in production)
 - [ ] CSRF protection on all state-changing endpoints
 - [ ] Content Security Policy headers
 - [ ] File upload validation (MIME type check via magic bytes, size limits, safe filenames)
-- [ ] All FFmpeg calls use list format (never `shell=True`)
-- [ ] URL allowlist for yt-dlp downloads (SSRF protection)
+- [x] All FFmpeg calls use list format (never `shell=True`)
+- [x] URL allowlist for yt-dlp downloads (SSRF protection)
 - [ ] Log redaction for credentials and proxy URLs
 
 ---
