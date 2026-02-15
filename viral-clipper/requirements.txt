@@ -1,0 +1,36 @@
+# Core
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+jinja2==3.1.5
+python-multipart==0.0.20
+
+# Database
+sqlalchemy[asyncio]==2.0.36
+alembic==1.14.1
+psycopg2-binary==2.9.10
+
+# Task Queue
+dramatiq[redis]==1.17.1
+redis==5.2.1
+apscheduler==3.11.0
+
+# AI
+anthropic==0.43.0
+
+# Video Processing
+yt-dlp==2025.1.26
+
+# Transcription (install separately - requires PyTorch)
+# pip install whisperx
+
+# Configuration & Security
+pydantic==2.10.5
+pydantic-settings==2.7.1
+cryptography==44.0.0
+python-magic==0.4.27
+
+# Logging
+structlog==24.4.0
+
+# Utilities
+httpx==0.28.1
