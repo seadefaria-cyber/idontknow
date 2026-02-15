@@ -1,19 +1,17 @@
 <section class="contact" id="contact">
-    <div class="container contact__inner">
+    <div class="contact__inner">
         {% if form_success %}
-        <h2 class="contact__headline">GOT IT. WE'LL BE IN TOUCH.</h2>
-        <p class="contact__sub">We'll reach out within 24 hours.</p>
+        <h2 class="contact__headline reveal">GOT IT.</h2>
+        <p class="contact__sub reveal">We'll break down your content and send you a sample within 24 hours. No pitch. No call. Just the work.</p>
         {% else %}
-        <h2 class="contact__headline">READY TO GO VIRAL?</h2>
-        <p class="contact__sub">Let's talk about your content.</p>
-        <form class="contact__form" id="contact-form" action="/contact" method="post">
-            <div class="contact__fields">
-                <input type="text" name="name" placeholder="Name" required class="input">
-                <input type="email" name="email" placeholder="Email" required class="input">
-                <input type="text" name="artist" placeholder="Artist / Act" class="input">
-                <textarea name="message" placeholder="Message" rows="4" class="input input--textarea"></textarea>
+        <h2 class="contact__headline reveal">READY?</h2>
+        <p class="contact__sub reveal">Send us one video. We'll show you exactly what we'd do with it. Free.</p>
+        <form class="contact__form reveal" id="contact-form" action="/contact" method="post">
+            <input type="hidden" name="name" value="—">
+            <div class="contact__row">
+                <input type="email" name="email" placeholder="YOUR EMAIL" required class="input">
+                <button type="submit" class="btn">SEND IT</button>
             </div>
-            <button type="submit" class="btn btn--dark">SEND IT</button>
         </form>
         {% endif %}
     </div>

@@ -1,3 +1,22 @@
+/* ── Scroll Reveal ────────────────────────── */
+const reveals = document.querySelectorAll('.reveal');
+
+if (reveals.length > 0) {
+    const revealObserver = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.15 }
+    );
+
+    reveals.forEach(el => revealObserver.observe(el));
+}
+
 /* ── Mobile Nav Toggle ───────────────────── */
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('nav-links');
@@ -8,7 +27,6 @@ if (hamburger && navLinks) {
         navLinks.classList.toggle('open');
     });
 
-    // Close menu when a link is clicked
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
@@ -17,7 +35,7 @@ if (hamburger && navLinks) {
     });
 }
 
-/* ── Smooth Scroll for anchor links ──────── */
+/* ── Smooth Scroll ───────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
         const target = document.querySelector(anchor.getAttribute('href'));
@@ -36,15 +54,11 @@ if (form) {
         const data = new FormData(form);
         const btn = form.querySelector('button[type="submit"]');
         const originalText = btn.textContent;
-        btn.textContent = 'SENDING...';
+        btn.textContent = 'Sending...';
         btn.disabled = true;
 
         try {
-            const res = await fetch('/contact', {
-                method: 'POST',
-                body: data,
-            });
-
+            const res = await fetch('/contact', { method: 'POST', body: data });
             if (res.ok) {
                 const html = await res.text();
                 const parser = new DOMParser();
