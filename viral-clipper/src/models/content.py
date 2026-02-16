@@ -19,11 +19,7 @@ class ClipMoment(Base):
     __tablename__ = "clip_moments"
     __table_args__ = (
         Index("idx_clips_client_status", "client_id", "status"),
-        Index(
-            "idx_clips_viral_score",
-            "viral_score",
-            postgresql_where="status = 'detected'",
-        ),
+        Index("idx_clips_viral_score", "viral_score"),
     )
 
     id: Mapped[int] = mapped_column(primary_key=True)

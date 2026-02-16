@@ -1,39 +1,47 @@
 .btn {
     display: inline-block;
-    padding: 16px 40px;
-    font-family: var(--font);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    background: var(--black);
+    padding: 16px 48px;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    background: var(--red);
     color: var(--white);
     border: none;
     cursor: pointer;
-    transition: opacity 0.3s var(--ease);
+    transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
 .btn:hover {
-    opacity: 0.75;
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px var(--red-glow), 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.btn--outline {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn--outline:hover {
+    border-color: var(--white);
+    box-shadow: none;
 }
 
 .input {
     padding: 16px 20px;
-    background: var(--off-white);
-    border: 1px solid var(--gray-border);
-    color: var(--black);
-    font-family: var(--font);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: var(--tracking);
-    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    transition: border-color 0.3s var(--ease);
 }
 
 .input::placeholder {
-    color: var(--gray);
+    color: var(--silver-dim);
 }
 
 .input:focus {
-    border-color: var(--black);
     outline: none;
+    border-color: var(--red);
 }

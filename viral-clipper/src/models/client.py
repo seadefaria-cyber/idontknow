@@ -2,8 +2,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Optional
 
-from sqlalchemy import Enum as SQLEnum, ForeignKey, Index, String, func
-from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy import JSON, Enum as SQLEnum, ForeignKey, Index, String, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.models.base import Base
@@ -38,7 +37,7 @@ class Source(Base):
     file_path: Mapped[str]
     title: Mapped[str]
     duration_seconds: Mapped[float]
-    transcript_json: Mapped[Optional[dict]] = mapped_column(JSONB)
+    transcript_json: Mapped[Optional[dict]] = mapped_column(JSON)
     status: Mapped[SourceStatus] = mapped_column(
         SQLEnum(SourceStatus, native_enum=False),
         default=SourceStatus.PENDING,
