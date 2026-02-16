@@ -1,7 +1,7 @@
 body {
-    background: var(--white);
-    color: var(--black);
-    font-family: var(--font);
+    background: var(--navy-dark);
+    color: var(--white);
+    font-family: var(--font-body);
     overflow-x: hidden;
 }
 
@@ -14,8 +14,8 @@ body {
 
 .reveal {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    transform: translateY(24px);
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
 }
 
 .reveal.visible {

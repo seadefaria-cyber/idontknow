@@ -108,9 +108,12 @@ class FFmpegService:
 
         encoder_args = self._get_encoder_args()
 
+        # Escape the font path for FFmpeg filter syntax
+        safe_font = self.settings.font_path.replace("\\", "\\\\").replace(":", "\\:").replace("'", "\\'")
+
         drawtext_filter = (
             f"drawtext=text='{safe_text}'"
-            f":fontfile=/usr/share/fonts/truetype/montserrat/Montserrat-Bold.ttf"
+            f":fontfile='{safe_font}'"
             f":fontsize=48:fontcolor=white:borderw=3:bordercolor=black"
             f":x=(w-text_w)/2:y=h*0.15"
             f":enable='between(t,0,{duration})'"

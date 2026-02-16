@@ -1,11 +1,7 @@
 @media (max-width: 1024px) {
-    .how__inner {
+    .how__grid {
         grid-template-columns: 1fr;
-        gap: var(--space-lg);
-    }
-
-    .how__title {
-        position: static;
+        gap: var(--space-md);
     }
 }
 
@@ -30,7 +26,7 @@
         align-items: center;
         justify-content: center;
         gap: var(--space-lg);
-        background: var(--white);
+        background: rgba(0, 13, 26, 0.97);
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s var(--ease);
@@ -42,38 +38,34 @@
     }
 
     .nav__links a {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
-    .hero__bottom {
+    .hero__actions {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .hero__stats {
+        flex-direction: column;
+        gap: var(--space-md);
+        align-items: center;
     }
 
     .feed__grid {
         height: 450px;
     }
 
-    .feed__col { width: 160px; }
+    .feed__col { width: 170px; }
     .feed__col--3,
     .feed__col--4 { display: none; }
-
-    .number__inner {
-        flex-direction: column;
-        gap: var(--space-lg);
-    }
-
-    .number__divider {
-        width: 60px;
-        height: 1px;
-    }
 
     .contact__row {
         flex-direction: column;
     }
 
     .contact__row .input {
-        border-right: 1px solid var(--gray-border);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .footer__inner {
