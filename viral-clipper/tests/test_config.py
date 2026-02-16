@@ -3,21 +3,7 @@ import pytest
 
 class TestSettings:
     def test_valid_creation(self, settings):
-        assert settings.claude_api_key is not None
         assert settings.storage_base_path.exists()
-
-    def test_claude_api_key_min_length(self, tmp_path, fernet_key, monkeypatch):
-        monkeypatch.setenv("DATABASE_URL", "postgresql://test:test@localhost/test")
-        monkeypatch.setenv("CLAUDE_API_KEY", "short")
-        monkeypatch.setenv("ENCRYPTION_KEY", fernet_key)
-        monkeypatch.setenv("DASHBOARD_SECRET_KEY", "a" * 32)
-        monkeypatch.setenv("STORAGE_BASE_PATH", str(tmp_path / "s"))
-
-        from pydantic import ValidationError
-        from src.config import Settings
-
-        with pytest.raises(ValidationError):
-            Settings()
 
     def test_max_concurrent_transcriptions_bounds(self, tmp_path, fernet_key, monkeypatch):
         monkeypatch.setenv("DATABASE_URL", "postgresql://test:test@localhost/test")

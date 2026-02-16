@@ -28,7 +28,10 @@ IMPORTANT:
 - Clips MUST be 30-90 seconds. No shorter, no longer.
 - The hook text must create curiosity or urgency. Best patterns: question, bold claim, "Wait for it...", relatable statement.
 - Score honestly. Most moments are 30-50. Only truly exceptional moments score 80+.
-- Prefer moments with clear emotional peaks, not just interesting information."""
+- Prefer moments with clear emotional peaks, not just interesting information.
+
+Respond with ONLY valid JSON in this exact format (no markdown, no explanation):
+{{"moments": [{{"start_time": 0.0, "end_time": 30.0, "hook_text": "...", "caption_text": "...", "viral_score": 85, "reasoning": "..."}}]}}"""
 
 HOOK_GENERATION_SYSTEM = """You are a viral content writer specializing in scroll-stopping hooks for short-form video.
 Your hooks appear as text overlays in the first 2-3 seconds of TikTok/Reels/Shorts.
@@ -56,4 +59,7 @@ Transcript excerpt: {transcript_excerpt}
 For each hook, provide:
 - Hook text (max 10 words, for text overlay)
 - Post caption (1-2 sentences with relevant hashtags)
-- Hook style (question/bold_claim/relatability/urgency/controversy/story)"""
+- Hook style (question/bold_claim/relatability/urgency/controversy/story)
+
+Respond with ONLY valid JSON in this exact format (no markdown, no explanation):
+{{"hooks": [{{"hook_text": "...", "post_caption": "...", "hook_style": "question"}}]}}"""
