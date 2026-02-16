@@ -55,10 +55,6 @@ def cmd_process_folder(args) -> None:
     """Process all video files in a folder through the clipping pipeline."""
     settings = get_settings()
 
-    if not settings.claude_api_key:
-        print("ERROR: CLAUDE_API_KEY not set in .env")
-        sys.exit(1)
-
     input_dir = Path(args.folder)
     output_dir = Path(args.output)
 
@@ -262,10 +258,6 @@ def cmd_test_account(args) -> None:
 def cmd_clip_and_post(args) -> None:
     """Process folder, assign clips to accounts, schedule posts."""
     settings = get_settings()
-
-    if not settings.claude_api_key:
-        print("ERROR: CLAUDE_API_KEY not set in .env")
-        sys.exit(1)
 
     init_db(settings.database_url)
 

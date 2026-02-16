@@ -1,9 +1,9 @@
 from typing import Any
 
-import anthropic
 import structlog
 from pydantic import BaseModel, Field
 
+from src.ai.claude_cli import call_claude
 from src.ai.prompts import HOOK_GENERATION_SYSTEM, HOOK_GENERATION_USER
 from src.config import Settings
 from src.exceptions import AIDetectionError
@@ -30,7 +30,6 @@ class HookWriter:
 
     def __init__(self, settings: Settings):
         self.settings = settings
-        self.client = anthropic.Anthropic(api_key=settings.claude_api_key)
 
     def generate_hooks(
         self,
@@ -60,14 +59,11 @@ class HookWriter:
         )
 
         try:
-            response = self.client.messages.create(
-                model=self.settings.claude_model_bulk,
-                max_tokens=2000,
-                system=HOOK_GENERATION_SYSTEM,
-                messages=[{"role": "user", "content": user_prompt}],
+            response_text = call_claude(
+                system_prompt=HOOK_GENERATION_SYSTEM,
+                user_prompt=user_prompt,
             )
 
-            response_text = response.content[0].text
             hook_set = HookSet.model_validate_json(response_text)
 
             logger.info(
@@ -79,8 +75,6 @@ class HookWriter:
 
             return hook_set.hooks
 
-        except anthropic.APIError as e:
-            raise AIDetectionError(f"Claude API error during hook generation: {e}") from e
         except Exception as e:
             raise AIDetectionError(f"Hook generation failed: {e}") from e
 
