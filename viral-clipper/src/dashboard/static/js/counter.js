@@ -1,6 +1,6 @@
 /* ── Animated Counters (IntersectionObserver) ── */
 function animateCounter(el) {
-    const target = parseInt(el.dataset.target, 10);
+    const target = parseInt(el.dataset.display || el.dataset.target, 10);
     const suffix = el.dataset.suffix || '';
     const duration = 2000;
     const start = performance.now();

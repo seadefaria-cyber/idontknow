@@ -3,6 +3,10 @@
     .services__grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .process__steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* ── Mobile (<809px) ─────────────────────── */
@@ -55,6 +59,11 @@
     .stats__grid {
         grid-template-columns: 1fr;
         gap: var(--space-lg);
+    }
+
+    /* Process */
+    .process__steps {
+        grid-template-columns: 1fr;
     }
 
     /* Services */

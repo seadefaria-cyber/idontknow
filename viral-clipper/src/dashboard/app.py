@@ -26,6 +26,14 @@ def create_app() -> FastAPI:
     async def landing(request: Request):
         return templates.TemplateResponse(request, "landing.html")
 
+    @app.get("/terms", response_class=HTMLResponse)
+    async def terms(request: Request):
+        return templates.TemplateResponse(request, "terms.html")
+
+    @app.get("/privacy", response_class=HTMLResponse)
+    async def privacy(request: Request):
+        return templates.TemplateResponse(request, "privacy.html")
+
     @app.post("/contact", response_class=HTMLResponse)
     async def contact(
         request: Request,

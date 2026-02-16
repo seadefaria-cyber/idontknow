@@ -84,6 +84,16 @@
     padding-bottom: var(--space-xl);
 }
 
+.hero__eyebrow {
+    font-family: var(--font-headline);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: var(--space-md);
+}
+
 .hero__headline {
     font-family: var(--font-headline);
     font-size: clamp(3rem, 8vw, 6.5rem);
@@ -99,7 +109,13 @@
     color: var(--text-muted);
     line-height: 1.7;
     margin-bottom: var(--space-lg);
-    max-width: 600px;
+    max-width: 640px;
+}
+
+.hero__ctas {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
 }
 
 /* ── Clients ─────────────────────────────── */
@@ -203,6 +219,65 @@
     color: var(--text-muted);
     line-height: 1.8;
     margin-bottom: var(--space-sm);
+}
+
+/* ── Process ─────────────────────────────── */
+.process {
+    padding: var(--space-2xl) 0;
+}
+
+.process__headline {
+    font-family: var(--font-headline);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: var(--space-xs);
+}
+
+.process__sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: var(--space-lg);
+}
+
+.process__steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+}
+
+.process__step {
+    padding: var(--space-md);
+    border-left: 2px solid var(--accent);
+}
+
+.process__number {
+    font-family: var(--font-headline);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0.3;
+    line-height: 1;
+    display: block;
+    margin-bottom: var(--space-sm);
+}
+
+.process__title {
+    font-family: var(--font-headline);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-xs);
+}
+
+.process__desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
 }
 
 /* ── Services ────────────────────────────── */
@@ -315,4 +390,74 @@
 .footer__bottom p {
     font-size: 0.8rem;
     color: var(--text-muted);
+}
+
+.footer__bottom a {
+    color: var(--text-muted);
+    transition: color var(--duration) var(--ease);
+}
+
+.footer__bottom a:hover {
+    color: var(--text);
+}
+
+/* ── Legal Pages ────────────────────────── */
+.legal {
+    padding-top: calc(var(--nav-height) + var(--space-xl));
+    padding-bottom: var(--space-2xl);
+}
+
+.legal__inner {
+    max-width: 800px;
+}
+
+.legal__headline {
+    font-family: var(--font-headline);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: var(--space-xs);
+}
+
+.legal__updated {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+}
+
+.legal h2 {
+    font-family: var(--font-headline);
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-xs);
+}
+
+.legal p {
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--space-sm);
+}
+
+.legal ul {
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--space-sm);
+    padding-left: var(--space-md);
+    list-style: disc;
+}
+
+.legal li {
+    margin-bottom: 0.25rem;
+}
+
+.legal__link {
+    color: var(--accent);
+    transition: opacity var(--duration) var(--ease);
+}
+
+.legal__link:hover {
+    opacity: 0.8;
 }

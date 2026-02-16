@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<nav class="nav" id="nav">
+    <div class="nav__inner container">
+        <a href="/" class="nav__logo">
+            <img src="/static/images/logo.svg" alt="POST" width="100" height="32">
+        </a>
+        <ul class="nav__links" id="nav-links">
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/#philosophy">About</a></li>
+            <li><a href="/#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="legal" id="terms">
+    <div class="container legal__inner">
+        <h1 class="legal__headline">TERMS OF SERVICE</h1>
+        <p class="legal__updated">Last updated: February 16, 2026</p>
+
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing and using the POST platform and services ("Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the Service.</p>
+
+        <h2>2. Description of Service</h2>
+        <p>POST provides automated content clipping, scheduling, and distribution services for social media platforms. Our platform processes long-form video content into short-form clips and manages posting schedules across authorized social media accounts.</p>
+
+        <h2>3. User Accounts</h2>
+        <p>You are responsible for maintaining the confidentiality of your account credentials. You agree to provide accurate and complete information when creating your account. You must notify us immediately of any unauthorized use of your account.</p>
+
+        <h2>4. Content and Intellectual Property</h2>
+        <p>You retain all rights to the content you upload to the Service. By using the Service, you grant POST a limited license to process, modify (clip, caption, and format), and distribute your content on your behalf to the social media accounts you authorize. You represent that you have the necessary rights to any content you upload.</p>
+
+        <h2>5. Social Media Account Authorization</h2>
+        <p>The Service posts content to social media accounts that you explicitly authorize. You are responsible for ensuring that automated posting complies with each platform's terms of service. POST is not responsible for any actions taken by social media platforms against your accounts.</p>
+
+        <h2>6. Prohibited Uses</h2>
+        <p>You agree not to:</p>
+        <ul>
+            <li>Upload content you do not have rights to use</li>
+            <li>Use the Service for illegal purposes</li>
+            <li>Attempt to reverse engineer or compromise the platform</li>
+            <li>Upload content containing illegal material</li>
+            <li>Misrepresent your identity or affiliation</li>
+        </ul>
+
+        <h2>7. Payment and Billing</h2>
+        <p>Service fees are billed monthly. All fees are non-refundable unless otherwise stated. We reserve the right to modify pricing with 30 days written notice.</p>
+
+        <h2>8. Limitation of Liability</h2>
+        <p>POST is provided "as is" without warranty of any kind. We are not liable for any indirect, incidental, or consequential damages arising from your use of the Service. Our total liability shall not exceed the amount you paid for the Service in the preceding 12 months.</p>
+
+        <h2>9. Termination</h2>
+        <p>Either party may terminate this agreement at any time. Upon termination, your access to the Service will be revoked and your content will be deleted within 30 days, unless you request an export.</p>
+
+        <h2>10. Changes to Terms</h2>
+        <p>We may update these Terms from time to time. Continued use of the Service after changes constitutes acceptance of the new Terms.</p>
+
+        <h2>11. Contact</h2>
+        <p>For questions about these Terms, contact us at <a href="mailto:legal@postagency.io" class="legal__link">legal@postagency.io</a>.</p>
+    </div>
+</section>
+
+{% include "partials/footer.html" %}
+{% endblock %}
