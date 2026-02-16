@@ -1,30 +1,28 @@
 :root {
-    /* Colors */
-    --bg: #000000;
-    --text: #ffffff;
-    --text-muted: #9BA1A5;
-    --accent: #fed446;
-    --accent-cyan: #0099ff;
-    --surface: #0a0a0a;
-    --surface-light: #111111;
+    /* Red Bull-inspired palette */
+    --navy: #00162b;
+    --navy-dark: #000d1a;
+    --navy-surface: #001e3c;
+    --red: #db0a40;
+    --red-glow: rgba(219, 10, 64, 0.4);
+    --silver: #c0c8d0;
+    --silver-dim: #6b7a8d;
+    --white: #ffffff;
+    --white-off: #f0f2f4;
 
-    /* Fonts */
-    --font-headline: 'Oswald', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    /* Fonts — Bebas Neue = bold condensed like Red Bull headlines */
+    --font-display: 'Bebas Neue', Impact, sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
 
     /* Spacing */
     --space-xs: 0.5rem;
     --space-sm: 1rem;
     --space-md: 2rem;
     --space-lg: 4rem;
-    --space-xl: 6rem;
-    --space-2xl: 8rem;
+    --space-xl: 8rem;
+    --space-2xl: 12rem;
 
-    /* Sizes */
-    --container: 1200px;
-    --nav-height: 72px;
-
-    /* Transitions */
-    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --duration: 0.3s;
+    --nav-height: 64px;
+    --container: 1400px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }

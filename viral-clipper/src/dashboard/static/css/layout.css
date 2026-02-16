@@ -1,24 +1,24 @@
 body {
-    background: var(--bg);
-    color: var(--text);
+    background: var(--navy-dark);
+    color: var(--white);
     font-family: var(--font-body);
+    overflow-x: hidden;
 }
 
 .container {
     width: 100%;
     max-width: var(--container);
     margin: 0 auto;
-    padding: 0 var(--space-md);
+    padding: 0 var(--space-lg);
 }
 
-section {
-    padding: var(--space-xl) 0;
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
 }
 
-.text-accent {
-    color: var(--accent);
-}
-
-.hide-mobile {
-    display: inline;
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
 }

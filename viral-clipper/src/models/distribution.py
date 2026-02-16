@@ -39,6 +39,7 @@ class Account(Base):
     )
     username: Mapped[str] = mapped_column(String(100))
     credentials_encrypted: Mapped[str]
+    cookie_path: Mapped[Optional[str]] = mapped_column(default=None)
     status: Mapped[AccountStatus] = mapped_column(
         SQLEnum(AccountStatus, native_enum=False),
         default=AccountStatus.ACTIVE,
@@ -53,11 +54,7 @@ class Account(Base):
 class PostJob(Base):
     __tablename__ = "post_jobs"
     __table_args__ = (
-        Index(
-            "idx_posts_scheduled",
-            "scheduled_at",
-            postgresql_where="status = 'queued'",
-        ),
+        Index("idx_posts_scheduled", "scheduled_at"),
     )
 
     id: Mapped[int] = mapped_column(primary_key=True)

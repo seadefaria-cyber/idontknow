@@ -10,7 +10,6 @@ class TestExtractExcerpt:
     def _make_writer(self, settings):
         writer = HookWriter.__new__(HookWriter)
         writer.settings = settings
-        writer.client = MagicMock()
         return writer
 
     def test_exact_range(self, settings):
@@ -54,10 +53,8 @@ class TestExtractExcerpt:
 
 
 class TestGenerateHooks:
-    def test_successful_generation(self, settings):
-        writer = HookWriter.__new__(HookWriter)
-        writer.settings = settings
-        writer.client = MagicMock()
+    def test_successful_generation(self, settings, monkeypatch):
+        writer = HookWriter(settings)
 
         response_data = {
             "hooks": [
@@ -68,9 +65,10 @@ class TestGenerateHooks:
                 }
             ]
         }
-        mock_response = MagicMock()
-        mock_response.content = [MagicMock(text=json.dumps(response_data))]
-        writer.client.messages.create.return_value = mock_response
+        monkeypatch.setattr(
+            "src.ai.hook_writer.call_claude",
+            lambda **kwargs: json.dumps(response_data),
+        )
 
         transcript = {"segments": [{"start": 0, "end": 30, "text": "test content"}]}
         result = writer.generate_hooks(0.0, 30.0, transcript)

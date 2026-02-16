@@ -1,4 +1,4 @@
-"""Tests for the POST agency landing page."""
+"""Tests for the HOOK agency landing page."""
 
 import pytest
 from fastapi.testclient import TestClient
@@ -22,29 +22,27 @@ def _clear_submissions():
 def test_landing_page_loads(client):
     resp = client.get("/")
     assert resp.status_code == 200
-    assert "POST" in resp.text
+    assert "HOOK" in resp.text
 
 
 def test_landing_page_has_all_sections(client):
     resp = client.get("/")
     html = resp.text
     assert 'id="hero"' in html
-    assert 'id="clients"' in html
-    assert 'id="stats"' in html
-    assert 'id="philosophy"' in html
-    assert 'id="services"' in html
+    assert 'id="work"' in html
+    assert 'id="how"' in html
     assert 'id="contact"' in html
 
 
 def test_contact_form_submission(client):
     resp = client.post(
         "/contact",
-        data={"name": "Test", "email": "test@example.com", "artist": "DJ Test", "message": "Hello"},
+        data={"name": "—", "email": "test@example.com"},
     )
     assert resp.status_code == 200
     assert "GOT IT" in resp.text
     assert len(contact_submissions) == 1
-    assert contact_submissions[0]["name"] == "Test"
+    assert contact_submissions[0]["email"] == "test@example.com"
 
 
 def test_static_files_served(client):

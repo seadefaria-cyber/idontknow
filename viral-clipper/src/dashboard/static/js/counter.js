@@ -1,14 +1,13 @@
-/* ── Animated Counters (IntersectionObserver) ── */
+/* ── The Number — count up animation ──────── */
 function animateCounter(el) {
     const target = parseInt(el.dataset.display || el.dataset.target, 10);
     const suffix = el.dataset.suffix || '';
-    const duration = 2000;
+    const duration = 2500;
     const start = performance.now();
 
     function tick(now) {
         const elapsed = now - start;
         const progress = Math.min(elapsed / duration, 1);
-        // Ease-out cubic
         const eased = 1 - Math.pow(1 - progress, 3);
         const current = Math.round(eased * target);
 
@@ -22,7 +21,7 @@ function animateCounter(el) {
     requestAnimationFrame(tick);
 }
 
-const counters = document.querySelectorAll('.stats__number[data-target]');
+const counters = document.querySelectorAll('[data-target]');
 
 if (counters.length > 0) {
     const observer = new IntersectionObserver(
@@ -34,7 +33,7 @@ if (counters.length > 0) {
                 }
             });
         },
-        { threshold: 0.5 }
+        { threshold: 0.3 }
     );
 
     counters.forEach(counter => observer.observe(counter));

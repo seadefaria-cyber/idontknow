@@ -1,9 +1,9 @@
 from typing import Any
 
-import anthropic
 import structlog
 from pydantic import BaseModel, Field
 
+from src.ai.claude_cli import call_claude
 from src.ai.prompts import MOMENT_DETECTION_SYSTEM, MOMENT_DETECTION_USER
 from src.config import Settings
 from src.exceptions import AIDetectionError
@@ -33,7 +33,6 @@ class MomentDetector:
 
     def __init__(self, settings: Settings):
         self.settings = settings
-        self.client = anthropic.Anthropic(api_key=settings.claude_api_key)
 
     def detect_moments(
         self,
@@ -72,15 +71,11 @@ class MomentDetector:
         )
 
         try:
-            response = self.client.messages.create(
-                model=self.settings.claude_model_bulk,
-                max_tokens=4000,
-                system=MOMENT_DETECTION_SYSTEM,
-                messages=[{"role": "user", "content": user_prompt}],
+            response_text = call_claude(
+                system_prompt=MOMENT_DETECTION_SYSTEM,
+                user_prompt=user_prompt,
             )
 
-            # Parse the response text as JSON into our Pydantic model
-            response_text = response.content[0].text
             analysis = MomentAnalysis.model_validate_json(response_text)
 
             moments = sorted(
@@ -97,8 +92,6 @@ class MomentDetector:
 
             return moments
 
-        except anthropic.APIError as e:
-            raise AIDetectionError(f"Claude API error: {e}") from e
         except Exception as e:
             raise AIDetectionError(f"Moment detection failed: {e}") from e
 

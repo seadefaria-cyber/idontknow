@@ -21,7 +21,6 @@ class TestDeduplicateMoments:
     def _make_detector(self, settings):
         detector = MomentDetector.__new__(MomentDetector)
         detector.settings = settings
-        detector.client = MagicMock()
         return detector
 
     def test_empty(self, settings):
@@ -71,7 +70,6 @@ class TestFormatTranscript:
     def _make_detector(self, settings):
         detector = MomentDetector.__new__(MomentDetector)
         detector.settings = settings
-        detector.client = MagicMock()
         return detector
 
     def test_empty_transcript(self, settings):
@@ -113,10 +111,8 @@ class TestFormatTranscript:
 
 
 class TestDetectMoments:
-    def test_sorted_output(self, settings):
-        detector = MomentDetector.__new__(MomentDetector)
-        detector.settings = settings
-        detector.client = MagicMock()
+    def test_sorted_output(self, settings, monkeypatch):
+        detector = MomentDetector(settings)
 
         response_data = {
             "moments": [
@@ -138,37 +134,35 @@ class TestDetectMoments:
                 },
             ]
         }
-        mock_response = MagicMock()
-        mock_response.content = [MagicMock(text=json.dumps(response_data))]
-        detector.client.messages.create.return_value = mock_response
+        monkeypatch.setattr(
+            "src.ai.moment_detector.call_claude",
+            lambda **kwargs: json.dumps(response_data),
+        )
 
         result = detector.detect_moments({"segments": [{"start": 0, "end": 60, "text": "test"}]})
         assert result[0].viral_score == 90
         assert result[1].viral_score == 50
 
-    def test_api_error_raises(self, settings):
-        import anthropic
+    def test_cli_error_raises(self, settings, monkeypatch):
+        detector = MomentDetector(settings)
 
-        detector = MomentDetector.__new__(MomentDetector)
-        detector.settings = settings
-        detector.client = MagicMock()
-        detector.client.messages.create.side_effect = anthropic.APIError(
-            message="fail", request=MagicMock(), body=None
-        )
+        def mock_call_claude(**kwargs):
+            raise RuntimeError("Claude CLI failed: some error")
+
+        monkeypatch.setattr("src.ai.moment_detector.call_claude", mock_call_claude)
 
         from src.exceptions import AIDetectionError
 
-        with pytest.raises(AIDetectionError, match="Claude API error"):
+        with pytest.raises(AIDetectionError, match="Moment detection failed"):
             detector.detect_moments({"segments": [{"start": 0, "end": 5, "text": "test"}]})
 
-    def test_invalid_json_raises(self, settings):
-        detector = MomentDetector.__new__(MomentDetector)
-        detector.settings = settings
-        detector.client = MagicMock()
+    def test_invalid_json_raises(self, settings, monkeypatch):
+        detector = MomentDetector(settings)
 
-        mock_response = MagicMock()
-        mock_response.content = [MagicMock(text="not json at all")]
-        detector.client.messages.create.return_value = mock_response
+        monkeypatch.setattr(
+            "src.ai.moment_detector.call_claude",
+            lambda **kwargs: "not json at all",
+        )
 
         from src.exceptions import AIDetectionError
 
