@@ -1,0 +1,18 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Arial,30,&H0000FFFF,&H000000FF,&H00000000,&H80000000,-1,0,0,0,100,100,1,0,1,3,0,2,20,20,340,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.50,0:00:02.36,Default,,0,0,0,,SONGS I'M TAKING
+Dialogue: 0,0:00:02.36,0:00:04.23,Default,,0,0,0,,TO THE APOCALYPSE
+Dialogue: 0,0:00:04.23,0:00:06.09,Default,,0,0,0,,BABYFATHER YUNG LEAN
+Dialogue: 0,0:00:06.09,0:00:07.96,Default,,0,0,0,,AND WILLIE NELSON
+Dialogue: 0,0:00:07.96,0:00:09.83,Default,,0,0,0,,THAT'S IT MAYBE
+Dialogue: 0,0:00:09.83,0:00:11.69,Default,,0,0,0,,MAZZY STAR

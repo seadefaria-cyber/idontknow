@@ -43,6 +43,15 @@
 
 ---
 
+## Agency Tools
+
+| # | Tool | Email Used | Plan | Status |
+|---|------|-----------|------|--------|
+| 1 | Submagic | seadefaria@gmail.com | Business | [x] Signed up |
+| 2 | Later | — | — | [ ] Not yet |
+
+---
+
 ## Reminders
 
 - Each account needs a DIFFERENT email

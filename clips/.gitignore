@@ -1,0 +1,16 @@
+# Large media files (stored locally, not in git)
+raw/*.mp4
+raw/*.mov
+raw/*.jpg
+raw/*.png
+output/
+sounds/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Keep subtitle files
+!raw/subs/
+
+# Keep reference images and docs
+!references/
