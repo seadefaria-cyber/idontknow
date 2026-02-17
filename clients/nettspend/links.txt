@@ -1,0 +1,10 @@
+# Nettspend — Source Links
+# Paste YouTube URLs, TikTok URLs, Instagram links, etc. below.
+# One link per line. Add a short note after each link so you remember what it is.
+#
+# Example:
+# https://youtube.com/watch?v=xxxxx  - Nettspend interview on No Jumper
+# https://youtube.com/watch?v=yyyyy  - Glock 19 music video
+#
+# ---------------------------------------------------------------
+
