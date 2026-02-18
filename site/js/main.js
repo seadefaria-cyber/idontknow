@@ -83,21 +83,77 @@
     addMessage();
 })();
 
-/* ── Social Notification Cycling ────────── */
+/* ── Floating Engagement Likes ───────────── */
 (function() {
-    var notifs = document.querySelectorAll('.social-notif');
-    if (notifs.length === 0) return;
+    var container = document.getElementById('engagement-likes');
+    if (!container) return;
 
-    var current = 0;
+    function addHeart() {
+        var el = document.createElement('span');
+        el.className = 'engagement-likes__heart';
+        var size = 18 + Math.floor(Math.random() * 14);
+        var alpha = 0.25 + Math.random() * 0.35;
+        el.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="rgba(102,211,250,' + alpha + ')"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+        el.style.left = (Math.random() * 90) + '%';
+        el.style.animationDuration = (2.8 + Math.random() * 1.5) + 's';
+        container.appendChild(el);
 
-    function showNext() {
-        notifs.forEach(function(n) { n.classList.remove('active'); });
-        notifs[current].classList.add('active');
-        current = (current + 1) % notifs.length;
+        setTimeout(function() {
+            if (el.parentNode) el.parentNode.removeChild(el);
+        }, 4000);
     }
 
-    setTimeout(showNext, 1500);
-    setInterval(showNext, 4000);
+    setInterval(addHeart, 800);
+    addHeart();
+})();
+
+/* ── Scroll Fade — Hero Overlays ─────────── */
+(function() {
+    var chat = document.getElementById('twitch-chat');
+    var likes = document.getElementById('engagement-likes');
+    var hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    var ticking = false;
+
+    function updateFade() {
+        var rect = hero.getBoundingClientRect();
+        var heroBottom = rect.bottom;
+        var fadeStart = window.innerHeight * 0.6;
+        var opacity = Math.max(0, Math.min(1, heroBottom / fadeStart));
+
+        if (chat) chat.style.opacity = opacity * 0.35;
+        if (likes) likes.style.opacity = opacity;
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(updateFade);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    updateFade();
+})();
+
+/* ── Phone Status Bar — Live Time ────────── */
+(function() {
+    var timeEl = document.getElementById('status-time');
+    if (!timeEl) return;
+
+    function updateTime() {
+        var now = new Date();
+        var h = now.getHours();
+        var m = now.getMinutes();
+        var ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12 || 12;
+        m = m < 10 ? '0' + m : m;
+        timeEl.textContent = h + ':' + m + ' ' + ampm;
+    }
+
+    updateTime();
+    setInterval(updateTime, 30000);
 })();
 
 /* ── Reveal Animations ───────────────────── */
