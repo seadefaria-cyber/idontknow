@@ -1,17 +1,26 @@
 :root {
-    /* Core palette */
-    --bg: #FAFAF8;
-    --surface: #F0EFEC;
-    --text: #1A1A1A;
-    --text-muted: #6B6B6B;
-    --accent: #2B5CE6;
-    --accent-glow: rgba(43, 92, 230, 0.15);
-    --border: #E0DFDC;
-    --border-light: #EEEDEB;
+    /* Core palette — Bright / Tropical on Dark */
+    --bg: #0E0E10;
+    --surface: #18181B;
+    --surface-alt: #1F1F23;
+    --text: #EFEFF1;
+    --text-muted: #ADADB8;
+    --accent: #66D3FA;
+    --accent-light: #A8E6FF;
+    --accent-glow: rgba(102, 211, 250, 0.15);
+    --border: rgba(255, 255, 255, 0.08);
+    --border-light: rgba(255, 255, 255, 0.04);
+
+    /* Multi-color accents */
+    --green: #90EE90;
+    --yellow: #E8E847;
+    --orange: #F5A623;
+    --red: #E74C3C;
+    --cyan: #66D3FA;
 
     /* Fonts */
-    --font-headline: 'Bebas Neue', Impact, sans-serif;
-    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-headline: 'Helvetica Neue', 'Inter', -apple-system, sans-serif;
+    --font-body: 'Inter', 'Helvetica Neue', -apple-system, sans-serif;
 
     /* Spacing */
     --space-xs: 0.5rem;

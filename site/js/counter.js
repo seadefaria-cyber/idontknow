@@ -1,4 +1,4 @@
-/* ── The Number — count up animation ──────── */
+/* ── Count-up animation ──────────────────── */
 function animateCounter(el) {
     const target = parseInt(el.dataset.display || el.dataset.target, 10);
     const suffix = el.dataset.suffix || '';

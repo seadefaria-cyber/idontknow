@@ -20,16 +20,16 @@
 
 .btn--primary {
     background: var(--accent);
-    color: #fff;
+    color: #0E0E10;
 }
 
 .btn--dark {
-    background: #fff;
-    color: var(--text);
+    background: #0E0E10;
+    color: var(--accent);
 }
 
 .btn--dark:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .btn:focus-visible {
@@ -76,16 +76,28 @@
 
 /* Cards */
 .card {
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--border);
     padding: var(--space-md);
     transition: border-color var(--duration) var(--ease),
-                transform var(--duration) var(--ease);
+                transform var(--duration) var(--ease),
+                box-shadow var(--duration) var(--ease);
 }
 
 .card:hover {
     border-color: var(--accent);
     transform: translateY(-4px);
+    box-shadow: 0 12px 32px var(--accent-glow);
+}
+
+.card__icon-wrap {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-sm);
+    color: var(--accent);
 }
 
 .card__icon {
