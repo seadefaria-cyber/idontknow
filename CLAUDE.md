@@ -31,6 +31,14 @@ This project uses **git worktrees** for parallel development across multiple ter
 - Invoice numbering: INV-2026-001, INV-2026-002, etc.
 - Primary client: Clover New York / Interscope Records (NettSpend projects)
 - PDFs exported via Chrome headless to `~/Desktop/invoices/`
+- Don't charge sales tax on invoices — tax on equipment is Sean's cost, not billed to client
+- Interscope will ask for a W-9 before paying (standard for payments over $600)
+- Sean does NOT have an LLC yet — invoicing as sole proprietor is fine for now
+- Old email was sean@asspizza.com — switched to seadefaria@gmail.com for invoicing
+- Existing invoices:
+  - `invoices/invoice_virginia_stream.html` — INV-2026-001, $6,500, NettSpend Richmond Virginia LiveStream
+  - `invoices/invoice_nyc_early_crisis.html` — INV-2026-002, $1,215.77, NettSpend NYC Early Crisis Stream
+  - `invoices/invoice_clover_interscope.html` — Original draft template (superseded by above)
 
 ## Conventions
 
