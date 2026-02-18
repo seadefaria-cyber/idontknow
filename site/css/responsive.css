@@ -1,0 +1,203 @@
+/* ── Tablet (<1199px) ────────────────────── */
+@media (max-width: 1199px) {
+    .services__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .creative__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .process__steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .phone {
+        width: 180px;
+    }
+
+    .phone--hero {
+        width: 220px;
+    }
+
+    .clients__slide {
+        gap: 2.5rem;
+        padding-right: 2.5rem;
+    }
+
+    .clients__logo {
+        height: 32px;
+    }
+}
+
+/* ── Mobile (<809px) ─────────────────────── */
+@media (max-width: 809px) {
+    :root {
+        --space-xl: 4rem;
+        --space-2xl: 5rem;
+    }
+
+    .hide-mobile {
+        display: none;
+    }
+
+    /* Twitch chat & social notifs */
+    .twitch-chat {
+        display: none;
+    }
+
+    .social-notif {
+        display: none;
+    }
+
+    /* Nav */
+    .nav__hamburger {
+        display: flex;
+    }
+
+    .nav__links {
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-lg);
+        background: rgba(14, 14, 16, 0.97);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--duration) var(--ease);
+    }
+
+    .nav__links.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .nav__links a {
+        font-size: 1.5rem;
+    }
+
+    .nav__cta {
+        font-size: 1.5rem !important;
+        padding: 0.6rem 2rem;
+    }
+
+    /* Hero */
+    .hero__headline {
+        font-size: clamp(2.8rem, 11vw, 4.5rem);
+    }
+
+    /* Clients */
+    .clients__slide {
+        gap: 2rem;
+        padding-right: 2rem;
+    }
+
+    .clients__logo {
+        height: 28px;
+    }
+
+    /* Showcase */
+    .showcase {
+        min-height: 200vh;
+    }
+
+    .showcase__phones {
+        gap: var(--space-xs);
+        perspective: none;
+    }
+
+    .showcase__phone--left,
+    .showcase__phone--right {
+        transform: none;
+    }
+
+    .phone {
+        width: 28vw;
+        max-width: 160px;
+    }
+
+    .phone--hero {
+        width: 35vw;
+        max-width: 200px;
+    }
+
+    .phone__handle {
+        font-size: 0.45rem;
+        top: 24px;
+        left: 8px;
+    }
+
+    .phone__overlay {
+        padding: 0.8rem 0.5rem;
+    }
+
+    .phone__platform {
+        font-size: 0.4rem;
+        padding: 0.1rem 0.3rem;
+    }
+
+    .phone__desc {
+        font-size: 0.4rem;
+        -webkit-line-clamp: 1;
+    }
+
+    .phone__views {
+        font-size: 0.7rem;
+    }
+
+    .phone__engagement {
+        right: 4px;
+        bottom: 50px;
+        gap: 8px;
+    }
+
+    .phone__eng-item svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .phone__eng-item span {
+        font-size: 0.35rem;
+    }
+
+    .phone__notch {
+        width: 40px;
+        height: 12px;
+    }
+
+    /* Stats */
+    .stats__grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+
+    /* Process */
+    .process__steps {
+        grid-template-columns: 1fr;
+    }
+
+    /* Services */
+    .services__grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Creative */
+    .creative__grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Footer */
+    .footer__top {
+        flex-direction: column;
+        gap: var(--space-md);
+        text-align: center;
+    }
+
+    .footer__links {
+        justify-content: center;
+    }
+}

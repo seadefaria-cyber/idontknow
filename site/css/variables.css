@@ -1,0 +1,37 @@
+:root {
+    /* Core palette — Bright / Tropical on Dark */
+    --bg: #0E0E10;
+    --surface: #18181B;
+    --surface-alt: #1F1F23;
+    --text: #EFEFF1;
+    --text-muted: #ADADB8;
+    --accent: #66D3FA;
+    --accent-light: #A8E6FF;
+    --accent-glow: rgba(102, 211, 250, 0.15);
+    --border: rgba(255, 255, 255, 0.08);
+    --border-light: rgba(255, 255, 255, 0.04);
+
+    /* Multi-color accents */
+    --green: #90EE90;
+    --yellow: #E8E847;
+    --orange: #F5A623;
+    --red: #E74C3C;
+    --cyan: #66D3FA;
+
+    /* Fonts */
+    --font-headline: 'Helvetica Neue', 'Inter', -apple-system, sans-serif;
+    --font-body: 'Inter', 'Helvetica Neue', -apple-system, sans-serif;
+
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+    --space-xl: 8rem;
+    --space-2xl: 12rem;
+
+    --nav-height: 64px;
+    --container: 1400px;
+    --duration: 0.3s;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
