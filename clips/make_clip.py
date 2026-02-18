@@ -18,9 +18,36 @@ Usage:
 import subprocess
 import sys
 import os
+import re
 from PIL import Image, ImageDraw, ImageFont
 from pilmoji import Pilmoji
 from pilmoji.source import AppleEmojiSource
+
+
+# Regex to match emoji characters (covers most common emoji ranges)
+EMOJI_RE = re.compile(
+    "["
+    "\U0001F600-\U0001F64F"  # emoticons
+    "\U0001F300-\U0001F5FF"  # symbols & pictographs
+    "\U0001F680-\U0001F6FF"  # transport & map
+    "\U0001F1E0-\U0001F1FF"  # flags
+    "\U0001F900-\U0001F9FF"  # supplemental symbols
+    "\U0001FA00-\U0001FA6F"  # chess symbols
+    "\U0001FA70-\U0001FAFF"  # symbols extended-A
+    "\U00002702-\U000027B0"  # dingbats
+    "\U0000FE00-\U0000FE0F"  # variation selectors
+    "\U0000200D"             # zero width joiner
+    "\U000023F0-\U000023FA"  # misc symbols
+    "\U00002600-\U000026FF"  # misc symbols
+    "\U0000270A-\U0000270D"  # misc symbols
+    "]+",
+    flags=re.UNICODE,
+)
+
+
+def strip_emojis(text):
+    """Remove emoji characters from text, preserving spacing."""
+    return EMOJI_RE.sub("", text).strip()
 
 
 # ============================================================
@@ -155,11 +182,13 @@ def create_overlay(caption, overlay_path, text_color, outline_color):
 
     outline_rgba = outline_color + (255,) if len(outline_color) == 3 else outline_color
 
-    # Pass 1: Draw outline (text at offsets, no emojis)
+    # Pass 1: Draw outline (text at offsets, emojis stripped to avoid
+    # ugly placeholder glyphs bleeding through behind real Apple emojis)
     y = start_y
     for i, line in enumerate(lines):
         lw, lh = line_sizes[i]
         x = (OUTPUT_WIDTH - lw) // 2
+        line_no_emoji = strip_emojis(line)
 
         for dx in range(-OUTLINE_WIDTH, OUTLINE_WIDTH + 1):
             for dy in range(-OUTLINE_WIDTH, OUTLINE_WIDTH + 1):
@@ -168,7 +197,7 @@ def create_overlay(caption, overlay_path, text_color, outline_color):
                 # Circular mask for smoother outline
                 if dx * dx + dy * dy > OUTLINE_WIDTH * OUTLINE_WIDTH + 1:
                     continue
-                draw.text((x + dx, y + dy), line, font=font, fill=outline_rgba)
+                draw.text((x + dx, y + dy), line_no_emoji, font=font, fill=outline_rgba)
 
         y += lh + LINE_SPACING
 
