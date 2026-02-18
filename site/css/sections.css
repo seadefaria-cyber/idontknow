@@ -33,6 +33,14 @@
     color: var(--text);
 }
 
+.nav__logo-f {
+    transition: color var(--duration) var(--ease);
+}
+
+.nav__logo:hover .nav__logo-f {
+    color: var(--accent);
+}
+
 .nav__links {
     display: flex;
     align-items: center;
@@ -57,12 +65,12 @@
     padding: 0.45rem 1.2rem;
     border-radius: 6px;
     font-weight: 600 !important;
-    transition: opacity var(--duration) var(--ease) !important;
+    transition: background var(--duration) var(--ease), color var(--duration) var(--ease) !important;
 }
 
 .nav__cta:hover {
-    opacity: 0.85;
-    color: #0E0E10 !important;
+    background: #fff;
+    color: var(--accent) !important;
 }
 
 .nav__hamburger {
