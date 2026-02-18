@@ -21,12 +21,12 @@
     }
 
     .clients__slide {
-        gap: 2.5rem;
-        padding-right: 2.5rem;
+        gap: 4rem;
+        padding-right: 4rem;
     }
 
     .clients__logo {
-        height: 32px;
+        height: 48px;
     }
 }
 
@@ -41,12 +41,16 @@
         display: none;
     }
 
-    /* Twitch chat & social notifs */
+    /* Twitch chat, likes & phone status */
     .twitch-chat {
         display: none;
     }
 
-    .social-notif {
+    .engagement-likes {
+        display: none;
+    }
+
+    .phone-status {
         display: none;
     }
 
@@ -92,12 +96,12 @@
 
     /* Clients */
     .clients__slide {
-        gap: 2rem;
-        padding-right: 2rem;
+        gap: 3rem;
+        padding-right: 3rem;
     }
 
     .clients__logo {
-        height: 28px;
+        height: 36px;
     }
 
     /* Showcase */
