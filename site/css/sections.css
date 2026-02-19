@@ -784,6 +784,22 @@
     transform: scale(1.06);
 }
 
+/* Platform icons between client logos */
+.clients__platform {
+    opacity: 0.35;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.clients__platform:hover {
+    opacity: 0.7;
+    transform: scale(1.1);
+}
+
+.clients__platform svg {
+    height: 18px;
+    width: 18px;
+}
+
 /* Pause scroll on hover */
 .clients__track:hover {
     animation-play-state: paused;
@@ -1438,7 +1454,7 @@
 .about-banner {
     text-align: center;
     padding: var(--space-xl) 0;
-    background: #1c1c22;
+    background: #252529;
     border-top: 1px solid var(--border);
 }
 

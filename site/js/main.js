@@ -501,30 +501,37 @@ if (hamburger && navLinks) {
     });
 })();
 
-/* ── Virality Hover — Floating Hearts ────── */
+/* ── Heart Word Hover — Floating Hearts from any .heart-word ── */
 (function() {
-    var virality = document.querySelector('.hero__virality');
-    if (!virality) return;
+    var heartWords = document.querySelectorAll('.heart-word');
+    if (heartWords.length === 0) return;
 
-    virality.addEventListener('mouseenter', function() {
-        var mtaColors = ['#EE352E', '#FF6319', '#B933AD', '#0039A6', '#00933C'];
-        for (var i = 0; i < 8; i++) {
-            (function(idx) {
-                setTimeout(function() {
-                    var heart = document.createElement('span');
-                    heart.className = 'virality-heart';
-                    var size = 12 + Math.floor(Math.random() * 14);
-                    var color = mtaColors[Math.floor(Math.random() * mtaColors.length)];
-                    heart.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="' + color + '"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
-                    heart.style.left = (5 + Math.random() * 90) + '%';
-                    heart.style.bottom = '50%';
-                    virality.appendChild(heart);
+    var mtaColors = ['#EE352E', '#FF6319', '#B933AD', '#0039A6', '#00933C'];
+
+    heartWords.forEach(function(word) {
+        word.style.position = 'relative';
+        word.style.display = 'inline-block';
+        word.style.overflow = 'visible';
+
+        word.addEventListener('mouseenter', function() {
+            for (var i = 0; i < 6; i++) {
+                (function(idx) {
                     setTimeout(function() {
-                        if (heart.parentNode) heart.parentNode.removeChild(heart);
-                    }, 1800);
-                }, idx * 80);
-            })(i);
-        }
+                        var heart = document.createElement('span');
+                        heart.className = 'virality-heart';
+                        var size = 10 + Math.floor(Math.random() * 12);
+                        var color = mtaColors[Math.floor(Math.random() * mtaColors.length)];
+                        heart.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="' + color + '"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+                        heart.style.left = (5 + Math.random() * 90) + '%';
+                        heart.style.bottom = '50%';
+                        word.appendChild(heart);
+                        setTimeout(function() {
+                            if (heart.parentNode) heart.parentNode.removeChild(heart);
+                        }, 1800);
+                    }, idx * 80);
+                })(i);
+            }
+        });
     });
 })();
 
