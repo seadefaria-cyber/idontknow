@@ -10,9 +10,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://defaria.nyc">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2366D3FA'/><text x='50%25' y='23' text-anchor='middle' font-family='Helvetica Neue,sans-serif' font-size='16' fill='%230E0E10' font-weight='bold'>dF</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Helvetica Neue — system font, no import needed -->
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/layout.css">
@@ -56,17 +54,11 @@
 
     <div class="container hero__inner">
         <h1 class="hero__headline">
-            We Engineer<br>
-            <span class="text-accent hero__viral-word">Virality.</span>
+            <span class="hero__word hero__word--clip">CLIP.</span>
+            <span class="hero__word hero__word--seed">SEED.</span>
+            <span class="hero__word hero__word--grow">GROW.</span>
         </h1>
         <p class="hero__sub"><span class="hero__sub-highlight">Viral infrastructure</span> for <a href="#clients" class="hero__sub-link">artists and labels</a>.</p>
-        <div class="hero__platforms">
-            <svg class="hero__platform" viewBox="0 0 24 24" fill="currentColor" aria-label="TikTok"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.88-2.88 2.89 2.89 0 0 1 2.88-2.88c.28 0 .56.04.81.13v-3.5a6.37 6.37 0 0 0-.81-.05A6.34 6.34 0 0 0 3.15 15.4a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.72a8.27 8.27 0 0 0 4.83 1.56V6.83a4.84 4.84 0 0 1-1.07-.14z"/></svg>
-            <svg class="hero__platform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-label="Instagram"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
-            <svg class="hero__platform" viewBox="0 0 24 24" fill="currentColor" aria-label="YouTube Shorts"><path d="M10 14.65v-5.3L15 12l-5 2.65zm7.77-4.33c-.77-.32-1.2-.5-1.2-.5L18 9.06c1.84-.96 2.53-3.23 1.56-5.06s-3.24-2.53-5.07-1.56L6 6.94c-1.29.68-2.07 2.04-2 3.49.07 1.42.93 2.67 2.22 3.25.03.01 1.2.5 1.2.5L6 14.93c-1.83.97-2.53 3.24-1.56 5.07.97 1.83 3.24 2.53 5.07 1.56l8.5-4.5c1.29-.68 2.06-2.04 1.99-3.49-.07-1.42-.94-2.68-2.23-3.25z"/></svg>
-            <svg class="hero__platform" viewBox="0 0 24 24" fill="currentColor" aria-label="Twitch"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
-            <svg class="hero__platform" viewBox="0 0 24 24" fill="currentColor" aria-label="X"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </div>
         <a href="#contact" class="btn btn--primary">Connect</a>
     </div>
 
@@ -112,7 +104,7 @@
 <section class="showcase" id="work">
     <div class="showcase__sticky">
         <div class="container">
-            <p class="showcase__eyebrow"><span class="live-indicator"><span class="live-indicator__dot"></span>LIVE</span></p>
+            <p class="showcase__eyebrow"><span class="subway-bullet subway-bullet--blue">dF</span> <span class="live-indicator"><span class="live-indicator__dot"></span>LIVE</span></p>
             <h2 class="showcase__headline">Virality isn't luck.<br><span class="text-accent">It's infrastructure.</span></h2>
             <div class="showcase__phones">
                 <!-- Phone 1 -->
@@ -121,9 +113,9 @@
                         <div class="phone__notch"></div>
                         <div class="phone__screen">
                             <div class="phone__feed" data-speed="0.85">
-                                <div class="phone__video" style="background:url('img/videos/nettspend.jpg') center/cover"><span class="phone__handle">@yourmultimedia</span><div class="phone__engagement"><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>1.2M</span></div><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>45.3K</span></div><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg><span>89K</span></div></div><div class="phone__overlay"><span class="phone__platform">TikTok</span><p class="phone__desc">Nettspend going crazy</p><span class="phone__views">77.4M views</span></div></div>
-                                <div class="phone__video" style="background:url('img/videos/asspizza.jpg') center/cover"><span class="phone__handle">@yourmultimedia</span><div class="phone__engagement"><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>892K</span></div><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>28.1K</span></div><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg><span>51K</span></div></div><div class="phone__overlay"><span class="phone__platform">TikTok</span><p class="phone__desc">asspizza thats hard</p><span class="phone__views">15.2M views</span></div></div>
-                                <div class="phone__video" style="background:url('img/videos/carti.jpg') center/cover"><span class="phone__handle">@yourmultimedia</span><div class="phone__engagement"><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>312K</span></div><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>11.8K</span></div><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg><span>24K</span></div></div><div class="phone__overlay"><span class="phone__platform">TikTok</span><p class="phone__desc">Carti clip went crazy</p><span class="phone__views">4M views</span></div></div>
+                                <div class="phone__video" style="background:url('img/videos/ym-reel1.jpg') center/cover"><span class="phone__handle">@yourmultimedia</span><div class="phone__engagement"><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>1.2M</span></div><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>45.3K</span></div><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg><span>89K</span></div></div><div class="phone__overlay"><span class="phone__platform">Instagram</span><p class="phone__desc">asspizza in the store</p><span class="phone__views">1.2M views</span></div></div>
+                                <div class="phone__video" style="background:url('img/videos/ym-reel2.jpg') center/cover"><span class="phone__handle">@yourmultimedia</span><div class="phone__engagement"><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>892K</span></div><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>28.1K</span></div><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg><span>51K</span></div></div><div class="phone__overlay"><span class="phone__platform">Instagram</span><p class="phone__desc">interview clip</p><span class="phone__views">892K views</span></div></div>
+                                <div class="phone__video" style="background:url('img/videos/ym-reel4.jpg') center/cover"><span class="phone__handle">@yourmultimedia</span><div class="phone__engagement"><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>567K</span></div><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>15.6K</span></div><div class="phone__eng-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg><span>41K</span></div></div><div class="phone__overlay"><span class="phone__platform">Instagram</span><p class="phone__desc">HOTMODELS on the scene</p><span class="phone__views">567K views</span></div></div>
                             </div>
                         </div>
                     </div>
@@ -175,15 +167,12 @@
 <!-- Services -->
 <section class="services" id="services">
     <div class="container">
-        <p class="services__eyebrow">The Playbook</p>
+        <p class="services__eyebrow"><span class="subway-bullet subway-bullet--orange">S</span> The Playbook</p>
         <h2 class="services__headline">How We Force It</h2>
-        <div class="services__grid">
-            <div class="card"><div class="card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3 class="card__title">Micro-Seeding</h3><p class="card__desc">Our system places your content across hundreds of accounts simultaneously. Fan pages, niche communities, curated feeds &mdash; all engineered to trigger the algorithm.</p></div>
-            <div class="card"><div class="card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></div><h3 class="card__title">Viral Clipping</h3><p class="card__desc">10 editors dissecting every frame of your content to extract the exact moments that force engagement. Every clip is built to go viral, not hoped to.</p></div>
-            <div class="card"><div class="card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/></svg></div><h3 class="card__title">Captions &amp; Hooks</h3><p class="card__desc">Engineered text hooks and word-synced captions that force the scroll to stop. We've tested thousands of formats &mdash; we know what converts.</p></div>
-            <div class="card"><div class="card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="12" y1="8" x2="5" y2="16"/><line x1="12" y1="8" x2="19" y2="16"/></svg></div><h3 class="card__title">Fan Page Network</h3><p class="card__desc">We build and operate a distribution network of fan pages for your artist. Every page is a new entry point into the algorithm &mdash; all controlled by us.</p></div>
-            <div class="card"><div class="card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div><h3 class="card__title">Multi-Platform</h3><p class="card__desc">TikTok, Reels, Shorts, Twitch, X &mdash; we deploy your content across every platform simultaneously. Same system, five platforms, maximum saturation.</p></div>
-            <div class="card"><div class="card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h3 class="card__title">Growth Analytics</h3><p class="card__desc">Real-time tracking across every account and platform. We see exactly what's working and redirect the system to double down on it.</p></div>
+        <div class="services__grid services__grid--3">
+            <div class="card"><div class="card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/></svg></div><h3 class="card__title">Consulting</h3><p class="card__desc">We map out the entire plan of attack for the month. How many clips go out per day, which platforms to hit, what content to prioritize. We assemble the team of editors and build the full strategy before anything goes live.</p></div>
+            <div class="card"><div class="card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></div><h3 class="card__title">Viral Clipping</h3><p class="card__desc">10 editors dissecting every frame of your content to extract the exact moments that force engagement. Captions, hooks, pacing &mdash; every clip is engineered to stop the scroll. We handle all of it.</p></div>
+            <div class="card"><div class="card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div><h3 class="card__title">Distribution</h3><p class="card__desc">Your clips deploy across TikTok, Reels, Shorts, Twitch, and X simultaneously. Fan pages, niche communities, micro-seeding networks &mdash; all coordinated. Real-time tracking shows exactly what's working so we double down.</p></div>
         </div>
     </div>
 </section>
@@ -191,7 +180,7 @@
 <!-- Creative -->
 <section class="creative" id="creative">
     <div class="container">
-        <p class="creative__eyebrow">Full-Service Creative</p>
+        <p class="creative__eyebrow"><span class="subway-bullet subway-bullet--purple">C</span> Full-Service Creative</p>
         <h2 class="creative__headline">Beyond Clipping</h2>
         <p class="creative__sub">From music videos to commercials, we handle every step. Led by our founder &mdash; a filmmaker, scorer, and Twitch partner &mdash; every project gets a director's eye.</p>
         <div class="creative__grid">
@@ -208,13 +197,13 @@
 <!-- Process -->
 <section class="process" id="process">
     <div class="container">
-        <h2 class="process__headline">How The System Works</h2>
+        <h2 class="process__headline"><span class="subway-bullet subway-bullet--green">P</span> How The System Works</h2>
         <p class="process__sub">From first conversation to full-scale viral distribution &mdash; the machine runs itself.</p>
-        <div class="process__steps">
-            <div class="process__step"><span class="process__number">01</span><h3 class="process__title">Meet</h3><p class="process__desc">Tell us about your artist and your goals. We assess the content and build a strategy.</p></div>
-            <div class="process__step"><span class="process__number">02</span><h3 class="process__title">Study</h3><p class="process__desc">Our editors analyze every frame of your footage. We identify exactly what will trigger the algorithm.</p></div>
-            <div class="process__step"><span class="process__number">03</span><h3 class="process__title">Plan</h3><p class="process__desc">We build the seeding map. Which accounts, which platforms, which timing &mdash; every variable is controlled.</p></div>
-            <div class="process__step"><span class="process__number">04</span><h3 class="process__title">Execute</h3><p class="process__desc">The system goes live. Clips deploy, seeds activate, and your content saturates every feed. We force it.</p></div>
+        <div class="process__line">
+            <div class="process__stop"><span class="process__dot process__dot--red"></span><div class="process__content"><h3 class="process__title">Meet</h3><p class="process__desc">Tell us about your artist and your goals. We assess the content and build a strategy.</p></div></div>
+            <div class="process__stop"><span class="process__dot process__dot--orange"></span><div class="process__content"><h3 class="process__title">Study</h3><p class="process__desc">Our editors analyze every frame of your footage. We identify exactly what will trigger the algorithm.</p></div></div>
+            <div class="process__stop"><span class="process__dot process__dot--yellow"></span><div class="process__content"><h3 class="process__title">Plan</h3><p class="process__desc">We build the seeding map. Which accounts, which platforms, which timing &mdash; every variable is controlled.</p></div></div>
+            <div class="process__stop process__stop--last"><span class="process__dot process__dot--green"></span><div class="process__content"><h3 class="process__title">Execute</h3><p class="process__desc">The system goes live. Clips deploy, seeds activate, and your content saturates every feed. We force it.</p></div></div>
         </div>
     </div>
 </section>
@@ -260,6 +249,13 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+        </div>
+        <div class="footer__socials">
+            <a href="#" class="footer__social" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.88-2.88 2.89 2.89 0 0 1 2.88-2.88c.28 0 .56.04.81.13v-3.5a6.37 6.37 0 0 0-.81-.05A6.34 6.34 0 0 0 3.15 15.4a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.72a8.27 8.27 0 0 0 4.83 1.56V6.83a4.84 4.84 0 0 1-1.07-.14z"/></svg></a>
+            <a href="#" class="footer__social" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+            <a href="#" class="footer__social" aria-label="YouTube Shorts"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 14.65v-5.3L15 12l-5 2.65zm7.77-4.33c-.77-.32-1.2-.5-1.2-.5L18 9.06c1.84-.96 2.53-3.23 1.56-5.06s-3.24-2.53-5.07-1.56L6 6.94c-1.29.68-2.07 2.04-2 3.49.07 1.42.93 2.67 2.22 3.25.03.01 1.2.5 1.2.5L6 14.93c-1.83.97-2.53 3.24-1.56 5.07.97 1.83 3.24 2.53 5.07 1.56l8.5-4.5c1.29-.68 2.06-2.04 1.99-3.49-.07-1.42-.94-2.68-2.23-3.25z"/></svg></a>
+            <a href="#" class="footer__social" aria-label="Twitch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg></a>
+            <a href="#" class="footer__social" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
         </div>
         <div class="footer__bottom">
             <p>&copy; 2026 deFaria. All rights reserved. | <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a></p>

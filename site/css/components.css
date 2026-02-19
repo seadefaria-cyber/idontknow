@@ -1,13 +1,14 @@
-/* Buttons */
+/* Buttons — NYC Subway wayfinding feel */
 .btn {
     display: inline-block;
     padding: 1rem 2.5rem;
     font-family: var(--font-headline);
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     border: none;
+    border-radius: 0;
     cursor: pointer;
     transition: transform var(--duration) var(--ease),
                 box-shadow var(--duration) var(--ease);
@@ -40,7 +41,7 @@
 .btn--outline {
     background: transparent;
     color: var(--text);
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
 }
 
 .btn--outline:hover {
@@ -49,13 +50,15 @@
     box-shadow: 0 8px 24px var(--accent-glow);
 }
 
-/* Inputs */
+/* Inputs — sharp, industrial */
 .input {
     width: 100%;
     padding: 1rem 1.25rem;
     background: var(--surface);
     border: 1px solid var(--border);
+    border-radius: 0;
     color: var(--text);
+    font-family: var(--font-body);
     font-size: 1rem;
     transition: border-color var(--duration) var(--ease),
                 box-shadow var(--duration) var(--ease);
@@ -74,10 +77,11 @@
     min-height: 120px;
 }
 
-/* Cards */
+/* Cards — subway information panel style */
 .card {
     background: var(--surface);
     border: 1px solid var(--border);
+    border-radius: 0;
     padding: var(--space-md);
     transition: border-color var(--duration) var(--ease),
                 transform var(--duration) var(--ease),
@@ -109,7 +113,7 @@
 .card__title {
     font-family: var(--font-headline);
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: var(--space-xs);

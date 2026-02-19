@@ -1,26 +1,35 @@
 :root {
-    /* Core palette — Bright Cyan on Dark */
+    /* NYC Subway palette — Dark with MTA accents */
     --bg: #0E0E10;
     --surface: #18181B;
     --surface-alt: #1F1F23;
     --text: #EFEFF1;
     --text-muted: #ADADB8;
-    --accent: #66D3FA;
-    --accent-light: #A8E6FF;
-    --accent-glow: rgba(102, 211, 250, 0.15);
+    --accent: #FCCC0A;
+    --accent-light: #FFE066;
+    --accent-glow: rgba(252, 204, 10, 0.12);
     --border: rgba(255, 255, 255, 0.08);
     --border-light: rgba(255, 255, 255, 0.04);
 
-    /* Multi-color accents */
-    --green: #90EE90;
-    --yellow: #E8E847;
-    --orange: #F5A623;
-    --red: #E74C3C;
-    --cyan: #66D3FA;
+    /* MTA Line Colors */
+    --mta-red: #EE352E;
+    --mta-orange: #FF6319;
+    --mta-yellow: #FCCC0A;
+    --mta-green: #00933C;
+    --mta-blue: #0039A6;
+    --mta-purple: #B933AD;
+    --mta-gray: #808183;
 
-    /* Fonts */
-    --font-headline: 'Helvetica Neue', 'Inter', -apple-system, sans-serif;
-    --font-body: 'Inter', 'Helvetica Neue', -apple-system, sans-serif;
+    /* Legacy multi-color accents */
+    --green: #00933C;
+    --yellow: #FCCC0A;
+    --orange: #FF6319;
+    --red: #EE352E;
+    --cyan: #0039A6;
+
+    /* Fonts — Helvetica is the NYC Subway typeface */
+    --font-headline: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
     /* Spacing */
     --space-xs: 0.5rem;

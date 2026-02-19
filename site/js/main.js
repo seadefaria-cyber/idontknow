@@ -1,10 +1,13 @@
-/* ── Scroll-Linked Phone Feed ───────────── */
+/* ── Scroll-Linked Phone Feed + Dissolution ─ */
 (function() {
     var showcase = document.querySelector('.showcase');
     var feeds = document.querySelectorAll('.phone__feed');
+    var phonesContainer = document.querySelector('.showcase__phones');
+    var totalContainer = document.querySelector('.showcase__total');
     if (!showcase || feeds.length === 0) return;
 
     var ticking = false;
+    var dissolved = false;
 
     function updateFeeds() {
         var rect = showcase.getBoundingClientRect();
@@ -15,10 +18,22 @@
             var speed = parseFloat(feed.dataset.speed) || 1;
             var videoCount = feed.children.length;
             var maxScroll = (videoCount - 1) * 100;
-            /* Clamp translate so the last video is always fully visible — never black */
             var translate = Math.min(scrollProgress * maxScroll * speed, maxScroll);
             feed.style.transform = 'translateY(-' + translate + '%)';
         });
+
+        /* Phone dissolution — when scroll reaches 85%, phones dissolve and stat takes over */
+        if (phonesContainer && totalContainer) {
+            if (scrollProgress > 0.85 && !dissolved) {
+                dissolved = true;
+                phonesContainer.classList.add('dissolve');
+                totalContainer.classList.add('takeover');
+            } else if (scrollProgress <= 0.85 && dissolved) {
+                dissolved = false;
+                phonesContainer.classList.remove('dissolve');
+                totalContainer.classList.remove('takeover');
+            }
+        }
 
         ticking = false;
     }
@@ -225,6 +240,193 @@
     });
 })();
 
+/* ── Hero Word Animations — CLIP / SEED / GROW ── */
+(function() {
+    var clipWord = document.querySelector('.hero__word--clip');
+    var seedWord = document.querySelector('.hero__word--seed');
+    var growWord = document.querySelector('.hero__word--grow');
+    if (!clipWord || !seedWord || !growWord) return;
+
+    /* ── CLIP — scissors slash + split ── */
+    function animateClip() {
+        if (clipWord.classList.contains('animating')) return;
+        clipWord.classList.add('animating');
+
+        /* Hide original text, show split halves */
+        clipWord.style.color = 'transparent';
+
+        var topHalf = document.createElement('span');
+        topHalf.className = 'hero__clip-half hero__clip-half--top';
+        topHalf.textContent = 'CLIP.';
+
+        var bottomHalf = document.createElement('span');
+        bottomHalf.className = 'hero__clip-half hero__clip-half--bottom';
+        bottomHalf.textContent = 'CLIP.';
+
+        var slash = document.createElement('span');
+        slash.className = 'hero__clip-slash';
+
+        var line = document.createElement('span');
+        line.className = 'hero__clip-line';
+
+        clipWord.appendChild(topHalf);
+        clipWord.appendChild(bottomHalf);
+        clipWord.appendChild(slash);
+        clipWord.appendChild(line);
+
+        /* Start slash */
+        requestAnimationFrame(function() {
+            slash.classList.add('animate');
+            line.classList.add('animate');
+        });
+
+        /* Sparks at the cut line */
+        setTimeout(function() {
+            for (var i = 0; i < 8; i++) {
+                var spark = document.createElement('span');
+                spark.className = 'hero__clip-spark';
+                spark.style.left = (25 + Math.random() * 50) + '%';
+                spark.style.top = (45 + Math.random() * 10) + '%';
+                spark.style.setProperty('--dx', ((Math.random() - 0.5) * 80) + 'px');
+                spark.style.setProperty('--dy', ((Math.random() - 0.5) * 50) + 'px');
+                clipWord.appendChild(spark);
+                (function(s) {
+                    setTimeout(function() {
+                        if (s.parentNode) s.parentNode.removeChild(s);
+                    }, 800);
+                })(spark);
+            }
+        }, 200);
+
+        /* Split the halves apart */
+        setTimeout(function() {
+            topHalf.classList.add('split');
+            bottomHalf.classList.add('split');
+        }, 280);
+
+        /* Rejoin */
+        setTimeout(function() {
+            topHalf.classList.remove('split');
+            bottomHalf.classList.remove('split');
+        }, 700);
+
+        /* Clean up */
+        setTimeout(function() {
+            clipWord.style.color = '';
+            [slash, line, topHalf, bottomHalf].forEach(function(el) {
+                if (el.parentNode) el.parentNode.removeChild(el);
+            });
+            clipWord.classList.remove('animating');
+        }, 1100);
+    }
+
+    /* ── SEED — bury + sprout ── */
+    function animateSeed() {
+        if (seedWord.classList.contains('animating')) return;
+        seedWord.classList.add('animating');
+        seedWord.classList.add('active');
+
+        /* Dirt particles falling */
+        for (var i = 0; i < 14; i++) {
+            (function(idx) {
+                var dot = document.createElement('span');
+                dot.className = 'hero__seed-particle';
+                dot.style.left = (Math.random() * 100) + '%';
+                dot.style.animationDelay = (Math.random() * 0.3) + 's';
+                dot.style.animationDuration = (0.5 + Math.random() * 0.5) + 's';
+                seedWord.appendChild(dot);
+                setTimeout(function() {
+                    if (dot.parentNode) dot.parentNode.removeChild(dot);
+                }, 1200);
+            })(i);
+        }
+
+        /* Sprout grows from top */
+        setTimeout(function() {
+            var sprout = document.createElement('span');
+            sprout.className = 'hero__sprout';
+            sprout.innerHTML = '<span class="hero__sprout-stem"></span>' +
+                '<span class="hero__sprout-leaf hero__sprout-leaf--left"></span>' +
+                '<span class="hero__sprout-leaf hero__sprout-leaf--right"></span>';
+            seedWord.appendChild(sprout);
+
+            /* Fade out sprout */
+            setTimeout(function() {
+                sprout.style.opacity = '0';
+                sprout.style.transition = 'opacity 0.5s';
+                setTimeout(function() {
+                    if (sprout.parentNode) sprout.parentNode.removeChild(sprout);
+                }, 500);
+            }, 2000);
+        }, 500);
+
+        /* Un-bury */
+        setTimeout(function() {
+            seedWord.classList.remove('active');
+        }, 900);
+
+        setTimeout(function() {
+            seedWord.classList.remove('animating');
+        }, 3200);
+    }
+
+    /* ── GROW — hearts + scale up ── */
+    function animateGrow() {
+        if (growWord.classList.contains('animating')) return;
+        growWord.classList.add('animating');
+        growWord.classList.add('active');
+
+        for (var i = 0; i < 12; i++) {
+            (function(idx) {
+                setTimeout(function() {
+                    var heart = document.createElement('span');
+                    heart.className = 'hero__grow-heart';
+                    var size = 14 + Math.floor(Math.random() * 16);
+                    var colors = ['rgba(252,204,10,0.8)', 'rgba(252,204,10,0.5)', 'rgba(255,255,255,0.4)', 'rgba(238,53,46,0.5)', 'rgba(0,57,166,0.5)'];
+                    var color = colors[Math.floor(Math.random() * colors.length)];
+                    heart.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="' + color + '"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+                    heart.style.left = (5 + Math.random() * 90) + '%';
+                    heart.style.animationDuration = (1.5 + Math.random() * 1) + 's';
+                    growWord.appendChild(heart);
+                    setTimeout(function() {
+                        if (heart.parentNode) heart.parentNode.removeChild(heart);
+                    }, 3000);
+                }, idx * 100);
+            })(i);
+        }
+
+        /* Scale back down */
+        setTimeout(function() {
+            growWord.classList.remove('active');
+        }, 2200);
+
+        setTimeout(function() {
+            growWord.classList.remove('animating');
+        }, 3500);
+    }
+
+    /* Hover triggers */
+    clipWord.addEventListener('mouseenter', animateClip);
+    seedWord.addEventListener('mouseenter', animateSeed);
+    growWord.addEventListener('mouseenter', animateGrow);
+
+    /* Auto-play sequence on page load */
+    var hero = document.querySelector('.hero');
+    if (hero) {
+        var heroWordObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    setTimeout(animateClip, 1000);
+                    setTimeout(animateSeed, 2400);
+                    setTimeout(animateGrow, 3800);
+                    heroWordObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        heroWordObserver.observe(hero);
+    }
+})();
+
 /* ── Reveal Animations ───────────────────── */
 var revealSelectors = [
     { sel: '.hero__headline', delay: 0 },
@@ -245,7 +447,7 @@ var revealSelectors = [
     { sel: '.creative__item', stagger: true },
     { sel: '.process__headline', delay: 0 },
     { sel: '.process__sub', delay: 1 },
-    { sel: '.process__step', stagger: true },
+    { sel: '.process__stop', stagger: true },
     { sel: '.about__headline', delay: 0 },
     { sel: '.about__text', stagger: true },
     { sel: '.contact__headline', delay: 0 },
