@@ -460,16 +460,13 @@ var revealSelectors = [
     { sel: '.card', stagger: true },
     { sel: '.creative__eyebrow', delay: 0 },
     { sel: '.creative__headline', delay: 1 },
-    { sel: '.creative__sub', delay: 2 },
     { sel: '.creative__item', stagger: true },
     { sel: '.process__headline', delay: 0 },
     { sel: '.process__sub', delay: 1 },
     { sel: '.process__stop', stagger: true },
     { sel: '.about__headline', delay: 0 },
-    { sel: '.about__text', stagger: true },
     { sel: '.contact__headline', delay: 0 },
-    { sel: '.contact__sub', delay: 1 },
-    { sel: '.contact__form', delay: 2 },
+    { sel: '.contact__form', delay: 1 },
 ];
 
 var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -524,6 +521,33 @@ if (hamburger && navLinks) {
         });
     });
 }
+
+/* ── Virality Hover — Floating Hearts ────── */
+(function() {
+    var virality = document.querySelector('.hero__virality');
+    if (!virality) return;
+
+    virality.addEventListener('mouseenter', function() {
+        var mtaColors = ['#EE352E', '#FF6319', '#B933AD', '#0039A6', '#00933C'];
+        for (var i = 0; i < 8; i++) {
+            (function(idx) {
+                setTimeout(function() {
+                    var heart = document.createElement('span');
+                    heart.className = 'virality-heart';
+                    var size = 12 + Math.floor(Math.random() * 14);
+                    var color = mtaColors[Math.floor(Math.random() * mtaColors.length)];
+                    heart.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="' + color + '"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+                    heart.style.left = (5 + Math.random() * 90) + '%';
+                    heart.style.bottom = '50%';
+                    virality.appendChild(heart);
+                    setTimeout(function() {
+                        if (heart.parentNode) heart.parentNode.removeChild(heart);
+                    }, 1800);
+                }, idx * 80);
+            })(i);
+        }
+    });
+})();
 
 /* ── Smooth Scroll ───────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {

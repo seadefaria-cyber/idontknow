@@ -118,7 +118,7 @@
 .nav__logo:hover .nav__logo-y,
 .nav__logo:hover .nav__logo-c {
     color: #fff;
-    margin: 0 0.1em;
+    margin: 0 0.25em;
 }
 
 .nav__logo:hover .nav__logo-d::before,
@@ -126,8 +126,8 @@
 .nav__logo:hover .nav__logo-n::before,
 .nav__logo:hover .nav__logo-y::before,
 .nav__logo:hover .nav__logo-c::before {
-    width: 1.6em;
-    height: 1.6em;
+    width: 1.4em;
+    height: 1.4em;
 }
 
 .nav__links {
@@ -239,19 +239,51 @@
     margin-bottom: var(--space-md);
 }
 
-/* "Engineering" hover — mechanical precision, letters tighten */
+/* "Engineering" hover — precision blueprint feel */
 .hero__engineering {
     display: inline-block;
+    position: relative;
     transition: letter-spacing 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
                 color 0.4s ease,
                 text-shadow 0.4s ease;
     cursor: default;
 }
 
+.hero__engineering::before {
+    content: '';
+    position: absolute;
+    bottom: 0.08em;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--mta-blue);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 8px rgba(0, 57, 166, 0.4);
+}
+
+.hero__engineering::after {
+    content: '';
+    position: absolute;
+    bottom: 0.2em;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: rgba(0, 57, 166, 0.3);
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+}
+
 .hero__engineering:hover {
     letter-spacing: -0.08em;
     color: var(--mta-blue);
     text-shadow: 0 0 30px rgba(0, 57, 166, 0.3);
+}
+
+.hero__engineering:hover::before {
+    width: 100%;
+}
+
+.hero__engineering:hover::after {
+    width: 60%;
 }
 
 /* "Virality" hover — shine sweep + color shift */
@@ -293,6 +325,20 @@
 @keyframes viralityShine {
     from { left: -100%; }
     to { left: 150%; }
+}
+
+/* Virality hover — floating hearts */
+.virality-heart {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+    animation: viralityHeartFloat 1.5s ease-out forwards;
+}
+
+@keyframes viralityHeartFloat {
+    0% { opacity: 0; transform: translateY(0) scale(0.3); }
+    15% { opacity: 0.9; transform: translateY(-10px) scale(1); }
+    100% { opacity: 0; transform: translateY(-80px) scale(0.4); }
 }
 
 .hero__sub {
@@ -588,23 +634,25 @@
 }
 
 .hero__social {
-    width: 40px;
-    height: 40px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    transition: transform 0.3s var(--ease), box-shadow 0.3s ease;
+    opacity: 0.5;
+    transition: transform 0.3s var(--ease), box-shadow 0.3s ease, opacity 0.3s ease;
 }
 
 .hero__social svg {
-    width: 18px;
-    height: 18px;
+    width: 13px;
+    height: 13px;
 }
 
 .hero__social:hover {
     transform: scale(1.15);
+    opacity: 1;
 }
 
 /* MTA Subway Line Colors — each icon is a line */
@@ -1085,6 +1133,21 @@
     position: relative;
     flex-shrink: 0;
     background-color: #0A1628;
+    animation: kenBurns 8s ease-in-out infinite alternate;
+}
+
+.phone__video:nth-child(2) {
+    animation-delay: -3s;
+    animation-direction: alternate-reverse;
+}
+
+.phone__video:nth-child(3) {
+    animation-delay: -5s;
+}
+
+@keyframes kenBurns {
+    0% { background-size: cover; background-position: center 48%; }
+    100% { background-size: 110% auto; background-position: center 52%; }
 }
 
 .phone__handle {
@@ -1377,7 +1440,7 @@
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
     text-align: center;
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-xl);
 }
 
 .creative__sub {
