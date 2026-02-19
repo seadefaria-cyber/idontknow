@@ -32,6 +32,29 @@ body {
     color: var(--accent);
 }
 
+/* ── NYC Subway Line Bullets ────────────── */
+.subway-bullet {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-family: var(--font-headline);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #fff;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+.subway-bullet--blue { background: var(--mta-blue); }
+.subway-bullet--orange { background: var(--mta-orange); }
+.subway-bullet--green { background: var(--mta-green); }
+.subway-bullet--red { background: var(--mta-red); }
+.subway-bullet--yellow { background: var(--mta-yellow); color: #000; }
+.subway-bullet--purple { background: var(--mta-purple); }
+
 @media (prefers-reduced-motion: reduce) {
     .reveal {
         opacity: 1;

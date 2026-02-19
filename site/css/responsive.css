@@ -8,10 +8,6 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .process__steps {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .phone {
         width: 180px;
     }
@@ -112,7 +108,7 @@
     }
 
     .hero__headline {
-        font-size: clamp(3.5rem, 12vw, 7rem);
+        font-size: clamp(4rem, 16vw, 8rem);
         padding: 0 var(--space-xs);
     }
 
@@ -131,15 +127,6 @@
         margin-top: var(--space-sm);
         font-size: 0.85rem;
         padding: 0.7rem 2rem;
-    }
-
-    .hero__platforms {
-        gap: 1rem;
-    }
-
-    .hero__platform {
-        width: 16px;
-        height: 16px;
     }
 
     /* Clients */
@@ -245,9 +232,9 @@
         font-size: 0.6rem;
     }
 
-    /* Services — keep 2-column on mobile */
+    /* Services — stack on mobile */
     .services__grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: var(--space-sm);
     }
 
@@ -266,9 +253,9 @@
         padding: 0 var(--space-xs);
     }
 
-    /* Process — keep 2-column on mobile */
-    .process__steps {
-        grid-template-columns: repeat(2, 1fr);
+    /* Process — subway line stays vertical, works great on mobile */
+    .process__line {
+        padding-left: 30px;
     }
 
     /* About */
@@ -299,12 +286,19 @@
     .footer__links {
         justify-content: center;
     }
+
+    /* Subway bullets — slightly smaller on mobile */
+    .subway-bullet {
+        width: 24px;
+        height: 24px;
+        font-size: 0.6rem;
+    }
 }
 
 /* ── Small phones (<480px) ──────────────── */
 @media (max-width: 480px) {
     .hero__headline {
-        font-size: clamp(2.8rem, 11vw, 5rem);
+        font-size: clamp(3.2rem, 14vw, 6rem);
     }
 
     .hero::before {
@@ -389,21 +383,12 @@
         letter-spacing: 0.05em;
     }
 
-    /* Services/Creative — single column on very small only */
     .services__grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
     }
 
     .creative__grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-    .process__steps {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .process__number {
-        font-size: 2rem;
     }
 
     .clients__slide {
