@@ -560,7 +560,7 @@
 
 .csg__word {
     font-family: var(--font-headline);
-    font-size: clamp(4rem, 14vw, 8rem);
+    font-size: clamp(5rem, 18vw, 12rem);
     font-weight: 700;
     letter-spacing: -0.03em;
     text-transform: uppercase;
