@@ -268,14 +268,6 @@
         font-size: clamp(2rem, 8vw, 3.5rem);
     }
 
-    /* Social icons — hide on mobile */
-    .hero__socials {
-        position: static;
-        flex-direction: row;
-        justify-content: center;
-        margin-top: var(--space-sm);
-    }
-
     /* Footer */
     .footer__top {
         flex-direction: column;

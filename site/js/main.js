@@ -126,11 +126,10 @@
     addHeart();
 })();
 
-/* ── Scroll Fade — Hero Overlays + Socials ── */
+/* ── Scroll Fade — Hero Overlays ── */
 (function() {
     var chat = document.getElementById('twitch-chat');
     var likes = document.getElementById('engagement-likes');
-    var socials = document.getElementById('hero-socials');
     var hero = document.querySelector('.hero');
     if (!hero) return;
 
@@ -144,15 +143,6 @@
 
         if (chat) chat.style.opacity = opacity * 0.35;
         if (likes) likes.style.opacity = opacity;
-
-        /* Dissolve socials when scrolling away from hero */
-        if (socials) {
-            if (opacity < 0.7) {
-                socials.classList.add('dissolved');
-            } else {
-                socials.classList.remove('dissolved');
-            }
-        }
         ticking = false;
     }
 
@@ -205,6 +195,46 @@
             });
         }, 2500);
     }, 5000);
+})();
+
+/* ── Stats Emoji Burst — emojis fly when section scrolls into view ── */
+(function() {
+    var statsSection = document.getElementById('stats');
+    if (!statsSection) return;
+
+    var emojis = ['🚀', '🔥', '💯', '📈', '⚡', '💪', '🤖', '🎯'];
+    var fired = false;
+
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting && !fired) {
+                fired = true;
+                var items = statsSection.querySelectorAll('.stats__item');
+                items.forEach(function(item) {
+                    for (var i = 0; i < 4; i++) {
+                        (function(idx) {
+                            setTimeout(function() {
+                                var el = document.createElement('span');
+                                el.className = 'stats__emoji';
+                                el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                                el.style.left = (10 + Math.random() * 80) + '%';
+                                el.style.bottom = '20%';
+                                el.style.animationDelay = (Math.random() * 0.3) + 's';
+                                el.style.animationDuration = (2 + Math.random() * 1.5) + 's';
+                                item.appendChild(el);
+                                setTimeout(function() {
+                                    if (el.parentNode) el.parentNode.removeChild(el);
+                                }, 4000);
+                            }, idx * 200 + Math.random() * 300);
+                        })(i);
+                    }
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.4 });
+
+    observer.observe(statsSection);
 })();
 
 /* ── Card Engagement Burst — likes fly out on hover (process + stats only) ── */
@@ -455,12 +485,11 @@ var revealSelectors = [
     { sel: '.showcase__phone', stagger: true },
     { sel: '.showcase__total', delay: 0 },
     { sel: '.stats__item', stagger: true },
-    { sel: '.services__eyebrow', delay: 0 },
-    { sel: '.services__headline', delay: 1 },
+    { sel: '.services__headline', delay: 0 },
     { sel: '.card', stagger: true },
-    { sel: '.creative__eyebrow', delay: 0 },
-    { sel: '.creative__headline', delay: 1 },
+    { sel: '.creative__headline', delay: 0 },
     { sel: '.creative__item', stagger: true },
+    { sel: '.section-number', stagger: true },
     { sel: '.process__headline', delay: 0 },
     { sel: '.process__sub', delay: 1 },
     { sel: '.process__stop', stagger: true },
