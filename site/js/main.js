@@ -578,6 +578,23 @@ if (hamburger && navLinks) {
     });
 })();
 
+/* ── Lock Animation — snap lock emoji when contact scrolls in ── */
+(function() {
+    var lockText = document.querySelector('.lock-text');
+    if (!lockText) return;
+
+    var lockObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                lockText.classList.add('locked');
+                lockObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    lockObserver.observe(lockText.closest('.contact') || lockText);
+})();
+
 /* ── Smooth Scroll ───────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     anchor.addEventListener('click', function(e) {

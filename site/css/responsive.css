@@ -22,7 +22,11 @@
     }
 
     .clients__logo {
-        height: 48px;
+        height: 32px;
+    }
+
+    .contact__socials {
+        gap: 1.5rem;
     }
 }
 
@@ -141,7 +145,7 @@
     }
 
     .clients__logo {
-        height: 36px;
+        height: 28px;
     }
 
     /* Showcase — keep all 3 phones */
@@ -199,34 +203,16 @@
         -webkit-line-clamp: 1;
     }
 
-    .phone__views {
-        font-size: 0.7rem;
-    }
-
-    .phone__engagement {
-        right: 4px;
-        bottom: 50px;
-        gap: 8px;
-    }
-
-    .phone__eng-item svg {
-        width: 12px;
-        height: 12px;
-    }
-
-    .phone__eng-item span {
-        font-size: 0.35rem;
-    }
-
     .phone__notch {
         width: 40px;
         height: 12px;
     }
 
-    /* Stats — keep 3-column like desktop */
+    /* Stats — 2-column (matches desktop) */
     .stats__grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: var(--space-sm);
+        max-width: 100%;
     }
 
     .stats__number {
@@ -263,9 +249,34 @@
         padding-left: 30px;
     }
 
+    /* About Banner — tighter on mobile */
+    .about-banner__text {
+        font-size: clamp(1.4rem, 5vw, 2.2rem);
+    }
+
     /* Contact */
     .contact__headline {
         font-size: clamp(2rem, 8vw, 3.5rem);
+    }
+
+    .contact__socials {
+        flex-wrap: wrap;
+        gap: 1.2rem;
+        padding-top: var(--space-lg);
+    }
+
+    .contact__social-circle {
+        width: 38px;
+        height: 38px;
+    }
+
+    .contact__social-circle svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .contact__social-label {
+        font-size: 0.5rem;
     }
 
     /* Footer */
@@ -336,10 +347,6 @@
         padding: 0.4rem 0.3rem;
     }
 
-    .phone__views {
-        font-size: 0.5rem;
-    }
-
     .phone__desc {
         font-size: 0.35rem;
     }
@@ -348,24 +355,15 @@
         font-size: 0.35rem;
     }
 
-    .phone__engagement {
-        gap: 6px;
-    }
-
-    .phone__eng-item svg {
-        width: 10px;
-        height: 10px;
-    }
-
-    .phone__eng-item span {
-        font-size: 0.3rem;
-    }
-
     .showcase__total-number {
         font-size: clamp(2.5rem, 14vw, 4rem);
     }
 
-    /* Stats — still 3-column */
+    /* Stats — single column on small phones */
+    .stats__grid {
+        grid-template-columns: 1fr;
+    }
+
     .stats__number {
         font-size: clamp(1.8rem, 7vw, 3rem);
     }
@@ -389,6 +387,30 @@
     }
 
     .clients__logo {
-        height: 28px;
+        height: 24px;
+    }
+
+    /* About Banner — smaller text */
+    .about-banner__text {
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+    }
+
+    /* Contact socials — 3 per row */
+    .contact__socials {
+        gap: 1rem;
+    }
+
+    .contact__social-circle {
+        width: 34px;
+        height: 34px;
+    }
+
+    .contact__social-circle svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .contact__social-label {
+        font-size: 0.45rem;
     }
 }
