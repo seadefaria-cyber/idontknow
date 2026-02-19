@@ -197,45 +197,6 @@
     }, 5000);
 })();
 
-/* ── Stats Emoji Burst — emojis fly when section scrolls into view ── */
-(function() {
-    var statsSection = document.getElementById('stats');
-    if (!statsSection) return;
-
-    var emojis = ['🚀', '🔥', '💯', '📈', '⚡', '💪', '🤖', '🎯'];
-    var fired = false;
-
-    var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-            if (entry.isIntersecting && !fired) {
-                fired = true;
-                var items = statsSection.querySelectorAll('.stats__item');
-                items.forEach(function(item) {
-                    for (var i = 0; i < 4; i++) {
-                        (function(idx) {
-                            setTimeout(function() {
-                                var el = document.createElement('span');
-                                el.className = 'stats__emoji';
-                                el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-                                el.style.left = (10 + Math.random() * 80) + '%';
-                                el.style.bottom = '20%';
-                                el.style.animationDelay = (Math.random() * 0.3) + 's';
-                                el.style.animationDuration = (2 + Math.random() * 1.5) + 's';
-                                item.appendChild(el);
-                                setTimeout(function() {
-                                    if (el.parentNode) el.parentNode.removeChild(el);
-                                }, 4000);
-                            }, idx * 200 + Math.random() * 300);
-                        })(i);
-                    }
-                });
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.4 });
-
-    observer.observe(statsSection);
-})();
 
 /* ── Card Engagement Burst — likes fly out on hover (process + stats only) ── */
 (function() {
