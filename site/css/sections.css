@@ -774,22 +774,6 @@
     transform: scale(1.06);
 }
 
-/* Platform icons between client logos */
-.clients__platform {
-    opacity: 0.35;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.clients__platform:hover {
-    opacity: 0.7;
-    transform: scale(1.1);
-}
-
-.clients__platform svg {
-    height: 18px;
-    width: 18px;
-}
-
 /* Pause scroll on hover */
 .clients__track:hover {
     animation-play-state: paused;
@@ -846,7 +830,7 @@
 
 /* ── Showcase — Sticky Scroll Feed ──────── */
 .showcase {
-    min-height: 220vh;
+    min-height: 180vh;
     position: relative;
 }
 
@@ -1246,7 +1230,7 @@
 /* ── Creative Services — Metro-Themed ──────── */
 .creative {
     padding: var(--space-2xl) 0;
-    background: var(--surface);
+    background: var(--bg);
     border-top: 3px solid var(--mta-purple);
     border-bottom: 1px solid var(--border);
     position: relative;
@@ -1449,8 +1433,8 @@
 .about-banner {
     text-align: center;
     padding: var(--space-xl) 0;
-    background: #38383f;
-    border-top: 1px solid var(--border);
+    background: var(--accent);
+    border-top: none;
 }
 
 .about-banner__text {
@@ -1465,7 +1449,7 @@
 }
 
 .about-banner__accent {
-    color: var(--accent);
+    color: #7CB3F0;
 }
 
 /* ── Contact ─────────────────────────────── */

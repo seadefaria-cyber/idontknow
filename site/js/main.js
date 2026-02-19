@@ -109,9 +109,9 @@
         el.className = 'engagement-likes__heart';
         var size = 18 + Math.floor(Math.random() * 14);
         var alpha = 0.25 + Math.random() * 0.35;
-        /* Top 4 MTA line colors: 4/5/6 Green, 1/2/3 Red, A/C/E Blue, B/D/F/M Orange */
-        var mtaHearts = ['#00933C', '#EE352E', '#0039A6', '#FF6319'];
-        var fill = mtaHearts[Math.floor(Math.random() * mtaHearts.length)];
+        /* Different shades of blue */
+        var blueShades = ['#0039A6', '#4A90D9', '#7CB3F0', '#1A5BC4', '#2E6FCF', '#6BAAE8'];
+        var fill = blueShades[Math.floor(Math.random() * blueShades.length)];
         el.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="' + fill + '" opacity="0.7"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
         el.style.left = (Math.random() * 90) + '%';
         el.style.animationDuration = (2.8 + Math.random() * 1.5) + 's';
