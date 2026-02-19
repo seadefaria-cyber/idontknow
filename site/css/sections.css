@@ -38,21 +38,28 @@
     color: var(--text);
 }
 
-/* Logo — d and F get subway circles on hover */
+/* Logo — dF NYC, each letter is a subway circle on hover */
 .nav__logo-d,
-.nav__logo-f {
+.nav__logo-f,
+.nav__logo-n,
+.nav__logo-y,
+.nav__logo-c {
     position: relative;
     display: inline-block;
     z-index: 1;
     transition: color 0.3s var(--ease);
 }
 
-.nav__logo-rest {
-    transition: opacity 0.3s var(--ease), color 0.3s var(--ease);
+.nav__logo-sep {
+    display: inline-block;
+    width: 0.4em;
 }
 
 .nav__logo-d::before,
-.nav__logo-f::before {
+.nav__logo-f::before,
+.nav__logo-n::before,
+.nav__logo-y::before,
+.nav__logo-c::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -68,20 +75,25 @@
 
 .nav__logo-d::before { background: var(--mta-purple); }
 .nav__logo-f::before { background: var(--mta-blue); }
+.nav__logo-n::before { background: var(--mta-red); }
+.nav__logo-y::before { background: var(--mta-orange); }
+.nav__logo-c::before { background: var(--mta-green); }
 
 .nav__logo:hover .nav__logo-d,
-.nav__logo:hover .nav__logo-f {
+.nav__logo:hover .nav__logo-f,
+.nav__logo:hover .nav__logo-n,
+.nav__logo:hover .nav__logo-y,
+.nav__logo:hover .nav__logo-c {
     color: #fff;
 }
 
 .nav__logo:hover .nav__logo-d::before,
-.nav__logo:hover .nav__logo-f::before {
+.nav__logo:hover .nav__logo-f::before,
+.nav__logo:hover .nav__logo-n::before,
+.nav__logo:hover .nav__logo-y::before,
+.nav__logo:hover .nav__logo-c::before {
     width: 1.6em;
     height: 1.6em;
-}
-
-.nav__logo:hover .nav__logo-rest {
-    opacity: 0;
 }
 
 .nav__links {
@@ -1239,7 +1251,7 @@
 
 .services__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: var(--space-md);
 }
 
@@ -1269,6 +1281,10 @@
 
 .card:nth-child(3) {
     border-left-color: var(--mta-green);
+}
+
+.card:nth-child(4) {
+    border-left-color: var(--mta-purple);
 }
 
 .card::after {
