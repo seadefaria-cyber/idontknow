@@ -546,7 +546,7 @@
 
 /* ── CLIP. SEED. GROW. Section ──────────── */
 .csg {
-    padding: var(--space-sm) 0;
+    padding: 0 0 var(--space-sm);
     border-bottom: 1px solid var(--border);
 }
 
@@ -862,7 +862,7 @@
 
 /* ── Showcase — Sticky Scroll Feed ──────── */
 .showcase {
-    min-height: 130vh;
+    min-height: 115vh;
     position: relative;
 }
 
@@ -1110,7 +1110,7 @@
 
 .showcase__total-number {
     font-family: var(--font-headline);
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(5rem, 18vw, 12rem);
     font-weight: 700;
     color: var(--mta-purple);
     letter-spacing: -0.02em;
@@ -1323,7 +1323,7 @@
 .creative {
     padding: var(--space-2xl) 0;
     background: var(--bg);
-    border-top: 3px solid var(--mta-purple);
+    border-top: 3px solid var(--mta-orange);
     border-bottom: 1px solid var(--border);
     position: relative;
     overflow: hidden;
