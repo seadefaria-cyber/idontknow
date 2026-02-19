@@ -488,7 +488,7 @@
 
 /* ── Showcase — Sticky Scroll Feed ──────── */
 .showcase {
-    min-height: 280vh;
+    min-height: 220vh;
     position: relative;
 }
 
@@ -589,6 +589,7 @@
     aspect-ratio: 9 / 16;
     overflow: hidden;
     position: relative;
+    background: linear-gradient(135deg, #0A1628, #1A3A5C);
 }
 
 .phone__feed {
@@ -1136,4 +1137,131 @@
 
 .legal__link:hover {
     opacity: 0.8;
+}
+
+/* ── Social Toast Notifications ──────────── */
+.social-toasts {
+    position: fixed;
+    top: calc(var(--nav-height) + 1rem);
+    right: 1.5rem;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    pointer-events: none;
+}
+
+.social-toast {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(30, 30, 35, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 0.55rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text);
+    max-width: 280px;
+    transform: translateX(120%);
+    opacity: 0;
+    animation: toastIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+               toastOut 0.4s ease 3.5s forwards;
+}
+
+.social-toast__icon {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-toast__icon--like { background: #E74C3C; }
+.social-toast__icon--follow { background: var(--accent); }
+.social-toast__icon--trending { background: #F5A623; }
+.social-toast__icon--views { background: #34C759; }
+
+@keyframes toastIn {
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes toastOut {
+    to { transform: translateX(120%); opacity: 0; }
+}
+
+/* ── LIVE Indicator ──────────────────────── */
+.live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #E74C3C;
+    margin-right: 0.8rem;
+}
+
+.live-indicator__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #E74C3C;
+    animation: livePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.6); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(231, 76, 60, 0); }
+}
+
+/* ── Card Engagement Burst ────────────────── */
+.card-burst {
+    position: absolute;
+    font-size: 1rem;
+    pointer-events: none;
+    animation: burstUp 1s ease-out forwards;
+    z-index: 10;
+}
+
+@keyframes burstUp {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    50% { opacity: 0.8; transform: translateY(-40px) scale(1.2); }
+    100% { opacity: 0; transform: translateY(-80px) scale(0.6); }
+}
+
+/* ── Engagement Badges (float on section reveal) ── */
+.engagement-badge {
+    position: absolute;
+    font-family: var(--font-headline);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0;
+    pointer-events: none;
+    animation: badgeFloat 2.5s ease-out forwards;
+    z-index: 5;
+    text-shadow: 0 0 20px rgba(102, 211, 250, 0.4);
+}
+
+@keyframes badgeFloat {
+    0% { opacity: 0; transform: translateY(20px) scale(0.8); }
+    20% { opacity: 0.6; transform: translateY(-10px) scale(1); }
+    60% { opacity: 0.4; transform: translateY(-30px) scale(1.05); }
+    100% { opacity: 0; transform: translateY(-60px) scale(0.9); }
+}
+
+/* ── Cards need relative for burst ────────── */
+.card,
+.creative__item,
+.process__step,
+.stats__item {
+    position: relative;
+    overflow: hidden;
 }

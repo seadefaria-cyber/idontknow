@@ -15,7 +15,8 @@
             var speed = parseFloat(feed.dataset.speed) || 1;
             var videoCount = feed.children.length;
             var maxScroll = (videoCount - 1) * 100;
-            var translate = scrollProgress * maxScroll * speed;
+            /* Clamp translate so the last video is always fully visible — never black */
+            var translate = Math.min(scrollProgress * maxScroll * speed, maxScroll);
             feed.style.transform = 'translateY(-' + translate + '%)';
         });
 
@@ -154,6 +155,139 @@
 
     updateTime();
     setInterval(updateTime, 30000);
+})();
+
+/* ── Social Media Toast Notifications ────── */
+(function() {
+    var container = document.getElementById('social-toasts');
+    if (!container) return;
+
+    var toasts = [
+        { icon: 'like', text: '+1.2K likes on your latest clip' },
+        { icon: 'follow', text: '+340 new followers this hour' },
+        { icon: 'trending', text: 'Your clip is trending on TikTok' },
+        { icon: 'views', text: '+5.8K views in the last minute' },
+        { icon: 'like', text: '@viralking liked your post' },
+        { icon: 'follow', text: 'New follower: @contentcreator' },
+        { icon: 'trending', text: 'Engagement up 280% today' },
+        { icon: 'views', text: '12.4M total views this week' },
+        { icon: 'like', text: '+890 comments on your reel' },
+        { icon: 'follow', text: '@musiclabel started following you' },
+        { icon: 'trending', text: '#1 on For You page' },
+        { icon: 'views', text: 'New clip hit 1M views' },
+        { icon: 'like', text: '@algohacker reposted your clip' },
+        { icon: 'trending', text: 'Shorts algorithm picked this up' },
+        { icon: 'follow', text: '+2.1K followers from one clip' },
+        { icon: 'views', text: 'Reels reach up 480% today' },
+    ];
+
+    var icons = {
+        like: '<svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+        follow: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>',
+        trending: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
+        views: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'
+    };
+
+    function showToast() {
+        var toast = toasts[Math.floor(Math.random() * toasts.length)];
+        var el = document.createElement('div');
+        el.className = 'social-toast';
+        el.innerHTML = '<div class="social-toast__icon social-toast__icon--' + toast.icon + '">' + icons[toast.icon] + '</div><span>' + toast.text + '</span>';
+        container.appendChild(el);
+
+        /* Remove after animation completes */
+        setTimeout(function() {
+            if (el.parentNode) el.parentNode.removeChild(el);
+        }, 4500);
+
+        /* Max 3 toasts visible */
+        while (container.children.length > 3) {
+            container.removeChild(container.firstChild);
+        }
+    }
+
+    setTimeout(function() {
+        showToast();
+        setInterval(showToast, 4000);
+    }, 2500);
+})();
+
+/* ── Live Stats Ticker — numbers keep climbing ── */
+(function() {
+    var statsNumbers = document.querySelectorAll('.stats__number');
+    if (statsNumbers.length === 0) return;
+
+    /* Wait for the initial count-up animation to finish (about 3s), then start ticking */
+    setTimeout(function() {
+        setInterval(function() {
+            statsNumbers.forEach(function(el) {
+                var text = el.textContent.replace(/,/g, '');
+                var current = parseInt(text.replace(/[^0-9]/g, ''), 10);
+                var suffix = el.dataset.suffix || '';
+                if (current > 100) {
+                    current += Math.floor(Math.random() * 3) + 1;
+                    el.textContent = current.toLocaleString() + suffix;
+                }
+            });
+        }, 2500);
+    }, 5000);
+})();
+
+/* ── Card Engagement Burst — likes fly out on hover ── */
+(function() {
+    var cards = document.querySelectorAll('.card, .creative__item, .process__step, .stats__item');
+
+    cards.forEach(function(card) {
+        card.addEventListener('mouseenter', function() {
+            for (var i = 0; i < 3; i++) {
+                var heart = document.createElement('span');
+                heart.className = 'card-burst';
+                heart.innerHTML = ['❤️', '🔥', '💯', '🚀', '⚡'][Math.floor(Math.random() * 5)];
+                heart.style.left = (20 + Math.random() * 60) + '%';
+                heart.style.animationDelay = (i * 0.1) + 's';
+                card.appendChild(heart);
+                setTimeout(function() {
+                    if (heart.parentNode) heart.parentNode.removeChild(heart);
+                }, 1200);
+            }
+        });
+    });
+})();
+
+/* ── Engagement Counter Badges — show on section reveal ── */
+(function() {
+    var sections = document.querySelectorAll('.services, .creative, .process, .about');
+
+    var badges = [
+        '+12.4K', '+890', '+5.6K', '+2.1M', '+340', '+77K', '+1.8K', '+4.2K'
+    ];
+
+    var badgeObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                /* Spawn a few floating engagement numbers */
+                for (var i = 0; i < 4; i++) {
+                    (function(index) {
+                        setTimeout(function() {
+                            var badge = document.createElement('span');
+                            badge.className = 'engagement-badge';
+                            badge.textContent = badges[Math.floor(Math.random() * badges.length)];
+                            badge.style.left = (10 + Math.random() * 80) + '%';
+                            badge.style.top = (Math.random() * 40) + '%';
+                            entry.target.style.position = 'relative';
+                            entry.target.appendChild(badge);
+                            setTimeout(function() {
+                                if (badge.parentNode) badge.parentNode.removeChild(badge);
+                            }, 2500);
+                        }, index * 400);
+                    })(i);
+                }
+                badgeObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    sections.forEach(function(s) { badgeObserver.observe(s); });
 })();
 
 /* ── Reveal Animations ───────────────────── */
