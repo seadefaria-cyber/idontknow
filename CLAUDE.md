@@ -76,55 +76,79 @@ agent-browser close
 - **Google blocks sign-in** → You forgot the anti-detection flags. Close and relaunch with full command.
 - **Session lost** → The profile at `~/.chrome-agent-profile` persists. Just relaunch and logins should still be there.
 
+## Clip Workflow (Underground Rap Content)
+
+This is the core content system. Sean runs fan pages for underground rap (primarily Nettspend). Full style guide: `clients/nettspend/clipping-style.md` — READ IT BEFORE EVERY CLIP.
+
+### Visual Style — LOCKED (never change these)
+
+- **Text overlay:** White bold text + thick black outline (5px). Montserrat Bold, 44px. NO background pill/rectangle. NO auto-contrast — ALWAYS white on black outline.
+- **Emojis:** Clean Apple emojis after caption text (no outline artifacts). Strip emojis from outline rendering pass.
+- **Title duration:** Appears immediately, disappears after 6 seconds (`--text-duration 6`).
+- **Speech captions:** ASS subtitles, ALL CAPS, font 38, white text with yellow karaoke word highlighting (`\kf` tags), MarginL=MarginR=120, MarginV=420. Must never hit TikTok side buttons.
+- **Zoom:** ALWAYS 10% slow zoom-in (`--zoom 10`). Every clip. No exceptions.
+- **Reference account:** 730.archive on TikTok — that's the visual standard.
+
+### Default Pipeline Command
+
+```bash
+python3 clips/make_clip.py <FULL_ABSOLUTE_PATH> "<caption 💀>" \
+  --start <start> --end <end> \
+  --style light --text-duration 6 --zoom 10 \
+  --subs <FULL_ABSOLUTE_PATH_subs.ass> \
+  -o <output_name>
+```
+
+**Always use absolute paths** (relative paths break trimming).
+
+### Sound Rules
+
+- **Regular clips:** Nettspend tracks from `clips/sounds/`, volume 15-20%
+- **Hopecore/motivational:** Soft instrumentals only (piano, strings, no vocals). Or no added sound if original audio is good. NEVER Nettspend songs on hopecore.
+- **Score the sound to the emotional arc** — feel the clip, place the sound like lyrics.
+
+### Caption Voice
+
+- Create tension, never resolve it. The caption opens a loop only the footage can close.
+- Conversational tone, how people actually talk. Add rage-bait emojis that REACT to the phrase.
+- Never make the artist look bad — we're on Nettspend's side.
+- 1-2 lines max. Never give away the ending.
+
+### Accounts (7 total)
+
+- **TikTok:** nettspend.clips7, nettspend590, nettspend.clips0
+- **Instagram:** rapnews.world, nettspend.world
+- **X:** NettspendWorld_, NettSpendNews_
+
+### Performance Tracking
+
+Log every clip to `clips/clip_log.csv` after posting. Review weekly to double down on winning formulas.
+
+## Invoicing
+
+- Business name: **DeFaria NYC** (Sean DeFaria, Sole Proprietor)
+- Address: 188 Scholes St., Brooklyn, NY 11206
+- Phone: 310 625 4899
+- Email: seadefaria@gmail.com
+- Invoice template: `invoices/invoice_virginia_stream.html` (use as base template)
+- Template style: Clean black & white, Inter font, 2-column (Description + Amount), black project bar, no tax line
+- No late fee clause — just "Net 30 Terms"
+- No tax line on invoices — bill flat amounts
+- Payment section has placeholder for bank details (user fills in manually)
+- Invoice numbering: INV-2026-001, INV-2026-002, etc.
+- Primary client: Clover New York / Interscope Records (NettSpend projects)
+- PDFs exported via Chrome headless to `~/Desktop/invoices/`
+- Don't charge sales tax on invoices — tax on equipment is Sean's cost, not billed to client
+- Interscope will ask for a W-9 before paying (standard for payments over $600)
+- Sean does NOT have an LLC yet — invoicing as sole proprietor is fine for now
+- Old email was sean@asspizza.com — switched to seadefaria@gmail.com for invoicing
+- Existing invoices:
+  - `invoices/invoice_virginia_stream.html` — INV-2026-001, $6,500, NettSpend Richmond Virginia LiveStream
+  - `invoices/invoice_nyc_early_crisis.html` — INV-2026-002, $1,215.77, NettSpend NYC Early Crisis Stream
+  - `invoices/invoice_clover_interscope.html` — Original draft template (superseded by above)
+
 ## Conventions
 
 - When the user dictates instructions, interpret them generously - they are communicating verbally.
 - Ask clarifying questions when requirements are ambiguous.
 - Keep explanations simple and jargon-free.
-
-## Site: defaria.nyc — Current State (Updated 2026-02-19)
-
-### Deployment Pipeline
-1. Work on any worktree branch (wt-1 through wt-4)
-2. `cd /Users/seandefaria/idontknow && git merge <branch> --no-edit`
-3. `rsync -av --delete --exclude='.git' /Users/seandefaria/idontknow/site/ /tmp/defaria-pages/`
-4. `cd /tmp/defaria-pages && git add -A && git commit -m "message" && git push origin main`
-5. Trigger build: `gh api -X POST repos/seadefaria-cyber/seadefaria-cyber.github.io/pages/builds`
-6. **CDN caches aggressively** — always bump `?v=N` on CSS/JS links in index.html when deploying CSS/JS changes
-
-### Cache Busting
-- Current version: `?v=6` on sections.css, responsive.css, and main.js
-- **CRITICAL**: Every time you change CSS or JS, bump the version number in index.html or the CDN will serve stale files
-
-### Site Architecture
-- Pure static HTML/CSS/JS — no frameworks
-- NYC MTA Subway design theme (Helvetica, colored subway circles, bold uppercase)
-- Files: `site/index.html`, `site/css/{reset,variables,layout,components,sections,responsive}.css`, `site/js/{counter,main}.js`
-
-### Current Sections (top to bottom)
-1. **Nav** — "deFaria" logo with "new york" sliding out on hover (white, same size, train animation)
-2. **Hero** — "Engineering Virality." headline. "Virality" has shine effect + scale(1.06) on hover. Twitch chat overlay (left), floating hearts (right)
-3. **Clients** — 6 SVG logos scrolling left: Interscope, Chris Heyn, Welcome JPEG, Asspizza, Early Life Crisis, Clover. 24px height, 0.2 opacity, 25s scroll speed
-4. **Showcase** — 3 phone mockups with scroll-linked video feeds. NO view counts, NO engagement metrics. Total counter "500M+ Views Generated" with dissolution effect
-5. **CLIP. SEED. GROW.** — Three animated words (slash/bury/hearts animations)
-6. **Stats** — 2 items only: "Clips Deployed Monthly" (3000+) and "Seeding Accounts Active" (100+). NO emoji burst animations
-7. **Process** (#1 red bullet) — "How The System Works" — VERTICAL subway line with 4 stops: Meet, Study, Plan, Execute. Bots mentioned ONCE carefully in Execute step only
-8. **Services** (#2 orange bullet) — "How We Force It" — HORIZONTAL metro route with 3 colored stations (orange C, red V, green D) connected by track line. Consulting, Viral Clipping, Distribution
-9. **Creative** (#3 purple bullet) — "Full-Service Creative" — 3x2 grid with purple left borders. 5 items WITH descriptions: Directing, Scoring, Post-Production, Live Production, Media Seeding
-10. **About Banner** — Single sentence: "We built the system." (white) + "Now we run it for you." (blue accent). Dark background with borders
-11. **Contact** (#4 green bullet) — "Let's lock in." with lock emoji animation. Form: Project Name, Name, Email, Message, Get Started button. 6 social circles (TikTok, Instagram, YouTube, Twitch, X, Kik) white on blue
-12. **Footer** — deFaria logo (left), Services + Contact links (right), copyright line
-
-### SVG Client Logos
-- `site/img/clients/asspizza.svg` — Text "ASSPIZZA"
-- `site/img/clients/clover.svg` — Text "CLOVER"
-- `site/img/clients/early-life-crisis.svg` — Italic serif text "early life crisis."
-- `site/img/clients/interscope.svg` — Skewed rectangle with "i" cutout
-- `site/img/clients/chrisheyn.svg` — 4 broadcast wave lines
-- `site/img/clients/welcomejpeg.svg` — 5 ellipse blob shapes
-
-### Design Decisions / Sensitivities
-- **Botting**: ONLY mentioned once in Process > Execute step. Removed from stats, services cards, creative items. Language is careful: "strictly to amplify real momentum, never to manipulate the algorithm"
-- **No fake metrics**: Phone mockups show NO view counts or engagement numbers — "not accurate" and "bad look"
-- **No cheesy animations**: Emoji bursts removed from stats. Keep interactions subtle and macho
-- **Metro theme consistency**: Process = vertical subway line, Services = horizontal metro route — different formats for different sections
