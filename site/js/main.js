@@ -492,21 +492,26 @@ if (hamburger && navLinks) {
     });
 }
 
-/* ── Hero Word Hover Colors ────────────── */
-(function() {
-    var words = document.querySelectorAll('.hero__word');
-    words.forEach(function(word) {
-        var color = word.dataset.color;
-        if (color) word.style.setProperty('--word-color', color);
-    });
-})();
-
-/* ── Heart Word Hover — Floating Hearts from any .heart-word ── */
+/* ── Engagement Word Hover — Floating engagement icons from .heart-word ── */
 (function() {
     var heartWords = document.querySelectorAll('.heart-word');
     if (heartWords.length === 0) return;
 
     var mtaColors = ['#EE352E', '#FF6319', '#B933AD', '#0039A6', '#00933C'];
+
+    /* Engagement SVG paths — gear, chart, eye, lightning, trending */
+    var iconPaths = [
+        /* Gear */
+        'M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97s-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65A.49.49 0 0 0 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1s.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.58 1.69-.98l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64L19.43 12.97z',
+        /* Trending up */
+        'M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z',
+        /* Eye */
+        'M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z',
+        /* Lightning bolt */
+        'M7 2v11h3v9l7-12h-4l4-8z',
+        /* Bar chart */
+        'M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z'
+    ];
 
     heartWords.forEach(function(word) {
         word.style.position = 'relative';
@@ -517,16 +522,17 @@ if (hamburger && navLinks) {
             for (var i = 0; i < 6; i++) {
                 (function(idx) {
                     setTimeout(function() {
-                        var heart = document.createElement('span');
-                        heart.className = 'virality-heart';
-                        var size = 10 + Math.floor(Math.random() * 12);
+                        var icon = document.createElement('span');
+                        icon.className = 'virality-heart';
+                        var size = 12 + Math.floor(Math.random() * 10);
                         var color = mtaColors[Math.floor(Math.random() * mtaColors.length)];
-                        heart.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="' + color + '"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
-                        heart.style.left = (5 + Math.random() * 90) + '%';
-                        heart.style.bottom = '50%';
-                        word.appendChild(heart);
+                        var path = iconPaths[Math.floor(Math.random() * iconPaths.length)];
+                        icon.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="' + color + '"><path d="' + path + '"/></svg>';
+                        icon.style.left = (5 + Math.random() * 90) + '%';
+                        icon.style.bottom = '50%';
+                        word.appendChild(icon);
                         setTimeout(function() {
-                            if (heart.parentNode) heart.parentNode.removeChild(heart);
+                            if (icon.parentNode) icon.parentNode.removeChild(icon);
                         }, 1800);
                     }, idx * 80);
                 })(i);
