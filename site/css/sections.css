@@ -542,25 +542,28 @@
 
 /* ── CLIP. SEED. GROW. Section ──────────── */
 .csg {
-    padding: var(--space-sm) 0;
+    padding: var(--space-lg) 0;
     border-bottom: 1px solid var(--border);
 }
 
 .csg__inner {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--space-md);
+    gap: 0;
 }
 
 .csg__word {
     font-family: var(--font-headline);
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(4rem, 14vw, 8rem);
     font-weight: 700;
     letter-spacing: -0.03em;
     text-transform: uppercase;
+    line-height: 1.05;
     transition: transform 0.3s var(--ease), opacity 0.3s ease;
     cursor: default;
+    position: relative;
 }
 
 .csg__word--clip {
