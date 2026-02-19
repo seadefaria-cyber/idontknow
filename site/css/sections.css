@@ -1730,8 +1730,12 @@
 
 /* ── Sections need relative positioning ──── */
 .creative__item,
-.process__stop,
 .stats__item {
     position: relative;
     overflow: hidden;
+}
+
+.process__stop {
+    position: relative;
+    overflow: visible;
 }
