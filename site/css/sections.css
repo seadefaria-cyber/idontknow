@@ -517,7 +517,7 @@
 
 /* ── CLIP. SEED. GROW. Section ──────────── */
 .csg {
-    padding: var(--space-md) 0;
+    padding: var(--space-sm) 0;
     border-bottom: 1px solid var(--border);
 }
 
@@ -830,7 +830,7 @@
 
 /* ── Showcase — Sticky Scroll Feed ──────── */
 .showcase {
-    min-height: 180vh;
+    min-height: 150vh;
     position: relative;
 }
 
@@ -1450,6 +1450,30 @@
 
 .about-banner__accent {
     color: #7CB3F0;
+}
+
+.about-banner .section-number {
+    margin-bottom: var(--space-sm);
+}
+
+.about-banner__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--space-lg);
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.3s ease, transform 0.3s ease;
+    animation: arrowBounce 2s ease-in-out infinite;
+}
+
+.about-banner__arrow:hover {
+    color: #fff;
+    transform: translateY(4px);
+}
+
+@keyframes arrowBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
 }
 
 /* ── Contact ─────────────────────────────── */

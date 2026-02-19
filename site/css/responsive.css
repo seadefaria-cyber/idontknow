@@ -223,7 +223,7 @@ html, body {
 
     /* Showcase — keep all 3 phones */
     .showcase {
-        min-height: 160vh;
+        min-height: 130vh;
     }
 
     .showcase__headline {
