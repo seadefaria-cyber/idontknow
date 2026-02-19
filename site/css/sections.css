@@ -97,6 +97,33 @@
     color: var(--accent) !important;
 }
 
+/* Nav LIVE indicator */
+.nav__live {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #E74C3C;
+    opacity: 0.8;
+}
+
+.nav__live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #E74C3C;
+    animation: navLivePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes navLivePulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.6); }
+    50% { opacity: 0.5; box-shadow: 0 0 0 4px rgba(231, 76, 60, 0); }
+}
+
 .nav__hamburger {
     display: none;
     flex-direction: column;
@@ -173,44 +200,16 @@
     margin-bottom: var(--space-md);
 }
 
-/* "Engineering" — no hover animation */
-.hero__engineering {
+/* Hero words — individual hover colors (MTA line colors) */
+.hero__word {
     display: inline-block;
+    transition: color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: default;
 }
 
-/* "Virality" hover — subtle shine + hearts + grow */
-.hero__virality {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.hero__virality:hover {
-    transform: scale(1.06);
-}
-
-.hero__virality::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-    transform: skewX(-15deg);
-    pointer-events: none;
-    z-index: 1;
-    transition: none;
-}
-
-.hero__virality:hover::before {
-    animation: viralityShine 0.8s ease-out forwards;
-}
-
-@keyframes viralityShine {
-    0% { left: -100%; opacity: 1; }
-    100% { left: 150%; opacity: 0; }
+.hero__word:hover {
+    color: var(--word-color, var(--accent));
+    transform: translateY(-3px);
 }
 
 /* Virality hover — floating hearts */

@@ -492,6 +492,15 @@ if (hamburger && navLinks) {
     });
 }
 
+/* ── Hero Word Hover Colors ────────────── */
+(function() {
+    var words = document.querySelectorAll('.hero__word');
+    words.forEach(function(word) {
+        var color = word.dataset.color;
+        if (color) word.style.setProperty('--word-color', color);
+    });
+})();
+
 /* ── Virality Hover — Floating Hearts ────── */
 (function() {
     var virality = document.querySelector('.hero__virality');
