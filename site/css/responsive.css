@@ -41,17 +41,47 @@
         display: none;
     }
 
-    /* Twitch chat, likes & phone status */
+    /* Twitch chat — scaled down, not hidden */
     .twitch-chat {
-        display: none;
+        width: 180px;
+        max-height: 140px;
+        bottom: 16px;
+        left: 12px;
+        opacity: 0.25;
     }
 
+    .twitch-chat__msg {
+        font-size: 0.6rem;
+    }
+
+    /* Engagement likes — scaled down, not hidden */
     .engagement-likes {
-        display: none;
+        width: 80px;
+        height: 200px;
+        bottom: 16px;
+        right: 12px;
     }
 
+    /* Phone status — hidden on mobile */
     .phone-status {
         display: none;
+    }
+
+    /* Social toasts — smaller on mobile */
+    .social-toasts {
+        right: 0.75rem;
+        left: 0.75rem;
+    }
+
+    .social-toast {
+        max-width: 100%;
+        font-size: 0.65rem;
+        padding: 0.45rem 0.75rem;
+    }
+
+    .social-toast__icon {
+        width: 22px;
+        height: 22px;
     }
 
     /* Nav */
@@ -262,6 +292,11 @@
         font-size: 0.95rem;
     }
 
+    /* Engagement badges — hide on mobile */
+    .engagement-badge {
+        display: none;
+    }
+
     /* Footer */
     .footer__top {
         flex-direction: column;
@@ -282,6 +317,15 @@
 
     .hero::before {
         font-size: 10rem;
+    }
+
+    /* Hide chat/likes on very small phones */
+    .twitch-chat {
+        display: none;
+    }
+
+    .engagement-likes {
+        display: none;
     }
 
     .phone {
