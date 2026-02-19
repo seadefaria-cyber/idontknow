@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Star shape -->
+  <polygon points="100,10 127,75 195,80 142,125 158,192 100,158 42,192 58,125 5,80 73,75" fill="#ffffff" stroke="none"/>
+  <!-- Squinty left eye -->
+  <path d="M65,90 Q72,82 82,90" fill="none" stroke="#0E0E10" stroke-width="4" stroke-linecap="round"/>
+  <!-- Squinty right eye -->
+  <path d="M118,90 Q125,82 135,90" fill="none" stroke="#0E0E10" stroke-width="4" stroke-linecap="round"/>
+  <!-- Small nose -->
+  <circle cx="100" cy="105" r="2.5" fill="#0E0E10"/>
+  <!-- Smile -->
+  <path d="M75,118 Q100,142 125,118" fill="none" stroke="#0E0E10" stroke-width="4" stroke-linecap="round"/>
+</svg>
