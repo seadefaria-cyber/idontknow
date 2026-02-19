@@ -1526,33 +1526,63 @@
     transform: translateY(-1px);
 }
 
-/* Footer social icons */
+/* Footer social icons — subway circle style */
 .footer__socials {
     display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+    padding: var(--space-lg) 0 var(--space-md);
+}
+
+.footer__social-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+}
+
+.footer__social-circle {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 1.5rem;
-    padding: var(--space-md) 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    color: #fff;
+    transition: transform var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
 }
 
-.footer__social {
-    width: 28px;
-    height: 28px;
+.footer__social-circle svg {
+    width: 22px;
+    height: 22px;
+}
+
+.footer__social-circle--red { background: var(--mta-red); }
+.footer__social-circle--orange { background: var(--mta-orange); }
+.footer__social-circle--yellow { background: var(--mta-yellow); color: #000; }
+.footer__social-circle--green { background: var(--mta-green); }
+.footer__social-circle--blue { background: var(--mta-blue); }
+.footer__social-circle--purple { background: var(--mta-purple); }
+
+.footer__social-item:hover .footer__social-circle {
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+}
+
+.footer__social-label {
+    font-family: var(--font-headline);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--text-muted);
-    opacity: 0.6;
-    transition: opacity var(--duration) var(--ease), color var(--duration) var(--ease), transform var(--duration) var(--ease);
-    display: block;
+    transition: color var(--duration) var(--ease);
 }
 
-.footer__social svg {
-    width: 100%;
-    height: 100%;
-}
-
-.footer__social:hover {
-    opacity: 1;
-    color: var(--accent);
-    transform: translateY(-2px);
+.footer__social-item:hover .footer__social-label {
+    color: var(--text);
 }
 
 .footer__bottom {
