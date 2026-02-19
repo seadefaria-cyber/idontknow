@@ -39,11 +39,34 @@
 }
 
 .nav__logo-f {
-    transition: color var(--duration) var(--ease);
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s var(--ease);
+    z-index: 1;
+}
+
+.nav__logo-f::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                height 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: -1;
 }
 
 .nav__logo:hover .nav__logo-f {
-    color: var(--accent);
+    color: #fff;
+}
+
+.nav__logo:hover .nav__logo-f::before {
+    width: 1.6em;
+    height: 1.6em;
 }
 
 .nav__links {
@@ -67,7 +90,7 @@
 
 .nav__cta {
     background: var(--accent);
-    color: #0E0E10 !important;
+    color: #fff !important;
     padding: 0.45rem 1.2rem;
     border-radius: 0;
     font-weight: 700 !important;
@@ -76,7 +99,7 @@
 
 .nav__cta:hover {
     background: #fff;
-    color: #0E0E10 !important;
+    color: var(--accent) !important;
 }
 
 .nav__hamburger {
@@ -177,9 +200,9 @@
     overflow: visible;
 }
 
-/* GROW — MTA Yellow, scales up when active */
+/* GROW — white, scales up when active */
 .hero__word--grow {
-    color: var(--mta-yellow);
+    color: #fff;
     transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.4s ease;
 }
 
@@ -196,6 +219,12 @@
 .hero__word--seed.active {
     transform: translateY(8px);
     opacity: 0.6;
+}
+
+/* ── CLIP — Individual letters ─────────── */
+.hero__clip-letter {
+    display: inline-block;
+    will-change: transform;
 }
 
 /* ── CLIP — Slash Line ──────────────────── */
@@ -450,7 +479,7 @@
 .hero .btn:hover {
     background: #fff;
     color: var(--accent);
-    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 57, 166, 0.3);
 }
 
 /* ── Phone Status Bar ───────────────────── */
@@ -1092,7 +1121,7 @@
     left: -60%;
     width: 40%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(252, 204, 10, 0.08), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 57, 166, 0.1), transparent);
     transform: skewX(-15deg);
     opacity: 0;
     pointer-events: none;
@@ -1271,7 +1300,7 @@
 
 .process__dot--red { background: var(--mta-red); }
 .process__dot--orange { background: var(--mta-orange); }
-.process__dot--yellow { background: var(--mta-yellow); }
+.process__dot--yellow { background: var(--mta-blue); }
 .process__dot--green { background: var(--mta-green); }
 
 .process__stop:hover .process__dot {
@@ -1281,7 +1310,7 @@
 
 .process__stop:hover .process__dot--red { box-shadow: 0 0 16px var(--mta-red); }
 .process__stop:hover .process__dot--orange { box-shadow: 0 0 16px var(--mta-orange); }
-.process__stop:hover .process__dot--yellow { box-shadow: 0 0 16px var(--mta-yellow); }
+.process__stop:hover .process__dot--yellow { box-shadow: 0 0 16px var(--mta-blue); }
 .process__stop:hover .process__dot--green { box-shadow: 0 0 16px var(--mta-green); }
 
 .process__content {
@@ -1335,7 +1364,7 @@
 /* ── Contact ─────────────────────────────── */
 .contact {
     background: var(--accent);
-    color: #0E0E10;
+    color: #fff;
     padding: var(--space-2xl) 0;
 }
 
@@ -1349,13 +1378,13 @@
     font-weight: 700;
     line-height: 1.08;
     margin-bottom: var(--space-sm);
-    color: #0E0E10;
+    color: #fff;
 }
 
 .contact__sub {
     font-size: 1.1rem;
     margin-bottom: var(--space-lg);
-    color: rgba(14, 14, 16, 0.6);
+    color: rgba(255, 255, 255, 0.6);
     line-height: 1.6;
 }
 
@@ -1366,23 +1395,23 @@
 }
 
 .contact__form .input {
-    background: rgba(14, 14, 16, 0.08);
-    border: 1px solid rgba(14, 14, 16, 0.15);
-    color: #0E0E10;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
 }
 
 .contact__form .input::placeholder {
-    color: rgba(14, 14, 16, 0.4);
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .contact__form .input:focus {
-    background: rgba(14, 14, 16, 0.12);
-    border-color: #0E0E10;
-    box-shadow: 0 0 0 3px rgba(14, 14, 16, 0.1);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
 .contact__form .btn--dark {
-    background: #0E0E10;
+    background: #fff;
     color: var(--accent);
 }
 
