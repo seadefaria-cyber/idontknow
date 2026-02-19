@@ -206,6 +206,27 @@
     color: var(--mta-orange);
 }
 
+/* Agency ID inside hero */
+.hero__agency-id {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-xs);
+}
+
+.hero__agency-id .agency-id__word {
+    font-size: clamp(0.7rem, 1.8vw, 1rem);
+    letter-spacing: 0.12em;
+    padding: 0 0.5rem;
+}
+
+.hero__agency-id .agency-id__dot {
+    width: 5px;
+    height: 5px;
+}
+
 /* Virality hover — floating hearts */
 .virality-heart {
     position: absolute;
