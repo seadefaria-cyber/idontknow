@@ -199,16 +199,14 @@ html, body {
 
     /* CSG — centered, no overflow */
     .csg__inner {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: var(--space-sm);
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
         text-align: center;
     }
 
     .csg__word {
-        font-size: clamp(2rem, 10vw, 4rem);
-        text-align: center;
+        font-size: clamp(3rem, 14vw, 6rem);
     }
 
     /* Clients */
