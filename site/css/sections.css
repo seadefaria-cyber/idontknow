@@ -1141,6 +1141,47 @@
 }
 
 
+/* ── Agency Identity Strip ─────────────────── */
+.agency-id {
+    padding: var(--space-lg) 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.agency-id__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+}
+
+.agency-id__word {
+    font-family: var(--font-headline);
+    font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0 var(--space-sm);
+    transition: color 0.3s ease;
+}
+
+.agency-id__word--clip { color: var(--mta-red); }
+.agency-id__word--dist { color: var(--mta-blue); }
+.agency-id__word--creative { color: var(--mta-orange); }
+.agency-id__word--agency { color: #fff; }
+
+.agency-id__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    flex-shrink: 0;
+}
+
 /* ── Services ────────────────────────────── */
 .services {
     padding: var(--space-lg) 0 var(--space-2xl);
