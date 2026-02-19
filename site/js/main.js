@@ -22,13 +22,13 @@
             feed.style.transform = 'translateY(-' + translate + '%)';
         });
 
-        /* Phone dissolution — when scroll reaches 85%, phones dissolve and stat takes over */
+        /* Phone dissolution — dissolve at 55% so phones never go blank */
         if (phonesContainer && totalContainer) {
-            if (scrollProgress > 0.85 && !dissolved) {
+            if (scrollProgress > 0.55 && !dissolved) {
                 dissolved = true;
                 phonesContainer.classList.add('dissolve');
                 totalContainer.classList.add('takeover');
-            } else if (scrollProgress <= 0.85 && dissolved) {
+            } else if (scrollProgress <= 0.55 && dissolved) {
                 dissolved = false;
                 phonesContainer.classList.remove('dissolve');
                 totalContainer.classList.remove('takeover');
@@ -109,9 +109,10 @@
         el.className = 'engagement-likes__heart';
         var size = 18 + Math.floor(Math.random() * 14);
         var alpha = 0.25 + Math.random() * 0.35;
-        var blueShades = ['rgba(0,57,166,' + alpha + ')', 'rgba(74,144,217,' + alpha + ')', 'rgba(255,255,255,' + (alpha * 0.6) + ')', 'rgba(26,94,199,' + alpha + ')'];
-        var fill = blueShades[Math.floor(Math.random() * blueShades.length)];
-        el.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="' + fill + '"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+        /* Top 4 MTA line colors: 4/5/6 Green, 1/2/3 Red, A/C/E Blue, B/D/F/M Orange */
+        var mtaHearts = ['#00933C', '#EE352E', '#0039A6', '#FF6319'];
+        var fill = mtaHearts[Math.floor(Math.random() * mtaHearts.length)];
+        el.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="' + fill + '" opacity="0.7"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
         el.style.left = (Math.random() * 90) + '%';
         el.style.animationDuration = (2.8 + Math.random() * 1.5) + 's';
         container.appendChild(el);
@@ -125,10 +126,11 @@
     addHeart();
 })();
 
-/* ── Scroll Fade — Hero Overlays ─────────── */
+/* ── Scroll Fade — Hero Overlays + Socials ── */
 (function() {
     var chat = document.getElementById('twitch-chat');
     var likes = document.getElementById('engagement-likes');
+    var socials = document.getElementById('hero-socials');
     var hero = document.querySelector('.hero');
     if (!hero) return;
 
@@ -142,6 +144,15 @@
 
         if (chat) chat.style.opacity = opacity * 0.35;
         if (likes) likes.style.opacity = opacity;
+
+        /* Dissolve socials when scrolling away from hero */
+        if (socials) {
+            if (opacity < 0.7) {
+                socials.classList.add('dissolved');
+            } else {
+                socials.classList.remove('dissolved');
+            }
+        }
         ticking = false;
     }
 
@@ -242,11 +253,11 @@
     });
 })();
 
-/* ── Hero Word Animations — CLIP / SEED / GROW ── */
+/* ── CLIP / SEED / GROW Word Animations ──── */
 (function() {
-    var clipWord = document.querySelector('.hero__word--clip');
-    var seedWord = document.querySelector('.hero__word--seed');
-    var growWord = document.querySelector('.hero__word--grow');
+    var clipWord = document.querySelector('.csg__word--clip');
+    var seedWord = document.querySelector('.csg__word--seed');
+    var growWord = document.querySelector('.csg__word--grow');
     if (!clipWord || !seedWord || !growWord) return;
 
     /* ── CLIP — slash cuts through, letters split apart ── */
@@ -255,7 +266,7 @@
     clipWord.textContent = '';
     clipLetters.forEach(function(ch, i) {
         var span = document.createElement('span');
-        span.className = 'hero__clip-letter';
+        span.className = 'csg__clip-letter';
         span.textContent = ch;
         span.dataset.index = i;
         clipWord.appendChild(span);
@@ -265,15 +276,15 @@
         if (clipWord.classList.contains('animating')) return;
         clipWord.classList.add('animating');
 
-        var letters = clipWord.querySelectorAll('.hero__clip-letter');
+        var letters = clipWord.querySelectorAll('.csg__clip-letter');
 
         /* Slash element sweeps across */
         var slash = document.createElement('span');
-        slash.className = 'hero__clip-slash';
+        slash.className = 'csg__clip-slash';
         clipWord.appendChild(slash);
 
         var line = document.createElement('span');
-        line.className = 'hero__clip-line';
+        line.className = 'csg__clip-line';
         clipWord.appendChild(line);
 
         requestAnimationFrame(function() {
@@ -307,7 +318,7 @@
         setTimeout(function() {
             for (var i = 0; i < 12; i++) {
                 var spark = document.createElement('span');
-                spark.className = 'hero__clip-spark';
+                spark.className = 'csg__clip-spark';
                 spark.style.left = (35 + Math.random() * 20) + '%';
                 spark.style.top = (35 + Math.random() * 30) + '%';
                 spark.style.setProperty('--dx', ((Math.random() - 0.5) * 120) + 'px');
@@ -354,7 +365,7 @@
         for (var i = 0; i < 14; i++) {
             (function(idx) {
                 var dot = document.createElement('span');
-                dot.className = 'hero__seed-particle';
+                dot.className = 'csg__seed-particle';
                 dot.style.left = (Math.random() * 100) + '%';
                 dot.style.animationDelay = (Math.random() * 0.3) + 's';
                 dot.style.animationDuration = (0.5 + Math.random() * 0.5) + 's';
@@ -385,9 +396,9 @@
             (function(idx) {
                 setTimeout(function() {
                     var heart = document.createElement('span');
-                    heart.className = 'hero__grow-heart';
+                    heart.className = 'csg__grow-heart';
                     var size = 14 + Math.floor(Math.random() * 16);
-                    var colors = ['rgba(0,57,166,0.8)', 'rgba(74,144,217,0.7)', 'rgba(255,255,255,0.5)', 'rgba(0,57,166,0.5)', 'rgba(160,196,255,0.6)'];
+                    var colors = ['rgba(0,147,60,0.8)', 'rgba(238,53,46,0.7)', 'rgba(0,57,166,0.7)', 'rgba(255,99,25,0.7)'];
                     var color = colors[Math.floor(Math.random() * colors.length)];
                     heart.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="' + color + '"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
                     heart.style.left = (5 + Math.random() * 90) + '%';
@@ -415,20 +426,20 @@
     seedWord.addEventListener('mouseenter', animateSeed);
     growWord.addEventListener('mouseenter', animateGrow);
 
-    /* Auto-play sequence on page load */
-    var hero = document.querySelector('.hero');
-    if (hero) {
-        var heroWordObserver = new IntersectionObserver(function(entries) {
+    /* Auto-play sequence when CSG section scrolls into view */
+    var csgSection = document.querySelector('.csg');
+    if (csgSection) {
+        var csgObserver = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
-                    setTimeout(animateClip, 1000);
-                    setTimeout(animateSeed, 2400);
-                    setTimeout(animateGrow, 3800);
-                    heroWordObserver.unobserve(entry.target);
+                    setTimeout(animateClip, 300);
+                    setTimeout(animateSeed, 1600);
+                    setTimeout(animateGrow, 2800);
+                    csgObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.3 });
-        heroWordObserver.observe(hero);
+        csgObserver.observe(csgSection);
     }
 })();
 
@@ -438,6 +449,7 @@ var revealSelectors = [
     { sel: '.hero__sub', delay: 1 },
     { sel: '.hero__desc', delay: 2 },
     { sel: '.hero__inner .btn', delay: 3 },
+    { sel: '.csg__word', stagger: true },
     { sel: '.showcase__eyebrow', delay: 0 },
     { sel: '.showcase__headline', delay: 1 },
     { sel: '.showcase__phone', stagger: true },
