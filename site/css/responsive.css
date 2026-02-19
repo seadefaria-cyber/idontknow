@@ -263,22 +263,17 @@
         padding-left: 30px;
     }
 
-    /* About */
-    .about__headline {
-        font-size: clamp(2rem, 8vw, 3.5rem);
-    }
-
-    .about__text {
-        font-size: 0.95rem;
-    }
-
     /* Contact */
     .contact__headline {
         font-size: clamp(2rem, 8vw, 3.5rem);
     }
 
-    .contact__sub {
-        font-size: 0.95rem;
+    /* Social icons — hide on mobile */
+    .hero__socials {
+        position: static;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: var(--space-sm);
     }
 
     /* Footer */

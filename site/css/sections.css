@@ -38,37 +38,7 @@
     color: var(--text);
 }
 
-/* Logo — "deFaria" morphs into "dF NYC" with subway circles on hover */
-.nav__logo-d,
-.nav__logo-f,
-.nav__logo-n,
-.nav__logo-y,
-.nav__logo-c {
-    position: relative;
-    display: inline-block;
-    z-index: 1;
-    transition: color 0.3s var(--ease);
-}
-
-/* "e" and "aria" collapse on hover to make room for NYC */
-.nav__logo-e,
-.nav__logo-aria {
-    display: inline-block;
-    max-width: 80px;
-    overflow: hidden;
-    white-space: nowrap;
-    vertical-align: bottom;
-    transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.3s ease;
-}
-
-.nav__logo:hover .nav__logo-e,
-.nav__logo:hover .nav__logo-aria {
-    max-width: 0;
-    opacity: 0;
-}
-
-/* NYC wrapper — hidden by default, expands on hover */
+/* Logo — "deFaria" with "NYC" sliding out on hover */
 .nav__logo-nyc {
     display: inline-block;
     max-width: 0;
@@ -79,55 +49,15 @@
     transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
                 opacity 0.3s ease 0.1s;
     margin-left: 0;
+    color: var(--mta-blue);
+    font-size: 0.75em;
+    letter-spacing: 0.08em;
 }
 
 .nav__logo:hover .nav__logo-nyc {
-    max-width: 120px;
+    max-width: 80px;
     opacity: 1;
-    margin-left: 0.4em;
-}
-
-/* Subway circle backgrounds on each letter */
-.nav__logo-d::before,
-.nav__logo-f::before,
-.nav__logo-n::before,
-.nav__logo-y::before,
-.nav__logo-c::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-                height 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-    z-index: -1;
-}
-
-.nav__logo-d::before { background: var(--mta-purple); }
-.nav__logo-f::before { background: var(--mta-blue); }
-.nav__logo-n::before { background: var(--mta-red); }
-.nav__logo-y::before { background: var(--mta-orange); }
-.nav__logo-c::before { background: var(--mta-green); }
-
-.nav__logo:hover .nav__logo-d,
-.nav__logo:hover .nav__logo-f,
-.nav__logo:hover .nav__logo-n,
-.nav__logo:hover .nav__logo-y,
-.nav__logo:hover .nav__logo-c {
-    color: #fff;
-    margin: 0 0.25em;
-}
-
-.nav__logo:hover .nav__logo-d::before,
-.nav__logo:hover .nav__logo-f::before,
-.nav__logo:hover .nav__logo-n::before,
-.nav__logo:hover .nav__logo-y::before,
-.nav__logo:hover .nav__logo-c::before {
-    width: 1.4em;
-    height: 1.4em;
+    margin-left: 0.35em;
 }
 
 .nav__links {
@@ -617,19 +547,22 @@
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
 }
 
-/* Hero Social Media — Metro colored circles */
+/* Hero Social Media — vertical strip on upper right */
 .hero__socials {
+    position: absolute;
+    right: var(--space-lg);
+    top: calc(var(--nav-height) + 2rem);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: var(--space-md);
+    gap: 0.6rem;
+    z-index: 3;
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .hero__socials.dissolved {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateX(10px);
     pointer-events: none;
 }
 
@@ -1606,29 +1539,21 @@
     line-height: 1.7;
 }
 
-/* ── About ───────────────────────────────── */
-.about {
-    padding: var(--space-2xl) 0;
+/* ── About Banner ────────────────────────── */
+.about-banner {
+    padding: var(--space-md) 0;
     background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
 }
 
-.about__inner {
-    max-width: 760px;
-}
-
-.about__headline {
+.about-banner__text {
     font-family: var(--font-headline);
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
     font-weight: 700;
-    line-height: 1.08;
-    margin-bottom: var(--space-lg);
-}
-
-.about__text {
-    font-size: clamp(1rem, 2vw, 1.15rem);
-    color: var(--text-muted);
-    line-height: 1.8;
-    margin-bottom: var(--space-md);
+    letter-spacing: -0.02em;
+    color: var(--text);
 }
 
 /* ── Contact ─────────────────────────────── */
@@ -1640,6 +1565,11 @@
 
 .contact__inner {
     max-width: 640px;
+}
+
+.contact__eyebrow {
+    text-align: center;
+    margin-bottom: var(--space-sm);
 }
 
 .contact__headline {
