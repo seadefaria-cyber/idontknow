@@ -464,7 +464,7 @@ var revealSelectors = [
     { sel: '.process__headline', delay: 0 },
     { sel: '.process__sub', delay: 1 },
     { sel: '.process__stop', stagger: true },
-    { sel: '.about__headline', delay: 0 },
+    { sel: '.about-banner__text', delay: 0 },
     { sel: '.contact__headline', delay: 0 },
     { sel: '.contact__form', delay: 1 },
 ];
