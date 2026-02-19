@@ -179,9 +179,9 @@
     }, 5000);
 })();
 
-/* ── Card Engagement Burst — likes fly out on hover ── */
+/* ── Card Engagement Burst — likes fly out on hover (process + stats only) ── */
 (function() {
-    var cards = document.querySelectorAll('.card, .creative__item, .process__step, .stats__item');
+    var cards = document.querySelectorAll('.process__step, .stats__item');
 
     cards.forEach(function(card) {
         card.addEventListener('mouseenter', function() {
@@ -198,42 +198,6 @@
             }
         });
     });
-})();
-
-/* ── Engagement Counter Badges — show on section reveal ── */
-(function() {
-    var sections = document.querySelectorAll('.services, .creative, .process, .about');
-
-    var badges = [
-        '+12.4K', '+890', '+5.6K', '+2.1M', '+340', '+77K', '+1.8K', '+4.2K'
-    ];
-
-    var badgeObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-                /* Spawn a few floating engagement numbers */
-                for (var i = 0; i < 4; i++) {
-                    (function(index) {
-                        setTimeout(function() {
-                            var badge = document.createElement('span');
-                            badge.className = 'engagement-badge';
-                            badge.textContent = badges[Math.floor(Math.random() * badges.length)];
-                            badge.style.left = (10 + Math.random() * 80) + '%';
-                            badge.style.top = (Math.random() * 40) + '%';
-                            entry.target.style.position = 'relative';
-                            entry.target.appendChild(badge);
-                            setTimeout(function() {
-                                if (badge.parentNode) badge.parentNode.removeChild(badge);
-                            }, 2500);
-                        }, index * 400);
-                    })(i);
-                }
-                badgeObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.2 });
-
-    sections.forEach(function(s) { badgeObserver.observe(s); });
 })();
 
 /* ── Client Logo Hover Hearts ────────────── */
