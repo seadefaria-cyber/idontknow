@@ -56,6 +56,10 @@ html, body {
         display: none;
     }
 
+    .metro-sidebar {
+        display: none;
+    }
+
     /* Twitch chat — scaled down */
     .twitch-chat {
         width: 180px;
@@ -221,7 +225,7 @@ html, body {
 
     /* Showcase — keep all 3 phones */
     .showcase {
-        min-height: 130vh;
+        min-height: 110vh;
     }
 
     .showcase__headline {
