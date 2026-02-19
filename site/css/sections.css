@@ -232,9 +232,10 @@
 }
 
 .hero__platform:hover {
-    opacity: 0.8;
-    color: var(--accent);
+    opacity: 1;
+    color: #fff;
     transform: scale(1.2);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
 }
 
 .hero__desc {

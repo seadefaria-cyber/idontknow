@@ -157,60 +157,6 @@
     setInterval(updateTime, 30000);
 })();
 
-/* ── Social Media Toast Notifications ────── */
-(function() {
-    var container = document.getElementById('social-toasts');
-    if (!container) return;
-
-    var toasts = [
-        { icon: 'like', text: '+1.2K likes on your latest clip' },
-        { icon: 'follow', text: '+340 new followers this hour' },
-        { icon: 'trending', text: 'Your clip is trending on TikTok' },
-        { icon: 'views', text: '+5.8K views in the last minute' },
-        { icon: 'like', text: '@viralking liked your post' },
-        { icon: 'follow', text: 'New follower: @contentcreator' },
-        { icon: 'trending', text: 'Engagement up 280% today' },
-        { icon: 'views', text: '12.4M total views this week' },
-        { icon: 'like', text: '+890 comments on your reel' },
-        { icon: 'follow', text: '@musiclabel started following you' },
-        { icon: 'trending', text: '#1 on For You page' },
-        { icon: 'views', text: 'New clip hit 1M views' },
-        { icon: 'like', text: '@algohacker reposted your clip' },
-        { icon: 'trending', text: 'Shorts algorithm picked this up' },
-        { icon: 'follow', text: '+2.1K followers from one clip' },
-        { icon: 'views', text: 'Reels reach up 480% today' },
-    ];
-
-    var icons = {
-        like: '<svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
-        follow: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>',
-        trending: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
-        views: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'
-    };
-
-    function showToast() {
-        var toast = toasts[Math.floor(Math.random() * toasts.length)];
-        var el = document.createElement('div');
-        el.className = 'social-toast';
-        el.innerHTML = '<div class="social-toast__icon social-toast__icon--' + toast.icon + '">' + icons[toast.icon] + '</div><span>' + toast.text + '</span>';
-        container.appendChild(el);
-
-        /* Remove after animation completes */
-        setTimeout(function() {
-            if (el.parentNode) el.parentNode.removeChild(el);
-        }, 4500);
-
-        /* Max 3 toasts visible */
-        while (container.children.length > 3) {
-            container.removeChild(container.firstChild);
-        }
-    }
-
-    setTimeout(function() {
-        showToast();
-        setInterval(showToast, 4000);
-    }, 2500);
-})();
 
 /* ── Live Stats Ticker — numbers keep climbing ── */
 (function() {
