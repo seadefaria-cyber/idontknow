@@ -519,21 +519,37 @@ if (hamburger && navLinks) {
     });
 })();
 
-/* ── Lock Animation — snap lock emoji when contact scrolls in ── */
+/* ── Nav Auto-Hide on Scroll Down ─────────── */
 (function() {
-    var lockText = document.querySelector('.lock-text');
-    if (!lockText) return;
+    var nav = document.getElementById('nav');
+    if (!nav) return;
 
-    var lockObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-                lockText.classList.add('locked');
-                lockObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.3 });
+    var lastScrollY = window.scrollY;
+    var ticking = false;
 
-    lockObserver.observe(lockText.closest('.contact') || lockText);
+    function updateNav() {
+        var currentScrollY = window.scrollY;
+        /* Hide nav when scrolling down past 80px, show when scrolling up */
+        if (currentScrollY > lastScrollY && currentScrollY > 80) {
+            nav.classList.add('nav--hidden');
+            /* Close mobile menu if open when hiding */
+            var navLinks = document.getElementById('nav-links');
+            var hamburger = document.getElementById('hamburger');
+            if (navLinks) navLinks.classList.remove('open');
+            if (hamburger) hamburger.classList.remove('active');
+        } else {
+            nav.classList.remove('nav--hidden');
+        }
+        lastScrollY = currentScrollY;
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(updateNav);
+            ticking = true;
+        }
+    }, { passive: true });
 })();
 
 /* ── Smooth Scroll ───────────────────────── */
