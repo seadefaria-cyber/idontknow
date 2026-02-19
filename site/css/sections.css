@@ -1493,28 +1493,58 @@
     color: #7CB3F0;
 }
 
-.about-banner .section-number {
-    margin-bottom: var(--space-sm);
-}
-
-.about-banner__arrow {
-    display: inline-flex;
+/* Subway track curving down to next section */
+.about-banner__track {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
     margin-top: var(--space-lg);
-    color: rgba(255, 255, 255, 0.5);
-    transition: color 0.3s ease, transform 0.3s ease;
-    animation: arrowBounce 2s ease-in-out infinite;
+    text-decoration: none;
+    position: relative;
+    height: 80px;
 }
 
-.about-banner__arrow:hover {
-    color: #fff;
-    transform: translateY(4px);
+.about-banner__rail {
+    width: 4px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 2px;
+    position: relative;
+    animation: railPulse 2.5s ease-in-out infinite;
 }
 
-@keyframes arrowBounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(8px); }
+.about-banner__rail::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 0 0 8px 8px;
+    transform-origin: top center;
+}
+
+.about-banner__station {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--mta-green);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    margin-top: 4px;
+    box-shadow: 0 0 12px rgba(0, 147, 60, 0.6), 0 0 24px rgba(0, 147, 60, 0.3);
+    animation: stationGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes railPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+@keyframes stationGlow {
+    0%, 100% { box-shadow: 0 0 12px rgba(0, 147, 60, 0.6), 0 0 24px rgba(0, 147, 60, 0.3); }
+    50% { box-shadow: 0 0 18px rgba(0, 147, 60, 0.8), 0 0 36px rgba(0, 147, 60, 0.5); }
 }
 
 /* ── Contact ─────────────────────────────── */
