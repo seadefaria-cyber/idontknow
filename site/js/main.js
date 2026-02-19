@@ -198,26 +198,6 @@
 })();
 
 
-/* ── Card Engagement Burst — likes fly out on hover (process + stats only) ── */
-(function() {
-    var cards = document.querySelectorAll('.process__step, .stats__item');
-
-    cards.forEach(function(card) {
-        card.addEventListener('mouseenter', function() {
-            for (var i = 0; i < 3; i++) {
-                var heart = document.createElement('span');
-                heart.className = 'card-burst';
-                heart.innerHTML = ['❤️', '🔥', '💯', '🚀', '⚡'][Math.floor(Math.random() * 5)];
-                heart.style.left = (20 + Math.random() * 60) + '%';
-                heart.style.animationDelay = (i * 0.1) + 's';
-                card.appendChild(heart);
-                setTimeout(function() {
-                    if (heart.parentNode) heart.parentNode.removeChild(heart);
-                }, 1200);
-            }
-        });
-    });
-})();
 
 /* ── Client Logo Hover Hearts ────────────── */
 (function() {
@@ -447,7 +427,7 @@ var revealSelectors = [
     { sel: '.showcase__total', delay: 0 },
     { sel: '.stats__item', stagger: true },
     { sel: '.services__headline', delay: 0 },
-    { sel: '.card', stagger: true },
+    { sel: '.services__station', stagger: true },
     { sel: '.creative__headline', delay: 0 },
     { sel: '.creative__item', stagger: true },
     { sel: '.section-number', stagger: true },
