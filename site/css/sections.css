@@ -177,7 +177,7 @@
 }
 
 .hero__viral-word:hover {
-    color: var(--accent);
+    color: #E74C3C;
 }
 
 .hero__viral-word::after {
@@ -187,7 +187,7 @@
     left: -10%;
     width: 20%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(102, 211, 250, 0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(231, 76, 60, 0.5), transparent);
     transform: skewX(-20deg);
     opacity: 0;
     pointer-events: none;
