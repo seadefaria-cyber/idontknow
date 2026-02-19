@@ -324,10 +324,6 @@ html, body {
         margin: 0;
     }
 
-    .services__letter {
-        display: none;
-    }
-
     .services__desc {
         font-size: 0.8rem;
     }
