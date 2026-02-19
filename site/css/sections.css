@@ -1167,72 +1167,83 @@
     margin-bottom: var(--space-xl);
 }
 
-.services__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-md);
-}
-
-/* Card shine + hover animation */
-.card {
-    transition: transform var(--duration) var(--ease),
-                border-color var(--duration) var(--ease),
-                box-shadow var(--duration) var(--ease);
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    border-color: var(--accent);
-    box-shadow: 0 0 30px var(--accent-glow);
-}
-
-/* Subway-style colored left border on cards */
-.card {
-    border-left: 3px solid var(--mta-orange);
-    border-radius: 0;
+/* ── Services — Horizontal Metro Route ──── */
+.services__route {
+    display: flex;
+    justify-content: center;
+    gap: 0;
     position: relative;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-.card:nth-child(2) {
-    border-left-color: var(--mta-red);
-}
-
-.card:nth-child(3) {
-    border-left-color: var(--mta-green);
-}
-
-.card:nth-child(4) {
-    border-left-color: var(--mta-purple);
-}
-
-.card::after {
-    content: '';
+/* Horizontal track connecting the three stations */
+.services__track {
     position: absolute;
-    top: 0;
-    left: -60%;
-    width: 40%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 57, 166, 0.1), transparent);
-    transform: skewX(-15deg);
-    opacity: 0;
-    pointer-events: none;
+    top: 20px;
+    left: 10%;
+    right: 10%;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    z-index: 0;
+}
+
+.services__station {
+    flex: 1;
+    text-align: center;
+    padding: 0 var(--space-sm);
+    position: relative;
     z-index: 1;
 }
 
-.card:hover::after {
-    opacity: 1;
-    animation: cardShine 0.7s ease-out forwards;
+/* Colored station dot */
+.services__dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 auto var(--space-xs);
+    border: 4px solid var(--bg);
+    z-index: 2;
+    position: relative;
+    transition: transform var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
 }
 
-.card:hover .card__icon-wrap {
-    color: var(--accent);
-    transform: scale(1.1);
-    transition: transform 0.3s ease, color 0.3s ease;
+.services__dot--orange { background: var(--mta-orange); }
+.services__dot--red { background: var(--mta-red); }
+.services__dot--green { background: var(--mta-green); }
+
+.services__station:hover .services__dot {
+    transform: scale(1.2);
 }
 
-@keyframes cardShine {
-    from { left: -60%; }
-    to { left: 120%; }
+.services__station:hover .services__dot--orange { box-shadow: 0 0 20px var(--mta-orange); }
+.services__station:hover .services__dot--red { box-shadow: 0 0 20px var(--mta-red); }
+.services__station:hover .services__dot--green { box-shadow: 0 0 20px var(--mta-green); }
+
+/* Station letter inside dot */
+.services__letter {
+    font-family: var(--font-headline);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-sm);
+}
+
+.services__title {
+    font-family: var(--font-headline);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-xs);
+}
+
+.services__desc {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.7;
 }
 
 /* ── Creative Services ───────────────────── */
@@ -1422,20 +1433,13 @@
     line-height: 1.7;
 }
 
-/* ── About Banner — scroll merge ─────────── */
+/* ── About Banner ───────────────────────── */
 .about-banner {
     text-align: center;
-}
-
-.about-banner__dark {
     padding: var(--space-xl) 0;
     background: var(--surface);
     border-top: 1px solid var(--border);
-}
-
-.about-banner__blue {
-    padding: var(--space-xl) 0;
-    background: var(--accent);
+    border-bottom: 1px solid var(--border);
 }
 
 .about-banner__text {
@@ -1443,11 +1447,14 @@
     font-size: clamp(1.8rem, 4vw, 3rem);
     font-weight: 700;
     letter-spacing: -0.02em;
-    color: var(--text);
 }
 
-.about-banner__text--light {
+.about-banner__white {
     color: #fff;
+}
+
+.about-banner__accent {
+    color: var(--accent);
 }
 
 /* ── Contact ─────────────────────────────── */
@@ -1741,27 +1748,11 @@
     50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(231, 76, 60, 0); }
 }
 
-/* ── Card Engagement Burst ────────────────── */
-.card-burst {
-    position: absolute;
-    font-size: 1rem;
-    pointer-events: none;
-    animation: burstUp 1s ease-out forwards;
-    z-index: 10;
-}
-
-@keyframes burstUp {
-    0% { opacity: 1; transform: translateY(0) scale(1); }
-    50% { opacity: 0.8; transform: translateY(-40px) scale(1.2); }
-    100% { opacity: 0; transform: translateY(-80px) scale(0.6); }
-}
-
-
-/* ── Cards need relative for burst ────────── */
-.card,
+/* ── Sections need relative positioning ──── */
 .creative__item,
-.process__step,
-.stats__item {
+.process__stop,
+.stats__item,
+.services__station {
     position: relative;
     overflow: hidden;
 }

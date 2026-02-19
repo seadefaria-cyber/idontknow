@@ -1,7 +1,7 @@
 /* ── Tablet (<1199px) ────────────────────── */
 @media (max-width: 1199px) {
-    .services__grid {
-        grid-template-columns: repeat(2, 1fr);
+    .services__route {
+        gap: 0;
     }
 
     .creative__grid {
@@ -223,13 +223,34 @@
         font-size: 0.6rem;
     }
 
-    /* Services — stack on mobile */
-    .services__grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-sm);
+    /* Services — stack vertically on mobile */
+    .services__route {
+        flex-direction: column;
+        gap: var(--space-md);
     }
 
-    .card__desc {
+    .services__track {
+        display: none;
+    }
+
+    .services__station {
+        text-align: left;
+        padding: 0;
+        display: flex;
+        gap: var(--space-sm);
+        align-items: flex-start;
+    }
+
+    .services__dot {
+        flex-shrink: 0;
+        margin: 0;
+    }
+
+    .services__letter {
+        display: none;
+    }
+
+    .services__desc {
         font-size: 0.8rem;
     }
 
@@ -373,9 +394,6 @@
         letter-spacing: 0.05em;
     }
 
-    .services__grid {
-        grid-template-columns: 1fr;
-    }
 
     .creative__grid {
         grid-template-columns: repeat(2, 1fr);
