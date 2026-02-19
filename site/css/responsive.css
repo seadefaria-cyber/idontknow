@@ -349,6 +349,7 @@ html, body {
     .process__dot--orange { box-shadow: 0 0 14px rgba(255, 99, 25, 0.6), 0 0 28px rgba(255, 99, 25, 0.25); }
     .process__dot--yellow { box-shadow: 0 0 14px rgba(0, 57, 166, 0.6), 0 0 28px rgba(0, 57, 166, 0.25); }
     .process__dot--green { box-shadow: 0 0 14px rgba(0, 147, 60, 0.6), 0 0 28px rgba(0, 147, 60, 0.25); }
+    .process__dot--purple { box-shadow: 0 0 14px rgba(185, 51, 173, 0.6), 0 0 28px rgba(185, 51, 173, 0.25); }
 
     /* About Banner — tighter on mobile */
     .about-banner__text {
