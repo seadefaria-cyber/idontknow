@@ -1143,7 +1143,7 @@
 
 /* ── Services ────────────────────────────── */
 .services {
-    padding: var(--space-2xl) 0;
+    padding: var(--space-lg) 0 var(--space-2xl);
 }
 
 /* Services eyebrow removed — uses .section-number instead */
