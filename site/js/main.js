@@ -53,7 +53,7 @@
     var chat = document.getElementById('twitch-chat');
     if (!chat) return;
 
-    var colors = ['#66D3FA', '#90EE90', '#E8E847', '#F5A623', '#E74C3C', '#FF69B4', '#00CED1', '#FFD700'];
+    var colors = ['#4A90D9', '#7CB3F0', '#fff', '#A0C4FF', '#6B9FD4', '#89B8E8', '#3D7AC7', '#B0D0F0'];
     var users = [
         'clipmaster99', 'viralking', 'seedbot3000', 'growthguru',
         'algohacker', 'trendchaser', 'reelsniper', 'cloutfarmer',
@@ -109,7 +109,9 @@
         el.className = 'engagement-likes__heart';
         var size = 18 + Math.floor(Math.random() * 14);
         var alpha = 0.25 + Math.random() * 0.35;
-        el.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="rgba(102,211,250,' + alpha + ')"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+        var blueShades = ['rgba(0,57,166,' + alpha + ')', 'rgba(74,144,217,' + alpha + ')', 'rgba(255,255,255,' + (alpha * 0.6) + ')', 'rgba(26,94,199,' + alpha + ')'];
+        var fill = blueShades[Math.floor(Math.random() * blueShades.length)];
+        el.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="' + fill + '"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
         el.style.left = (Math.random() * 90) + '%';
         el.style.animationDuration = (2.8 + Math.random() * 1.5) + 's';
         container.appendChild(el);
@@ -247,77 +249,99 @@
     var growWord = document.querySelector('.hero__word--grow');
     if (!clipWord || !seedWord || !growWord) return;
 
-    /* ── CLIP — scissors slash + split ── */
+    /* ── CLIP — slash cuts through, letters split apart ── */
+    /* Wrap CLIP. into individual letter spans on first load */
+    var clipLetters = 'CLIP.'.split('');
+    clipWord.textContent = '';
+    clipLetters.forEach(function(ch, i) {
+        var span = document.createElement('span');
+        span.className = 'hero__clip-letter';
+        span.textContent = ch;
+        span.dataset.index = i;
+        clipWord.appendChild(span);
+    });
+
     function animateClip() {
         if (clipWord.classList.contains('animating')) return;
         clipWord.classList.add('animating');
 
-        /* Hide original text, show split halves */
-        clipWord.style.color = 'transparent';
+        var letters = clipWord.querySelectorAll('.hero__clip-letter');
 
-        var topHalf = document.createElement('span');
-        topHalf.className = 'hero__clip-half hero__clip-half--top';
-        topHalf.textContent = 'CLIP.';
-
-        var bottomHalf = document.createElement('span');
-        bottomHalf.className = 'hero__clip-half hero__clip-half--bottom';
-        bottomHalf.textContent = 'CLIP.';
-
+        /* Slash element sweeps across */
         var slash = document.createElement('span');
         slash.className = 'hero__clip-slash';
+        clipWord.appendChild(slash);
 
         var line = document.createElement('span');
         line.className = 'hero__clip-line';
-
-        clipWord.appendChild(topHalf);
-        clipWord.appendChild(bottomHalf);
-        clipWord.appendChild(slash);
         clipWord.appendChild(line);
 
-        /* Start slash */
         requestAnimationFrame(function() {
             slash.classList.add('animate');
             line.classList.add('animate');
         });
 
-        /* Sparks at the cut line */
+        /* At impact: CL stays, I and P crack away — visible split */
         setTimeout(function() {
-            for (var i = 0; i < 8; i++) {
+            /* C — barely moves */
+            letters[0].style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            letters[0].style.transform = 'translate(-2px, -3px) rotate(-0.5deg)';
+            /* L — slight shift */
+            letters[1].style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            letters[1].style.transform = 'translate(-1px, -2px) rotate(-0.3deg)';
+            /* I — cracks apart the most, drops down and right */
+            letters[2].style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            letters[2].style.transform = 'translate(6px, 12px) rotate(3deg)';
+            letters[2].style.opacity = '0.85';
+            /* P — splits away too */
+            letters[3].style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            letters[3].style.transform = 'translate(10px, 16px) rotate(2.5deg)';
+            letters[3].style.opacity = '0.85';
+            /* . — follows P */
+            letters[4].style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            letters[4].style.transform = 'translate(12px, 20px) rotate(2deg)';
+            letters[4].style.opacity = '0.7';
+        }, 250);
+
+        /* Sparks between L and I — the cut point */
+        setTimeout(function() {
+            for (var i = 0; i < 12; i++) {
                 var spark = document.createElement('span');
                 spark.className = 'hero__clip-spark';
-                spark.style.left = (25 + Math.random() * 50) + '%';
-                spark.style.top = (45 + Math.random() * 10) + '%';
-                spark.style.setProperty('--dx', ((Math.random() - 0.5) * 80) + 'px');
-                spark.style.setProperty('--dy', ((Math.random() - 0.5) * 50) + 'px');
+                spark.style.left = (35 + Math.random() * 20) + '%';
+                spark.style.top = (35 + Math.random() * 30) + '%';
+                spark.style.setProperty('--dx', ((Math.random() - 0.5) * 120) + 'px');
+                spark.style.setProperty('--dy', ((Math.random() - 0.5) * 80) + 'px');
                 clipWord.appendChild(spark);
                 (function(s) {
                     setTimeout(function() {
                         if (s.parentNode) s.parentNode.removeChild(s);
-                    }, 800);
+                    }, 900);
                 })(spark);
             }
-        }, 200);
+        }, 220);
 
-        /* Split the halves apart */
+        /* Snap back together */
         setTimeout(function() {
-            topHalf.classList.add('split');
-            bottomHalf.classList.add('split');
-        }, 280);
-
-        /* Rejoin */
-        setTimeout(function() {
-            topHalf.classList.remove('split');
-            bottomHalf.classList.remove('split');
-        }, 700);
+            letters.forEach(function(l) {
+                l.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease';
+                l.style.transform = '';
+                l.style.opacity = '';
+            });
+        }, 750);
 
         /* Clean up */
         setTimeout(function() {
-            clipWord.style.color = '';
-            [slash, line, topHalf, bottomHalf].forEach(function(el) {
+            [slash, line].forEach(function(el) {
                 if (el.parentNode) el.parentNode.removeChild(el);
             });
+            letters.forEach(function(l) {
+                l.style.transition = '';
+                l.style.transform = '';
+                l.style.opacity = '';
+            });
             clipWord.classList.remove('animating');
-        }, 1100);
+        }, 1400);
     }
 
     /* ── SEED — bury + sprout ── */
@@ -341,25 +365,6 @@
             })(i);
         }
 
-        /* Sprout grows from top */
-        setTimeout(function() {
-            var sprout = document.createElement('span');
-            sprout.className = 'hero__sprout';
-            sprout.innerHTML = '<span class="hero__sprout-stem"></span>' +
-                '<span class="hero__sprout-leaf hero__sprout-leaf--left"></span>' +
-                '<span class="hero__sprout-leaf hero__sprout-leaf--right"></span>';
-            seedWord.appendChild(sprout);
-
-            /* Fade out sprout */
-            setTimeout(function() {
-                sprout.style.opacity = '0';
-                sprout.style.transition = 'opacity 0.5s';
-                setTimeout(function() {
-                    if (sprout.parentNode) sprout.parentNode.removeChild(sprout);
-                }, 500);
-            }, 2000);
-        }, 500);
-
         /* Un-bury */
         setTimeout(function() {
             seedWord.classList.remove('active');
@@ -367,7 +372,7 @@
 
         setTimeout(function() {
             seedWord.classList.remove('animating');
-        }, 3200);
+        }, 1500);
     }
 
     /* ── GROW — hearts + scale up ── */
@@ -382,7 +387,7 @@
                     var heart = document.createElement('span');
                     heart.className = 'hero__grow-heart';
                     var size = 14 + Math.floor(Math.random() * 16);
-                    var colors = ['rgba(252,204,10,0.8)', 'rgba(252,204,10,0.5)', 'rgba(255,255,255,0.4)', 'rgba(238,53,46,0.5)', 'rgba(0,57,166,0.5)'];
+                    var colors = ['rgba(0,57,166,0.8)', 'rgba(74,144,217,0.7)', 'rgba(255,255,255,0.5)', 'rgba(0,57,166,0.5)', 'rgba(160,196,255,0.6)'];
                     var color = colors[Math.floor(Math.random() * colors.length)];
                     heart.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="' + color + '"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
                     heart.style.left = (5 + Math.random() * 90) + '%';

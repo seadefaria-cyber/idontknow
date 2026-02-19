@@ -1,13 +1,13 @@
 :root {
-    /* NYC Subway palette — Dark with MTA accents */
+    /* NYC Subway palette — Dark blue + white + black */
     --bg: #0E0E10;
     --surface: #18181B;
     --surface-alt: #1F1F23;
     --text: #EFEFF1;
     --text-muted: #ADADB8;
-    --accent: #FCCC0A;
-    --accent-light: #FFE066;
-    --accent-glow: rgba(252, 204, 10, 0.12);
+    --accent: #0039A6;
+    --accent-light: #1A5EC7;
+    --accent-glow: rgba(0, 57, 166, 0.15);
     --border: rgba(255, 255, 255, 0.08);
     --border-light: rgba(255, 255, 255, 0.04);
 
