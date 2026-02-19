@@ -90,8 +90,39 @@
     }
 
     /* Hero */
+    .hero {
+        min-height: 100svh;
+    }
+
+    .hero::before {
+        font-size: clamp(12rem, 50vw, 30rem);
+    }
+
     .hero__headline {
-        font-size: clamp(2.8rem, 11vw, 4.5rem);
+        font-size: clamp(2.4rem, 10vw, 4.5rem);
+        padding: 0 var(--space-xs);
+    }
+
+    .hero__sub {
+        position: static;
+        text-align: center;
+        margin-bottom: var(--space-sm);
+        font-size: 0.7rem;
+    }
+
+    .hero__inner {
+        padding: var(--space-xl) var(--space-sm);
+    }
+
+    .hero .btn {
+        margin-top: var(--space-sm);
+        font-size: 0.85rem;
+        padding: 0.7rem 2rem;
+    }
+
+    /* Ticker */
+    .ticker__item {
+        font-size: 0.6rem;
     }
 
     /* Clients */
@@ -109,6 +140,11 @@
         min-height: 200vh;
     }
 
+    .showcase__headline {
+        font-size: clamp(1.8rem, 7vw, 3rem);
+        padding: 0 var(--space-xs);
+    }
+
     .showcase__phones {
         gap: var(--space-xs);
         perspective: none;
@@ -116,6 +152,11 @@
 
     .showcase__phone--left,
     .showcase__phone--right {
+        transform: none;
+    }
+
+    .showcase__phone--left:hover,
+    .showcase__phone--right:hover {
         transform: none;
     }
 
@@ -179,6 +220,10 @@
         gap: var(--space-lg);
     }
 
+    .stats__number {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+    }
+
     /* Process */
     .process__steps {
         grid-template-columns: 1fr;
@@ -194,6 +239,29 @@
         grid-template-columns: 1fr;
     }
 
+    .creative__sub {
+        font-size: 0.9rem;
+        padding: 0 var(--space-xs);
+    }
+
+    /* About */
+    .about__headline {
+        font-size: clamp(2rem, 8vw, 3.5rem);
+    }
+
+    .about__text {
+        font-size: 0.95rem;
+    }
+
+    /* Contact */
+    .contact__headline {
+        font-size: clamp(2rem, 8vw, 3.5rem);
+    }
+
+    .contact__sub {
+        font-size: 0.95rem;
+    }
+
     /* Footer */
     .footer__top {
         flex-direction: column;
@@ -203,5 +271,76 @@
 
     .footer__links {
         justify-content: center;
+    }
+}
+
+/* ── Small phones (<480px) ──────────────── */
+@media (max-width: 480px) {
+    .hero__headline {
+        font-size: clamp(2rem, 9vw, 3rem);
+    }
+
+    .hero::before {
+        font-size: 10rem;
+    }
+
+    .phone {
+        width: 26vw;
+        border-radius: 20px;
+        padding: 4px;
+    }
+
+    .phone--hero {
+        width: 33vw;
+    }
+
+    .phone__screen {
+        border-radius: 16px;
+    }
+
+    .phone__notch {
+        width: 30px;
+        height: 8px;
+    }
+
+    .phone__overlay {
+        padding: 0.4rem 0.3rem;
+    }
+
+    .phone__views {
+        font-size: 0.5rem;
+    }
+
+    .phone__desc {
+        display: none;
+    }
+
+    .phone__platform {
+        font-size: 0.35rem;
+    }
+
+    .phone__engagement {
+        display: none;
+    }
+
+    .showcase__total-number {
+        font-size: clamp(2.5rem, 14vw, 4rem);
+    }
+
+    .stats__number {
+        font-size: clamp(2rem, 10vw, 3rem);
+    }
+
+    .process__number {
+        font-size: 2rem;
+    }
+
+    .clients__slide {
+        gap: 2rem;
+        padding-right: 2rem;
+    }
+
+    .clients__logo {
+        height: 28px;
     }
 }
