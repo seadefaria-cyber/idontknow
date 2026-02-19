@@ -38,7 +38,7 @@
     color: var(--text);
 }
 
-/* Logo — "deFaria" with "NYC" sliding out on hover */
+/* Logo — "deFaria" with "new york" sliding out on hover */
 .nav__logo-nyc {
     display: inline-block;
     max-width: 0;
@@ -46,16 +46,17 @@
     opacity: 0;
     white-space: nowrap;
     vertical-align: bottom;
-    transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    transition: max-width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
                 opacity 0.3s ease 0.1s;
     margin-left: 0;
     color: var(--mta-blue);
-    font-size: 0.75em;
-    letter-spacing: 0.08em;
+    font-size: 0.65em;
+    letter-spacing: 0.06em;
+    text-transform: lowercase;
 }
 
 .nav__logo:hover .nav__logo-nyc {
-    max-width: 80px;
+    max-width: 140px;
     opacity: 1;
     margin-left: 0.35em;
 }
@@ -169,92 +170,15 @@
     margin-bottom: var(--space-md);
 }
 
-/* "Engineering" hover — precision blueprint feel */
+/* "Engineering" — no hover animation */
 .hero__engineering {
     display: inline-block;
-    position: relative;
-    transition: letter-spacing 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-                color 0.4s ease,
-                text-shadow 0.4s ease;
-    cursor: default;
 }
 
-.hero__engineering::before {
-    content: '';
-    position: absolute;
-    bottom: 0.08em;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--mta-blue);
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 0 8px rgba(0, 57, 166, 0.4);
-}
-
-.hero__engineering::after {
-    content: '';
-    position: absolute;
-    bottom: 0.2em;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: rgba(0, 57, 166, 0.3);
-    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
-}
-
-.hero__engineering:hover {
-    letter-spacing: -0.08em;
-    color: var(--mta-blue);
-    text-shadow: 0 0 30px rgba(0, 57, 166, 0.3);
-}
-
-.hero__engineering:hover::before {
-    width: 100%;
-}
-
-.hero__engineering:hover::after {
-    width: 60%;
-}
-
-/* "Virality" hover — shine sweep + color shift */
+/* "Virality" hover — hearts only, no swipe */
 .hero__virality {
     position: relative;
     display: inline-block;
-    background: linear-gradient(90deg, var(--text) 0%, var(--text) 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    transition: filter 0.4s ease;
-}
-
-.hero__virality::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transform: skewX(-15deg);
-    pointer-events: none;
-    transition: none;
-}
-
-.hero__virality:hover {
-    background: linear-gradient(90deg, var(--mta-blue) 0%, #4A90D9 50%, #fff 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: brightness(1.2);
-}
-
-.hero__virality:hover::after {
-    animation: viralityShine 0.6s ease-out forwards;
-}
-
-@keyframes viralityShine {
-    from { left: -100%; }
-    to { left: 150%; }
 }
 
 /* Virality hover — floating hearts */
@@ -547,60 +471,7 @@
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
 }
 
-/* Hero Social Media — vertical strip on upper right */
-.hero__socials {
-    position: absolute;
-    right: var(--space-lg);
-    top: calc(var(--nav-height) + 2rem);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
-    z-index: 3;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.hero__socials.dissolved {
-    opacity: 0;
-    transform: translateX(10px);
-    pointer-events: none;
-}
-
-.hero__social {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    opacity: 0.5;
-    transition: transform 0.3s var(--ease), box-shadow 0.3s ease, opacity 0.3s ease;
-}
-
-.hero__social svg {
-    width: 13px;
-    height: 13px;
-}
-
-.hero__social:hover {
-    transform: scale(1.15);
-    opacity: 1;
-}
-
-/* MTA Subway Line Colors — each icon is a line */
-.hero__social--tiktok { background: var(--mta-gray); }         /* L/S Shuttle gray */
-.hero__social--tiktok:hover { box-shadow: 0 0 14px var(--mta-gray); }
-.hero__social--instagram { background: var(--mta-orange); }    /* B/D/F/M orange */
-.hero__social--instagram:hover { box-shadow: 0 0 14px var(--mta-orange); }
-.hero__social--youtube { background: var(--mta-red); }         /* 1/2/3 red */
-.hero__social--youtube:hover { box-shadow: 0 0 14px var(--mta-red); }
-.hero__social--twitch { background: var(--mta-purple); }       /* 7 purple */
-.hero__social--twitch:hover { box-shadow: 0 0 14px var(--mta-purple); }
-.hero__social--x { background: var(--mta-blue); }              /* A/C/E blue */
-.hero__social--x:hover { box-shadow: 0 0 14px var(--mta-blue); }
-.hero__social--kik { background: var(--mta-green); }           /* 4/5/6 green */
-.hero__social--kik:hover { box-shadow: 0 0 14px var(--mta-green); }
+/* Hero socials moved to footer */
 
 .hero__desc {
     font-size: clamp(0.95rem, 1.8vw, 1.1rem);
@@ -873,23 +744,13 @@
     height: 60px;
     width: auto;
     object-fit: contain;
-    filter: invert(1);
-    opacity: 0.2;
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.clients__logo--white {
-    filter: none;
-    opacity: 0.2;
-}
-
 .clients__logo:hover {
-    opacity: 0.6;
-    transform: scale(1.08);
-}
-
-.clients__logo--white:hover {
-    opacity: 0.6;
+    opacity: 1;
     transform: scale(1.08);
 }
 
@@ -1255,21 +1116,27 @@
     text-transform: uppercase;
 }
 
+/* Stats emoji burst on scroll */
+.stats__emoji {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+    font-size: 1.6rem;
+    animation: statsEmojiBurst 2.5s ease-out forwards;
+}
+
+@keyframes statsEmojiBurst {
+    0% { opacity: 0; transform: translateY(0) scale(0.3); }
+    12% { opacity: 1; transform: translateY(-20px) scale(1.1); }
+    100% { opacity: 0; transform: translateY(-120px) scale(0.3); }
+}
+
 /* ── Services ────────────────────────────── */
 .services {
     padding: var(--space-2xl) 0;
 }
 
-.services__eyebrow {
-    font-family: var(--font-body);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    color: var(--accent);
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: var(--space-xs);
-}
+/* Services eyebrow removed — uses .section-number instead */
 
 .services__headline {
     font-family: var(--font-headline);
@@ -1357,16 +1224,7 @@
     overflow: hidden;
 }
 
-.creative__eyebrow {
-    font-family: var(--font-body);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    color: var(--accent);
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: var(--space-xs);
-}
+/* Creative eyebrow removed — uses .section-number instead */
 
 .creative__headline {
     font-family: var(--font-headline);
@@ -1440,16 +1298,18 @@
     padding: var(--space-2xl) 0;
 }
 
+/* Section number — centered above title */
+.section-number {
+    text-align: center;
+    margin-bottom: var(--space-sm);
+}
+
 .process__headline {
     font-family: var(--font-headline);
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
     text-align: center;
     margin-bottom: var(--space-xs);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
 }
 
 .process__sub {
@@ -1674,10 +1534,10 @@
 }
 
 .footer__social {
-    width: 22px;
-    height: 22px;
+    width: 28px;
+    height: 28px;
     color: var(--text-muted);
-    opacity: 0.4;
+    opacity: 0.6;
     transition: opacity var(--duration) var(--ease), color var(--duration) var(--ease), transform var(--duration) var(--ease);
     display: block;
 }
