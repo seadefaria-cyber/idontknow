@@ -118,6 +118,7 @@
 .nav__logo:hover .nav__logo-y,
 .nav__logo:hover .nav__logo-c {
     color: #fff;
+    margin: 0 0.1em;
 }
 
 .nav__logo:hover .nav__logo-d::before,
