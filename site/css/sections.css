@@ -206,6 +206,10 @@
     color: var(--mta-orange);
 }
 
+.text-accent--green {
+    color: var(--mta-green);
+}
+
 /* Agency ID inside hero */
 .hero__agency-id {
     display: flex;
@@ -542,7 +546,7 @@
 
 /* ── CLIP. SEED. GROW. Section ──────────── */
 .csg {
-    padding: var(--space-lg) 0;
+    padding: var(--space-sm) 0;
     border-bottom: 1px solid var(--border);
 }
 
@@ -858,7 +862,7 @@
 
 /* ── Showcase — Sticky Scroll Feed ──────── */
 .showcase {
-    min-height: 150vh;
+    min-height: 130vh;
     position: relative;
 }
 
@@ -1567,38 +1571,26 @@
     margin-top: var(--space-lg);
     text-decoration: none;
     position: relative;
-    height: 80px;
+    height: 140px;
 }
 
 .about-banner__rail {
     width: 4px;
-    height: 50px;
+    flex: 1;
     background: rgba(255, 255, 255, 0.25);
     border-radius: 2px;
     position: relative;
     animation: railPulse 2.5s ease-in-out infinite;
 }
 
-.about-banner__rail::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 20px;
-    background: rgba(255, 255, 255, 0.25);
-    border-radius: 0 0 8px 8px;
-    transform-origin: top center;
-}
-
 .about-banner__station {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     background: var(--mta-green);
     border: 3px solid rgba(255, 255, 255, 0.3);
-    margin-top: 4px;
+    margin-top: 6px;
+    flex-shrink: 0;
     box-shadow: 0 0 12px rgba(0, 147, 60, 0.6), 0 0 24px rgba(0, 147, 60, 0.3);
     animation: stationGlow 2.5s ease-in-out infinite;
 }
@@ -1901,4 +1893,69 @@
 .process__stop {
     position: relative;
     overflow: visible;
+}
+
+/* ── Metro Sidebar — Full-page vertical line ── */
+.metro-sidebar {
+    position: fixed;
+    left: 24px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    z-index: 90;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.metro-sidebar__line {
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        var(--mta-red) 8%,
+        var(--mta-orange) 25%,
+        var(--mta-blue) 45%,
+        var(--mta-green) 65%,
+        var(--mta-purple) 85%,
+        transparent 100%
+    );
+    opacity: 0.15;
+    border-radius: 2px;
+    position: relative;
+}
+
+/* Glowing progress tracker that follows scroll */
+.metro-sidebar__progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0%;
+    background: linear-gradient(
+        180deg,
+        var(--mta-red) 0%,
+        var(--mta-orange) 25%,
+        var(--mta-blue) 50%,
+        var(--mta-green) 75%,
+        var(--mta-purple) 100%
+    );
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(0, 57, 166, 0.4), 0 0 16px rgba(0, 57, 166, 0.2);
+    transition: height 0.1s linear;
+}
+
+/* Current position dot */
+.metro-sidebar__dot {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(0, 57, 166, 0.4);
 }

@@ -569,3 +569,23 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
         }
     });
 });
+
+/* ── Metro Sidebar — Scroll Progress ────── */
+(function() {
+    var progress = document.getElementById('metro-progress');
+    if (!progress) return;
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(function() {
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                var pct = Math.min(100, Math.max(0, (scrollTop / docHeight) * 100));
+                progress.style.height = pct + '%';
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+})();
