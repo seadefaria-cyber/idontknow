@@ -168,6 +168,75 @@
     z-index: 3;
 }
 
+/* Hero — "viral" word shine on hover */
+.hero__viral-word {
+    position: relative;
+    cursor: default;
+    transition: color var(--duration) var(--ease);
+}
+
+.hero__viral-word:hover {
+    color: var(--accent);
+}
+
+.hero__viral-word::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10%;
+    width: 20%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(102, 211, 250, 0.4), transparent);
+    transform: skewX(-20deg);
+    opacity: 0;
+    pointer-events: none;
+    transition: none;
+}
+
+.hero__viral-word:hover::after {
+    opacity: 1;
+    animation: shineWord 0.6s ease-out forwards;
+}
+
+@keyframes shineWord {
+    from { left: -20%; }
+    to { left: 120%; }
+}
+
+/* Hero — subtitle highlight */
+.hero__sub-highlight {
+    transition: color var(--duration) var(--ease);
+    cursor: default;
+}
+
+.hero__sub-highlight:hover {
+    color: var(--accent);
+}
+
+/* Hero — platform icons */
+.hero__platforms {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-xs);
+}
+
+.hero__platform {
+    width: 20px;
+    height: 20px;
+    color: var(--text-muted);
+    opacity: 0.3;
+    transition: opacity var(--duration) var(--ease), color var(--duration) var(--ease), transform var(--duration) var(--ease);
+}
+
+.hero__platform:hover {
+    opacity: 0.8;
+    color: var(--accent);
+    transform: scale(1.2);
+}
+
 .hero__desc {
     font-size: clamp(0.95rem, 1.8vw, 1.1rem);
     color: var(--text-muted);
@@ -472,13 +541,62 @@
 }
 
 .clients__logo:hover {
-    opacity: 0.5;
+    opacity: 0.6;
     transform: scale(1.08);
 }
 
 .clients__logo--white:hover {
-    opacity: 0.5;
+    opacity: 0.6;
     transform: scale(1.08);
+}
+
+/* Pause scroll on hover */
+.clients__track:hover {
+    animation-play-state: paused;
+}
+
+/* Client item — relative for overlay + hearts */
+.clients__item {
+    position: relative;
+    cursor: pointer;
+    overflow: visible;
+}
+
+/* Client overlay text */
+.clients__overlay {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-body);
+    font-size: 0.55rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.clients__item:hover .clients__overlay {
+    opacity: 1;
+    transform: translateX(-50%) translateY(2px);
+}
+
+/* Client hover hearts */
+.clients__heart {
+    position: absolute;
+    bottom: 10px;
+    pointer-events: none;
+    opacity: 0;
+    animation: clientHeart 1.8s ease-out forwards;
+    z-index: 10;
+}
+
+@keyframes clientHeart {
+    0% { opacity: 0.6; transform: translateY(0) scale(0.8); }
+    40% { opacity: 0.5; transform: translateY(-25px) scale(1); }
+    100% { opacity: 0; transform: translateY(-60px) scale(0.6); }
 }
 
 @keyframes clientsScroll {
