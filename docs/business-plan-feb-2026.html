@@ -143,6 +143,10 @@
   .tag.green { background: #1a7a2e; }
   .tag.orange { background: #b45309; }
 
+  .page-break {
+    page-break-before: always;
+  }
+
   .footer {
     margin-top: 48px;
     padding-top: 20px;
@@ -155,6 +159,7 @@
     body { padding: 40px; }
     .section-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .tag { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page-break { page-break-before: always; }
   }
 </style>
 </head>
@@ -162,203 +167,311 @@
 
 <div class="header">
   <h1>DeFaria NYC</h1>
-  <div class="subtitle">6-Month Business Plan — Clipping Agency</div>
-  <div class="date">Prepared February 20, 2026 &nbsp;|&nbsp; Sean DeFaria, Sole Proprietor</div>
+  <div class="subtitle">6-Month Business Plan &mdash; Content &amp; Clipping Agency</div>
+  <div class="date">Prepared February 20, 2026 &nbsp;|&nbsp; Sean DeFaria &nbsp;|&nbsp; DeFaria NYC, LLC</div>
 </div>
 
 <!-- OVERVIEW -->
 <div class="section-bar">Overview</div>
 
-<p>DeFaria NYC is a clipping and fan page agency specializing in underground rap artists. We create, distribute, and manage viral short-form content across TikTok, Instagram, and X using a combination of AI automation (Claude Code, Larry/OpenClaw) and human editorial oversight.</p>
+<p>DeFaria NYC is a content agency specializing in short-form viral media for recording artists and labels. We build and manage fan pages, produce clips from artist footage, create slideshow content, and distribute across TikTok, Instagram, X, and YouTube Shorts. Our team handles every step &mdash; from moment selection and captioning to posting strategy and performance analysis.</p>
 
 <div class="highlight">
-  <strong>Goal:</strong> Reach $3,000+/month in recurring client revenue by Month 3, covering rent ($2,000) and all business expenses ($1,280) with profit.
+  <strong>Goal:</strong> Reach $5,000/month in recurring client revenue by Month 3 (May 2026), fully covering all business and personal expenses with profit.
 </div>
 
-<!-- CURRENT EXPENSES -->
-<div class="section-bar">Monthly Expenses — Confirmed</div>
+<!-- LLC FORMATION -->
+<div class="section-bar">LLC Formation &mdash; DeFaria NYC</div>
 
-<h3>Business Overhead</h3>
 <table>
-  <tr><th>Expense</th><th>Monthly Cost</th><th>Notes</th></tr>
-  <tr><td>Claude Max 20x (Anthropic)</td><td>$200.00</td><td>Powers all AI work across 4 worktrees</td></tr>
-  <tr><td>OpenAI API (GPT-4o)</td><td>~$45.00</td><td>Powers Larry/OpenClaw automation on EC2</td></tr>
-  <tr><td>AWS EC2</td><td>$0.00</td><td>Free tier (12 months) — will be ~$10/mo after</td></tr>
-  <tr><td>Residential Proxies</td><td>~$35.00</td><td>For scaling TikTok accounts (starting Month 2)</td></tr>
-  <tr class="total-row"><td><strong>Total Business Overhead</strong></td><td><strong>~$280/mo</strong></td><td></td></tr>
+  <tr><th>Item</th><th>Cost</th><th>Notes</th></tr>
+  <tr><td>NY State filing (Articles of Organization)</td><td>$200</td><td>Filed via ZenBusiness</td></tr>
+  <tr><td>Newspaper publication (6 weeks, 2 papers)</td><td>$200&ndash;$1,400</td><td>Albany County: ~$200 / Brooklyn: ~$1,400</td></tr>
+  <tr><td>Certificate of Publication</td><td>$50</td><td>Filed after publication completes</td></tr>
+  <tr><td>ZenBusiness registered agent</td><td>~$125/yr</td><td>Annual renewal</td></tr>
+  <tr><td>EIN (IRS)</td><td>$0</td><td>Free, applied online</td></tr>
+  <tr><td>Operating agreement</td><td>$0</td><td>Self-drafted</td></tr>
+  <tr class="total-row"><td><strong>Total Formation</strong></td><td><strong>$450&ndash;$1,650</strong></td><td>Depends on publication county</td></tr>
 </table>
 
-<h3>Planned Hires</h3>
+<p><strong>Annual LLC maintenance:</strong> $30&ndash;$175/yr (NY filing fee based on gross income) + $9 biennial statement every 2 years.</p>
+
+<!-- MONTHLY OPERATING COSTS -->
+<div class="section-bar">Monthly Operating Costs</div>
+
+<h3>Fixed Overhead (same regardless of clients)</h3>
 <table>
-  <tr><th>Role</th><th>Monthly Cost</th><th>Start Date</th></tr>
-  <tr><td>Freelance Editor</td><td>$1,000.00</td><td>Month 3 (May 2026)</td></tr>
-  <tr class="total-row"><td><strong>Total with Editor</strong></td><td><strong>~$1,280/mo</strong></td><td></td></tr>
+  <tr><th>Expense</th><th>Monthly</th><th>Purpose</th></tr>
+  <tr><td>Claude Max 20x (Anthropic)</td><td>$200.00</td><td>Content strategy, captioning, all production work</td></tr>
+  <tr><td>AWS EC2 Server</td><td>~$25.00</td><td>Runs content automation infrastructure</td></tr>
+  <tr><td>Google Workspace (1 user, Starter)</td><td>$8.40</td><td>Business email + calendar</td></tr>
+  <tr class="total-row"><td><strong>Fixed Total</strong></td><td><strong>~$233/mo</strong></td><td></td></tr>
 </table>
 
-<h3>Canceled / Not Needed</h3>
+<h3>Variable Costs (scale with clients)</h3>
 <table>
-  <tr><th>Tool</th><th>Was Costing</th><th>Status</th></tr>
-  <tr><td>Submagic</td><td>$41/mo</td><td>Never activated (trial only)</td></tr>
-  <tr><td>Later</td><td>$80/mo</td><td>Canceled — not active</td></tr>
+  <tr><th>Expense</th><th>1 Client</th><th>2&ndash;4 Clients</th><th>5+ Clients</th></tr>
+  <tr><td>OpenAI API (image gen + text)</td><td>~$50</td><td>~$65</td><td>~$80</td></tr>
+  <tr><td>Postiz (scheduling)</td><td>$39</td><td>$49</td><td>$99</td></tr>
+  <tr><td>Residential proxies</td><td>$35</td><td>$50</td><td>$75</td></tr>
+  <tr class="total-row"><td><strong>Variable Total</strong></td><td><strong>~$124</strong></td><td><strong>~$164</strong></td><td><strong>~$254</strong></td></tr>
 </table>
 
-<h3>Personal Expenses (Known)</h3>
+<h3>Team</h3>
 <table>
-  <tr><th>Expense</th><th>Monthly Cost</th><th>Notes</th></tr>
-  <tr><td>Rent</td><td>$2,000.00</td><td>Starting in a few months</td></tr>
-  <tr><td>Other personal expenses</td><td>TBD</td><td>To be added</td></tr>
-  <tr class="total-row"><td><strong>Total Monthly Nut</strong></td><td><strong>~$3,280/mo</strong></td><td>Biz + rent + editor</td></tr>
+  <tr><th>Role</th><th>Monthly</th><th>Start</th></tr>
+  <tr><td>Freelance editor (clips + content)</td><td>$1,000</td><td>Month 3 (May 2026)</td></tr>
 </table>
 
-<!-- TOTAL SPENT TO DATE -->
+<h3>Total Monthly Burn</h3>
+<table>
+  <tr><th>Scenario</th><th>Monthly Cost</th></tr>
+  <tr><td>Solo, 1 client</td><td>~$357</td></tr>
+  <tr><td>Solo, 2&ndash;4 clients</td><td>~$397</td></tr>
+  <tr><td>With editor, 2&ndash;4 clients</td><td>~$1,397</td></tr>
+  <tr><td>With editor, 5+ clients</td><td>~$1,487</td></tr>
+</table>
+
+<!-- SPENDING TO DATE -->
 <div class="section-bar">Spending to Date</div>
 
 <table>
   <tr><th>Item</th><th>Amount</th><th>Date</th></tr>
-  <tr><td>Claude Max (upgrade charges)</td><td>$210.00</td><td>Feb 2026</td></tr>
-  <tr><td>OpenAI API — Invoice 0001</td><td>$10.89</td><td>Feb 18, 2026</td></tr>
-  <tr><td>OpenAI API — Invoice 0002</td><td>$16.53</td><td>Feb 20, 2026</td></tr>
-  <tr><td>AWS EC2</td><td>$0.00</td><td>Feb 2026</td></tr>
+  <tr><td>Claude Max (subscription + upgrade)</td><td>$210.00</td><td>Feb 2026</td></tr>
+  <tr><td>OpenAI API &mdash; Invoice 0001</td><td>$10.89</td><td>Feb 18, 2026</td></tr>
+  <tr><td>OpenAI API &mdash; Invoice 0002</td><td>$16.53</td><td>Feb 20, 2026</td></tr>
   <tr class="total-row"><td><strong>Total Spent So Far</strong></td><td><strong>$237.42</strong></td><td></td></tr>
 </table>
 
-<!-- PRICING -->
-<div class="section-bar">Client Pricing</div>
+<!-- SERVICE COST BREAKDOWN -->
+<div class="page-break"></div>
+<div class="section-bar">Production Costs &mdash; Clips vs. Slideshows</div>
 
+<h3>Clips (footage edits, text overlays, karaoke captions)</h3>
+<p>Built from real artist footage. Trimmed, captioned, and styled locally using professional editing tools.</p>
 <table>
-  <tr><th>Tier</th><th>Price</th><th>What's Included</th></tr>
-  <tr>
-    <td><strong>Seed</strong></td>
-    <td>$1,000/mo</td>
-    <td>3 fan accounts, 2-3 clips/day, weekly performance report</td>
-  </tr>
-  <tr>
-    <td><strong>Growth</strong></td>
-    <td>$2,500/mo</td>
-    <td>5-7 accounts, 3-5 clips/day, caption strategy, bi-weekly calls</td>
-  </tr>
-  <tr>
-    <td><strong>Full Service</strong></td>
-    <td>$5,000/mo</td>
-    <td>7+ accounts, 5-10 clips/day, Larry automation, trend-reactive clips, weekly calls</td>
-  </tr>
+  <tr><th>Step</th><th>Cost</th></tr>
+  <tr><td>Source footage (artist-provided / public)</td><td>$0</td></tr>
+  <tr><td>Trim, zoom, crop</td><td>$0</td></tr>
+  <tr><td>Text overlay (caption)</td><td>$0</td></tr>
+  <tr><td>Speech captions (word-by-word highlighting)</td><td>$0</td></tr>
+  <tr><td>Caption writing &amp; strategy</td><td>$0</td></tr>
+  <tr><td>Background music</td><td>$0</td></tr>
+  <tr class="total-row"><td><strong>Per-clip cost</strong></td><td><strong>$0.00</strong></td></tr>
+</table>
+
+<h3>Clip Scaling Scenarios</h3>
+<table>
+  <tr><th>Scenario</th><th>Clips/Day</th><th>Monthly Cost</th><th>Constraint</th></tr>
+  <tr><td>1 account, 2&ndash;3 clips/day</td><td>2&ndash;3</td><td>$0</td><td>Editor time only</td></tr>
+  <tr><td>3 accounts, 3 clips/day each</td><td>9</td><td>$0</td><td>Editor time only</td></tr>
+  <tr><td>7 accounts, 5 clips/day each</td><td>35</td><td>$0</td><td>Need 1&ndash;2 editors</td></tr>
+  <tr><td>10 accounts, 10 clips/day each</td><td>100</td><td>$0</td><td>Need 2&ndash;3 editors</td></tr>
 </table>
 
 <div class="highlight">
-  <strong>Setup fee:</strong> None for Seed tier. $500 one-time for Growth. $1,000 one-time for Full Service.<br>
-  <strong>Minimum contract:</strong> 3 months (accounts need 30+ days to warm up and show results).
+  <strong>Key advantage:</strong> Clips cost $0 per unit. The only scaling cost is team capacity (editors). Every clip is pure margin.
 </div>
 
+<h3>Slideshows (AI-generated image posts)</h3>
+<p>6-slide visual posts designed in-house. Used for news pages, volume seeding, and supplemental content.</p>
+<table>
+  <tr><th>Post Type</th><th>Per-Post Cost</th><th>Notes</th></tr>
+  <tr><td>Full slideshow (6 designed slides)</td><td>$0.50&ndash;$0.70</td><td>All slides designed from scratch</td></tr>
+  <tr><td>Hybrid (2 designed + 4 curated photos)</td><td>$0.15&ndash;$0.25</td><td>Mix of designed cards + real photos</td></tr>
+</table>
+
+<h3>Slideshow Scaling Scenarios</h3>
+<table>
+  <tr><th>Scenario</th><th>Posts/Day</th><th>Monthly Cost</th></tr>
+  <tr><td>1 account, 1 post/day</td><td>1</td><td>~$35&ndash;$45</td></tr>
+  <tr><td>1 account, 3 posts/day</td><td>3</td><td>~$90&ndash;$125</td></tr>
+  <tr><td>3 accounts, 3 posts/day each</td><td>9</td><td>~$250&ndash;$350</td></tr>
+  <tr><td>5 accounts, 3 posts/day each</td><td>15</td><td>~$400&ndash;$550</td></tr>
+</table>
+
+<h3>Side-by-Side Comparison</h3>
+<table>
+  <tr><th></th><th>Clips</th><th>Slideshows</th></tr>
+  <tr><td>Per-post cost</td><td><strong>$0</strong></td><td>$0.15&ndash;$0.70</td></tr>
+  <tr><td>100 posts/month</td><td><strong>$0</strong></td><td>$15&ndash;$70</td></tr>
+  <tr><td>300 posts/month</td><td><strong>$0</strong></td><td>$45&ndash;$210</td></tr>
+  <tr><td>Requires footage?</td><td>Yes</td><td>No</td></tr>
+  <tr><td>Human time required?</td><td>High (moment selection, QC)</td><td>Low (approve &amp; post)</td></tr>
+  <tr><td>Engagement quality</td><td>Higher (real footage)</td><td>Moderate (visual content)</td></tr>
+  <tr><td>Best for</td><td>Fan pages, viral moments</td><td>News pages, volume seeding</td></tr>
+</table>
+
+<!-- CLIENT PRICING TIERS -->
+<div class="page-break"></div>
+<div class="section-bar">Client Pricing Tiers</div>
+
+<table>
+  <tr><th></th><th>Starter</th><th>Growth</th><th>Pro</th></tr>
+  <tr><td><strong>Monthly Retainer</strong></td><td><strong>$2,000</strong></td><td><strong>$3,500</strong></td><td><strong>$5,000</strong></td></tr>
+  <tr><td><strong>Setup Fee</strong></td><td>$500</td><td>$1,000</td><td>$1,500</td></tr>
+  <tr><td><strong>Minimum Contract</strong></td><td>3 months</td><td>3 months</td><td>3 months</td></tr>
+  <tr><td>Managed accounts</td><td>3&ndash;5</td><td>5&ndash;7</td><td>7&ndash;10</td></tr>
+  <tr><td>Clips per day</td><td>2&ndash;3</td><td>3&ndash;5</td><td>5&ndash;10</td></tr>
+  <tr><td>Slideshow posts per day</td><td>&mdash;</td><td>1&ndash;2</td><td>3&ndash;5</td></tr>
+  <tr><td>Platforms</td><td>TikTok + 1</td><td>TikTok + IG + X</td><td>TikTok + IG + X + YouTube</td></tr>
+  <tr><td>Content strategy</td><td>Basic</td><td>Full caption strategy</td><td>Full strategy + trend-reactive</td></tr>
+  <tr><td>Reporting</td><td>Monthly</td><td>Bi-weekly + call</td><td>Weekly + call</td></tr>
+  <tr><td>Turnaround</td><td>48 hours</td><td>24 hours</td><td>Same-day</td></tr>
+  <tr><td>Caption A/B testing</td><td>&mdash;</td><td>&mdash;</td><td>Yes</td></tr>
+  <tr><td>Dedicated team</td><td>Shared editor</td><td>Dedicated editor</td><td>Editor + strategist</td></tr>
+</table>
+
+<h3>Who Each Tier Is For</h3>
+<ul>
+  <li><strong>Starter ($2,000/mo)</strong> &mdash; Independent artists and small managers testing fan page growth. Low-risk entry point with real results in 30&ndash;60 days.</li>
+  <li><strong>Growth ($3,500/mo)</strong> &mdash; Artists with label support or managers with 2&ndash;3 artists who want full cross-platform coverage and strategic input.</li>
+  <li><strong>Pro ($5,000/mo)</strong> &mdash; Labels and established artists who want a full content team. Clips + slideshows + trend-reactive posts + weekly strategy. Equivalent to hiring a full-time social media person at a fraction of the cost.</li>
+</ul>
+
+<h3>Profit Per Client</h3>
+<table>
+  <tr><th>Tier</th><th>Revenue</th><th>Your Cost to Service</th><th>Gross Profit</th><th>Margin</th></tr>
+  <tr><td>Starter</td><td>$2,000</td><td>~$350&ndash;$450</td><td><strong>$1,550&ndash;$1,650</strong></td><td>~80%</td></tr>
+  <tr><td>Growth</td><td>$3,500</td><td>~$450&ndash;$600</td><td><strong>$2,900&ndash;$3,050</strong></td><td>~83%</td></tr>
+  <tr><td>Pro</td><td>$5,000</td><td>~$500&ndash;$700</td><td><strong>$4,300&ndash;$4,500</strong></td><td>~88%</td></tr>
+</table>
+
+<!-- PAYING YOURSELF -->
+<div class="section-bar">Paying Yourself &mdash; Owner's Draw</div>
+
+<p>As a single-member LLC, you pay yourself via <strong>owner's draw</strong> &mdash; a direct transfer from the business bank account to your personal account. No payroll required.</p>
+
+<table>
+  <tr><th>Allocation</th><th>Rule</th><th>Example ($10K revenue, $1,500 expenses)</th></tr>
+  <tr><td>Taxes (reserve)</td><td>Set aside 30%</td><td>$2,550/mo into savings</td></tr>
+  <tr><td>Business reserve</td><td>Keep 15% in business account</td><td>$1,275/mo</td></tr>
+  <tr><td><strong>Your draw (paycheck)</strong></td><td><strong>Take the remaining 55%</strong></td><td><strong>$4,675/mo</strong></td></tr>
+</table>
+
+<div class="highlight">
+  <strong>Quarterly tax payments</strong> (mandatory if you owe $1,000+/year): April 15, June 16, September 15, January 15. Set aside 30% of every payment received into a separate savings account.
+</div>
+
+<p><strong>S Corp election:</strong> Once the LLC nets $60,000&ndash;$80,000+/year, consider filing Form 2553 to elect S Corp status. This lets you pay yourself a reasonable salary and take the rest as distributions, saving $5,000&ndash;$10,000/year in self-employment tax.</p>
+
 <!-- 6-MONTH ROADMAP -->
+<div class="page-break"></div>
 <div class="section-bar">6-Month Roadmap</div>
 
 <div class="month-block">
-  <h3><span class="tag">Month 1</span> March 2026 — Proof of Concept</h3>
+  <h3><span class="tag">Month 1</span> March 2026 &mdash; Proof of Concept</h3>
   <p><strong>Goal:</strong> Land first paying client.</p>
   <ul>
-    <li>Finish NettSpend fan pages — post consistently, build view count portfolio</li>
-    <li>Use results as case studies for outreach</li>
-    <li>DM 10-15 artist managers per week</li>
+    <li>Post daily across NettSpend fan pages to build portfolio with real view counts</li>
+    <li>Run slideshow trial on @asspizza2026 to prove volume posting</li>
+    <li>Use results as case studies &mdash; DM 10&ndash;15 artist managers per week</li>
+    <li>Pitch Interscope/Clover for the $5K/mo Pro deal</li>
   </ul>
   <table>
-    <tr><td>Target Revenue</td><td><strong>$1,000</strong></td></tr>
-    <tr><td>Clients</td><td>1 Seed</td></tr>
-    <tr><td>Profit (after biz costs)</td><td>$720</td></tr>
-    <tr><td>Rent covered?</td><td>Not yet</td></tr>
+    <tr><td>Target Revenue</td><td><strong>$2,000&ndash;$5,000</strong></td></tr>
+    <tr><td>Clients</td><td>1 Starter or 1 Pro (Interscope)</td></tr>
+    <tr><td>Monthly Burn</td><td>~$357</td></tr>
+    <tr><td>Profit</td><td>$1,643&ndash;$4,643</td></tr>
   </table>
 </div>
 
 <div class="month-block">
-  <h3><span class="tag">Month 2</span> April 2026 — Stack to Break-Even</h3>
-  <p><strong>Goal:</strong> Cover rent with client revenue.</p>
+  <h3><span class="tag">Month 2</span> April 2026 &mdash; Stack Clients</h3>
+  <p><strong>Goal:</strong> 2&ndash;3 total clients.</p>
   <ul>
-    <li>First client's results become the pitch deck</li>
-    <li>Add 1-2 more clients</li>
-    <li>Begin proxy setup for Larry scaling</li>
+    <li>First client's performance data becomes pitch deck</li>
+    <li>Add 1&ndash;2 more clients at Starter or Growth tier</li>
+    <li>Scale slideshow accounts with proxy infrastructure</li>
   </ul>
   <table>
-    <tr><td>Target Revenue</td><td><strong>$2,000–3,500</strong></td></tr>
-    <tr><td>Clients</td><td>2-3 Seed or 1 Growth + 1 Seed</td></tr>
-    <tr><td>Profit</td><td>$1,720–3,220</td></tr>
-    <tr><td>Rent covered?</td><td><span class="tag green">Yes</span></td></tr>
+    <tr><td>Target Revenue</td><td><strong>$4,000&ndash;$7,000</strong></td></tr>
+    <tr><td>Clients</td><td>2&ndash;3 total</td></tr>
+    <tr><td>Monthly Burn</td><td>~$397</td></tr>
+    <tr><td>Profit</td><td>$3,603&ndash;$6,603</td></tr>
   </table>
 </div>
 
 <div class="month-block">
-  <h3><span class="tag">Month 3</span> May 2026 — Hire the Editor</h3>
-  <p><strong>Goal:</strong> Enough volume to justify help.</p>
+  <h3><span class="tag">Month 3</span> May 2026 &mdash; Hire Editor</h3>
+  <p><strong>Goal:</strong> Scale production capacity.</p>
   <ul>
-    <li>Bring on freelance editor ($1,000/mo)</li>
-    <li>Larry handles slideshow/seed accounts autonomously</li>
-    <li>Editor handles custom clips, you handle strategy + clients</li>
+    <li>Bring on freelance editor ($1,000/mo) to handle clip volume</li>
+    <li>Editor runs their own pages and produces clips for clients</li>
+    <li>You focus on strategy, client relationships, and acquisition</li>
   </ul>
   <table>
-    <tr><td>Target Revenue</td><td><strong>$3,000–3,500</strong></td></tr>
-    <tr><td>Clients</td><td>3 Seed or 1 Growth + 1 Seed</td></tr>
-    <tr><td>Profit (after editor)</td><td>$1,720–2,220</td></tr>
-    <tr><td>All costs covered?</td><td><span class="tag green">Yes</span></td></tr>
+    <tr><td>Target Revenue</td><td><strong>$5,000&ndash;$8,500</strong></td></tr>
+    <tr><td>Clients</td><td>2&ndash;3 clients (mix of tiers)</td></tr>
+    <tr><td>Monthly Burn</td><td>~$1,397</td></tr>
+    <tr><td>Profit</td><td>$3,603&ndash;$7,103</td></tr>
   </table>
 </div>
 
 <div class="month-block">
-  <h3><span class="tag">Month 4</span> June 2026 — Raise Prices</h3>
-  <p><strong>Goal:</strong> Move to Growth-tier clients.</p>
+  <h3><span class="tag">Month 4</span> June 2026 &mdash; Raise Prices</h3>
+  <p><strong>Goal:</strong> Move clients to Growth/Pro tiers.</p>
   <ul>
     <li>3 months of case studies with real performance data</li>
-    <li>Pitch Growth tier ($2,500) to new prospects</li>
-    <li>Upsell existing Seed clients showing results</li>
+    <li>Pitch Growth tier ($3,500) to new prospects</li>
+    <li>Upsell existing Starter clients showing results</li>
   </ul>
   <table>
-    <tr><td>Target Revenue</td><td><strong>$6,000</strong></td></tr>
-    <tr><td>Clients</td><td>2 Growth + 1 Seed</td></tr>
-    <tr><td>Profit</td><td>$4,720</td></tr>
+    <tr><td>Target Revenue</td><td><strong>$7,000&ndash;$10,000</strong></td></tr>
+    <tr><td>Clients</td><td>2 Growth + 1 Starter or 1 Pro + 1 Growth</td></tr>
+    <tr><td>Profit</td><td>$5,603&ndash;$8,603</td></tr>
   </table>
 </div>
 
 <div class="month-block">
-  <h3><span class="tag">Month 5</span> July 2026 — Systemize</h3>
-  <p><strong>Goal:</strong> Manage, don't produce.</p>
+  <h3><span class="tag">Month 5</span> July 2026 &mdash; Systemize</h3>
+  <p><strong>Goal:</strong> Manage the business, not every clip.</p>
   <ul>
     <li>Editor handles 80% of clip production</li>
-    <li>Larry runs seed accounts autonomously</li>
-    <li>You focus on client acquisition and strategy</li>
-    <li>~15-20 hours/week of your time</li>
+    <li>Slideshow accounts run semi-autonomously</li>
+    <li>You focus on client acquisition and strategy &mdash; ~15&ndash;20 hrs/week</li>
   </ul>
   <table>
-    <tr><td>Target Revenue</td><td><strong>$7,500</strong></td></tr>
-    <tr><td>Clients</td><td>3 Growth</td></tr>
-    <tr><td>Profit</td><td>$6,220</td></tr>
+    <tr><td>Target Revenue</td><td><strong>$10,000+</strong></td></tr>
+    <tr><td>Clients</td><td>3&ndash;4 clients</td></tr>
+    <tr><td>Profit</td><td>$8,500+</td></tr>
   </table>
 </div>
 
 <div class="month-block">
-  <h3><span class="tag">Month 6</span> August 2026 — Scale</h3>
-  <p><strong>Goal:</strong> $10k/month revenue.</p>
+  <h3><span class="tag">Month 6</span> August 2026 &mdash; Scale</h3>
+  <p><strong>Goal:</strong> Consistent $10K+ months.</p>
   <ul>
-    <li>Add a Full Service client ($5,000) or reach 4 Growth clients</li>
+    <li>Add Pro clients ($5,000) or expand existing accounts</li>
     <li>Consider second editor if volume demands it</li>
-    <li>Evaluate brand expansion (2016vault content brand)</li>
+    <li>Evaluate S Corp election if netting $60K+/year</li>
+    <li>Begin 2016vault media brand expansion</li>
   </ul>
   <table>
-    <tr><td>Target Revenue</td><td><strong>$10,000</strong></td></tr>
-    <tr><td>Clients</td><td>4 Growth or 1 Full + 1 Growth + 1 Seed</td></tr>
-    <tr><td>Profit</td><td>$8,420–8,720</td></tr>
+    <tr><td>Target Revenue</td><td><strong>$10,000&ndash;$15,000</strong></td></tr>
+    <tr><td>Clients</td><td>3&ndash;5 clients</td></tr>
+    <tr><td>Profit</td><td>$8,500&ndash;$13,500</td></tr>
   </table>
 </div>
 
-<!-- BREAK-EVEN CHEAT SHEET -->
+<!-- BREAK-EVEN -->
 <div class="section-bar">Break-Even Cheat Sheet</div>
 
 <table>
-  <tr><th>Scenario</th><th>Clients Needed</th><th>Revenue</th><th>Covers</th></tr>
-  <tr><td>Business costs only (solo)</td><td>1 Seed</td><td>$1,000</td><td>All tools + profit</td></tr>
-  <tr><td>Rent + business (solo)</td><td>3 Seed</td><td>$3,000</td><td>Rent + tools + $720 profit</td></tr>
-  <tr><td>Rent + business + editor</td><td>4 Seed or 2 Growth</td><td>$4,000–5,000</td><td>Everything + profit</td></tr>
-  <tr><td>Comfortable</td><td>2 Growth + 1 Seed</td><td>$6,000</td><td>Everything + $4,720 profit</td></tr>
+  <tr><th>Scenario</th><th>Clients Needed</th><th>Revenue</th><th>What It Covers</th></tr>
+  <tr><td>Business costs only (solo)</td><td>1 Starter</td><td>$2,000</td><td>All tools + $1,643 profit</td></tr>
+  <tr><td>Business + editor</td><td>1 Starter + 1 Starter</td><td>$4,000</td><td>All costs + $2,603 profit</td></tr>
+  <tr><td>Comfortable</td><td>1 Pro</td><td>$5,000</td><td>All costs + $3,603 profit</td></tr>
+  <tr><td>Real money</td><td>1 Pro + 1 Growth</td><td>$8,500</td><td>All costs + $7,103 profit</td></tr>
+  <tr><td>Target (Month 6)</td><td>2 Pro + 1 Starter</td><td>$12,000</td><td>All costs + $10,500+ profit</td></tr>
 </table>
 
+<div class="highlight">
+  <strong>The math:</strong> With ~80% margins, every $1,000 in revenue produces ~$800 in gross profit. The freelance editor ($1,000/mo) pays for themselves with a single Starter client. Every client after that is nearly pure profit.
+</div>
+
 <div class="footer">
-  DeFaria NYC &nbsp;|&nbsp; Sean DeFaria &nbsp;|&nbsp; 188 Scholes St., Brooklyn, NY 11206 &nbsp;|&nbsp; seadefaria@gmail.com<br>
+  DeFaria NYC, LLC &nbsp;|&nbsp; Sean DeFaria &nbsp;|&nbsp; 188 Scholes St., Brooklyn, NY 11206 &nbsp;|&nbsp; seadefaria@gmail.com<br>
   Plan prepared February 20, 2026. Figures based on confirmed expenses and projected client pricing.
 </div>
 
