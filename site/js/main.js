@@ -99,33 +99,37 @@
     addMessage();
 })();
 
-/* ── Floating Signal Dots (subtle data signals) ── */
+/* ── Floating Hearts (social media engagement) ── */
 (function() {
     var container = document.getElementById('engagement-likes');
     if (!container) return;
 
-    function addSignal() {
+    var icons = [
+        '<svg width="SIZE" height="SIZE" viewBox="0 0 24 24" fill="COLOR"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+        '<svg width="SIZE" height="SIZE" viewBox="0 0 24 24" fill="COLOR"><path d="M14 9V5a3 3 0 0 0-6 0v1H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9h-6z"/><path d="M9 22V12M15 22V12" fill="none" stroke="COLOR" stroke-width="1"/></svg>',
+        '<svg width="SIZE" height="SIZE" viewBox="0 0 24 24" fill="none" stroke="COLOR" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+        '<svg width="SIZE" height="SIZE" viewBox="0 0 24 24" fill="COLOR"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'
+    ];
+    var colors = ['rgba(238,53,46,0.7)', 'rgba(255,99,25,0.7)', 'rgba(0,147,60,0.6)', 'rgba(0,57,166,0.6)', 'rgba(185,51,173,0.6)'];
+
+    function addHeart() {
         var el = document.createElement('span');
         el.className = 'engagement-likes__heart';
-        var size = 3 + Math.floor(Math.random() * 5);
-        var blueShades = ['#0039A6', '#4A90D9', '#7CB3F0', '#1A5BC4', '#2E6FCF', '#6BAAE8'];
-        var fill = blueShades[Math.floor(Math.random() * blueShades.length)];
-        el.style.width = size + 'px';
-        el.style.height = size + 'px';
-        el.style.borderRadius = '50%';
-        el.style.background = fill;
-        el.style.boxShadow = '0 0 ' + (size * 2) + 'px ' + fill;
-        el.style.left = (Math.random() * 90) + '%';
-        el.style.animationDuration = (2.8 + Math.random() * 1.5) + 's';
+        var size = 14 + Math.floor(Math.random() * 10);
+        var color = colors[Math.floor(Math.random() * colors.length)];
+        var icon = icons[Math.floor(Math.random() * icons.length)];
+        el.innerHTML = icon.replace(/SIZE/g, size).replace(/COLOR/g, color);
+        el.style.left = (Math.random() * 80 + 10) + '%';
+        el.style.animationDuration = (3 + Math.random() * 1.5) + 's';
         container.appendChild(el);
 
         setTimeout(function() {
             if (el.parentNode) el.parentNode.removeChild(el);
-        }, 4000);
+        }, 5000);
     }
 
-    setInterval(addSignal, 600);
-    addSignal();
+    setInterval(addHeart, 800);
+    addHeart();
 })();
 
 /* ── Scroll Fade — Hero Overlays ── */
