@@ -48,15 +48,16 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 1.15em;
-    height: 1.15em;
     border-radius: 50%;
-    transition: background 0.3s ease, color 0.3s ease;
+    padding: 0;
+    transition: background 0.3s ease, color 0.3s ease, padding 0.3s ease, margin 0.3s ease;
 }
 
 .nav__logo:hover .nav__logo-df {
     background: var(--accent);
     color: #fff;
+    padding: 2px 5px;
+    margin: 0 1px;
 }
 
 .nav__links {
