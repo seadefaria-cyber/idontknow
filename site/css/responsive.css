@@ -103,6 +103,10 @@ html, body {
         height: 10px;
     }
 
+    .nav__tagline {
+        display: none;
+    }
+
     /* ── Nav — Metro slide-down dropdown ── */
     .nav__hamburger {
         display: flex;
