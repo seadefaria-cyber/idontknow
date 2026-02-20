@@ -34,6 +34,11 @@
     letter-spacing: -0.02em;
     color: var(--text);
     white-space: nowrap;
+    transition: text-shadow 0.3s ease;
+}
+
+.nav__logo:hover .nav__logo-text {
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.35), 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
 .nav__tagline {
@@ -581,9 +586,9 @@
 }
 
 .hero .btn:hover {
-    background: #fff;
-    color: var(--accent);
-    box-shadow: 0 8px 24px rgba(0, 57, 166, 0.3);
+    background: var(--mta-green);
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(0, 147, 60, 0.3);
 }
 
 /* ── CLIP. SEED. GROW. Section ──────────── */
@@ -840,12 +845,13 @@
     width: auto;
     object-fit: contain;
     opacity: 0.2;
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
 }
 
 .clients__logo:hover {
-    opacity: 0.45;
-    transform: scale(1.06);
+    opacity: 0.6;
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.15));
 }
 
 /* Pause scroll on hover */
@@ -853,7 +859,7 @@
     animation-play-state: paused;
 }
 
-/* Client item — relative for overlay + hearts */
+/* Client item — relative for overlay */
 .clients__item {
     position: relative;
     cursor: pointer;
@@ -881,21 +887,7 @@
     transform: translateX(-50%) translateY(2px);
 }
 
-/* Client hover hearts */
-.clients__heart {
-    position: absolute;
-    bottom: 10px;
-    pointer-events: none;
-    opacity: 0;
-    animation: clientHeart 1.8s ease-out forwards;
-    z-index: 10;
-}
 
-@keyframes clientHeart {
-    0% { opacity: 0.6; transform: translateY(0) scale(0.8); }
-    40% { opacity: 0.5; transform: translateY(-25px) scale(1); }
-    100% { opacity: 0; transform: translateY(-60px) scale(0.6); }
-}
 
 @keyframes clientsScroll {
     from { transform: translateX(0); }
