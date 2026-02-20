@@ -164,6 +164,43 @@ Sean is building a media company / video page for underground rap, inspired by K
 - **Concept:** Archival, exclusive underground rap content. "The vault" = rare, unreleased, premium. 2016 = the SoundCloud era that started it all (Carti, Uzi, Yachty, X, Ski Mask).
 - **Positioning:** We found them before you did. Opening the vault on underground artists before they blow.
 
+## Financial Overview (Updated Feb 20, 2026)
+
+Full business plan PDF: `~/Desktop/business-plans/DeFaria-NYC-6-Month-Plan-Feb2026.pdf`
+Full business plan HTML: `docs/business-plan-feb-2026.html`
+
+### Monthly Business Overhead: ~$280/mo (solo) / ~$1,280/mo (with editor)
+- **Claude Max 20x:** $200/mo (covers all Claude Code across all worktrees — no separate API costs)
+- **OpenAI API (GPT-4o for Larry/OpenClaw):** ~$45/mo (EC2 server at 3.239.100.180)
+- **AWS EC2:** $0/mo (free tier — will be ~$10/mo after 12 months)
+- **Residential proxies:** ~$35/mo (for TikTok account scaling)
+- **Freelance editor:** $1,000/mo (starting Month 3 / May 2026)
+- **Submagic:** NOT active (never upgraded from trial) — don't need it, make_clip.py replaces it
+- **Later:** NOT active (canceled) — don't need it
+
+### Total Spent To Date: $237.42
+- Claude Max upgrade charges: $210 (Feb 2026)
+- OpenAI API: $27.42 ($10.89 on Feb 18 + $16.53 on Feb 20)
+- AWS: $0
+
+### Clipping Agency Pricing Tiers
+- **Seed:** $1,000/mo (3 accounts, 2-3 clips/day)
+- **Growth:** $2,500/mo (5-7 accounts, 3-5 clips/day, strategy)
+- **Full Service:** $5,000/mo (7+ accounts, 5-10 clips/day, automation, weekly calls)
+- **Minimum contract:** 3 months (accounts need 30+ days to warm up)
+
+### Break-Even Targets
+- Business costs only: 1 Seed client ($1,000/mo)
+- Rent ($2,000) + business (solo): 3 Seed clients ($3,000/mo)
+- Rent + business + editor: 4 Seed or 2 Growth ($4,000–5,000/mo)
+
+### Key Financial Facts
+- Transcription is FREE (WhisperX runs locally, not OpenAI Whisper API)
+- Claude Code usage is included in the $200/mo Max subscription (no separate API key)
+- Video processing (FFmpeg) is free and local
+- Sean does NOT have an LLC — invoicing as sole proprietor
+- Personal rent: $2,000/mo (upcoming)
+
 ## Conventions
 
 - When the user dictates instructions, interpret them generously - they are communicating verbally.

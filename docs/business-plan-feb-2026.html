@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeFaria NYC — 6-Month Business Plan</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: #111;
+    background: #fff;
+    line-height: 1.6;
+    padding: 60px;
+    max-width: 850px;
+    margin: 0 auto;
+  }
+
+  .header {
+    border-bottom: 3px solid #111;
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .header .subtitle {
+    font-size: 14px;
+    color: #555;
+    margin-top: 4px;
+  }
+
+  .header .date {
+    font-size: 13px;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  .section-bar {
+    background: #111;
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 36px;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+
+  p, li {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  ul {
+    padding-left: 20px;
+    margin-bottom: 12px;
+  }
+
+  li { margin-bottom: 4px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px 0;
+    font-size: 13px;
+  }
+
+  th {
+    text-align: left;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-bottom: 2px solid #111;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  .total-row td {
+    border-top: 2px solid #111;
+    border-bottom: none;
+    font-weight: 700;
+    padding-top: 10px;
+  }
+
+  .highlight {
+    background: #f7f7f7;
+    border-left: 3px solid #111;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+
+  .month-block {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .month-block:last-child { border-bottom: none; }
+
+  .tag {
+    display: inline-block;
+    background: #111;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .tag.green { background: #1a7a2e; }
+  .tag.orange { background: #b45309; }
+
+  .footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    font-size: 12px;
+    color: #888;
+  }
+
+  @media print {
+    body { padding: 40px; }
+    .section-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .tag { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>DeFaria NYC</h1>
+  <div class="subtitle">6-Month Business Plan — Clipping Agency</div>
+  <div class="date">Prepared February 20, 2026 &nbsp;|&nbsp; Sean DeFaria, Sole Proprietor</div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="section-bar">Overview</div>
+
+<p>DeFaria NYC is a clipping and fan page agency specializing in underground rap artists. We create, distribute, and manage viral short-form content across TikTok, Instagram, and X using a combination of AI automation (Claude Code, Larry/OpenClaw) and human editorial oversight.</p>
+
+<div class="highlight">
+  <strong>Goal:</strong> Reach $3,000+/month in recurring client revenue by Month 3, covering rent ($2,000) and all business expenses ($1,280) with profit.
+</div>
+
+<!-- CURRENT EXPENSES -->
+<div class="section-bar">Monthly Expenses — Confirmed</div>
+
+<h3>Business Overhead</h3>
+<table>
+  <tr><th>Expense</th><th>Monthly Cost</th><th>Notes</th></tr>
+  <tr><td>Claude Max 20x (Anthropic)</td><td>$200.00</td><td>Powers all AI work across 4 worktrees</td></tr>
+  <tr><td>OpenAI API (GPT-4o)</td><td>~$45.00</td><td>Powers Larry/OpenClaw automation on EC2</td></tr>
+  <tr><td>AWS EC2</td><td>$0.00</td><td>Free tier (12 months) — will be ~$10/mo after</td></tr>
+  <tr><td>Residential Proxies</td><td>~$35.00</td><td>For scaling TikTok accounts (starting Month 2)</td></tr>
+  <tr class="total-row"><td><strong>Total Business Overhead</strong></td><td><strong>~$280/mo</strong></td><td></td></tr>
+</table>
+
+<h3>Planned Hires</h3>
+<table>
+  <tr><th>Role</th><th>Monthly Cost</th><th>Start Date</th></tr>
+  <tr><td>Freelance Editor</td><td>$1,000.00</td><td>Month 3 (May 2026)</td></tr>
+  <tr class="total-row"><td><strong>Total with Editor</strong></td><td><strong>~$1,280/mo</strong></td><td></td></tr>
+</table>
+
+<h3>Canceled / Not Needed</h3>
+<table>
+  <tr><th>Tool</th><th>Was Costing</th><th>Status</th></tr>
+  <tr><td>Submagic</td><td>$41/mo</td><td>Never activated (trial only)</td></tr>
+  <tr><td>Later</td><td>$80/mo</td><td>Canceled — not active</td></tr>
+</table>
+
+<h3>Personal Expenses (Known)</h3>
+<table>
+  <tr><th>Expense</th><th>Monthly Cost</th><th>Notes</th></tr>
+  <tr><td>Rent</td><td>$2,000.00</td><td>Starting in a few months</td></tr>
+  <tr><td>Other personal expenses</td><td>TBD</td><td>To be added</td></tr>
+  <tr class="total-row"><td><strong>Total Monthly Nut</strong></td><td><strong>~$3,280/mo</strong></td><td>Biz + rent + editor</td></tr>
+</table>
+
+<!-- TOTAL SPENT TO DATE -->
+<div class="section-bar">Spending to Date</div>
+
+<table>
+  <tr><th>Item</th><th>Amount</th><th>Date</th></tr>
+  <tr><td>Claude Max (upgrade charges)</td><td>$210.00</td><td>Feb 2026</td></tr>
+  <tr><td>OpenAI API — Invoice 0001</td><td>$10.89</td><td>Feb 18, 2026</td></tr>
+  <tr><td>OpenAI API — Invoice 0002</td><td>$16.53</td><td>Feb 20, 2026</td></tr>
+  <tr><td>AWS EC2</td><td>$0.00</td><td>Feb 2026</td></tr>
+  <tr class="total-row"><td><strong>Total Spent So Far</strong></td><td><strong>$237.42</strong></td><td></td></tr>
+</table>
+
+<!-- PRICING -->
+<div class="section-bar">Client Pricing</div>
+
+<table>
+  <tr><th>Tier</th><th>Price</th><th>What's Included</th></tr>
+  <tr>
+    <td><strong>Seed</strong></td>
+    <td>$1,000/mo</td>
+    <td>3 fan accounts, 2-3 clips/day, weekly performance report</td>
+  </tr>
+  <tr>
+    <td><strong>Growth</strong></td>
+    <td>$2,500/mo</td>
+    <td>5-7 accounts, 3-5 clips/day, caption strategy, bi-weekly calls</td>
+  </tr>
+  <tr>
+    <td><strong>Full Service</strong></td>
+    <td>$5,000/mo</td>
+    <td>7+ accounts, 5-10 clips/day, Larry automation, trend-reactive clips, weekly calls</td>
+  </tr>
+</table>
+
+<div class="highlight">
+  <strong>Setup fee:</strong> None for Seed tier. $500 one-time for Growth. $1,000 one-time for Full Service.<br>
+  <strong>Minimum contract:</strong> 3 months (accounts need 30+ days to warm up and show results).
+</div>
+
+<!-- 6-MONTH ROADMAP -->
+<div class="section-bar">6-Month Roadmap</div>
+
+<div class="month-block">
+  <h3><span class="tag">Month 1</span> March 2026 — Proof of Concept</h3>
+  <p><strong>Goal:</strong> Land first paying client.</p>
+  <ul>
+    <li>Finish NettSpend fan pages — post consistently, build view count portfolio</li>
+    <li>Use results as case studies for outreach</li>
+    <li>DM 10-15 artist managers per week</li>
+  </ul>
+  <table>
+    <tr><td>Target Revenue</td><td><strong>$1,000</strong></td></tr>
+    <tr><td>Clients</td><td>1 Seed</td></tr>
+    <tr><td>Profit (after biz costs)</td><td>$720</td></tr>
+    <tr><td>Rent covered?</td><td>Not yet</td></tr>
+  </table>
+</div>
+
+<div class="month-block">
+  <h3><span class="tag">Month 2</span> April 2026 — Stack to Break-Even</h3>
+  <p><strong>Goal:</strong> Cover rent with client revenue.</p>
+  <ul>
+    <li>First client's results become the pitch deck</li>
+    <li>Add 1-2 more clients</li>
+    <li>Begin proxy setup for Larry scaling</li>
+  </ul>
+  <table>
+    <tr><td>Target Revenue</td><td><strong>$2,000–3,500</strong></td></tr>
+    <tr><td>Clients</td><td>2-3 Seed or 1 Growth + 1 Seed</td></tr>
+    <tr><td>Profit</td><td>$1,720–3,220</td></tr>
+    <tr><td>Rent covered?</td><td><span class="tag green">Yes</span></td></tr>
+  </table>
+</div>
+
+<div class="month-block">
+  <h3><span class="tag">Month 3</span> May 2026 — Hire the Editor</h3>
+  <p><strong>Goal:</strong> Enough volume to justify help.</p>
+  <ul>
+    <li>Bring on freelance editor ($1,000/mo)</li>
+    <li>Larry handles slideshow/seed accounts autonomously</li>
+    <li>Editor handles custom clips, you handle strategy + clients</li>
+  </ul>
+  <table>
+    <tr><td>Target Revenue</td><td><strong>$3,000–3,500</strong></td></tr>
+    <tr><td>Clients</td><td>3 Seed or 1 Growth + 1 Seed</td></tr>
+    <tr><td>Profit (after editor)</td><td>$1,720–2,220</td></tr>
+    <tr><td>All costs covered?</td><td><span class="tag green">Yes</span></td></tr>
+  </table>
+</div>
+
+<div class="month-block">
+  <h3><span class="tag">Month 4</span> June 2026 — Raise Prices</h3>
+  <p><strong>Goal:</strong> Move to Growth-tier clients.</p>
+  <ul>
+    <li>3 months of case studies with real performance data</li>
+    <li>Pitch Growth tier ($2,500) to new prospects</li>
+    <li>Upsell existing Seed clients showing results</li>
+  </ul>
+  <table>
+    <tr><td>Target Revenue</td><td><strong>$6,000</strong></td></tr>
+    <tr><td>Clients</td><td>2 Growth + 1 Seed</td></tr>
+    <tr><td>Profit</td><td>$4,720</td></tr>
+  </table>
+</div>
+
+<div class="month-block">
+  <h3><span class="tag">Month 5</span> July 2026 — Systemize</h3>
+  <p><strong>Goal:</strong> Manage, don't produce.</p>
+  <ul>
+    <li>Editor handles 80% of clip production</li>
+    <li>Larry runs seed accounts autonomously</li>
+    <li>You focus on client acquisition and strategy</li>
+    <li>~15-20 hours/week of your time</li>
+  </ul>
+  <table>
+    <tr><td>Target Revenue</td><td><strong>$7,500</strong></td></tr>
+    <tr><td>Clients</td><td>3 Growth</td></tr>
+    <tr><td>Profit</td><td>$6,220</td></tr>
+  </table>
+</div>
+
+<div class="month-block">
+  <h3><span class="tag">Month 6</span> August 2026 — Scale</h3>
+  <p><strong>Goal:</strong> $10k/month revenue.</p>
+  <ul>
+    <li>Add a Full Service client ($5,000) or reach 4 Growth clients</li>
+    <li>Consider second editor if volume demands it</li>
+    <li>Evaluate brand expansion (2016vault content brand)</li>
+  </ul>
+  <table>
+    <tr><td>Target Revenue</td><td><strong>$10,000</strong></td></tr>
+    <tr><td>Clients</td><td>4 Growth or 1 Full + 1 Growth + 1 Seed</td></tr>
+    <tr><td>Profit</td><td>$8,420–8,720</td></tr>
+  </table>
+</div>
+
+<!-- BREAK-EVEN CHEAT SHEET -->
+<div class="section-bar">Break-Even Cheat Sheet</div>
+
+<table>
+  <tr><th>Scenario</th><th>Clients Needed</th><th>Revenue</th><th>Covers</th></tr>
+  <tr><td>Business costs only (solo)</td><td>1 Seed</td><td>$1,000</td><td>All tools + profit</td></tr>
+  <tr><td>Rent + business (solo)</td><td>3 Seed</td><td>$3,000</td><td>Rent + tools + $720 profit</td></tr>
+  <tr><td>Rent + business + editor</td><td>4 Seed or 2 Growth</td><td>$4,000–5,000</td><td>Everything + profit</td></tr>
+  <tr><td>Comfortable</td><td>2 Growth + 1 Seed</td><td>$6,000</td><td>Everything + $4,720 profit</td></tr>
+</table>
+
+<div class="footer">
+  DeFaria NYC &nbsp;|&nbsp; Sean DeFaria &nbsp;|&nbsp; 188 Scholes St., Brooklyn, NY 11206 &nbsp;|&nbsp; seadefaria@gmail.com<br>
+  Plan prepared February 20, 2026. Figures based on confirmed expenses and projected client pricing.
+</div>
+
+</body>
+</html>
