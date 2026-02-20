@@ -9,7 +9,6 @@
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     z-index: 100;
-    border-bottom: 1px solid var(--border);
 }
 
 .nav__inner {
@@ -222,6 +221,17 @@
     line-height: 1.05;
     letter-spacing: -0.04em;
     margin-bottom: var(--space-md);
+    animation: heroGlow 9s ease-in-out infinite;
+}
+
+@keyframes heroGlow {
+    0%, 10% { color: #fff; text-shadow: none; }
+    15%, 25% { color: #fff; text-shadow: 0 0 20px rgba(0, 57, 166, 0.6), 0 0 50px rgba(0, 57, 166, 0.3); }
+    30%, 40% { color: #fff; text-shadow: none; }
+    45%, 55% { color: #fff; text-shadow: 0 0 20px rgba(0, 147, 60, 0.6), 0 0 50px rgba(0, 147, 60, 0.3); }
+    60%, 70% { color: #fff; text-shadow: none; }
+    75%, 85% { color: #fff; text-shadow: 0 0 20px rgba(255, 99, 25, 0.6), 0 0 50px rgba(255, 99, 25, 0.3); }
+    90%, 100% { color: #fff; text-shadow: none; }
 }
 
 /* Hero — word-by-word type-in on page load */
@@ -594,7 +604,6 @@
 /* ── CLIP. SEED. GROW. Section ──────────── */
 .csg {
     padding: 0 0 var(--space-sm);
-    border-bottom: 1px solid var(--border);
 }
 
 .csg__inner {
@@ -769,8 +778,6 @@
 /* ── Ticker ─────────────────────────────── */
 .ticker {
     background: var(--surface);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
     padding: 0.6rem 0;
     overflow: hidden;
     white-space: nowrap;
@@ -816,7 +823,7 @@
 /* ── Clients (Infinite Scroll) ──────────── */
 .clients {
     padding: var(--space-sm) 0;
-    border-bottom: 1px solid var(--border);
+    background: var(--surface);
     overflow: hidden;
 }
 
@@ -1169,7 +1176,6 @@
 .stats {
     padding: var(--space-md) 0 var(--space-lg);
     border-top: 3px solid #E91E8C;
-    border-bottom: 1px solid var(--border);
 }
 
 .stats__grid {
@@ -1368,9 +1374,8 @@
 /* ── Creative Services — Metro-Themed ──────── */
 .creative {
     padding: var(--space-lg) 0;
-    background: var(--bg);
+    background: var(--surface);
     border-top: 3px solid var(--mta-orange);
-    border-bottom: 1px solid var(--border);
     position: relative;
     overflow: hidden;
 }
@@ -1516,6 +1521,7 @@
 /* ── Process — Subway Line Map ───────────── */
 .process {
     padding: var(--space-md) 0;
+    background: var(--surface);
     border-top: 3px solid var(--mta-blue);
 }
 
@@ -1921,7 +1927,7 @@
 /* ── Footer ──────────────────────────────── */
 .footer {
     padding: var(--space-md) 0 var(--space-md);
-    border-top: 1px solid var(--border);
+    background: var(--surface);
 }
 
 .footer__inner {
