@@ -128,3 +128,35 @@ agent-browser close
 - **No fake metrics**: Phone mockups show NO view counts or engagement numbers — "not accurate" and "bad look"
 - **No cheesy animations**: Emoji bursts removed from stats. Keep interactions subtle and macho
 - **Metro theme consistency**: Process = vertical subway line, Services = horizontal metro route — different formats for different sections
+
+## Active Project: Amanda Bynes — "Girlfriend" Music Video
+
+### Overview
+Sean is pitching to direct a music video for Amanda Bynes. She's 40, on a comeback with an EDM/dubstep track called "Girlfriend." She wants to shoot it in the style of Concrete Boys' "Millionaire" video (directed by ASAP & Boy Dilla).
+
+### Aesthetic References
+- **Concrete Boys "Millionaire"** — Dark environments, luxury details on real locations, warm/cool light contrast, no VFX, gold accents, urban concrete, feast/abundance scenes
+- **Charli XCX "brat" era** — Raw, unapologetic, rave-adjacent, lime green, cool-girl energy
+- **2hollis** — Rick Owens goth-glamour, hyperpop, hardstyle, digital aesthetic
+- **The Hellp** — Electroclash, indie sleaze, nocturnal leather energy, Hedi Slimane vibes
+- **Fakemink** — "Luxury and dirty," digital nostalgia, blurry Valencia-filter aesthetic
+
+### Treatment Summary (full doc: `docs/amanda-bynes-girlfriend-treatment.md`)
+- **Concept:** Not a comeback video — a presence video. Amanda moving through one night in a city.
+- **Act 1 (The Quiet):** Apartment interior, getting ready ritual, warm amber light, intimate close-ups
+- **Act 2 (The Walk):** NYC streets at night, neon + concrete, handheld camera, claiming space
+- **Act 3 (The Drop):** Underground parking garage/tunnel, LED practicals, chaotic energy matching the bass drop
+- **Outro:** Empty apartment, boots by the door, clean title card
+- **Budget:** $1–2K, all towards crew (DP + PA). iPhone Pro + gimbal, all free locations, one evening shoot.
+- **Role:** Sean directing. Crew = DP + PA + 2-3 friends as background.
+
+### Key Sensitivities
+- This is NOT a nostalgia/comeback narrative — Amanda is present tense, full volume
+- The rawness is earned, not a costume — respect her journey
+- No overproduction — the Millionaire video proves you don't need money to look expensive
+
+### Files
+- `docs/amanda-bynes-girlfriend-treatment.md` — Full treatment (markdown)
+- `docs/amanda-bynes-girlfriend-treatment.pdf` — PDF version for pitching
+- `docs/sean-claude-setup-guide.md` — Setup guide written for Sean's brother (beginner-friendly)
+- `docs/sean-claude-setup-guide.pdf` — PDF version
