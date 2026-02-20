@@ -45,19 +45,15 @@
 }
 
 .nav__logo-df {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     border-radius: 50%;
-    padding: 0;
-    transition: background 0.3s ease, color 0.3s ease, padding 0.3s ease, margin 0.3s ease;
+    padding: 0 0;
+    transition: background 0.3s ease, color 0.3s ease, padding 0.3s ease;
 }
 
 .nav__logo:hover .nav__logo-df {
     background: var(--accent);
     color: #fff;
-    padding: 2px 5px;
-    margin: 0 1px;
+    padding: 3px 6px;
 }
 
 .nav__links {
