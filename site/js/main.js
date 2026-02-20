@@ -652,6 +652,20 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     observer.observe(showcase);
 })();
 
+/* ── Mobile Creative — Tap to Expand ────── */
+(function() {
+    if (window.innerWidth > 809) return;
+    var items = document.querySelectorAll('.creative__item');
+    items.forEach(function(item) {
+        item.addEventListener('click', function() {
+            items.forEach(function(other) {
+                if (other !== item) other.classList.remove('creative__item--expanded');
+            });
+            item.classList.toggle('creative__item--expanded');
+        });
+    });
+})();
+
 /* ── Metro Sidebar — Scroll Progress ────── */
 (function() {
     var progress = document.getElementById('metro-progress');

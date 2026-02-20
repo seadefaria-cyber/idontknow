@@ -223,9 +223,29 @@ html, body {
         height: 20px;
     }
 
-    /* Showcase — keep all 3 phones */
+    /* Showcase — compact on mobile, no dissolution */
     .showcase {
-        min-height: 110vh;
+        min-height: 80vh;
+    }
+
+    .showcase__phones.dissolve {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        pointer-events: auto !important;
+    }
+
+    .showcase__total.takeover {
+        transform: none !important;
+    }
+
+    .showcase__total {
+        opacity: 1 !important;
+        margin-top: var(--space-xs);
+    }
+
+    .showcase__total-number {
+        font-size: clamp(2rem, 8vw, 3.5rem);
     }
 
     .showcase__headline {
@@ -237,6 +257,7 @@ html, body {
     .showcase__phones {
         gap: var(--space-xs);
         perspective: none;
+        margin-bottom: var(--space-xs);
     }
 
     .showcase__phone--left,
@@ -330,17 +351,29 @@ html, body {
         font-size: 0.8rem;
     }
 
-    /* Creative — 2-column on mobile, details always visible */
+    /* Creative — 2-column on mobile, tap to expand */
     .creative__grid {
         grid-template-columns: repeat(2, 1fr);
         gap: var(--space-sm);
     }
 
+    .creative__item {
+        cursor: pointer;
+    }
+
     .creative__detail {
-        max-height: none;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        margin-top: 0;
+        font-size: 0.7rem;
+        transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, margin-top 0.3s ease;
+    }
+
+    .creative__item--expanded .creative__detail {
+        max-height: 200px;
         opacity: 0.7;
         margin-top: var(--space-xs);
-        font-size: 0.7rem;
     }
 
     .creative__sub {
