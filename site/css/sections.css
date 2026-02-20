@@ -27,9 +27,9 @@
 
 .nav__logo-text {
     font-family: var(--font-headline);
-    font-size: 1.6rem;
+    font-size: 2.2rem;
     font-weight: 700;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
     color: var(--text);
     white-space: nowrap;
 }
@@ -1171,7 +1171,7 @@
 .stats__number {
     display: block;
     font-family: var(--font-headline);
-    font-size: clamp(3rem, 6vw, 5rem);
+    font-size: clamp(4rem, 10vw, 7rem);
     font-weight: 700;
     color: var(--text);
     letter-spacing: -0.02em;
@@ -1191,15 +1191,22 @@
 
 /* ── Agency Identity Strip ─────────────────── */
 .agency-id {
-    padding: var(--space-lg) 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    padding: var(--space-lg) 0 var(--space-sm);
     background: var(--bg);
     position: relative;
     overflow: hidden;
 }
 
 .agency-id__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    text-align: center;
+}
+
+.agency-id__top {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1217,18 +1224,10 @@
     transition: color 0.3s ease;
 }
 
-.agency-id__word--clip { color: var(--mta-red); }
-.agency-id__word--dist { color: var(--mta-blue); }
+.agency-id__word--clip { color: var(--mta-blue); }
+.agency-id__word--dist { color: var(--mta-green); }
 .agency-id__word--creative { color: var(--mta-orange); }
 .agency-id__word--agency { color: #fff; }
-
-.agency-id__dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--text-muted);
-    flex-shrink: 0;
-}
 
 /* ── Services ────────────────────────────── */
 .services {
@@ -1520,6 +1519,7 @@
     transition: transform var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
 }
 
+.process__dot--pink { background: #E91E63; box-shadow: 0 0 12px rgba(233, 30, 99, 0.5), 0 0 24px rgba(233, 30, 99, 0.2); }
 .process__dot--red { background: var(--mta-red); box-shadow: 0 0 12px rgba(238, 53, 46, 0.5), 0 0 24px rgba(238, 53, 46, 0.2); }
 .process__dot--orange { background: var(--mta-orange); box-shadow: 0 0 12px rgba(255, 99, 25, 0.5), 0 0 24px rgba(255, 99, 25, 0.2); }
 .process__dot--yellow { background: var(--mta-blue); box-shadow: 0 0 12px rgba(0, 57, 166, 0.5), 0 0 24px rgba(0, 57, 166, 0.2); }
@@ -1531,6 +1531,7 @@
     box-shadow: 0 0 16px currentColor;
 }
 
+.process__stop:hover .process__dot--pink { box-shadow: 0 0 16px #E91E63; }
 .process__stop:hover .process__dot--red { box-shadow: 0 0 16px var(--mta-red); }
 .process__stop:hover .process__dot--orange { box-shadow: 0 0 16px var(--mta-orange); }
 .process__stop:hover .process__dot--yellow { box-shadow: 0 0 16px var(--mta-blue); }
@@ -1541,6 +1542,10 @@
 .process__stop--active .process__dot {
     transform: scale(1.5);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.process__stop--active .process__dot--pink {
+    box-shadow: 0 0 20px rgba(233, 30, 99, 0.9), 0 0 40px rgba(233, 30, 99, 0.5), 0 0 60px rgba(233, 30, 99, 0.25);
 }
 
 .process__stop--active .process__dot--orange {
