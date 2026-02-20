@@ -179,46 +179,82 @@ POSTIZ_API_KEY=<key> npx postiz posts:create \
 2. **Feb 20** — Asspizza 2016 streetwear nostalgia (hybrid: 2 AI title cards + 4 real photos) — LIVE
 
 ### Clip Style Spec (MANDATORY — never deviate from this)
-This is the EXACT style for every video clip. Reference: @nettspend.clips0 TikTok.
+This is the EXACT style for every video clip. Reference: @nettspend.clips0 TikTok (https://www.tiktok.com/t/ZP8xRJuxT/).
 
-**Layout:**
-- 9:16 vertical (720x1280)
-- Clean BLACK bars top and bottom — NO blurred background, NO gradient
-- Video sits centered in the middle portion of the frame
+**Layout (720x1280 canvas):**
+- 9:16 vertical, clean BLACK bars top and bottom — NO blur, NO gradient
+- Video scaled to 720px wide, centered with -80px upward offset
+- ffmpeg overlay: `overlay=0:(H-h)/2-80` → video occupies roughly y=358 to y=763
+- All text uses ASS Alignment 8 (top-center), MarginV measured from top of frame
 
-**Bottom Captions (in the black bar below video):**
-- ALL CAPS, Arial Black / bold sans-serif, size ~28pt at 720x1280
+**Position Map (LOCKED — match these exactly):**
+| Element | MarginV | Y position | Where |
+|---------|---------|-----------|-------|
+| Impact text | 460 | ~y=460 | ON video, upper-center |
+| Hook text | 540 | ~y=540 | ON video, lower-center (near page center) |
+| Emoji overlays | — | y=600 | ON video, right under hook/impact text |
+| Captions | 790 | ~y=790 | Bottom black bar, below video |
+
+**Captions (bottom black bar, below video):**
+- ALL CAPS, Arial Black, size 20pt at 720x1280
 - White text, NO background box, NO outline — just clean text on black
-- Current spoken word highlighted in YELLOW (#FFFF00) — word-by-word karaoke style
+- Current spoken word highlighted in YELLOW (#FFFF00) — word-by-word karaoke with \k tags
 - Single line preferred, 2 lines max
 - Centered horizontally
-- RIGHT MARGIN ~100px to avoid TikTok side buttons (like, comment, share, profile pic)
-- LEFT MARGIN ~30px
+- MarginL=30, MarginR=100 (right margin clears TikTok buttons)
 
-**Hook Text (overlapping bottom edge of video):**
-- Title-case, white text with subtle drop shadow, size ~30pt
-- Positioned to OVERLAP the bottom of the video — sits on the video/black bar boundary
+**Hook Text (ON the video, page center):**
+- Title-case, white text with drop shadow (Outline=2, Shadow=2), size 24pt
+- MarginV=540 — sits ON the video in the lower-center area, near the vertical center of the full page
 - Appears for first 3-4 seconds
 - MUST be clickbait/ragebait — broad, digestible, makes people stop scrolling
 - NOT niche or insider language — frame for maximum audience appeal
 - Examples: "He just exposed every entrepreneur", "This changes everything", "Nobody wants to hear this"
-- RIGHT MARGIN ~100px to clear TikTok buttons
-- 2-3 EMOJIS directly UNDER the hook text expressing the vibe (e.g., skull, fire, 100, money bag, brain, muscle)
-- Emojis rendered as PNG overlays (ffmpeg can't render color emoji via ASS) — use Pillow to generate emoji PNGs
-- NO background on emojis — transparent, clean on black
+- MarginL=50, MarginR=50
+- 2-3 EMOJIS right under hook text as PNG overlays at y=600, x=285 (centered)
+- Emojis rendered via Pillow (ffmpeg can't render color emoji in ASS) — generate PNGs with Apple Color Emoji font
+- NO background on emojis — transparent PNG on video
 
-**Impact Text (key punchline moments ON the video):**
-- LARGE, ALL CAPS, Arial Black, size ~42pt
-- White text with colored block/brush-stroke background (cyan/blue #00A5D4)
-- Appears at the climax moments for 2-4 seconds
-- Centered on the video frame, 1 line preferred
-- RIGHT MARGIN ~100px to clear TikTok buttons
+**Impact Text (ON the video, above hook area):**
+- LARGE, ALL CAPS, Arial Black, size 36pt
+- White text with cyan block background (#00A5D4, BorderStyle 3, Outline=5)
+- MarginV=460 — upper-center of video, above the hook text area
+- Appears at climax/punchline moments for 2-4 seconds
+- Centered, 1 line preferred
+- MarginL=30, MarginR=100
+- Optional: emoji PNG overlays at y=600 during impact moments
+
+**Emoji PNG Generation (Pillow):**
+```python
+from PIL import Image, ImageDraw, ImageFont
+font = ImageFont.truetype("/System/Library/Fonts/Apple Color Emoji.ttc", 48)
+img = Image.new("RGBA", (300, 60), (0, 0, 0, 0))
+draw = ImageDraw.Draw(img)
+draw.text((0, 0), "😳🔥💯", font=font, embedded_color=True)
+img.save("emoji.png")
+```
+
+**ffmpeg Command Template:**
+```bash
+ffmpeg -y -ss START -t DURATION -i input.mp4 \
+  -i emoji/hook.png -i emoji/impact1.png -i emoji/impact2.png \
+  -filter_complex "color=black:720x1280:d=DURATION[bg]; \
+  [0:v]scale=720:-2[scaled]; \
+  [bg][scaled]overlay=0:(H-h)/2-80[base]; \
+  [base]ass=subtitle.ass[texted]; \
+  [1:v]scale=150:-1[e1];[2:v]scale=150:-1[e2];[3:v]scale=150:-1[e3]; \
+  [texted][e1]overlay=285:600:enable='between(t,T1S,T1E)'[o1]; \
+  [o1][e2]overlay=285:600:enable='between(t,T2S,T2E)'[o2]; \
+  [o2][e3]overlay=285:600:enable='between(t,T3S,T3E)'[outv]" \
+  -map "[outv]" -map 0:a \
+  -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k \
+  -movflags +faststart -shortest output.mp4
+```
 
 **TikTok Safe Zones:**
-- Right side: ~100px margin for like/comment/share/profile buttons
-- Bottom: ~50px margin for TikTok caption bar
-- Top: ~80px for status bar / back button
-- ALL text and graphics must respect these margins
+- Right side: 100px margin for like/comment/share/profile buttons
+- Bottom: 50px margin for TikTok caption bar
+- Top: 80px for status bar / back button
 
 **What NOT to do:**
 - NO blurred background fill
@@ -228,6 +264,8 @@ This is the EXACT style for every video clip. Reference: @nettspend.clips0 TikTo
 - NO colored outlines on caption text
 - NO niche/insider titles — always broad clickbait
 - NO oversized text that bleeds into TikTok button zone
+- NO captions above the video — captions are ALWAYS in the bottom black bar
+- NO hook text floating far from the video — hook is ON the video near page center
 
 ### Cost Reference
 - See `docs/monthly-expenses.md` for full cost breakdown and scaling scenarios

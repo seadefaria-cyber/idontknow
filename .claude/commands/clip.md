@@ -26,37 +26,22 @@ For each selected moment:
 
 ## MANDATORY CLIP STYLE — Read CLAUDE.md "Clip Style Spec" Section
 
-Every clip MUST follow this exact format. Do NOT deviate.
+Every clip MUST follow this exact format. Do NOT deviate. Reference: @nettspend.clips0 TikTok.
 
-**ffmpeg template:**
-```bash
-ffmpeg -y \
-  -ss START -t DURATION -i input.mp4 \
-  -filter_complex "
-    color=black:720x1280:d=DURATION[bg];
-    [0:v]scale=720:-2[scaled];
-    [bg][scaled]overlay=0:(H-h)/2-80[composed];
-    [composed]ass=SUBTITLE_FILE.ass[outv]
-  " \
-  -map "[outv]" -map 0:a \
-  -c:v libx264 -preset fast -crf 22 \
-  -c:a aac -b:a 128k \
-  -movflags +faststart -shortest \
-  output.mp4
-```
+**ASS subtitle structure (720x1280, all Alignment 8 = top-center):**
+- Style "Caption": Arial Black, 20pt, white, yellow karaoke highlight (\k tags), MarginV=790, MarginL=30, MarginR=100
+- Style "Hook": Arial Black, 24pt, white + drop shadow, MarginV=540, MarginL=50, MarginR=50, first 3-4s only
+- Style "Impact": Arial Black, 36pt, white + cyan block bg (BorderStyle 3), MarginV=460, MarginL=30, MarginR=100
 
-**ASS subtitle structure:**
-- Resolution: 720x1280
-- Style "Caption": Arial Black, size 38, white (&H00FFFFFF), ALL CAPS, NO outline, NO background, positioned at bottom (MarginV ~60), word-by-word karaoke with \k tags, current word turns YELLOW (&H0000FFFF)
-- Style "Hook": Arial Black, size 32, white with drop shadow, positioned over video lower-third (MarginV ~340), title-case, first 3-4 seconds only
-- Style "Impact": Arial Black, size 52, white text with colored block background (cyan #00A5D4 as BorderStyle 3), positioned center of video (MarginV ~340), ALL CAPS, appears at punchline moments for 2-4 seconds
+**Emoji overlays:** Generate PNGs with Pillow (Apple Color Emoji), overlay at x=285, y=600 via ffmpeg filter_complex
 
-**Layout rules:**
-- Clean BLACK bars top and bottom — NO blur, NO gradient
-- Video centered in frame
-- Captions in bottom black bar with yellow word highlight
-- Impact text on the video at key moments
-- NO background boxes on captions or emojis
+**Position map (video at y=358-763 with -80px offset):**
+- Impact: y=460 (on video, upper)
+- Hook: y=540 (on video, lower, near page center)
+- Emojis: y=600 (on video, under text)
+- Captions: y=790 (bottom black bar)
+
+**See CLAUDE.md "Clip Style Spec" for complete ffmpeg template, Pillow code, and all rules.**
 
 ## Step 4: Preview
 Open the clip: `open /tmp/clip-output.mp4`
