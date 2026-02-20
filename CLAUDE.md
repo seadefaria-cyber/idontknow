@@ -82,7 +82,7 @@ agent-browser close
 - Ask clarifying questions when requirements are ambiguous.
 - Keep explanations simple and jargon-free.
 
-## Site: defaria.nyc — Current State (Updated 2026-02-19)
+## Site: defaria.nyc — Current State (Updated 2026-02-20, v53)
 
 ### Deployment Pipeline
 1. Work on any worktree branch (wt-1 through wt-4)
@@ -93,7 +93,7 @@ agent-browser close
 6. **CDN caches aggressively** — always bump `?v=N` on CSS/JS links in index.html when deploying CSS/JS changes
 
 ### Cache Busting
-- Current version: `?v=6` on sections.css, responsive.css, and main.js
+- Current version: `?v=53` on sections.css, responsive.css, and main.js
 - **CRITICAL**: Every time you change CSS or JS, bump the version number in index.html or the CDN will serve stale files
 
 ### Site Architecture
@@ -102,32 +102,36 @@ agent-browser close
 - Files: `site/index.html`, `site/css/{reset,variables,layout,components,sections,responsive}.css`, `site/js/{counter,main}.js`
 
 ### Current Sections (top to bottom)
-1. **Nav** — "deFaria" logo with "new york" sliding out on hover (white, same size, train animation)
-2. **Hero** — "Engineering Virality." headline. "Virality" has shine effect + scale(1.06) on hover. Twitch chat overlay (left), floating hearts (right)
-3. **Clients** — 6 SVG logos scrolling left: Interscope, Chris Heyn, Welcome JPEG, Asspizza, Early Life Crisis, Clover. 24px height, 0.2 opacity, 25s scroll speed
-4. **Showcase** — 3 phone mockups with scroll-linked video feeds. NO view counts, NO engagement metrics. Total counter "500M+ Views Generated" with dissolution effect
-5. **CLIP. SEED. GROW.** — Three animated words (slash/bury/hearts animations)
-6. **Stats** — 2 items only: "Clips Deployed Monthly" (3000+) and "Seeding Accounts Active" (100+). NO emoji burst animations
-7. **Process** (#1 red bullet) — "How The System Works" — VERTICAL subway line with 4 stops: Meet, Study, Plan, Execute. Bots mentioned ONCE carefully in Execute step only
-8. **Services** (#2 orange bullet) — "How We Force It" — HORIZONTAL metro route with 3 colored stations (orange C, red V, green D) connected by track line. Consulting, Viral Clipping, Distribution
-9. **Creative** (#3 purple bullet) — "Full-Service Creative" — 3x2 grid with purple left borders. 5 items WITH descriptions: Directing, Scoring, Post-Production, Live Production, Media Seeding
-10. **About Banner** — Single sentence: "We built the system." (white) + "Now we run it for you." (blue accent). Dark background with borders
-11. **Contact** (#4 green bullet) — "Let's lock in." with lock emoji animation. Form: Project Name, Name, Email, Message, Get Started button. 6 social circles (TikTok, Instagram, YouTube, Twitch, X, Kik) white on blue
-12. **Footer** — deFaria logo (left), Services + Contact links (right), copyright line
+1. **Nav** — "deFaria" logo (2.5rem, white glow on hover) + "Clipping Distribution Creative Agency" tagline that slides in on hover (blue/green/orange/white colored words). White nav links.
+2. **Hero** — "We Know How It Works." headline (word-by-word). Twitch chat overlay (left), floating blue hearts/comments (right). "Start A Project" button (blue, turns green on hover).
+3. **Clients** — 5 PNG logos in infinite 3-copy carousel: Interscope, Chris Heyn Show, Welcome JPEG, Asspizza, Clover NY. 24px height, 0.2 opacity, 25s scroll. Pauses on hover. Logos glow white + grow (scale 1.08) on hover. NO floating hearts.
+4. **Showcase** — 3 phone mockups with scroll-linked video feeds. NO view counts. "500M+ Views Generated" orange counter fades to 0.15 opacity (not fully invisible). Mobile: 80vh, no dissolution, compact.
+5. **Process** (#1 red bullet) — "How It Works" with blue underline + blue border-top on section. VERTICAL subway line, 4 stops: Meet, Study, Plan, Execute. Steps grow on hover (scale 1.04). Bots mentioned ONCE in Execute only.
+6. **Stats** — Pink border-top. 3 items: Impressions Generated (10M+), Clips Deployed Monthly (3000+), Seeding Accounts Active (100+). overflow: visible (plus signs not cut off). NO emoji bursts.
+7. **Services** (#2 orange bullet) — "How We Force It" — HORIZONTAL metro route with 3 colored stations. Consulting, Viral Clipping, Distribution.
+8. **Creative** (#3 purple bullet) — "What Else We Offer" with orange underline + orange border-top. 3x2 grid with purple left borders. 5 items WITH descriptions. Mobile: tap-to-expand (hidden details by default).
+9. **About Banner** — "We built the system." (white) + "Now we run it for you." (blue). Animated subway track (280px height).
+10. **Contact** (#4 green bullet) — "Start A Project." with green glow animation on scroll. Form: Project Name, Name, Email, Message. "Get Started" button (white, turns green on hover). 6 social circles (TikTok, Instagram, YouTube, Twitch, X, Kik).
+11. **CLIP. SEED. GROW.** — Three animated words (slash/bury/hearts animations).
+12. **Footer** — deFaria logo (2.5rem) + always-visible tagline. Services + Contact links. White copyright (400 weight). "Located in New York City" subtext.
 
-### SVG Client Logos
-- `site/img/clients/asspizza.svg` — Text "ASSPIZZA"
-- `site/img/clients/clover.svg` — Text "CLOVER"
-- `site/img/clients/early-life-crisis.svg` — Italic serif text "early life crisis."
-- `site/img/clients/interscope.svg` — Skewed rectangle with "i" cutout
-- `site/img/clients/chrisheyn.svg` — 4 broadcast wave lines
-- `site/img/clients/welcomejpeg.svg` — 5 ellipse blob shapes
+### Client Logo Files (PNG, white on transparent)
+- `site/img/clients/interscope.png` — Interscope Records logo (68x100)
+- `site/img/clients/chrisheyn.png` — Broadcast wave "C" + "The Chris Heyn Show" text (116x100)
+- `site/img/clients/welcomejpeg.png` — Smiley/wow design (114x100)
+- `site/img/clients/asspizza.png` — Star with smiley face (103x100, processed from black-on-white original)
+- `site/img/clients/clover.png` — Dot pattern logo (100x100)
+- Source logos saved at: `/Users/seandefaria/Desktop/LOGOS/`
 
 ### Design Decisions / Sensitivities
-- **Botting**: ONLY mentioned once in Process > Execute step. Removed from stats, services cards, creative items. Language is careful: "strictly to amplify real momentum, never to manipulate the algorithm"
+- **Botting**: ONLY mentioned once in Process > Execute step. Language is careful: "strictly to amplify real momentum, never to manipulate the algorithm"
 - **No fake metrics**: Phone mockups show NO view counts or engagement numbers — "not accurate" and "bad look"
-- **No cheesy animations**: Emoji bursts removed from stats. Keep interactions subtle and macho
-- **Metro theme consistency**: Process = vertical subway line, Services = horizontal metro route — different formats for different sections
+- **No cheesy animations**: Emoji bursts removed from stats. No floating hearts on client logos. Keep interactions subtle and macho
+- **Metro theme consistency**: Process = vertical subway line, Services = horizontal metro route — different formats
+- **Section colored borders**: Process = blue border-top, Stats = pink border-top, Creative = orange border-top
+- **Hover effects**: Nav logo glows white, client logos glow + grow, process steps grow, hero CTA turns green, contact CTA turns green
+- **Nav tagline**: Only shows on hover (desktop). Hidden on mobile. Footer tagline always visible.
+- **Mobile**: Creative items tap-to-expand, showcase compact (80vh, no dissolution), no nav tagline
 
 ## Active Project: TikTok Automation — @asspizza2026 (Started 2026-02-20)
 
