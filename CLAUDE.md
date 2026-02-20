@@ -164,6 +164,72 @@ Sean is building a media company / video page for underground rap, inspired by K
 - **Concept:** Archival, exclusive underground rap content. "The vault" = rare, unreleased, premium. 2016 = the SoundCloud era that started it all (Carti, Uzi, Yachty, X, Ski Mask).
 - **Positioning:** We found them before you did. Opening the vault on underground artists before they blow.
 
+## Financial Overview (Updated Feb 20, 2026)
+
+Full business plan PDF: `~/Desktop/business-plans/DeFaria-NYC-6-Month-Plan-Feb2026.pdf`
+Full business plan HTML: `docs/business-plan-feb-2026.html`
+Monthly expenses doc: `docs/monthly-expenses.md`
+
+### Business Entity: DeFaria NYC, LLC
+- Filing via ZenBusiness (registered agent included)
+- LLC formation cost: $450–$1,650 (depends on publication county — Albany vs Brooklyn)
+- Annual maintenance: $30–$175/yr + $9 biennial statement
+
+### Monthly Fixed Overhead: ~$233/mo
+- **Claude Max 20x:** $200/mo (covers all Claude Code across all worktrees — no separate API costs)
+- **AWS EC2:** ~$25/mo (runs Bernie/OpenClaw at 3.239.100.180)
+- **Google Workspace (1 user, Starter):** $8.40/mo (business email + calendar)
+
+### Monthly Variable Costs (scale with clients)
+- **OpenAI API (image gen + text):** ~$50–80/mo (GPT-4o for slideshows + Bernie chat)
+- **Postiz (scheduling):** $39/mo (1 client) → $49 (2-4 clients) → $99 (5+ clients)
+- **Residential proxies:** $35–75/mo (for TikTok account scaling)
+
+### Team
+- **Freelance editor:** $1,000/mo (starting Month 3 / May 2026) — runs their own pages, produces clips for clients
+
+### Total Monthly Burn
+- Solo, 1 client: ~$357/mo
+- Solo, 2-4 clients: ~$397/mo
+- With editor, 2-4 clients: ~$1,397/mo
+- With editor, 5+ clients: ~$1,487/mo
+
+### Total Spent To Date: $237.42
+- Claude Max upgrade charges: $210 (Feb 2026)
+- OpenAI API: $27.42 ($10.89 on Feb 18 + $16.53 on Feb 20)
+
+### Production Costs
+- **Clips (footage edits):** $0 per clip — FFmpeg, WhisperX, and captioning all run locally for free
+- **Slideshows (full AI, 6 slides):** $0.50–$0.70 per post
+- **Slideshows (hybrid, 2 AI + 4 photos):** $0.15–$0.25 per post
+- Clips are pure margin. Slideshows have small variable cost from OpenAI image generation.
+
+### Client Pricing Tiers
+- **Starter:** $2,000/mo + $500 setup (3-5 accounts, 2-3 clips/day, TikTok + 1 platform)
+- **Growth:** $3,500/mo + $1,000 setup (5-7 accounts, 3-5 clips/day + 1-2 slideshows/day, all platforms)
+- **Pro:** $5,000/mo + $1,500 setup (7-10 accounts, 5-10 clips/day + 3-5 slideshows/day, all platforms + YouTube, weekly calls, trend-reactive, A/B testing)
+- **Minimum contract:** 3 months
+- **Margins:** ~80% (Starter), ~83% (Growth), ~88% (Pro)
+
+### Break-Even Targets
+- Business costs only (solo): 1 Starter client ($2,000/mo → $1,643 profit)
+- Comfortable: 1 Pro client ($5,000/mo → $3,603 profit)
+- Real money: 1 Pro + 1 Growth ($8,500/mo → $7,103 profit)
+- Target (Month 6): 2 Pro + 1 Starter ($12,000/mo → $10,500+ profit)
+
+### Paying Yourself (Owner's Draw)
+- 30% → tax reserve savings account (quarterly payments: Apr 15, Jun 16, Sep 15, Jan 15)
+- 15% → business reserve (keep in business account)
+- 55% → your draw (paycheck)
+- Consider S Corp election once netting $60-80K+/year
+
+### Key Financial Facts
+- Transcription is FREE (WhisperX runs locally, not OpenAI Whisper API)
+- Claude Code usage is included in the $200/mo Max subscription (no separate API key)
+- Video processing (FFmpeg) is free and local — clips cost $0 per unit
+- Clients must NEVER know AI is involved — position everything as human creative team
+- Freelance editors run their own pages separately from AI workflow
+
 ## Conventions
 
 - When the user dictates instructions, interpret them generously - they are communicating verbally.
