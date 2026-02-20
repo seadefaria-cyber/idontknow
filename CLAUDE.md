@@ -155,6 +155,15 @@ Log every clip to `clips/clip_log.csv` after posting. Review weekly to double do
   - `invoices/invoice_nyc_early_crisis.html` — INV-2026-002, $1,215.77, NettSpend NYC Early Crisis Stream
   - `invoices/invoice_clover_interscope.html` — Original draft template (superseded by above)
 
+## Media Brand: 2016vault
+
+Sean is building a media company / video page for underground rap, inspired by KidsTakeOver, Your Multimedia, and Lyrical Lemonade.
+
+- **Brand name:** 2016vault
+- **Handle:** @2016vault (available on TikTok, Instagram, and X as of Feb 2026)
+- **Concept:** Archival, exclusive underground rap content. "The vault" = rare, unreleased, premium. 2016 = the SoundCloud era that started it all (Carti, Uzi, Yachty, X, Ski Mask).
+- **Positioning:** We found them before you did. Opening the vault on underground artists before they blow.
+
 ## Conventions
 
 - When the user dictates instructions, interpret them generously - they are communicating verbally.
