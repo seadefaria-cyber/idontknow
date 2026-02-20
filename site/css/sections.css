@@ -56,7 +56,7 @@
     font-family: var(--font-body);
     font-size: 0.8rem;
     font-weight: 500;
-    color: var(--text-muted);
+    color: #fff;
     transition: color var(--duration) var(--ease), transform var(--duration) var(--ease);
     display: inline-flex;
     align-items: center;
@@ -1367,7 +1367,7 @@
     font-size: clamp(3rem, 7vw, 5.5rem);
     font-weight: 700;
     text-align: center;
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-md);
     letter-spacing: -0.02em;
 }
 
@@ -1520,6 +1520,27 @@
     text-align: center;
     margin-bottom: var(--space-sm);
     letter-spacing: -0.02em;
+}
+
+/* Section title accent underlines */
+.process__headline::after,
+.creative__headline::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    margin: var(--space-xs) auto 0;
+    border-radius: 2px;
+}
+
+.process__headline::after {
+    background: var(--mta-blue);
+    box-shadow: 0 0 8px rgba(0, 57, 166, 0.4);
+}
+
+.creative__headline::after {
+    background: var(--mta-orange);
+    box-shadow: 0 0 8px rgba(255, 99, 25, 0.4);
 }
 
 /* Process — presentation pop-up on scroll */
@@ -1941,9 +1962,9 @@
 
 .footer__bottom p {
     font-family: var(--font-headline);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #fff;
 }
@@ -2155,7 +2176,11 @@
 
 /* ── Contact — "Project" green glow flash ── */
 .contact__project-glow {
-    animation: projectGlowFlash 2.5s ease-out 1s forwards;
+    color: #fff;
+}
+
+.contact__headline.visible .contact__project-glow {
+    animation: projectGlowFlash 2.5s ease-out 0.5s forwards;
 }
 
 @keyframes projectGlowFlash {
