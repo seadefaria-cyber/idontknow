@@ -1969,6 +1969,16 @@
     color: #fff;
 }
 
+.footer__location {
+    font-family: var(--font-body);
+    font-size: 0.55rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-top: var(--space-xs);
+    text-transform: uppercase;
+}
+
 .footer__bottom a {
     color: var(--text-muted);
     transition: color var(--duration) var(--ease);
