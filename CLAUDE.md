@@ -129,6 +129,56 @@ agent-browser close
 - **No cheesy animations**: Emoji bursts removed from stats. Keep interactions subtle and macho
 - **Metro theme consistency**: Process = vertical subway line, Services = horizontal metro route — different formats for different sections
 
+## Active Project: TikTok Automation — @asspizza2026 (Started 2026-02-20)
+
+### Status: 1-WEEK TRIAL (Feb 20-27)
+- **Account**: @asspizza2026 on TikTok
+- **Plan**: 1 post/day for 1 week, Sean approves each post before it goes live
+- **Cost**: ~$3-4/day (~$23-27/week)
+
+### How It Works (Full Pipeline)
+1. Sean sends topic to Bernie on WhatsApp (or Claude generates one)
+2. Bernie runs `generate-rap-news.js` on EC2 → creates 6 slides → uploads to catbox.moe
+3. Slides sent to Sean on WhatsApp for approval
+4. Once approved, post to TikTok via Postiz API with `DIRECT_POST`
+5. TikTok auto-selects a sound (API doesn't support custom sound selection)
+
+### Post Types
+- **Full AI**: 6 AI-generated slides (title cards + atmospheric images) — ~$0.50-0.70/post
+- **Hybrid** (preferred): 2 AI Virgil-style title cards + 4 real curated photos — ~$0.15-0.25/post
+- **Title card style**: Virgil Abloh-inspired — Helvetica Bold, black/white, diagonal orange accent, clean minimal
+
+### Infrastructure
+- **EC2**: `ssh -i ~/Downloads/openclaw-key.pem ubuntu@3.239.100.180`
+- **Bot**: Bernie (OpenClaw) — WhatsApp connected to Sean (+13106254899)
+- **Postiz**: Auto-posting to TikTok. API key in EC2 config.
+- **TikTok integration ID**: `cmlvcz31x00lxny0yex5bsi0v`
+- **Generation script**: `~/.openclaw/workspace/skills/larry/scripts/generate-rap-news.js "TOPIC"`
+- **Catbox.moe**: Free image hosting intermediary (WhatsApp blocks local file paths)
+
+### Posting via Postiz CLI
+```bash
+# Upload images
+POSTIZ_API_KEY=<key> npx postiz upload <file>
+
+# Create post
+POSTIZ_API_KEY=<key> npx postiz posts:create \
+  -c "caption with hashtags" \
+  -m "url1,url2,url3,url4,url5,url6" \
+  --settings '{"privacy_level":"PUBLIC_TO_EVERYONE","duet":true,"stitch":true,"comment":true,"autoAddMusic":"yes","brand_content_toggle":false,"brand_organic_toggle":false,"content_posting_method":"DIRECT_POST"}' \
+  -i "cmlvcz31x00lxny0yex5bsi0v"
+```
+
+### Published Posts (tracking)
+1. **Feb 20** — Future x Metro Boomin "We Still Don't Trust You 2" (test post, may be deleted)
+2. **Feb 20** — Asspizza 2016 streetwear nostalgia (hybrid: 2 AI title cards + 4 real photos) — LIVE
+
+### Cost Reference
+- See `docs/monthly-expenses.md` for full cost breakdown and scaling scenarios
+- Current trial: ~$8-10/week for 1 post/day on 1 account
+
+---
+
 ## Active Project: Amanda Bynes — "Girlfriend" Music Video
 
 ### Overview
