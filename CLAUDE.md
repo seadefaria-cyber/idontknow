@@ -331,6 +331,43 @@ POSTIZ_API_KEY=<key> npx postiz posts:create \
 1. **Feb 20** — Future x Metro Boomin "We Still Don't Trust You 2" (test post, may be deleted)
 2. **Feb 20** — Asspizza 2016 streetwear nostalgia (hybrid: 2 AI title cards + 4 real photos) — LIVE
 
+### Clip Style Spec (MANDATORY — never deviate from this)
+This is the EXACT style for every video clip. Reference: @nettspend.clips0 TikTok.
+
+**Layout:**
+- 9:16 vertical (720x1280)
+- Clean BLACK bars top and bottom — NO blurred background, NO gradient
+- Video sits centered in the middle portion of the frame
+
+**Bottom Captions (in the black bar below video):**
+- ALL CAPS, Arial Black / bold sans-serif
+- White text, NO background box, NO outline — just clean text on black
+- Current spoken word highlighted in YELLOW (#FFFF00) — word-by-word karaoke style
+- Single line preferred, 2 lines max
+- Centered horizontally
+
+**Hook Text (overlaid ON the video):**
+- Title-case, white text with subtle drop shadow
+- Positioned over the lower third of the video frame
+- Can include emojis inline (NO background boxes on emojis)
+- Appears for first 3-4 seconds
+
+**Impact Text (key punchline moments ON the video):**
+- HUGE, ALL CAPS, Arial Black
+- White text with colored block/brush-stroke background (cyan/blue #00A5D4)
+- Appears at the climax moments for 2-4 seconds
+- Centered on the video frame, 1-2 lines max
+
+**Category Tag (optional):**
+- Small colored box in top-right corner with single word (e.g., "BOOK", "MUSIC")
+
+**What NOT to do:**
+- NO blurred background fill
+- NO background boxes on regular captions
+- NO emojis with background rectangles
+- NO thin/light fonts — always bold/black weight
+- NO colored outlines on caption text
+
 ### Cost Reference
 - See `docs/monthly-expenses.md` for full cost breakdown and scaling scenarios
 - Current trial: ~$8-10/week for 1 post/day on 1 account
