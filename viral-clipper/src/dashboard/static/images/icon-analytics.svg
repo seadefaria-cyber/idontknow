@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="#fed446" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Bar chart -->
+  <rect x="6" y="28" width="8" height="14"/>
+  <rect x="20" y="18" width="8" height="24"/>
+  <rect x="34" y="8" width="8" height="34"/>
+  <!-- Trend line -->
+  <polyline points="8,26 24,16 38,6" stroke-dasharray="3,3"/>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="#fed446" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Scissors -->
+  <circle cx="12" cy="12" r="5"/>
+  <circle cx="12" cy="36" r="5"/>
+  <line x1="16" y1="15" x2="40" y2="40"/>
+  <line x1="16" y1="33" x2="40" y2="8"/>
+  <!-- Film strip marks -->
+  <rect x="34" y="4" width="10" height="6" rx="1"/>
+  <rect x="34" y="38" width="10" height="6" rx="1"/>
+</svg>

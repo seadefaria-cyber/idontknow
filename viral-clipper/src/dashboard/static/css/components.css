@@ -1,0 +1,103 @@
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    font-family: var(--font-headline);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: transform var(--duration) var(--ease),
+                box-shadow var(--duration) var(--ease);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(254, 212, 70, 0.25);
+}
+
+.btn--primary {
+    background: var(--accent);
+    color: #000;
+}
+
+.btn--dark {
+    background: #000;
+    color: #fff;
+}
+
+.btn--dark:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.btn--outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.btn--outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 8px 24px rgba(254, 212, 70, 0.1);
+}
+
+/* Inputs */
+.input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    color: #000;
+    font-size: 1rem;
+    transition: border-color var(--duration) var(--ease);
+}
+
+.input::placeholder {
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.input:focus {
+    border-color: #000;
+}
+
+.input--textarea {
+    min-height: 120px;
+}
+
+/* Cards */
+.card {
+    background: var(--surface);
+    border: 1px solid #1a1a1a;
+    padding: var(--space-md);
+    transition: border-color var(--duration) var(--ease),
+                transform var(--duration) var(--ease);
+}
+
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+}
+
+.card__icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--space-sm);
+}
+
+.card__title {
+    font-family: var(--font-headline);
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-xs);
+}
+
+.card__desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+}

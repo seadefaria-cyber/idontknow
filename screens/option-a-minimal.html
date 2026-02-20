@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tempo — Content Scheduling</title>
+<style>
+  :root {
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --accent: #4f46e5;
+    --accent-light: #eef2ff;
+    --bg: #fafafa;
+    --white: #ffffff;
+    --border: #e5e7eb;
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .logo span { color: var(--accent); }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 32px;
+    align-items: center;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--text); }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #4338ca;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 100px 60px 80px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .hero p {
+    font-size: 19px;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 36px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .social-proof {
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .avatars {
+    display: flex;
+  }
+
+  .avatars span {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    margin-left: -8px;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 28px;
+    text-align: center;
+  }
+
+  .avatars span:nth-child(1) { background: #c4b5fd; margin-left: 0; }
+  .avatars span:nth-child(2) { background: #93c5fd; }
+  .avatars span:nth-child(3) { background: #86efac; }
+  .avatars span:nth-child(4) { background: #fcd34d; }
+
+  /* FEATURES */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 60px 100px;
+  }
+
+  .feature {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    transition: box-shadow 0.2s;
+  }
+
+  .feature:hover {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--accent-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .feature h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .feature p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* PREVIEW */
+  .preview {
+    max-width: 900px;
+    margin: 0 auto 100px;
+    padding: 0 60px;
+  }
+
+  .preview-window {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  }
+
+  .preview-toolbar {
+    display: flex;
+    gap: 6px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .preview-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+
+  .preview-content {
+    padding: 32px;
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
+
+  .cal-header {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    padding: 8px 0;
+  }
+
+  .cal-cell {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    padding: 6px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cal-date { font-weight: 600; font-size: 13px; }
+
+  .cal-post {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .cal-post.twitter { background: #dbeafe; color: #1e40af; }
+  .cal-post.instagram { background: #fce7f3; color: #9d174d; }
+  .cal-post.linkedin { background: #e0e7ff; color: #3730a3; }
+  .cal-post.tiktok { background: #d1fae5; color: #065f46; }
+
+  /* CTA */
+  .cta {
+    text-align: center;
+    padding: 80px 60px;
+    background: var(--white);
+    border-top: 1px solid var(--border);
+  }
+
+  .cta h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+
+  .cta p {
+    color: var(--muted);
+    margin-bottom: 28px;
+    font-size: 17px;
+  }
+</style>
+</head>
+<body>
+  <nav>
+    <div class="logo">tempo<span>.</span></div>
+    <ul>
+      <li><a href="#">Features</a></li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#" class="btn btn-ghost">Log in</a></li>
+      <li><a href="#" class="btn btn-primary">Start free</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1>Schedule content, not stress</h1>
+    <p>Plan, write, and publish across every platform from one calm, focused workspace.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-primary">Start for free</a>
+      <a href="#" class="btn btn-ghost">See how it works</a>
+    </div>
+    <div class="social-proof">
+      <div class="avatars">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      2,400+ creators shipping content weekly
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature">
+      <div class="feature-icon">&#128197;</div>
+      <h3>Visual Calendar</h3>
+      <p>Drag and drop posts across days. See your whole month at a glance — no spreadsheets needed.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">&#9997;</div>
+      <h3>Write Once, Post Everywhere</h3>
+      <p>Adapt one post for Twitter, LinkedIn, Instagram, and TikTok with platform-specific previews.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">&#128200;</div>
+      <h3>Performance Insights</h3>
+      <p>Track what's working across platforms. Double down on content that resonates with your audience.</p>
+    </div>
+  </section>
+
+  <section class="preview">
+    <div class="preview-window">
+      <div class="preview-toolbar">
+        <div class="preview-dot"></div>
+        <div class="preview-dot"></div>
+        <div class="preview-dot"></div>
+      </div>
+      <div class="preview-content">
+        <div class="calendar-grid">
+          <div class="cal-header">Mon</div>
+          <div class="cal-header">Tue</div>
+          <div class="cal-header">Wed</div>
+          <div class="cal-header">Thu</div>
+          <div class="cal-header">Fri</div>
+          <div class="cal-header">Sat</div>
+          <div class="cal-header">Sun</div>
+
+          <div class="cal-cell">
+            <span class="cal-date">17</span>
+            <span class="cal-post twitter">Thread: AI tools</span>
+          </div>
+          <div class="cal-cell">
+            <span class="cal-date">18</span>
+            <span class="cal-post instagram">Carousel: Week recap</span>
+          </div>
+          <div class="cal-cell">
+            <span class="cal-date">19</span>
+            <span class="cal-post linkedin">Article: Remote work</span>
+          </div>
+          <div class="cal-cell">
+            <span class="cal-date">20</span>
+            <span class="cal-post tiktok">Video: Day in my life</span>
+          </div>
+          <div class="cal-cell">
+            <span class="cal-date">21</span>
+            <span class="cal-post twitter">Poll: Fav tools</span>
+            <span class="cal-post instagram">Reel: Tips</span>
+          </div>
+          <div class="cal-cell">
+            <span class="cal-date">22</span>
+          </div>
+          <div class="cal-cell">
+            <span class="cal-date">23</span>
+            <span class="cal-post linkedin">Case study</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Your content deserves a system</h2>
+    <p>Join thousands of creators who stopped winging it and started shipping consistently.</p>
+    <a href="#" class="btn btn-primary">Get started — it's free</a>
+  </section>
+</body>
+</html>
