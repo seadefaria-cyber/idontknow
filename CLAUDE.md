@@ -82,7 +82,7 @@ agent-browser close
 - Ask clarifying questions when requirements are ambiguous.
 - Keep explanations simple and jargon-free.
 
-## Site: defaria.nyc — Current State (Updated 2026-02-20, v53)
+## Site: defaria.nyc — Current State (Updated 2026-02-20, v54)
 
 ### Deployment Pipeline
 1. Work on any worktree branch (wt-1 through wt-4)
@@ -93,7 +93,7 @@ agent-browser close
 6. **CDN caches aggressively** — always bump `?v=N` on CSS/JS links in index.html when deploying CSS/JS changes
 
 ### Cache Busting
-- Current version: `?v=53` on sections.css, responsive.css, and main.js
+- Current version: `?v=54` on sections.css, responsive.css, and main.js
 - **CRITICAL**: Every time you change CSS or JS, bump the version number in index.html or the CDN will serve stale files
 
 ### Site Architecture
@@ -128,7 +128,8 @@ agent-browser close
 - **No fake metrics**: Phone mockups show NO view counts or engagement numbers — "not accurate" and "bad look"
 - **No cheesy animations**: Emoji bursts removed from stats. No floating hearts on client logos. Keep interactions subtle and macho
 - **Metro theme consistency**: Process = vertical subway line, Services = horizontal metro route — different formats
-- **Section colored borders**: Process = blue border-top, Stats = pink border-top, Creative = orange border-top
+- **Section separation**: NO gray border lines. Sections alternate between --bg (#0E0E10) and --surface (#18181B) backgrounds. Only colored accent borders remain (blue=process, pink=stats, orange=creative).
+- **Hero glow animation**: Headline cycles through blue → white → green → white → orange → white glow every 9 seconds
 - **Hover effects**: Nav logo glows white, client logos glow + grow, process steps grow, hero CTA turns green, contact CTA turns green
 - **Nav tagline**: Only shows on hover (desktop). Hidden on mobile. Footer tagline always visible.
 - **Mobile**: Creative items tap-to-expand, showcase compact (80vh, no dissolution), no nav tagline
@@ -186,26 +187,38 @@ This is the EXACT style for every video clip. Reference: @nettspend.clips0 TikTo
 - Video sits centered in the middle portion of the frame
 
 **Bottom Captions (in the black bar below video):**
-- ALL CAPS, Arial Black / bold sans-serif
+- ALL CAPS, Arial Black / bold sans-serif, size ~28pt at 720x1280
 - White text, NO background box, NO outline — just clean text on black
 - Current spoken word highlighted in YELLOW (#FFFF00) — word-by-word karaoke style
 - Single line preferred, 2 lines max
 - Centered horizontally
+- RIGHT MARGIN ~100px to avoid TikTok side buttons (like, comment, share, profile pic)
+- LEFT MARGIN ~30px
 
-**Hook Text (overlaid ON the video):**
-- Title-case, white text with subtle drop shadow
-- Positioned over the lower third of the video frame
-- Can include emojis inline (NO background boxes on emojis)
+**Hook Text (overlapping bottom edge of video):**
+- Title-case, white text with subtle drop shadow, size ~30pt
+- Positioned to OVERLAP the bottom of the video — sits on the video/black bar boundary
 - Appears for first 3-4 seconds
+- MUST be clickbait/ragebait — broad, digestible, makes people stop scrolling
+- NOT niche or insider language — frame for maximum audience appeal
+- Examples: "He just exposed every entrepreneur", "This changes everything", "Nobody wants to hear this"
+- RIGHT MARGIN ~100px to clear TikTok buttons
+- 2-3 EMOJIS directly UNDER the hook text expressing the vibe (e.g., skull, fire, 100, money bag, brain, muscle)
+- Emojis rendered as PNG overlays (ffmpeg can't render color emoji via ASS) — use Pillow to generate emoji PNGs
+- NO background on emojis — transparent, clean on black
 
 **Impact Text (key punchline moments ON the video):**
-- HUGE, ALL CAPS, Arial Black
+- LARGE, ALL CAPS, Arial Black, size ~42pt
 - White text with colored block/brush-stroke background (cyan/blue #00A5D4)
 - Appears at the climax moments for 2-4 seconds
-- Centered on the video frame, 1-2 lines max
+- Centered on the video frame, 1 line preferred
+- RIGHT MARGIN ~100px to clear TikTok buttons
 
-**Category Tag (optional):**
-- Small colored box in top-right corner with single word (e.g., "BOOK", "MUSIC")
+**TikTok Safe Zones:**
+- Right side: ~100px margin for like/comment/share/profile buttons
+- Bottom: ~50px margin for TikTok caption bar
+- Top: ~80px for status bar / back button
+- ALL text and graphics must respect these margins
 
 **What NOT to do:**
 - NO blurred background fill
@@ -213,6 +226,8 @@ This is the EXACT style for every video clip. Reference: @nettspend.clips0 TikTo
 - NO emojis with background rectangles
 - NO thin/light fonts — always bold/black weight
 - NO colored outlines on caption text
+- NO niche/insider titles — always broad clickbait
+- NO oversized text that bleeds into TikTok button zone
 
 ### Cost Reference
 - See `docs/monthly-expenses.md` for full cost breakdown and scaling scenarios
