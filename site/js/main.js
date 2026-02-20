@@ -35,8 +35,8 @@
             }
 
             /* Fade out the total counter as user scrolls past showcase */
-            if (scrollProgress > 0.85) {
-                var fadeProgress = (scrollProgress - 0.85) / 0.15;
+            if (scrollProgress > 0.92) {
+                var fadeProgress = (scrollProgress - 0.92) / 0.08;
                 totalContainer.style.opacity = Math.max(0, 1 - fadeProgress);
             } else {
                 totalContainer.style.opacity = '';

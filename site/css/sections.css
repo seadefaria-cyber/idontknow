@@ -197,11 +197,11 @@
     animation: heroWordIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.hero__word:nth-child(1) { animation-delay: 0.2s; }
-.hero__word:nth-child(2) { animation-delay: 0.4s; }
-.hero__word:nth-child(3) { animation-delay: 0.6s; }
-.hero__word:nth-child(4) { animation-delay: 0.8s; }
-.hero__word:nth-child(5) { animation-delay: 1.0s; }
+.hero__word:nth-of-type(1) { animation-delay: 0.2s; }
+.hero__word:nth-of-type(2) { animation-delay: 0.4s; }
+.hero__word:nth-of-type(3) { animation-delay: 0.65s; }
+.hero__word:nth-of-type(4) { animation-delay: 0.85s; }
+.hero__word:nth-of-type(5) { animation-delay: 1.1s; }
 
 @keyframes heroWordIn {
     0% { opacity: 0; transform: translateY(12px); }
@@ -1344,7 +1344,7 @@
 
 /* ── Creative Services — Metro-Themed ──────── */
 .creative {
-    padding: var(--space-2xl) 0;
+    padding: var(--space-lg) 0;
     background: var(--bg);
     border-top: 3px solid var(--mta-orange);
     border-bottom: 1px solid var(--border);
@@ -1712,7 +1712,7 @@
     margin-top: var(--space-lg);
     text-decoration: none;
     position: relative;
-    height: 140px;
+    height: 280px;
 }
 
 .about-banner__rail {
