@@ -416,7 +416,6 @@
 
 /* ── Reveal Animations ───────────────────── */
 var revealSelectors = [
-    { sel: '.hero__headline', delay: 0 },
     { sel: '.hero__sub', delay: 1 },
     { sel: '.hero__desc', delay: 2 },
     { sel: '.hero__inner .btn', delay: 3 },
@@ -569,6 +568,88 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
         }
     });
 });
+
+/* ── Process Dots — Glow when centered on screen ── */
+(function() {
+    var stops = document.querySelectorAll('.process__stop');
+    if (stops.length === 0) return;
+
+    var ticking = false;
+
+    function updateActiveStop() {
+        var viewportCenter = window.innerHeight / 2;
+        var closestStop = null;
+        var closestDist = Infinity;
+
+        stops.forEach(function(stop) {
+            var rect = stop.getBoundingClientRect();
+            var stopCenter = rect.top + rect.height / 2;
+            var dist = Math.abs(stopCenter - viewportCenter);
+            if (dist < closestDist) {
+                closestDist = dist;
+                closestStop = stop;
+            }
+        });
+
+        stops.forEach(function(stop) {
+            if (stop === closestStop && closestDist < window.innerHeight * 0.4) {
+                stop.classList.add('process__stop--active');
+            } else {
+                stop.classList.remove('process__stop--active');
+            }
+        });
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(updateActiveStop);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    updateActiveStop();
+})();
+
+/* ── About Banner — System + Railroad glow on scroll ── */
+(function() {
+    var banner = document.querySelector('.about-banner');
+    if (!banner) return;
+
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                banner.classList.add('about-banner--active');
+            } else {
+                banner.classList.remove('about-banner--active');
+            }
+        });
+    }, { threshold: 0.3 });
+
+    observer.observe(banner);
+})();
+
+/* ── Virality — Recording light pulse when visible ── */
+(function() {
+    var showcase = document.querySelector('.showcase');
+    if (!showcase) return;
+
+    var viralityWord = showcase.querySelector('.heart-word');
+    if (!viralityWord) return;
+
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                viralityWord.classList.add('heart-word--recording');
+            } else {
+                viralityWord.classList.remove('heart-word--recording');
+            }
+        });
+    }, { threshold: 0.2 });
+
+    observer.observe(showcase);
+})();
 
 /* ── Metro Sidebar — Scroll Progress ────── */
 (function() {

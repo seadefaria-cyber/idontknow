@@ -330,10 +330,17 @@ html, body {
         font-size: 0.8rem;
     }
 
-    /* Creative — 2-column on mobile */
+    /* Creative — 2-column on mobile, details always visible */
     .creative__grid {
         grid-template-columns: repeat(2, 1fr);
         gap: var(--space-sm);
+    }
+
+    .creative__detail {
+        max-height: none;
+        opacity: 0.7;
+        margin-top: var(--space-xs);
+        font-size: 0.7rem;
     }
 
     .creative__sub {
