@@ -63,14 +63,8 @@
 .nav__tagline-w--agency { color: #fff; }
 
 .nav__logo-l {
-    transition: color 0.3s ease;
+    color: inherit;
 }
-
-.nav__logo:hover .nav__logo-l:nth-child(2) { color: var(--mta-red); }
-.nav__logo:hover .nav__logo-l:nth-child(4) { color: var(--mta-orange); }
-.nav__logo:hover .nav__logo-l:nth-child(5) { color: var(--mta-blue); }
-.nav__logo:hover .nav__logo-l:nth-child(6) { color: var(--mta-green); }
-.nav__logo:hover .nav__logo-l:nth-child(7) { color: var(--mta-purple); }
 
 .nav__links {
     display: flex;
