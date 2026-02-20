@@ -647,42 +647,6 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     observer.observe(showcase);
 })();
 
-/* ── "Works." — signal dots on hover + page load ── */
-(function() {
-    var heartWord = document.querySelector('.hero .heart-word');
-    if (!heartWord) return;
-
-    var greenShades = ['#00933C', '#00C853', '#4CAF50', '#2E7D32', '#66BB6A'];
-
-    function spawnSignals() {
-        for (var i = 0; i < 4; i++) {
-            (function(idx) {
-                setTimeout(function() {
-                    var dot = document.createElement('span');
-                    dot.className = 'heart-word__signal';
-                    var size = 3 + Math.floor(Math.random() * 4);
-                    var fill = greenShades[Math.floor(Math.random() * greenShades.length)];
-                    dot.style.width = size + 'px';
-                    dot.style.height = size + 'px';
-                    dot.style.background = fill;
-                    dot.style.boxShadow = '0 0 ' + (size * 2) + 'px ' + fill;
-                    dot.style.left = (Math.random() * 100) + '%';
-                    dot.style.animationDuration = (2 + Math.random() * 1) + 's';
-                    heartWord.appendChild(dot);
-                    setTimeout(function() {
-                        if (dot.parentNode) dot.parentNode.removeChild(dot);
-                    }, 3000);
-                }, idx * 200);
-            })(i);
-        }
-    }
-
-    heartWord.addEventListener('mouseenter', spawnSignals);
-
-    /* Auto-play on page load after a short delay */
-    setTimeout(spawnSignals, 1500);
-})();
-
 /* ── Metro Sidebar — Scroll Progress ────── */
 (function() {
     var progress = document.getElementById('metro-progress');
