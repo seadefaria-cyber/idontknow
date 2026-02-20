@@ -39,13 +39,24 @@
     white-space: nowrap;
 }
 
-/* Logo — "d" and "F" turn blue on hover */
+/* Logo — metro subway circles around D and F on hover */
+.nav__logo-text {
+    font-size: 2.2rem;
+}
+
 .nav__logo-df {
-    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.15em;
+    height: 1.15em;
+    border-radius: 50%;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .nav__logo:hover .nav__logo-df {
-    color: var(--accent);
+    background: var(--accent);
+    color: #fff;
 }
 
 .nav__links {
@@ -60,7 +71,24 @@
     font-weight: 500;
     color: var(--text-muted);
     transition: color var(--duration) var(--ease), transform var(--duration) var(--ease);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
+
+.nav__links a::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.nav__links li:nth-child(1) a::before { background: var(--mta-red); }
+.nav__links li:nth-child(2) a::before { background: var(--mta-orange); }
+.nav__links li:nth-child(3) a::before { background: var(--mta-green); }
+.nav__links li:nth-child(4) a::before { background: var(--mta-blue); }
 
 .nav__links a:hover {
     color: var(--text);
@@ -190,15 +218,41 @@
     opacity: 0;
     transform: translateX(80px) translateY(8px);
     animation: heroLineIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    position: relative;
+    overflow: hidden;
 }
 
 .hero__line:nth-child(1) { animation-delay: 0.15s; }
 .hero__line:nth-child(2) { animation-delay: 0.35s; }
 .hero__line:nth-child(3) { animation-delay: 0.55s; }
 
+/* Train light sweep — flash across each line on arrival */
+.hero__line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), rgba(255,255,255,0.12), rgba(255,255,255,0.06), transparent);
+    pointer-events: none;
+    animation: heroShineSweep 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.hero__line:nth-child(1)::after { animation-delay: 0.7s; }
+.hero__line:nth-child(2)::after { animation-delay: 0.9s; }
+.hero__line:nth-child(3)::after { animation-delay: 1.1s; }
+
 @keyframes heroLineIn {
     0% { opacity: 0; transform: translateX(80px) translateY(8px); }
     100% { opacity: 1; transform: translateX(0) translateY(0); }
+}
+
+@keyframes heroShineSweep {
+    0% { left: -60%; opacity: 0; }
+    20% { opacity: 1; }
+    100% { left: 110%; opacity: 0; }
 }
 
 /* Hero word hover removed — plain text now */
@@ -232,12 +286,13 @@
     height: 5px;
 }
 
-/* Virality hover — floating hearts */
-.virality-heart {
-    position: absolute;
-    pointer-events: none;
-    z-index: 10;
-    animation: viralityHeartFloat 1.5s ease-out forwards;
+/* Heart-word subtle glow on hover (replaces flying hearts) */
+.heart-word {
+    transition: text-shadow 0.4s ease;
+}
+
+.heart-word:hover {
+    text-shadow: 0 0 20px rgba(0, 57, 166, 0.4), 0 0 40px rgba(0, 57, 166, 0.15);
 }
 
 /* Virality recording light pulse */
@@ -249,12 +304,6 @@
     0%, 84%, 100% { text-shadow: none; }
     88% { text-shadow: 0 0 15px rgba(238, 53, 46, 0.6), 0 0 30px rgba(238, 53, 46, 0.2); color: #EE352E; }
     92% { text-shadow: 0 0 5px rgba(238, 53, 46, 0.2); }
-}
-
-@keyframes viralityHeartFloat {
-    0% { opacity: 0; transform: translateY(0) scale(0.3); }
-    15% { opacity: 0.9; transform: translateY(-10px) scale(1); }
-    100% { opacity: 0; transform: translateY(-80px) scale(0.4); }
 }
 
 .hero__sub {
@@ -1575,7 +1624,9 @@
 }
 
 .process__stop--active .process__content {
-    transform: translateX(6px);
+    transform: translateX(6px) scale(1.03);
+    transform-origin: left center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .process__stop--active .process__title {
@@ -1742,9 +1793,10 @@
 }
 
 .contact__social-item:hover .contact__social-circle {
-    background: #fff;
-    color: var(--accent);
+    background: var(--mta-green);
+    color: #fff;
     transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 0 12px rgba(0, 147, 60, 0.5);
 }
 
 .contact__social-label {
@@ -1777,6 +1829,7 @@
     line-height: 1.08;
     margin-bottom: var(--space-sm);
     color: #fff;
+    text-align: center;
 }
 
 .contact__sub {
@@ -1812,6 +1865,9 @@
     background: #fff;
     color: var(--accent);
     transition: background var(--duration) var(--ease), color var(--duration) var(--ease), transform var(--duration) var(--ease);
+    display: block;
+    margin: var(--space-sm) auto 0;
+    width: fit-content;
 }
 
 .contact__form .btn--dark:hover {
