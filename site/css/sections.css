@@ -23,11 +23,6 @@
     display: flex;
     align-items: center;
     gap: 0;
-    transition: transform var(--duration) var(--ease);
-}
-
-.nav__logo:hover {
-    transform: scale(1.03);
 }
 
 .nav__logo-text {
@@ -37,26 +32,6 @@
     letter-spacing: -0.01em;
     color: var(--text);
     white-space: nowrap;
-}
-
-/* Logo — D and F get colored circles on hover only */
-.nav__logo-d,
-.nav__logo-f {
-    border-radius: 50%;
-    padding: 0;
-    transition: background 0.3s ease, color 0.3s ease, padding 0.3s ease;
-}
-
-.nav__logo:hover .nav__logo-d {
-    background: var(--accent);
-    color: #fff;
-    padding: 3px 6px;
-}
-
-.nav__logo:hover .nav__logo-f {
-    background: var(--mta-green);
-    color: #fff;
-    padding: 3px 6px;
 }
 
 .nav__links {
@@ -1145,9 +1120,13 @@
     text-transform: uppercase;
 }
 
+.showcase__total-label--orange {
+    color: var(--mta-orange);
+}
+
 /* ── Stats ───────────────────────────────── */
 .stats {
-    padding: var(--space-lg) 0 var(--space-2xl);
+    padding: var(--space-md) 0 var(--space-lg);
     border-bottom: 1px solid var(--border);
 }
 
@@ -1473,7 +1452,7 @@
 
 /* ── Process — Subway Line Map ───────────── */
 .process {
-    padding: var(--space-2xl) 0;
+    padding: var(--space-lg) 0;
 }
 
 /* Section number — centered above title */
