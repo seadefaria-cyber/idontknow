@@ -36,6 +36,24 @@
     white-space: nowrap;
 }
 
+.nav__tagline {
+    font-family: var(--font-body);
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-left: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    white-space: nowrap;
+}
+
+.nav__tagline-w--clip { color: var(--mta-blue); }
+.nav__tagline-w--dist { color: var(--mta-green); }
+.nav__tagline-w--creative { color: var(--mta-orange); }
+.nav__tagline-w--agency { color: #fff; }
+
 .nav__logo-l {
     transition: color 0.3s ease;
 }
@@ -1502,7 +1520,7 @@
 
 /* ── Process — Subway Line Map ───────────── */
 .process {
-    padding: var(--space-lg) 0;
+    padding: var(--space-md) 0;
 }
 
 /* Section number — centered above title */
@@ -1666,7 +1684,7 @@
 }
 
 .process__stop:hover .process__content {
-    transform: translateX(4px);
+    transform: translateX(6px) scale(1.04);
 }
 
 .process__title {
@@ -1781,7 +1799,7 @@
 .contact {
     background: var(--accent);
     color: #fff;
-    padding: var(--space-xs) 0 var(--space-md);
+    padding: var(--space-md) 0 var(--space-md);
 }
 
 /* Social circles in contact section */
@@ -2076,10 +2094,14 @@
 }
 
 /* ── Sections need relative positioning ──── */
-.creative__item,
-.stats__item {
+.creative__item {
     position: relative;
     overflow: hidden;
+}
+
+.stats__item {
+    position: relative;
+    overflow: visible;
 }
 
 .process__stop {
