@@ -36,6 +36,16 @@
     white-space: nowrap;
 }
 
+.nav__logo-l {
+    transition: color 0.3s ease;
+}
+
+.nav__logo:hover .nav__logo-l:nth-child(2) { color: var(--mta-red); }
+.nav__logo:hover .nav__logo-l:nth-child(4) { color: var(--mta-orange); }
+.nav__logo:hover .nav__logo-l:nth-child(5) { color: var(--mta-blue); }
+.nav__logo:hover .nav__logo-l:nth-child(6) { color: var(--mta-green); }
+.nav__logo:hover .nav__logo-l:nth-child(7) { color: var(--mta-purple); }
+
 .nav__links {
     display: flex;
     align-items: center;
@@ -1210,7 +1220,7 @@
 
 /* ── Agency Identity Strip ─────────────────── */
 .agency-id {
-    padding: var(--space-lg) 0 var(--space-sm);
+    padding: var(--space-xs) 0 var(--space-xs);
     background: var(--bg);
     position: relative;
     overflow: hidden;
@@ -1656,7 +1666,7 @@
 /* ── About Banner ───────────────────────── */
 .about-banner {
     text-align: center;
-    padding: var(--space-xl) 0;
+    padding: var(--space-lg) 0 0;
     background: var(--accent);
     border-top: none;
 }
@@ -1709,7 +1719,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: var(--space-lg);
+    margin-top: var(--space-md);
     text-decoration: none;
     position: relative;
     height: 280px;
@@ -1750,7 +1760,7 @@
 .contact {
     background: var(--accent);
     color: #fff;
-    padding: var(--space-lg) 0 var(--space-2xl);
+    padding: var(--space-xs) 0 var(--space-md);
 }
 
 /* Social circles in contact section */
@@ -1759,7 +1769,7 @@
     align-items: flex-start;
     justify-content: center;
     gap: 2rem;
-    padding-top: var(--space-xl);
+    padding-top: var(--space-md);
 }
 
 .contact__social-item {
@@ -1875,7 +1885,7 @@
 
 /* ── Footer ──────────────────────────────── */
 .footer {
-    padding: var(--space-lg) 0 var(--space-md);
+    padding: var(--space-md) 0 var(--space-md);
     border-top: 1px solid var(--border);
 }
 
@@ -1899,9 +1909,9 @@
 
 .footer__logo-text {
     font-family: var(--font-headline);
-    font-size: 1.2rem;
+    font-size: 2.5rem;
     font-weight: 700;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
     color: var(--text);
 }
 
@@ -1935,7 +1945,7 @@
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: #fff;
 }
 
 .footer__bottom a {
