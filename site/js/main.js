@@ -33,6 +33,14 @@
                 phonesContainer.classList.remove('dissolve');
                 totalContainer.classList.remove('takeover');
             }
+
+            /* Fade out the total counter as user scrolls past showcase */
+            if (scrollProgress > 0.85) {
+                var fadeProgress = (scrollProgress - 0.85) / 0.15;
+                totalContainer.style.opacity = Math.max(0, 1 - fadeProgress);
+            } else {
+                totalContainer.style.opacity = '';
+            }
         }
 
         ticking = false;
@@ -422,7 +430,6 @@
 
 /* ── Reveal Animations ───────────────────── */
 var revealSelectors = [
-    { sel: '.hero__headline', delay: 0 },
     { sel: '.hero__sub', delay: 1 },
     { sel: '.hero__desc', delay: 2 },
     { sel: '.hero__inner .btn', delay: 3 },
