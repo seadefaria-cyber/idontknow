@@ -211,30 +211,6 @@
 
 
 
-/* ── Client Logo Hover Hearts ────────────── */
-(function() {
-    var items = document.querySelectorAll('.clients__item');
-
-    items.forEach(function(item) {
-        item.addEventListener('mouseenter', function() {
-            for (var i = 0; i < 3; i++) {
-                (function(index) {
-                    setTimeout(function() {
-                        var heart = document.createElement('span');
-                        heart.className = 'clients__heart';
-                        var size = 10 + Math.floor(Math.random() * 6);
-                        heart.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="rgba(102,211,250,0.5)"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
-                        heart.style.left = (10 + Math.random() * 80) + '%';
-                        item.appendChild(heart);
-                        setTimeout(function() {
-                            if (heart.parentNode) heart.parentNode.removeChild(heart);
-                        }, 2000);
-                    }, index * 200);
-                })(i);
-            }
-        });
-    });
-})();
 
 /* ── CLIP / SEED / GROW Word Animations ──── */
 (function() {
