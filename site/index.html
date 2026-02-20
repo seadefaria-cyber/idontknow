@@ -17,11 +17,11 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230039A6'/><text x='50%25' y='23' text-anchor='middle' font-family='Helvetica Neue,sans-serif' font-size='16' fill='white' font-weight='bold'>dF</text></svg>">
     <!-- Helvetica Neue — system font, no import needed -->
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/variables.css?v=37">
+    <link rel="stylesheet" href="css/variables.css?v=38">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/sections.css?v=37">
-    <link rel="stylesheet" href="css/responsive.css?v=37">
+    <link rel="stylesheet" href="css/sections.css?v=38">
+    <link rel="stylesheet" href="css/responsive.css?v=38">
 </head>
 <body>
 
@@ -38,7 +38,7 @@
 <nav class="nav" id="nav">
     <div class="nav__inner container">
         <a href="#" class="nav__logo">
-            <span class="nav__logo-text"><span class="nav__logo-df">d</span>e<span class="nav__logo-df">F</span>aria</span>
+            <span class="nav__logo-text"><span class="nav__logo-d">d</span>e<span class="nav__logo-f">F</span>aria</span>
         </a>
         <ul class="nav__links" id="nav-links">
             <li><a href="#work">Work</a></li>
@@ -66,7 +66,7 @@
     </div>
 
     <div class="container hero__inner">
-        <h1 class="hero__headline"><span class="hero__line">We Know</span><span class="hero__line">How It</span><span class="hero__line"><span class="heart-word">Works.</span></span></h1>
+        <h1 class="hero__headline">We Know<br>How It<br><span class="heart-word">Works.</span></h1>
         <p class="hero__sub">Viral infrastructure for <a href="#clients" class="hero__sub-link">artists &amp; labels</a>.</p>
         <a href="#contact" class="btn btn--primary">Start A Project</a>
     </div>
@@ -106,7 +106,7 @@
     <div class="showcase__sticky">
         <div class="container">
             <p class="showcase__eyebrow"><span class="live-indicator"><span class="live-indicator__dot"></span>LIVE</span></p>
-            <h2 class="showcase__headline"><span class="heart-word">Virality</span> isn't luck.<br><span class="text-accent text-accent--green">It's infrastructure.</span></h2>
+            <h2 class="showcase__headline"><span class="heart-word">Virality</span> isn't luck.<br><span class="text-accent text-accent--green infra-word">It's infrastructure.</span></h2>
             <div class="showcase__phones">
                 <!-- Phone 1 -->
                 <div class="showcase__phone showcase__phone--left">
@@ -156,6 +156,20 @@
     </div>
 </section>
 
+<!-- The System — Combined Process + Services (vertical line) -->
+<section class="process" id="process">
+    <div class="container">
+        <div class="section-number"><span class="subway-bullet subway-bullet--red"></span></div>
+        <h2 class="process__headline">How It Works</h2>
+        <div class="process__line">
+            <div class="process__stop"><span class="process__dot process__dot--orange"></span><div class="process__content"><h3 class="process__title">Consult</h3><p class="process__desc">We build your monthly schedule. Platforms, volume, content strategy &mdash; the full plan before anything goes live.</p></div></div>
+            <div class="process__stop"><span class="process__dot process__dot--yellow"></span><div class="process__content"><h3 class="process__title">Clip</h3><p class="process__desc">Our editors pull from the internet and the footage you send. Every clip is cut to stop the scroll.</p></div></div>
+            <div class="process__stop"><span class="process__dot process__dot--green"></span><div class="process__content"><h3 class="process__title">Distribute</h3><p class="process__desc">Every clip gets micro-seeded across platforms. Hundreds of placements, all coordinated.</p></div></div>
+            <div class="process__stop process__stop--last"><span class="process__dot process__dot--purple"></span><div class="process__content"><h3 class="process__title">Repeat</h3><p class="process__desc">This is a monthly cycle. We rinse and repeat the entire system &mdash; every month, optimized.</p></div></div>
+        </div>
+    </div>
+</section>
+
 <!-- Stats -->
 <section class="stats" id="stats">
     <div class="container stats__grid">
@@ -173,33 +187,6 @@
         <span class="csg__word csg__word--grow">GROW.</span>
     </div>
 </section>
-
-<!-- The System — Combined Process + Services (vertical line) -->
-<section class="process" id="process">
-    <div class="container">
-        <div class="section-number"><span class="subway-bullet subway-bullet--red"></span></div>
-        <h2 class="process__headline">How It Works</h2>
-        <div class="process__line">
-            <div class="process__stop"><span class="process__dot process__dot--orange"></span><div class="process__content"><h3 class="process__title">Consult</h3><p class="process__desc">We build your monthly schedule. Platforms, volume, content strategy &mdash; the full plan before anything goes live.</p></div></div>
-            <div class="process__stop"><span class="process__dot process__dot--yellow"></span><div class="process__content"><h3 class="process__title">Clip</h3><p class="process__desc">Our editors pull from the internet and the footage you send. Every clip is cut to stop the scroll.</p></div></div>
-            <div class="process__stop"><span class="process__dot process__dot--green"></span><div class="process__content"><h3 class="process__title">Distribute</h3><p class="process__desc">Every clip gets micro-seeded across platforms. Hundreds of placements, all coordinated.</p></div></div>
-            <div class="process__stop process__stop--last"><span class="process__dot process__dot--purple"></span><div class="process__content"><h3 class="process__title">Repeat</h3><p class="process__desc">This is a monthly cycle. We rinse and repeat the entire system &mdash; every month, optimized.</p></div></div>
-        </div>
-    </div>
-</section>
-
-<!-- Agency Identity -->
-<div class="agency-id">
-    <div class="container agency-id__inner">
-        <span class="agency-id__word agency-id__word--clip">Clipping</span>
-        <span class="agency-id__dot"></span>
-        <span class="agency-id__word agency-id__word--dist">Distribution</span>
-        <span class="agency-id__dot"></span>
-        <span class="agency-id__word agency-id__word--creative">Creative</span>
-        <span class="agency-id__dot"></span>
-        <span class="agency-id__word agency-id__word--agency">Agency</span>
-    </div>
-</div>
 
 <!-- Creative — Horizontal Metro Route -->
 <section class="creative" id="services">
@@ -220,6 +207,19 @@
     </div>
 </section>
 
+<!-- Agency Identity -->
+<div class="agency-id">
+    <div class="container agency-id__inner">
+        <span class="agency-id__word agency-id__word--clip">Clipping</span>
+        <span class="agency-id__dot"></span>
+        <span class="agency-id__word agency-id__word--dist">Distribution</span>
+        <span class="agency-id__dot"></span>
+        <span class="agency-id__word agency-id__word--creative">Creative</span>
+        <span class="agency-id__dot"></span>
+        <span class="agency-id__word agency-id__word--agency">Agency</span>
+    </div>
+</div>
+
 <!-- About Banner -->
 <div class="about-banner">
     <div class="container">
@@ -234,7 +234,7 @@
 <!-- Contact -->
 <section class="contact" id="contact">
     <div class="container contact__inner">
-        <h2 class="contact__headline">Start A Project.</h2>
+        <h2 class="contact__headline">Start A <span class="contact__project-glow">Project.</span></h2>
         <form class="contact__form" id="contact-form" action="https://formsubmit.co/contact@defaria.nyc" method="POST">
             <input type="hidden" name="_subject" value="New inquiry from defaria.nyc">
             <input type="hidden" name="_captcha" value="false">
@@ -277,6 +277,6 @@
 
 
 <script src="js/counter.js"></script>
-<script src="js/main.js?v=37"></script>
+<script src="js/main.js?v=38"></script>
 </body>
 </html>
