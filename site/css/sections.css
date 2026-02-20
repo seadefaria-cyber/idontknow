@@ -824,8 +824,8 @@
 .clients__slide {
     display: flex;
     align-items: center;
-    gap: 4rem;
-    padding-right: 4rem;
+    gap: 5rem;
+    padding-right: 5rem;
 }
 
 .clients__item {
@@ -899,7 +899,7 @@
 
 @keyframes clientsScroll {
     from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    to { transform: translateX(-33.333%); }
 }
 
 /* ── Showcase — Sticky Scroll Feed ──────── */
