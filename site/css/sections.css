@@ -39,19 +39,22 @@
     white-space: nowrap;
 }
 
-/* Logo — metro subway circles around D and F on hover */
-.nav__logo-text {
-    font-size: 2.2rem;
-}
-
-.nav__logo-df {
+/* Logo — D and F get colored circles on hover only */
+.nav__logo-d,
+.nav__logo-f {
     border-radius: 50%;
-    padding: 0 0;
+    padding: 0;
     transition: background 0.3s ease, color 0.3s ease, padding 0.3s ease;
 }
 
-.nav__logo:hover .nav__logo-df {
+.nav__logo:hover .nav__logo-d {
     background: var(--accent);
+    color: #fff;
+    padding: 3px 6px;
+}
+
+.nav__logo:hover .nav__logo-f {
+    background: var(--mta-green);
     color: #fff;
     padding: 3px 6px;
 }
@@ -209,50 +212,7 @@
     margin-bottom: var(--space-md);
 }
 
-/* Hero line-by-line subway arrival animation */
-.hero__line {
-    display: block;
-    opacity: 0;
-    transform: translateX(80px) translateY(8px);
-    animation: heroLineIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero__line:nth-child(1) { animation-delay: 0.15s; }
-.hero__line:nth-child(2) { animation-delay: 0.35s; }
-.hero__line:nth-child(3) { animation-delay: 0.55s; }
-
-/* Train light sweep — flash across each line on arrival */
-.hero__line::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -60%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), rgba(255,255,255,0.12), rgba(255,255,255,0.06), transparent);
-    pointer-events: none;
-    animation: heroShineSweep 0.6s ease-out forwards;
-    opacity: 0;
-}
-
-.hero__line:nth-child(1)::after { animation-delay: 0.7s; }
-.hero__line:nth-child(2)::after { animation-delay: 0.9s; }
-.hero__line:nth-child(3)::after { animation-delay: 1.1s; }
-
-@keyframes heroLineIn {
-    0% { opacity: 0; transform: translateX(80px) translateY(8px); }
-    100% { opacity: 1; transform: translateX(0) translateY(0); }
-}
-
-@keyframes heroShineSweep {
-    0% { left: -60%; opacity: 0; }
-    20% { opacity: 1; }
-    100% { left: 110%; opacity: 0; }
-}
-
-/* Hero word hover removed — plain text now */
+/* Hero — standard reveal animation (no train effect) */
 
 .text-accent--orange {
     color: var(--mta-orange);
@@ -1170,7 +1130,7 @@
     font-family: var(--font-headline);
     font-size: clamp(5rem, 18vw, 12rem);
     font-weight: 700;
-    color: var(--mta-purple);
+    color: var(--mta-orange);
     letter-spacing: -0.02em;
     transition: font-size 0.8s ease;
     line-height: 1;
@@ -2105,4 +2065,48 @@
     border-radius: 50%;
     background: #fff;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(0, 57, 166, 0.4);
+}
+
+/* ── Infrastructure — green recording pulse (like Virality red) ── */
+.infra-word--recording {
+    animation: infraPulse 3s ease-in-out infinite;
+}
+
+@keyframes infraPulse {
+    0%, 84%, 100% { text-shadow: none; }
+    88% { text-shadow: 0 0 15px rgba(0, 147, 60, 0.6), 0 0 30px rgba(0, 147, 60, 0.2); color: #00C853; }
+    92% { text-shadow: 0 0 5px rgba(0, 147, 60, 0.2); }
+}
+
+/* ── "Works." — signal dots on hover ── */
+.heart-word {
+    position: relative;
+}
+
+.heart-word__signal {
+    position: absolute;
+    bottom: 100%;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    animation: worksSignal 2.5s ease-out forwards;
+}
+
+@keyframes worksSignal {
+    0% { opacity: 0; transform: translateY(0) scale(0.5); }
+    10% { opacity: 0.7; transform: translateY(-8px) scale(1); }
+    60% { opacity: 0.3; transform: translateY(-40px) scale(0.8); }
+    100% { opacity: 0; transform: translateY(-70px) scale(0.4); }
+}
+
+/* ── Contact — "Project" green glow flash ── */
+.contact__project-glow {
+    animation: projectGlowFlash 2.5s ease-out 1s forwards;
+}
+
+@keyframes projectGlowFlash {
+    0%, 100% { color: #fff; text-shadow: none; }
+    30% { color: #00C853; text-shadow: 0 0 15px rgba(0, 147, 60, 0.6), 0 0 30px rgba(0, 147, 60, 0.3); }
+    60% { color: #00C853; text-shadow: 0 0 10px rgba(0, 147, 60, 0.4); }
+    100% { color: #fff; text-shadow: none; }
 }

@@ -418,6 +418,7 @@
 
 /* ── Reveal Animations ───────────────────── */
 var revealSelectors = [
+    { sel: '.hero__headline', delay: 0 },
     { sel: '.hero__sub', delay: 1 },
     { sel: '.hero__desc', delay: 2 },
     { sel: '.hero__inner .btn', delay: 3 },
@@ -619,6 +620,63 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     }, { threshold: 0.2 });
 
     observer.observe(showcase);
+})();
+
+/* ── Infrastructure — green glow when showcase visible ── */
+(function() {
+    var showcase = document.querySelector('.showcase');
+    if (!showcase) return;
+
+    var infraWord = showcase.querySelector('.infra-word');
+    if (!infraWord) return;
+
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                infraWord.classList.add('infra-word--recording');
+            } else {
+                infraWord.classList.remove('infra-word--recording');
+            }
+        });
+    }, { threshold: 0.2 });
+
+    observer.observe(showcase);
+})();
+
+/* ── "Works." — signal dots on hover + page load ── */
+(function() {
+    var heartWord = document.querySelector('.hero .heart-word');
+    if (!heartWord) return;
+
+    var greenShades = ['#00933C', '#00C853', '#4CAF50', '#2E7D32', '#66BB6A'];
+
+    function spawnSignals() {
+        for (var i = 0; i < 4; i++) {
+            (function(idx) {
+                setTimeout(function() {
+                    var dot = document.createElement('span');
+                    dot.className = 'heart-word__signal';
+                    var size = 3 + Math.floor(Math.random() * 4);
+                    var fill = greenShades[Math.floor(Math.random() * greenShades.length)];
+                    dot.style.width = size + 'px';
+                    dot.style.height = size + 'px';
+                    dot.style.background = fill;
+                    dot.style.boxShadow = '0 0 ' + (size * 2) + 'px ' + fill;
+                    dot.style.left = (Math.random() * 100) + '%';
+                    dot.style.animationDuration = (2 + Math.random() * 1) + 's';
+                    heartWord.appendChild(dot);
+                    setTimeout(function() {
+                        if (dot.parentNode) dot.parentNode.removeChild(dot);
+                    }, 3000);
+                }, idx * 200);
+            })(i);
+        }
+    }
+
+    heartWord.addEventListener('mouseenter', spawnSignals);
+
+    /* Auto-play on page load after a short delay */
+    setTimeout(spawnSignals, 1500);
 })();
 
 /* ── Metro Sidebar — Scroll Progress ────── */
