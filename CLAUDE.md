@@ -85,7 +85,7 @@ This is the core content system. Sean runs fan pages for underground rap (primar
 - **Text overlay:** White bold text + thick black outline (5px). Montserrat Bold, 44px. NO background pill/rectangle. NO auto-contrast — ALWAYS white on black outline.
 - **Emojis:** Clean Apple emojis after caption text (no outline artifacts). Strip emojis from outline rendering pass.
 - **Title duration:** Appears immediately, disappears after 6 seconds (`--text-duration 6`).
-- **Speech captions:** ASS subtitles, ALL CAPS, font 38, white text with yellow karaoke word highlighting (`\kf` tags), MarginL=MarginR=120, MarginV=420. Must never hit TikTok side buttons.
+- **Speech captions:** ASS subtitles, ALL CAPS, font 32, white text with yellow karaoke word highlighting (`\kf` tags), MarginL=MarginR=200, MarginV=440. Must never hit TikTok side buttons.
 - **Zoom:** ALWAYS 10% slow zoom-in (`--zoom 10`). Every clip. No exceptions.
 - **Reference account:** 730.archive on TikTok — that's the visual standard.
 
@@ -123,6 +123,14 @@ python3 clips/make_clip.py <FULL_ABSOLUTE_PATH> "<caption 💀>" \
 ### Performance Tracking
 
 Log every clip to `clips/clip_log.csv` after posting. Review weekly to double down on winning formulas.
+
+### Lessons Learned (Don't Repeat These Mistakes)
+
+- **Generic captions kill clips.** "The Internet's Most Hated Rapper Has A Message For You" = 193 views. The caption MUST create an open loop — tension that only the footage can resolve. If the caption could describe any video, it's too generic.
+- **Interview/sit-down footage is low-energy.** Someone talking to a camera doesn't stop the scroll. Unless the moment is genuinely wild (crazy quote, controversial take, emotional reaction), pick high-energy footage: live performances, behind-the-scenes chaos, street encounters.
+- **Captions must not overlap TikTok UI.** Font sizes were too big and margins too tight. Fixed: title font 38px (was 44), speech subs font 32px (was 38), side margins 200px (was 120). Always preview before posting.
+- **No shares = algorithm death.** Before posting, gut-check: "Would someone send this to a friend?" If the answer isn't obviously yes, rework the caption or pick different footage.
+- **Hook in frame 1.** The most intense or confusing moment should be the very first thing people see. Don't build up to it.
 
 ## Invoicing
 

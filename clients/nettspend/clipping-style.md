@@ -1,7 +1,7 @@
 # Nettspend — Clipping Style Guide
 
 **Created:** 2026-02-16
-**Updated:** 2026-02-19 (v2 — locked in after hopecore session)
+**Updated:** 2026-02-20 (v3 — fixed caption sizing after flop analysis)
 **Status:** LOCKED — these rules are final. Never deviate.
 
 ---
@@ -11,13 +11,13 @@
 - **ALWAYS white bold text with thick black outline** — this is the TikTok native text tool look
 - **NO background pill/rectangle/bubble** — just bold floating text with stroke
 - **NO auto-contrast detection** — always white text, black outline, every time
-- **Font:** Montserrat Bold, 44px on 1080-wide frame
+- **Font:** Montserrat Bold, 38px on 1080-wide frame
 - **Outline:** 5px thick black stroke (this is what makes it look TikTok-native)
 - **Emojis:** Add rage-bait/clickbait emojis AFTER the caption text (react to the phrase)
   - Emojis must render as clean Apple emojis via pilmoji — NO black outline artifacts on emojis
   - Strip emojis from the outline rendering pass, only render them in the Pilmoji pass
 - **Position:** Center of video (~55% from top), centered horizontally
-- **Max width:** 72% of screen to avoid side buttons
+- **Max width:** 62% of screen to avoid side buttons
 - **Duration:** Title appears immediately, disappears after ~6 seconds (`--text-duration 6`)
 - **Lines:** 1-2 lines max for the caption text. Keep it tight.
 
@@ -30,17 +30,17 @@ Study 730.archive on TikTok. Their text overlay = our text overlay. Bold, clean,
 
 - **Format:** ASS subtitles with karaoke word highlighting
 - **ALL CAPS** — every word uppercase
-- **Font:** Montserrat, 38px (smaller than title overlay)
+- **Font:** Montserrat, 32px (smaller than title overlay)
 - **Colors:** White text base, current word highlighted in YELLOW (`\kf` tags)
 - **Outline:** 3px black outline
-- **Margins:** MarginL=120, MarginR=120 (equal, centered, clears TikTok/Reels side buttons)
-- **MarginV:** 420 from bottom (clears bottom UI — username, caption area, etc.)
+- **Margins:** MarginL=200, MarginR=200 (equal, centered, clears TikTok/Reels side buttons)
+- **MarginV:** 440 from bottom (clears bottom UI — username, caption area, etc.)
 - **Alignment:** Bottom center (2)
 - **Must never interfere with TikTok/Reels side buttons** (like, comment, share, bookmark)
 
 ### ASS Style Line (copy this exactly for new clips)
 ```
-Style: Speech,Montserrat,38,&H00FFFFFF,&H0000FFFF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,3,0,2,120,120,420,1
+Style: Speech,Montserrat,32,&H00FFFFFF,&H0000FFFF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,3,0,2,200,200,440,1
 ```
 
 ---

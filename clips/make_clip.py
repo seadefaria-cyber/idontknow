@@ -59,14 +59,14 @@ OUTPUT_WIDTH = 1080
 OUTPUT_HEIGHT = 1920
 
 # Text
-FONT_SIZE = 44
+FONT_SIZE = 38
 LINE_SPACING = 8
 OUTLINE_WIDTH = 5                   # Thick TikTok-native stroke
 
 # Position within safe zone
 # Safe zones: top 15%, bottom 25%, right 15% (TikTok/IG buttons)
 POSITION_Y_PCT = 0.55               # Slightly higher to avoid bottom UI
-MAX_WIDTH_PCT = 0.72                # Narrower to avoid right-side buttons
+MAX_WIDTH_PCT = 0.62                # Narrow — keeps text centered, clear of side buttons
 
 # ============================================================
 
