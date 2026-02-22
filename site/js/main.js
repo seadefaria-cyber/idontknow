@@ -628,6 +628,20 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     observer.observe(showcase);
 })();
 
+/* ── Mobile Process — Tap to Expand ────── */
+(function() {
+    if (window.innerWidth > 809) return;
+    var stops = document.querySelectorAll('.process__stop');
+    stops.forEach(function(stop) {
+        stop.addEventListener('click', function() {
+            stops.forEach(function(other) {
+                if (other !== stop) other.classList.remove('process__stop--expanded');
+            });
+            stop.classList.toggle('process__stop--expanded');
+        });
+    });
+})();
+
 /* ── Mobile Creative — Tap to Expand ────── */
 (function() {
     if (window.innerWidth > 809) return;

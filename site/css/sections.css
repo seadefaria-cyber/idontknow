@@ -221,17 +221,11 @@
     line-height: 1.05;
     letter-spacing: -0.04em;
     margin-bottom: var(--space-md);
-    animation: heroGlow 9s ease-in-out infinite;
+    text-shadow: none;
 }
 
-@keyframes heroGlow {
-    0%, 10% { color: #fff; text-shadow: none; }
-    15%, 25% { color: #fff; text-shadow: 0 0 20px rgba(0, 57, 166, 0.6), 0 0 50px rgba(0, 57, 166, 0.3); }
-    30%, 40% { color: #fff; text-shadow: none; }
-    45%, 55% { color: #fff; text-shadow: 0 0 20px rgba(0, 147, 60, 0.6), 0 0 50px rgba(0, 147, 60, 0.3); }
-    60%, 70% { color: #fff; text-shadow: none; }
-    75%, 85% { color: #fff; text-shadow: 0 0 20px rgba(255, 99, 25, 0.6), 0 0 50px rgba(255, 99, 25, 0.3); }
-    90%, 100% { color: #fff; text-shadow: none; }
+.hero__word {
+    text-shadow: none;
 }
 
 /* Hero — word-by-word type-in on page load */
@@ -601,6 +595,42 @@
     box-shadow: 0 8px 24px rgba(0, 147, 60, 0.3);
 }
 
+/* Hero — "Clients" arrow link */
+.hero__clients-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: var(--space-md);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    animation: heroWordIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
+}
+
+.hero__clients-arrow:hover {
+    color: #fff;
+    transform: translateY(3px);
+}
+
+.hero__clients-label {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.hero__clients-arrow svg {
+    animation: arrowBounce 2s ease-in-out infinite;
+}
+
+@keyframes arrowBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+}
+
 /* ── CLIP. SEED. GROW. Section ──────────── */
 .csg {
     padding: 0 0 var(--space-sm);
@@ -825,6 +855,7 @@
     padding: var(--space-sm) 0;
     background: var(--surface);
     overflow: hidden;
+    background: #000;
 }
 
 .clients__track {
@@ -851,14 +882,14 @@
     height: 24px;
     width: auto;
     object-fit: contain;
-    opacity: 0.2;
-    transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+    opacity: 0.5;
+    filter: brightness(0) invert(1);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .clients__logo:hover {
-    opacity: 0.6;
-    transform: scale(1.08);
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.15));
+    opacity: 0.85;
+    transform: scale(1.06);
 }
 
 /* Pause scroll on hover */
@@ -1174,7 +1205,7 @@
 
 /* ── Stats ───────────────────────────────── */
 .stats {
-    padding: var(--space-md) 0 var(--space-lg);
+    padding: var(--space-lg) 0 var(--space-lg);
     border-top: 3px solid #E91E8C;
 }
 
@@ -1520,7 +1551,7 @@
 
 /* ── Process — Subway Line Map ───────────── */
 .process {
-    padding: var(--space-md) 0;
+    padding: var(--space-xl) 0 var(--space-md);
     background: var(--surface);
     border-top: 3px solid var(--mta-blue);
 }
@@ -1702,6 +1733,24 @@
     color: var(--text-muted);
     font-size: 0.9rem;
     line-height: 1.7;
+}
+
+/* Process detail — expanded description on hover */
+.process__detail {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    color: var(--text);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, margin-top 0.3s ease;
+    margin-top: 0;
+}
+
+.process__stop:hover .process__detail {
+    max-height: 150px;
+    opacity: 0.7;
+    margin-top: var(--space-xs);
 }
 
 /* ── About Banner ───────────────────────── */
