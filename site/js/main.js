@@ -514,6 +514,19 @@ if (hamburger && navLinks) {
     }, { passive: true });
 })();
 
+/* ── Hero Clients Dropdown Toggle ─────────── */
+(function() {
+    var toggle = document.getElementById('clients-toggle');
+    var panel = document.getElementById('clients-panel');
+    if (!toggle || !panel) return;
+
+    toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggle.classList.toggle('open');
+        panel.classList.toggle('open');
+    });
+})();
+
 /* ── Smooth Scroll ───────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     anchor.addEventListener('click', function(e) {

@@ -631,6 +631,62 @@
     50% { transform: translateY(4px); }
 }
 
+/* Hero — Clients dropdown panel */
+.hero__clients-arrow {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.hero__clients-chevron {
+    transition: transform 0.3s ease;
+}
+
+.hero__clients-arrow.open .hero__clients-chevron {
+    transform: rotate(180deg);
+}
+
+.hero__clients-arrow.open svg {
+    animation: none;
+}
+
+.hero__clients-panel {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, margin-top 0.3s ease;
+    margin-top: 0;
+}
+
+.hero__clients-panel.open {
+    max-height: 120px;
+    opacity: 1;
+    margin-top: var(--space-md);
+}
+
+.hero__clients-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.hero__clients-logo {
+    height: 22px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.4;
+    filter: brightness(0) invert(1);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.hero__clients-logo:hover {
+    opacity: 0.8;
+    transform: scale(1.08);
+}
+
 /* ── CLIP. SEED. GROW. Section ──────────── */
 .csg {
     padding: 0 0 var(--space-sm);
@@ -936,6 +992,7 @@
 .showcase {
     min-height: 115vh;
     position: relative;
+    margin-bottom: var(--space-xl);
 }
 
 .showcase__sticky {
@@ -1551,7 +1608,7 @@
 
 /* ── Process — Subway Line Map ───────────── */
 .process {
-    padding: var(--space-xl) 0 var(--space-md);
+    padding: var(--space-xl) 0 var(--space-lg);
     background: var(--surface);
     border-top: 3px solid var(--mta-blue);
 }

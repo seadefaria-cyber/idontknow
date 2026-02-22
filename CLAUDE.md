@@ -421,6 +421,15 @@ ffmpeg -y -ss START -t DURATION -i input.mp4 \
 - NO captions above the video — captions are ALWAYS in the bottom black bar
 - NO hook text floating far from the video — hook is ON the video near page center
 
+### Postiz Posting Rules (MANDATORY — never violate)
+
+- **ONE post per account per session.** Never create duplicates.
+- **Never create a new post if a previous one is still in QUEUE.** Wait and check status first.
+- **No retries, no rescheduling.** If a post is stuck, investigate — don't create another on top of it.
+- **Duplicates get accounts flagged and shadowbanned.** This is a hard rule.
+- **Always verify a post reached PUBLISHED state** before considering it done.
+- **Post to each platform separately** with platform-specific settings (TikTok needs `autoAddMusic`, Instagram needs `post_type`).
+
 ### Cost Reference
 - See `docs/monthly-expenses.md` for full cost breakdown and scaling scenarios
 - Current trial: ~$8-10/week for 1 post/day on 1 account

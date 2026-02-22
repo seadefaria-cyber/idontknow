@@ -17,11 +17,19 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230039A6'/><text x='50%25' y='23' text-anchor='middle' font-family='Helvetica Neue,sans-serif' font-size='16' fill='white' font-weight='bold'>dF</text></svg>">
     <!-- Helvetica Neue — system font, no import needed -->
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/variables.css?v=55">
+
+    <link rel="stylesheet" href="css/variables.css?v=57">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/sections.css?v=55">
-    <link rel="stylesheet" href="css/responsive.css?v=55">
+    <link rel="stylesheet" href="css/sections.css?v=57">
+    <link rel="stylesheet" href="css/responsive.css?v=57">
+
+    <link rel="stylesheet" href="css/variables.css?v=57">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/sections.css?v=57">
+    <link rel="stylesheet" href="css/responsive.css?v=57">
+
 </head>
 <body>
 
@@ -68,12 +76,21 @@
 
     <div class="container hero__inner">
         <h1 class="hero__headline"><span class="hero__word">We</span> <span class="hero__word">Know</span><br><span class="hero__word">How</span> <span class="hero__word">It</span><br><span class="hero__word">Works.</span></h1>
-        <p class="hero__sub">Viral infrastructure for <a href="#clients" class="hero__sub-link">artists &amp; labels</a>.</p>
+        <p class="hero__sub">Viral infrastructure built for <a href="#clients" class="hero__sub-link">artists and labels</a>.</p>
         <a href="#contact" class="btn btn--primary">Start A Project</a>
-        <a href="#clients" class="hero__clients-arrow">
+        <button class="hero__clients-arrow" id="clients-toggle" type="button">
             <span class="hero__clients-label">Clients</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </a>
+            <svg class="hero__clients-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="hero__clients-panel" id="clients-panel">
+            <div class="hero__clients-grid">
+                <img src="img/clients/early-life-crisis.png" alt="Early Life Crisis" class="hero__clients-logo">
+                <img src="img/clients/chrisheyn.png" alt="The Chris Heyn Show" class="hero__clients-logo">
+                <img src="img/clients/welcomejpeg.png" alt="WELCOME.JPEG" class="hero__clients-logo">
+                <img src="img/clients/asspizza.png" alt="Asspizza" class="hero__clients-logo">
+                <img src="img/clients/clover.png" alt="Clover New York" class="hero__clients-logo">
+            </div>
+        </div>
     </div>
 
     <!-- Twitch Chat Overlay -->
@@ -171,10 +188,10 @@
     <div class="container">
         <h2 class="process__headline">How It Works</h2>
         <div class="process__line">
-            <div class="process__stop"><span class="process__dot process__dot--pink"></span><div class="process__content"><h3 class="process__title">Consult</h3><p class="process__desc">We build your monthly schedule. Platforms, volume, content strategy &mdash; the full plan before anything goes live.</p><p class="process__detail">We analyze your existing content, audience demographics, and competitive landscape. Then we design a custom rollout calendar with posting cadence, platform priorities, and content pillars tailored to your goals.</p></div></div>
-            <div class="process__stop"><span class="process__dot process__dot--yellow"></span><div class="process__content"><h3 class="process__title">Clip</h3><p class="process__desc">Our editors pull from the internet and the footage you send. Every clip is cut to stop the scroll.</p><p class="process__detail">We mine interviews, live performances, studio sessions, and behind-the-scenes footage for the moments that make people stop scrolling. Captions, sound design, and pacing are all engineered to maximize watch time and shares.</p></div></div>
-            <div class="process__stop"><span class="process__dot process__dot--green"></span><div class="process__content"><h3 class="process__title">Distribute</h3><p class="process__desc">Every clip gets micro-seeded across platforms. Hundreds of placements, all coordinated.</p><p class="process__detail">Fan pages, repost accounts, niche communities, and curated playlists &mdash; every clip gets placed where your audience already lives. We coordinate timing across TikTok, Instagram, X, and YouTube to create the illusion of organic momentum.</p></div></div>
-            <div class="process__stop process__stop--last"><span class="process__dot process__dot--orange"></span><div class="process__content"><h3 class="process__title">Repeat</h3><p class="process__desc">This is a monthly cycle. We rinse and repeat the entire system &mdash; every month, optimized.</p><p class="process__detail">Every month we review analytics, double down on winning formats, and cut what isn't working. The system gets sharper over time &mdash; your cost per view goes down and your reach compounds.</p></div></div>
+            <div class="process__stop"><span class="process__dot process__dot--pink"></span><div class="process__content"><h3 class="process__title">Consult</h3><p class="process__desc">We build your monthly schedule. Platforms, volume, content strategy &mdash; the full plan before anything goes live.</p></div></div>
+            <div class="process__stop"><span class="process__dot process__dot--yellow"></span><div class="process__content"><h3 class="process__title">Clip</h3><p class="process__desc">Our editors pull from the internet and the footage you send. Every clip is cut to stop the scroll.</p></div></div>
+            <div class="process__stop"><span class="process__dot process__dot--green"></span><div class="process__content"><h3 class="process__title">Distribute</h3><p class="process__desc">Every clip gets micro-seeded across platforms. Hundreds of placements, all coordinated.</p></div></div>
+            <div class="process__stop process__stop--last"><span class="process__dot process__dot--orange"></span><div class="process__content"><h3 class="process__title">Repeat</h3><p class="process__desc">This is a monthly cycle. We rinse and repeat the entire system &mdash; every month, optimized.</p></div></div>
         </div>
     </div>
 </section>
@@ -274,6 +291,10 @@
 
 
 <script src="js/counter.js"></script>
-<script src="js/main.js?v=55"></script>
+
+<script src="js/main.js?v=57"></script>
+
+<script src="js/main.js?v=57"></script>
+
 </body>
 </html>
