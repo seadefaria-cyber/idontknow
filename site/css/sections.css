@@ -854,7 +854,7 @@
     padding: var(--space-sm) 0;
     border-bottom: 1px solid var(--border);
     overflow: hidden;
-    background: #000;
+    background: var(--bg);
 }
 
 .clients__track {
