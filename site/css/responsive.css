@@ -165,9 +165,9 @@ html, body {
         text-align: left;
     }
 
-    /* Hero — don't force full viewport, wrap tight around content */
+    /* Hero — fill viewport, center content */
     .hero {
-        min-height: auto;
+        min-height: 100svh;
     }
 
     .hero::before {
@@ -208,9 +208,14 @@ html, body {
         font-size: clamp(3rem, 14vw, 6rem);
     }
 
-    /* Showcase — compact on mobile, no dissolution */
+    /* Showcase — no sticky on mobile, flows normally */
     .showcase {
-        min-height: 80vh;
+        min-height: auto;
+    }
+
+    .showcase__sticky {
+        position: static;
+        min-height: auto;
     }
 
     .showcase__phones.dissolve {
