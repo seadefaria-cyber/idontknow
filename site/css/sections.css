@@ -2009,7 +2009,7 @@
 /* ── Sections need relative positioning ──── */
 .creative__item {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .stats__item {
