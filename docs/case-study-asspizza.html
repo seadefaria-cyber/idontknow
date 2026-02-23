@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeFaria NYC — Case Study: Asspizza</title>
+<style>
+  @page {
+    size: letter portrait;
+    margin: 0;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #0E0E10;
+    color: #EFEFF1;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 8.5in;
+    height: 11in;
+    padding: 0.35in 0.45in;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    margin-bottom: 12px;
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .header-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ── Hero ── */
+  .hero {
+    margin-bottom: 14px;
+  }
+
+  .hero-artist {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #FF6319;
+    margin-bottom: 4px;
+  }
+
+  .hero-headline {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+
+  .hero-headline span {
+    color: #FF6319;
+  }
+
+  .hero-sub {
+    font-size: 10.5px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.45;
+  }
+
+  /* ── Big Stats Row ── */
+  .big-stats {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .big-stat {
+    flex: 1;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+  }
+
+  .big-stat .number {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: #FF6319;
+  }
+
+  .big-stat .label {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-top: 2px;
+  }
+
+  /* ── Platform Sections ── */
+  .platforms {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .platform-card {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 12px 12px 10px;
+  }
+
+  .platform-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .platform-name {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .platform-handle {
+    font-size: 9px;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .platform-hero {
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 8px;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.02);
+  }
+
+  .platform-hero .number {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .platform-hero .label {
+    font-size: 7.5px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-top: 1px;
+  }
+
+  .platform-stats {
+    list-style: none;
+  }
+
+  .platform-stats li {
+    font-size: 9.5px;
+    padding: 3.5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .platform-stats li:last-child {
+    border-bottom: none;
+  }
+
+  .stat-label {
+    color: rgba(255,255,255,0.38);
+    font-size: 9px;
+  }
+
+  .stat-value {
+    font-weight: 600;
+    font-size: 9.5px;
+  }
+
+  .top-posts {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .top-posts-label {
+    font-size: 7.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 4px;
+  }
+
+  .top-post {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 0;
+  }
+
+  .top-post .title {
+    font-size: 8.5px;
+    color: rgba(255,255,255,0.45);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 65%;
+  }
+
+  .top-post .views {
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  /* ── Audience Bar ── */
+  .audience-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .audience-item {
+    flex: 1;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+
+  .audience-item .aud-label {
+    font-size: 7.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 4px;
+  }
+
+  .audience-item .aud-value {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .audience-item .aud-detail {
+    font-size: 8.5px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 1px;
+  }
+
+  /* ── Clients Bar ── */
+  .clients-bar {
+    margin-bottom: 10px;
+    padding: 10px 14px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+  }
+
+  .clients-bar .clients-label {
+    font-size: 7.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 6px;
+  }
+
+  .clients-list {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .clients-list .client-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    white-space: nowrap;
+  }
+
+  .clients-list .client-sep {
+    font-size: 9px;
+    color: rgba(255,255,255,0.15);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-note {
+    font-size: 8.5px;
+    color: rgba(255,255,255,0.25);
+    line-height: 1.4;
+    max-width: 70%;
+  }
+
+  .footer-email {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.6);
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">deFaria</div>
+    <div class="header-label">Case Study</div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-artist">@asspizza2026</div>
+    <div class="hero-headline">Built from zero to <span>10M+ views</span> in 6 months</div>
+    <div class="hero-sub">Asspizza (Austin Babbitt) — streamer with weekly content, giving us a deep library of footage to clip. Grown organically across TikTok and Instagram with dedicated editors, strategic clipping, and multi-platform distribution.</div>
+  </div>
+
+  <!-- Big Stats -->
+  <div class="big-stats">
+    <div class="big-stat">
+      <div class="number">9.8M</div>
+      <div class="label">TikTok Views</div>
+    </div>
+    <div class="big-stat">
+      <div class="number">7M</div>
+      <div class="label">Viewers Reached</div>
+    </div>
+    <div class="big-stat">
+      <div class="number">7.1K</div>
+      <div class="label">Followers Built</div>
+    </div>
+    <div class="big-stat">
+      <div class="number">29K</div>
+      <div class="label">Shares</div>
+    </div>
+  </div>
+
+  <!-- Platform Cards -->
+  <div class="platforms">
+
+    <!-- TikTok -->
+    <div class="platform-card">
+      <div class="platform-card-header">
+        <div class="platform-name">TikTok</div>
+        <div class="platform-handle">@asspizza2026</div>
+      </div>
+      <div class="platform-hero">
+        <div class="number">9.8M</div>
+        <div class="label">Total Views (6 Months)</div>
+      </div>
+      <ul class="platform-stats">
+        <li><span class="stat-label">Followers</span><span class="stat-value">5,833</span></li>
+        <li><span class="stat-label">Likes</span><span class="stat-value">715K</span></li>
+        <li><span class="stat-label">Comments</span><span class="stat-value">7,871</span></li>
+        <li><span class="stat-label">Shares</span><span class="stat-value">29K</span></li>
+        <li><span class="stat-label">New Viewers</span><span class="stat-value">3.3M</span></li>
+        <li><span class="stat-label">Profile Views</span><span class="stat-value">87K</span></li>
+      </ul>
+      <div class="top-posts">
+        <div class="top-posts-label">Top Performing</div>
+        <div class="top-post"><span class="title">Fat Nick / Lil Peep</span><span class="views">691K</span></div>
+        <div class="top-post"><span class="title">Street Artist Lewis</span><span class="views">463K</span></div>
+        <div class="top-post"><span class="title">Kanye stealing idea</span><span class="views">322K</span></div>
+        <div class="top-post"><span class="title">Bam Margera</span><span class="views">318K</span></div>
+      </div>
+    </div>
+
+    <!-- Instagram -->
+    <div class="platform-card">
+      <div class="platform-card-header">
+        <div class="platform-name">Instagram</div>
+        <div class="platform-handle">@asspizza2026</div>
+      </div>
+      <div class="platform-hero">
+        <div class="number">605K</div>
+        <div class="label">Views (Last 90 Days)</div>
+      </div>
+      <ul class="platform-stats">
+        <li><span class="stat-label">Followers</span><span class="stat-value">1,304</span></li>
+        <li><span class="stat-label">Accounts Reached</span><span class="stat-value">298K</span></li>
+        <li><span class="stat-label">Non-Follower Reach</span><span class="stat-value">86.7%</span></li>
+        <li><span class="stat-label">Posts Published</span><span class="stat-value">194</span></li>
+        <li><span class="stat-label">Content: Reels</span><span class="stat-value">95.1%</span></li>
+        <li><span class="stat-label">Profile Visits</span><span class="stat-value">3,787</span></li>
+      </ul>
+      <div class="top-posts">
+        <div class="top-posts-label">Top Performing</div>
+        <div class="top-post"><span class="title">Community Ricks</span><span class="views">452K</span></div>
+        <div class="top-post"><span class="title">Lil Peep & X</span><span class="views">326K</span></div>
+        <div class="top-post"><span class="title">Joeyy sushi order</span><span class="views">120K</span></div>
+        <div class="top-post"><span class="title">Jorjiana Gucci piece</span><span class="views">33K</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Audience Bar -->
+  <div class="audience-bar">
+    <div class="audience-item">
+      <div class="aud-label">Core Demo</div>
+      <div class="aud-value">90% Male</div>
+      <div class="aud-detail">25-34 year olds (49.4%)</div>
+    </div>
+    <div class="audience-item">
+      <div class="aud-label">Discovery Rate</div>
+      <div class="aud-value">86.7%</div>
+      <div class="aud-detail">Views from non-followers</div>
+    </div>
+    <div class="audience-item">
+      <div class="aud-label">Timeframe</div>
+      <div class="aud-value">6 months</div>
+      <div class="aud-detail">Aug 2025 — Feb 2026</div>
+    </div>
+    <div class="audience-item">
+      <div class="aud-label">Starting Point</div>
+      <div class="aud-value">Zero</div>
+      <div class="aud-detail">All accounts built from scratch</div>
+    </div>
+  </div>
+
+  <!-- Clients -->
+  <div class="clients-bar">
+    <div class="clients-label">Other Clients</div>
+    <div class="clients-list">
+      <span class="client-name">Nettspend</span>
+      <span class="client-sep">/</span>
+      <span class="client-name">Chris Heyn Show</span>
+      <span class="client-sep">/</span>
+      <span class="client-name">Welcome JPEG</span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-note">All metrics pulled directly from TikTok Studio &amp; Instagram Professional Dashboard. Results vary by artist, content quality, and market.</div>
+    <div class="footer-email">sean@defaria.nyc</div>
+  </div>
+
+</body>
+</html>
