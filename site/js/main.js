@@ -211,7 +211,6 @@
 
 
 
-
 /* ── CLIP / SEED / GROW Word Animations ──── */
 (function() {
     var clipWord = document.querySelector('.csg__word--clip');
@@ -514,19 +513,6 @@ if (hamburger && navLinks) {
     }, { passive: true });
 })();
 
-/* ── Hero Clients Dropdown Toggle ─────────── */
-(function() {
-    var toggle = document.getElementById('clients-toggle');
-    var panel = document.getElementById('clients-panel');
-    if (!toggle || !panel) return;
-
-    toggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        toggle.classList.toggle('open');
-        panel.classList.toggle('open');
-    });
-})();
-
 /* ── Smooth Scroll ───────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     anchor.addEventListener('click', function(e) {
@@ -639,34 +625,6 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     }, { threshold: 0.2 });
 
     observer.observe(showcase);
-})();
-
-/* ── Mobile Process — Tap to Expand ────── */
-(function() {
-    if (window.innerWidth > 809) return;
-    var stops = document.querySelectorAll('.process__stop');
-    stops.forEach(function(stop) {
-        stop.addEventListener('click', function() {
-            stops.forEach(function(other) {
-                if (other !== stop) other.classList.remove('process__stop--expanded');
-            });
-            stop.classList.toggle('process__stop--expanded');
-        });
-    });
-})();
-
-/* ── Mobile Creative — Tap to Expand ────── */
-(function() {
-    if (window.innerWidth > 809) return;
-    var items = document.querySelectorAll('.creative__item');
-    items.forEach(function(item) {
-        item.addEventListener('click', function() {
-            items.forEach(function(other) {
-                if (other !== item) other.classList.remove('creative__item--expanded');
-            });
-            item.classList.toggle('creative__item--expanded');
-        });
-    });
 })();
 
 /* ── Metro Sidebar — Scroll Progress ────── */

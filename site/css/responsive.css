@@ -31,15 +31,6 @@ html, body {
         width: 220px;
     }
 
-    .clients__slide {
-        gap: 4rem;
-        padding-right: 4rem;
-    }
-
-    .clients__logo {
-        height: 22px;
-    }
-
     .contact__socials {
         gap: 1.5rem;
     }
@@ -205,26 +196,6 @@ html, body {
         padding: 0.7rem 2rem;
     }
 
-    .hero__clients-arrow {
-        margin-top: var(--space-sm);
-    }
-
-    /* Process detail — tap to expand on mobile */
-    .process__detail {
-        max-height: 0;
-        opacity: 0;
-        overflow: hidden;
-        margin-top: 0;
-        font-size: 0.75rem;
-        transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, margin-top 0.3s ease;
-    }
-
-    .process__stop--expanded .process__detail {
-        max-height: 200px;
-        opacity: 0.7;
-        margin-top: var(--space-xs);
-    }
-
     /* CSG — centered, no overflow */
     .csg__inner {
         flex-direction: column;
@@ -235,16 +206,6 @@ html, body {
 
     .csg__word {
         font-size: clamp(3rem, 14vw, 6rem);
-    }
-
-    /* Clients */
-    .clients__slide {
-        gap: 3rem;
-        padding-right: 3rem;
-    }
-
-    .clients__logo {
-        height: 20px;
     }
 
     /* Showcase — compact on mobile, no dissolution */
@@ -375,29 +336,10 @@ html, body {
         font-size: 0.8rem;
     }
 
-    /* Creative — 2-column on mobile, tap to expand */
+    /* Creative — 2-column on mobile */
     .creative__grid {
         grid-template-columns: repeat(2, 1fr);
         gap: var(--space-sm);
-    }
-
-    .creative__item {
-        cursor: pointer;
-    }
-
-    .creative__detail {
-        max-height: 0;
-        opacity: 0;
-        overflow: hidden;
-        margin-top: 0;
-        font-size: 0.7rem;
-        transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, margin-top 0.3s ease;
-    }
-
-    .creative__item--expanded .creative__detail {
-        max-height: 200px;
-        opacity: 0.7;
-        margin-top: var(--space-xs);
     }
 
     .creative__sub {
@@ -421,6 +363,10 @@ html, body {
     .about-banner__text {
         font-size: clamp(1.4rem, 5vw, 2.2rem);
         padding: 0 var(--space-sm);
+    }
+
+    .about-banner__track {
+        height: 140px;
     }
 
     /* Contact — centered */
@@ -573,15 +519,6 @@ html, body {
 
     .creative__grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-    .clients__slide {
-        gap: 2rem;
-        padding-right: 2rem;
-    }
-
-    .clients__logo {
-        height: 18px;
     }
 
     /* About Banner — smaller text */

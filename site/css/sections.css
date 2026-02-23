@@ -9,6 +9,7 @@
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     z-index: 100;
+    border-bottom: 1px solid var(--border);
 }
 
 .nav__inner {
@@ -33,11 +34,6 @@
     letter-spacing: -0.02em;
     color: var(--text);
     white-space: nowrap;
-    transition: text-shadow 0.3s ease;
-}
-
-.nav__logo:hover .nav__logo-text {
-    text-shadow: 0 0 12px rgba(255, 255, 255, 0.35), 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
 .nav__tagline {
@@ -590,108 +586,16 @@
 }
 
 .hero .btn:hover {
-    background: var(--mta-green);
-    color: #fff;
-    box-shadow: 0 8px 24px rgba(0, 147, 60, 0.3);
+    background: #fff;
+    color: var(--accent);
+    box-shadow: 0 8px 24px rgba(0, 57, 166, 0.3);
 }
 
-/* Hero — "Clients" arrow link */
-.hero__clients-arrow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-    margin-top: var(--space-md);
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.3s ease, transform 0.3s ease;
-    opacity: 0;
-    animation: heroWordIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
-}
-
-.hero__clients-arrow:hover {
-    color: #fff;
-    transform: translateY(3px);
-}
-
-.hero__clients-label {
-    font-family: var(--font-body);
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-.hero__clients-arrow svg {
-    animation: arrowBounce 2s ease-in-out infinite;
-}
-
-@keyframes arrowBounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(4px); }
-}
-
-/* Hero — Clients dropdown panel */
-.hero__clients-arrow {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-}
-
-.hero__clients-chevron {
-    transition: transform 0.3s ease;
-}
-
-.hero__clients-arrow.open .hero__clients-chevron {
-    transform: rotate(180deg);
-}
-
-.hero__clients-arrow.open svg {
-    animation: none;
-}
-
-.hero__clients-panel {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, margin-top 0.3s ease;
-    margin-top: 0;
-    width: 100%;
-    text-align: center;
-}
-
-.hero__clients-panel.open {
-    max-height: 120px;
-    opacity: 1;
-    margin-top: var(--space-md);
-}
-
-.hero__clients-grid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
-    flex-wrap: wrap;
-}
-
-.hero__clients-logo {
-    height: 32px;
-    width: auto;
-    object-fit: contain;
-    opacity: 0.4;
-    filter: brightness(0) invert(1);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.hero__clients-logo:hover {
-    opacity: 0.8;
-    transform: scale(1.08);
-}
 
 /* ── CLIP. SEED. GROW. Section ──────────── */
 .csg {
     padding: 0 0 var(--space-sm);
+    border-bottom: 1px solid var(--border);
 }
 
 .csg__inner {
@@ -866,6 +770,8 @@
 /* ── Ticker ─────────────────────────────── */
 .ticker {
     background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
     padding: 0.6rem 0;
     overflow: hidden;
     white-space: nowrap;
@@ -908,86 +814,6 @@
     to { transform: translateX(-50%); }
 }
 
-/* ── Clients (Infinite Scroll) ──────────── */
-.clients {
-    padding: var(--space-md) 0;
-    overflow: hidden;
-    background: var(--bg);
-}
-
-.clients__track {
-    display: flex;
-    width: max-content;
-    animation: clientsScroll 25s linear infinite;
-}
-
-.clients__slide {
-    display: flex;
-    align-items: center;
-    gap: 5rem;
-    padding-right: 5rem;
-}
-
-.clients__item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.clients__logo {
-    height: 144px;
-    width: auto;
-    object-fit: contain;
-    opacity: 0.5;
-    filter: brightness(0) invert(1);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.clients__logo:hover {
-    opacity: 0.85;
-    transform: scale(1.06);
-}
-
-/* Pause scroll on hover */
-.clients__track:hover {
-    animation-play-state: paused;
-}
-
-/* Client item — relative for overlay */
-.clients__item {
-    position: relative;
-    cursor: pointer;
-    overflow: visible;
-}
-
-/* Client overlay text */
-.clients__overlay {
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: var(--font-body);
-    font-size: 0.55rem;
-    font-weight: 500;
-    color: var(--text-muted);
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    pointer-events: none;
-}
-
-.clients__item:hover .clients__overlay {
-    opacity: 1;
-    transform: translateX(-50%) translateY(2px);
-}
-
-
-
-@keyframes clientsScroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-33.333%); }
-}
 
 /* ── Showcase — Sticky Scroll Feed ──────── */
 .showcase {
@@ -1264,7 +1090,7 @@
 /* ── Stats ───────────────────────────────── */
 .stats {
     padding: var(--space-lg) 0 var(--space-lg);
-    border-top: 3px solid #E91E8C;
+    border-bottom: 1px solid var(--border);
 }
 
 .stats__grid {
@@ -1463,8 +1289,9 @@
 /* ── Creative Services — Metro-Themed ──────── */
 .creative {
     padding: var(--space-lg) 0;
-    background: var(--surface);
+    background: var(--bg);
     border-top: 3px solid var(--mta-orange);
+    border-bottom: 1px solid var(--border);
     position: relative;
     overflow: hidden;
 }
@@ -1589,29 +1416,10 @@
     color: var(--text);
 }
 
-/* Creative detail — expanded description on hover */
-.creative__detail {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    color: var(--text);
-    font-size: 0.8rem;
-    line-height: 1.6;
-    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, margin-top 0.3s ease;
-    margin-top: 0;
-}
-
-.creative__item:hover .creative__detail {
-    max-height: 120px;
-    opacity: 1;
-    margin-top: var(--space-xs);
-}
 
 /* ── Process — Subway Line Map ───────────── */
 .process {
     padding: var(--space-xl) 0 var(--space-lg);
-    background: var(--surface);
-    border-top: 3px solid var(--mta-blue);
 }
 
 /* Section number — centered above title */
@@ -1793,23 +1601,6 @@
     line-height: 1.7;
 }
 
-/* Process detail — expanded description on hover */
-.process__detail {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    color: var(--text);
-    font-size: 0.8rem;
-    line-height: 1.6;
-    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, margin-top 0.3s ease;
-    margin-top: 0;
-}
-
-.process__stop:hover .process__detail {
-    max-height: 150px;
-    opacity: 0.7;
-    margin-top: var(--space-xs);
-}
 
 /* ── About Banner ───────────────────────── */
 .about-banner {
@@ -2034,7 +1825,7 @@
 /* ── Footer ──────────────────────────────── */
 .footer {
     padding: var(--space-md) 0 var(--space-md);
-    background: var(--surface);
+    border-top: 1px solid var(--border);
 }
 
 .footer__inner {
