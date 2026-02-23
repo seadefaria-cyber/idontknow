@@ -348,12 +348,16 @@ html, body {
     }
 
     .creative__title {
-        font-size: 0.8rem;
-        letter-spacing: 0.04em;
+        font-size: 0.7rem;
+        letter-spacing: 0;
     }
 
     .creative__desc {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+    }
+
+    .creative__item {
+        padding: var(--space-sm) 0.6rem;
     }
 
     .creative__sub {
