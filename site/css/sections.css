@@ -670,7 +670,7 @@
 }
 
 .hero__clients-logo {
-    height: 22px;
+    height: 32px;
     width: auto;
     object-fit: contain;
     opacity: 0.4;
@@ -934,7 +934,7 @@
 }
 
 .clients__logo {
-    height: 24px;
+    height: 36px;
     width: auto;
     object-fit: contain;
     opacity: 0.5;
