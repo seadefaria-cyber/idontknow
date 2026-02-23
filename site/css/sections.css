@@ -910,8 +910,7 @@
 
 /* ── Clients (Infinite Scroll) ──────────── */
 .clients {
-    padding: var(--space-sm) 0;
-    background: var(--surface);
+    padding: var(--space-md) 0;
     overflow: hidden;
     background: var(--bg);
 }
@@ -937,7 +936,7 @@
 }
 
 .clients__logo {
-    height: 36px;
+    height: 144px;
     width: auto;
     object-fit: contain;
     opacity: 0.5;
