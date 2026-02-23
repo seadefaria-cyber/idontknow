@@ -493,3 +493,36 @@ Sean is pitching to direct a music video for Amanda Bynes. She's 40, on a comeba
 - `docs/amanda-bynes-girlfriend-treatment.pdf` — PDF version for pitching
 - `docs/sean-claude-setup-guide.md` — Setup guide written for Sean's brother (beginner-friendly)
 - `docs/sean-claude-setup-guide.pdf` — PDF version
+
+---
+
+## Active Project: Client Outreach (Started 2026-02-23)
+
+### Status: OUTREACH WEEK — Picking up clients NOW
+
+### Files
+- `docs/outreach-lists.md` — Editable source (3 prospect lists + email template)
+- `docs/outreach-lists.pdf` — Shareable PDF version
+
+### Prospect Lists
+- **12 Twitch streamers** — Mid-tier (50K-500K followers), no dedicated clip teams. Includes: Plaqueboymax, YourRAGE, Silky, Duke Dennis, JiDion, Sketch, Stable Ronaldo, Caseoh, Jynxzi, BruceDropEmOff, Fanum (AMP), Scru Face Jean
+- **14 labels** — Independent/mid-size hip-hop labels. Confirmed emails: Fool's Gold (info@foolsgoldrecs.com), Babygrande (inquiries@babygrande.com), Rhymesayers (info@rhymesayers.com). Others: Cinematic Music Group, Mass Appeal, Griselda, Coalmine, EMPIRE, 10K Projects, Rostrum, Nature Sounds, Alamo, Payday, WEDIDIT
+- **12 YouTubers** — Long-form creators who need shorts distribution. Includes: Agent 00, Berleezy, RDCWorld, Dontai, CalebCity, CDawgVA, FaZe Rug, Typical Gamer, LazarBeam, Tommyinnit, Chrismd, imdavisss
+
+### Outreach Strategy (decided)
+- **NO free trial** — setup costs too much time/resources
+- **Send individual emails** — NO CC/BCC mass emails (gets flagged as spam, feels impersonal)
+- **Lead with a sample clip** — clip one moment from their public content (15-20 min), attach/link it in the email as proof of concept
+- **10-15 emails/day**, Mon-Thu, sent between 9-11am EST
+- **Follow up once** after 3-4 days if no reply
+- **Packages/tier deck** — do NOT attach in first email (hurts deliverability). Send in follow-up or after they reply.
+
+### Email Template
+**Subject:** clips for [Name] — free trial week
+**Body:** Short (4 lines) — personalized first line referencing their content, mention 500M+ views stat, link to sample clip you made from their content, ask "Down to try it?" — ends with defaria.nyc
+**Follow-up:** "Just bumping this. Happy to clip one of your recent streams as a sample — no strings."
+
+### Next Steps
+- Build a packages/tier deck PDF (Starter / Growth / Full Service) to have ready when prospects reply
+- Pull emails from YouTube About pages and Twitch bios for each prospect
+- Start sending 10-15/day
