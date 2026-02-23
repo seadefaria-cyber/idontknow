@@ -211,6 +211,7 @@ html, body {
     /* Showcase — no sticky on mobile, flows normally */
     .showcase {
         min-height: auto;
+        border-bottom: 1px solid var(--border);
     }
 
     .showcase__sticky {
@@ -363,6 +364,11 @@ html, body {
     .creative__sub {
         font-size: 0.9rem;
         padding: 0 var(--space-xs);
+    }
+
+    /* Process — divider after section on mobile */
+    .process {
+        border-bottom: 1px solid var(--border);
     }
 
     /* Process — subway line stays vertical */
