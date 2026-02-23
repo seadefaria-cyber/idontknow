@@ -165,9 +165,9 @@ html, body {
         text-align: left;
     }
 
-    /* Hero — keep large text, match desktop feel */
+    /* Hero — don't force full viewport, wrap tight around content */
     .hero {
-        min-height: 100svh;
+        min-height: auto;
     }
 
     .hero::before {
