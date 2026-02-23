@@ -204,18 +204,44 @@ Monthly expenses doc: `docs/monthly-expenses.md`
 - **Slideshows (hybrid, 2 AI + 4 photos):** $0.15–$0.25 per post
 - Clips are pure margin. Slideshows have small variable cost from OpenAI image generation.
 
-### Client Pricing Tiers
-- **Starter:** $2,000/mo + $500 setup (3-5 accounts, 2-3 clips/day, TikTok + 1 platform)
-- **Growth:** $3,500/mo + $1,000 setup (5-7 accounts, 3-5 clips/day + 1-2 slideshows/day, all platforms)
-- **Pro:** $5,000/mo + $1,500 setup (7-10 accounts, 5-10 clips/day + 3-5 slideshows/day, all platforms + YouTube, weekly calls, trend-reactive, A/B testing)
+### Client Pricing Tiers (Updated Feb 23, 2026)
+- **Seed:** $1,000/mo + $500 setup — AI production (sound, text overlays, distribution), 1 post/day per platform
+- **Starter:** $2,000/mo + $500 setup — Dedicated editor, 2 posts/day per platform
+- **Growth:** $3,500/mo + $500 setup — Dedicated editor, 4 posts/day per platform
+- **Pro:** $5,000/mo + $500 setup — Dedicated editor, 8 posts/day per platform
+- **Elite:** Custom pricing — Everything in Pro + publication & media seeding
+- **All tiers:** 1 account per platform (TikTok, IG, X, YT Shorts = 4 accounts), $500 one-time setup (account activation, scheduling setup, editor onboarding), weekly performance report, optional strategy call
 - **Minimum contract:** 3 months
-- **Margins:** ~80% (Starter), ~83% (Growth), ~88% (Pro)
+- **Setup fee is flat $500** across all tiers
+- **Pricing PDF:** `docs/pricing-tiers.html` → exported to `~/Desktop/DeFaria-NYC-Pricing.pdf`
+
+### How the Service Works
+- Each unique post goes live on ALL 4 platforms daily (TikTok, IG, X, YT Shorts)
+- Tiers scale on content volume (unique posts/day), NOT number of accounts
+- Seed tier = AI handles production (sound + overlays + captions). Human picks clip moments.
+- Starter and above = dedicated human editor makes all creative decisions. AI handles distribution.
+- **Layer 1 (human):** Clip selection, caption writing, sound choice, posting strategy
+- **Layer 2 (AI):** Text overlays, captions, sound placement, scheduling, distribution, performance tracking
+- **Rule:** AI never touches creative decisions. AI executes what humans decide.
+
+### Capacity
+- Seed: AI handles production. ~30 min/day of Sean's time (clip selection only)
+- Starter: Editor handles all clips. Sean reviews + approves. ~1 hr/day
+- Growth: Editor does 2-3 clips, Sean does 1-2. ~2-3 hrs/day
+- Pro: Needs Sean + editor both at full output. ~4-5 hrs/day. Second editor recommended.
+- Current editor capacity: 1 freelance editor, 2 accounts, 3-4 clips/day
 
 ### Break-Even Targets
-- Business costs only (solo): 1 Starter client ($2,000/mo → $1,643 profit)
-- Comfortable: 1 Pro client ($5,000/mo → $3,603 profit)
-- Real money: 1 Pro + 1 Growth ($8,500/mo → $7,103 profit)
-- Target (Month 6): 2 Pro + 1 Starter ($12,000/mo → $10,500+ profit)
+- 1 Seed client: $1,000/mo revenue → ~$717 profit
+- 1 Starter client: $2,000/mo revenue → ~$1,717 profit
+- 1 Starter + 1 Seed: $3,000/mo revenue → ~$2,700 profit
+- 1 Starter + 1 Growth: $5,500/mo revenue → ~$3,700 profit (with second editor)
+- Target (Month 6): 1 Pro + 1 Starter = $7,000/mo → ~$5,200 profit
+
+### Track Record
+- **Asspizza:** Proven account growth using real editors (case study PDF pending — need to compile numbers)
+- **Nettspend:** Current testing lab. Best reel 30K views, avg ~2K. Diagnosing what works.
+- Growth plan: `docs/growth-plan-feb-2026.md`
 
 ### Paying Yourself (Owner's Draw)
 - 30% → tax reserve savings account (quarterly payments: Apr 15, Jun 16, Sep 15, Jan 15)
