@@ -211,31 +211,6 @@
 
 
 
-/* ── Client Logo Hover Hearts ────────────── */
-(function() {
-    var items = document.querySelectorAll('.clients__item');
-
-    items.forEach(function(item) {
-        item.addEventListener('mouseenter', function() {
-            for (var i = 0; i < 3; i++) {
-                (function(index) {
-                    setTimeout(function() {
-                        var heart = document.createElement('span');
-                        heart.className = 'clients__heart';
-                        var size = 10 + Math.floor(Math.random() * 6);
-                        heart.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="rgba(102,211,250,0.5)"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
-                        heart.style.left = (10 + Math.random() * 80) + '%';
-                        item.appendChild(heart);
-                        setTimeout(function() {
-                            if (heart.parentNode) heart.parentNode.removeChild(heart);
-                        }, 2000);
-                    }, index * 200);
-                })(i);
-            }
-        });
-    });
-})();
-
 /* ── CLIP / SEED / GROW Word Animations ──── */
 (function() {
     var clipWord = document.querySelector('.csg__word--clip');
@@ -538,19 +513,6 @@ if (hamburger && navLinks) {
     }, { passive: true });
 })();
 
-/* ── Hero Clients Dropdown Toggle ─────────── */
-(function() {
-    var toggle = document.getElementById('clients-toggle');
-    var panel = document.getElementById('clients-panel');
-    if (!toggle || !panel) return;
-
-    toggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        toggle.classList.toggle('open');
-        panel.classList.toggle('open');
-    });
-})();
-
 /* ── Smooth Scroll ───────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     anchor.addEventListener('click', function(e) {
@@ -663,34 +625,6 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     }, { threshold: 0.2 });
 
     observer.observe(showcase);
-})();
-
-/* ── Mobile Process — Tap to Expand ────── */
-(function() {
-    if (window.innerWidth > 809) return;
-    var stops = document.querySelectorAll('.process__stop');
-    stops.forEach(function(stop) {
-        stop.addEventListener('click', function() {
-            stops.forEach(function(other) {
-                if (other !== stop) other.classList.remove('process__stop--expanded');
-            });
-            stop.classList.toggle('process__stop--expanded');
-        });
-    });
-})();
-
-/* ── Mobile Creative — Tap to Expand ────── */
-(function() {
-    if (window.innerWidth > 809) return;
-    var items = document.querySelectorAll('.creative__item');
-    items.forEach(function(item) {
-        item.addEventListener('click', function() {
-            items.forEach(function(other) {
-                if (other !== item) other.classList.remove('creative__item--expanded');
-            });
-            item.classList.toggle('creative__item--expanded');
-        });
-    });
 })();
 
 /* ── Metro Sidebar — Scroll Progress ────── */
