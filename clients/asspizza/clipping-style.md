@@ -25,34 +25,44 @@ Same as Nettspend style guide (see `clients/nettspend/clipping-style.md`):
 
 ## Sound Strategy
 
-- **Background music:** Playboi Carti TikTok sounds at **15% volume**
-- Interview audio is primary — music is subtle background energy
-- Rotate through 10 Carti tracks:
-  1. Sky
-  2. Magnolia
-  3. Evil Jordan
-  4. Crush
-  5. Rather Lie
-  6. Long Time
-  7. RIP
-  8. Toxic
-  9. Backdoor (ft. Kendrick)
-  10. Mojo Jojo (ft. Kendrick)
+- **NO embedded music.** Use TikTok's `autoAddMusic: "yes"` setting so TikTok adds a trending sound automatically.
+- Interview audio is primary — TikTok adds subtle background music on its own.
+
+---
+
+## Caption Style (Refined 2026-02-23)
+
+Two separate text layers:
+
+1. **Hook caption (text overlay):** White text, black outline, Montserrat Bold 36px, ON the video at ~55% Y. This is the rage-bait/clickbait hook.
+2. **Speech subtitles:** Yellow text (`&H0000FFFF`), Montserrat 22px, black outline, in the BLACK BAR below the video (MarginV=350). These are the actual spoken words as ASS subtitles.
 
 ---
 
 ## Platform Accounts
 
-### Later Profile: "Asspizza 1"
-- **TikTok:** asspizza2026 (Later ID: 9987534)
-- **Instagram:** asspizza2026 (Later ID: 9987533)
+### Postiz (NOT Later.com)
+- **TikTok:** asspizza2026 (Postiz ID: `cmlvcz31x00lxny0yex5bsi0v`)
+- **Instagram:** asspizza2026 (NOT CONNECTED to Postiz as of 2026-02-23)
+
+### Postiz API Key
+`e964c2e49e94fa7d870c1f94f4327d875c135c6b73d9ab9ba02e745da6872408`
 
 ---
 
 ## Content Schedule
 
-- Post every **8 hours**
+- Post every **12 hours**
 - Auto-publish enabled
+- TikTok autoAddMusic enabled
+
+---
+
+## Video Processing
+
+- **Crop for podcast/stream clips:** `crop=1350:850:0:80` (tighter framing on speakers)
+- **Output:** 1080x1920 (9:16), H.264, CRF 18
+- **Transcription:** mlx-whisper large-v3-turbo with word timestamps
 
 ---
 

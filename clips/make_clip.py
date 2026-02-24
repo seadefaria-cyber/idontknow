@@ -152,20 +152,29 @@ def wrap_text(text, font, max_width):
     return lines if lines else [text]
 
 
-def create_overlay(caption, overlay_path, text_color, outline_color):
+def create_overlay(caption, overlay_path, text_color, outline_color,
+                   font_size_override=None, max_width_override=None, position_y_override=None):
     """Create transparent PNG with floating outlined text + Apple emojis."""
     img = Image.new("RGBA", (OUTPUT_WIDTH, OUTPUT_HEIGHT), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
-    # Load font
+    # Load font (with optional size override)
+    use_font_size = font_size_override or FONT_SIZE
     font, font_path, font_index = find_font()
+    if font_size_override and font_path:
+        # Reload at custom size
+        if font_index is not None:
+            font = ImageFont.truetype(font_path, use_font_size, index=font_index)
+        else:
+            font = ImageFont.truetype(font_path, use_font_size)
     if font_path:
         name = os.path.basename(font_path)
         weight = "Bold" if font_index == 1 else "Regular" if font_index == 0 else ""
-        print(f"Font: {name} {weight}".strip())
+        print(f"Font: {name} {weight} @ {use_font_size}px".strip())
 
     # Wrap text
-    max_text_px = int(OUTPUT_WIDTH * MAX_WIDTH_PCT)
+    use_max_width = max_width_override or MAX_WIDTH_PCT
+    max_text_px = int(OUTPUT_WIDTH * use_max_width)
     lines = wrap_text(caption, font, max_text_px)
 
     # Measure each line
@@ -173,12 +182,13 @@ def create_overlay(caption, overlay_path, text_color, outline_color):
     for line in lines:
         bbox = font.getbbox(line)
         w = bbox[2] - bbox[0]
-        h = max(bbox[3] - bbox[1], FONT_SIZE + 4)
+        h = max(bbox[3] - bbox[1], use_font_size + 4)
         line_sizes.append((w, h))
 
     # Calculate text block position
+    use_position_y = position_y_override or POSITION_Y_PCT
     text_block_h = sum(s[1] for s in line_sizes) + LINE_SPACING * (len(lines) - 1)
-    start_y = int(OUTPUT_HEIGHT * POSITION_Y_PCT) - text_block_h // 2
+    start_y = int(OUTPUT_HEIGHT * use_position_y) - text_block_h // 2
 
     outline_rgba = outline_color + (255,) if len(outline_color) == 3 else outline_color
 
@@ -239,7 +249,8 @@ def make_clip(video_path, caption, output_name=None, sound_path=None,
     """
     Create a captioned clip with black bars (no stretching) and optional sound.
 
-    text_style: 'auto' (detect brightness), 'light' (white text), 'dark' (black text)
+    text_style: 'auto' (detect brightness), 'light' (white text), 'dark' (black text),
+                'yellow' (yellow text, black outline, small font)
     """
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -273,6 +284,10 @@ def make_clip(video_path, caption, output_name=None, sound_path=None,
             outline_color = (255, 255, 255) # White outline
             style_label = "black text, white outline"
         print(f"Brightness: {brightness:.0f}/255 → {style_label}")
+    elif text_style == "yellow":
+        text_color = (255, 255, 0)         # Yellow text
+        outline_color = (0, 0, 0)          # Black outline
+        print("Style: yellow text, black outline (small)")
     elif text_style == "light":
         text_color = (255, 255, 255)
         outline_color = (0, 0, 0)
@@ -282,7 +297,11 @@ def make_clip(video_path, caption, output_name=None, sound_path=None,
 
     # Generate overlay PNG
     overlay_path = "/tmp/post_caption_overlay.png"
-    create_overlay(caption, overlay_path, text_color, outline_color)
+    if text_style == "yellow":
+        create_overlay(caption, overlay_path, text_color, outline_color,
+                       font_size_override=26, max_width_override=0.60, position_y_override=0.50)
+    else:
+        create_overlay(caption, overlay_path, text_color, outline_color)
 
     # Output path
     if output_name is None:
