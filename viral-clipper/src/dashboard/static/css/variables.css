@@ -1,15 +1,18 @@
 :root {
-    /* Core palette */
-    --bg: #050505;
-    --surface: #0a0a0a;
-    --text: #ffffff;
-    --text-muted: #888888;
-    --accent: #fed446;
-    --accent-glow: rgba(254, 212, 70, 0.3);
+    /* clip.tech-inspired palette */
+    --bg: #000000;
+    --surface: #0A0A0A;
+    --surface-alt: #111111;
+    --text: #FFFFFF;
+    --text-muted: #9CA3AF;
+    --accent: #0fff52;
+    --accent-light: #3dff75;
+    --accent-glow: rgba(15, 255, 82, 0.15);
+    --border: rgba(255, 255, 255, 0.08);
 
-    /* Fonts */
-    --font-headline: 'Bebas Neue', Impact, sans-serif;
-    --font-body: 'Inter', -apple-system, sans-serif;
+    /* Fonts — Unbounded for display, Poppins for body */
+    --font-display: 'Unbounded', sans-serif;
+    --font-body: 'Poppins', -apple-system, sans-serif;
 
     /* Spacing */
     --space-xs: 0.5rem;
@@ -21,6 +24,5 @@
 
     --nav-height: 64px;
     --container: 1400px;
-    --duration: 0.3s;
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
