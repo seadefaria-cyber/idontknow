@@ -1,18 +1,18 @@
 :root {
-    /* Red Bull-inspired palette */
-    --navy: #00162b;
-    --navy-dark: #000d1a;
-    --navy-surface: #001e3c;
-    --red: #db0a40;
-    --red-glow: rgba(219, 10, 64, 0.4);
-    --silver: #c0c8d0;
-    --silver-dim: #6b7a8d;
-    --white: #ffffff;
-    --white-off: #f0f2f4;
+    /* clip.tech-inspired palette */
+    --bg: #000000;
+    --surface: #0A0A0A;
+    --surface-alt: #111111;
+    --text: #FFFFFF;
+    --text-muted: #9CA3AF;
+    --accent: #0fff52;
+    --accent-light: #3dff75;
+    --accent-glow: rgba(15, 255, 82, 0.15);
+    --border: rgba(255, 255, 255, 0.08);
 
-    /* Fonts — Bebas Neue = bold condensed like Red Bull headlines */
-    --font-display: 'Bebas Neue', Impact, sans-serif;
-    --font-body: 'Inter', -apple-system, sans-serif;
+    /* Fonts — Unbounded for display, Poppins for body */
+    --font-display: 'Unbounded', sans-serif;
+    --font-body: 'Poppins', -apple-system, sans-serif;
 
     /* Spacing */
     --space-xs: 0.5rem;
