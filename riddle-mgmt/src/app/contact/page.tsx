@@ -1,5 +1,8 @@
+import SwipeNav from "@/components/SwipeNav";
+
 export default function Contact() {
   return (
+    <SwipeNav leftTo={{ path: "/", label: "Home" }}>
     <div className="min-h-screen flex flex-col items-center justify-center sm:justify-start pt-0 sm:pt-32 pb-20 px-5 sm:px-8">
       <div className="max-w-md w-full text-center sm:text-left">
         <h1 className="text-2xl font-light tracking-tight animate-fade-in">
@@ -24,5 +27,6 @@ export default function Contact() {
         </div>
       </div>
     </div>
+    </SwipeNav>
   );
 }

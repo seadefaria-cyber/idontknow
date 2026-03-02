@@ -50,10 +50,11 @@ function initSchema(db: Database.Database) {
     // Column already exists
   }
 
-  // Seed the default user if not exists
-  const existing = db.prepare("SELECT id FROM users WHERE username = ?").get("seandefaria");
-  if (!existing) {
-    const { v4: uuid } = require("uuid");
+  // Seed default users if not exists
+  const { v4: uuid } = require("uuid");
+
+  const adminExists = db.prepare("SELECT id FROM users WHERE username = ?").get("seandefaria");
+  if (!adminExists) {
     const hash = bcrypt.hashSync("test1", 12);
     db.prepare("INSERT INTO users (id, username, password_hash, display_name, role) VALUES (?, ?, ?, ?, ?)").run(
       uuid(),
@@ -61,6 +62,18 @@ function initSchema(db: Database.Database) {
       hash,
       "Sean DeFaria",
       "admin"
+    );
+  }
+
+  const testExists = db.prepare("SELECT id FROM users WHERE username = ?").get("test1");
+  if (!testExists) {
+    const hash = bcrypt.hashSync("test1", 12);
+    db.prepare("INSERT INTO users (id, username, password_hash, display_name, role) VALUES (?, ?, ?, ?, ?)").run(
+      uuid(),
+      "test1",
+      hash,
+      "Test User",
+      "client"
     );
   }
 }

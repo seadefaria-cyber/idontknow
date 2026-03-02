@@ -220,7 +220,7 @@ export default function Dashboard() {
     <div className="min-h-screen pt-24 sm:pt-24 pb-20 px-5 sm:px-8 md:px-16">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
-        <div className="flex items-start justify-between mb-8 sm:mb-12 gap-4">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between mb-6 sm:mb-12 gap-2 sm:gap-4 text-center sm:text-left">
           <div className="min-w-0">
             <h1 className="text-xl sm:text-2xl font-light tracking-tight animate-fade-in truncate">
               {user?.displayName || user?.username}
@@ -231,13 +231,13 @@ export default function Dashboard() {
           </div>
           <button
             onClick={handleLogout}
-            className="text-[10px] sm:text-xs text-white/30 hover:text-white/60 transition-colors tracking-[0.15em] uppercase animate-fade-in shrink-0"
+            className="text-[10px] sm:text-xs text-white/30 hover:text-white/60 transition-colors tracking-[0.15em] uppercase animate-fade-in shrink-0 mt-1 sm:mt-0"
           >
             Sign Out
           </button>
         </div>
 
-        <div className="w-full h-px bg-white/5 mb-10 animate-fade-in delay-100" />
+        <div className="w-full h-px bg-white/5 mb-6 sm:mb-10 animate-fade-in delay-100" />
 
         {/* Admin upload */}
         {user?.role === "admin" && (
@@ -327,8 +327,8 @@ export default function Dashboard() {
         {/* Folder view — when no folder is open */}
         {!openFolder && (
           <>
-            <div className="flex flex-col items-center justify-center min-h-[60vh]">
-            <h2 className="text-xs tracking-[0.2em] uppercase text-white/30 mb-10 animate-fade-in delay-200 text-center">
+            <div className="flex flex-col items-center justify-center min-h-[50vh] sm:min-h-[60vh]">
+            <h2 className="text-xs tracking-[0.2em] uppercase text-white/30 mb-8 sm:mb-10 animate-fade-in delay-200 text-center">
               {user?.role === "admin" ? "All Folders" : "Your Folders"}
             </h2>
 
@@ -339,10 +339,10 @@ export default function Dashboard() {
                   <button
                     key={folder.key}
                     onClick={() => setOpenFolder(folder.key)}
-                    className="group flex flex-col items-center gap-3 py-6 rounded-xl hover:bg-white/[0.02] transition-all duration-200"
+                    className="group flex flex-col items-center gap-2 sm:gap-3 py-4 sm:py-6 px-2 rounded-xl hover:bg-white/[0.02] transition-all duration-200"
                   >
                     <MacFolder itemCount={count} />
-                    <span className="text-xs text-white/60 group-hover:text-white/90 transition-colors duration-200 tracking-wide">
+                    <span className="text-[11px] sm:text-xs text-white/60 group-hover:text-white/90 transition-colors duration-200 tracking-wide">
                       {folder.label}
                     </span>
                   </button>

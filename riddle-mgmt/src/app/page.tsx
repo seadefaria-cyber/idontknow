@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import SwipeableHome from "@/components/SwipeableHome";
+import SwipeNav from "@/components/SwipeNav";
 
 export default function Home() {
   return (
-    <SwipeableHome>
+    <SwipeNav leftTo={{ path: "/about", label: "About" }} rightTo={{ path: "/contact", label: "Contact" }}>
     <div className="min-h-screen flex flex-col items-center justify-center relative">
       {/* Subtle radial gradient background */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.02)_0%,_transparent_70%)]" />
@@ -56,6 +56,6 @@ export default function Home() {
         </p>
       </div>
     </div>
-    </SwipeableHome>
+    </SwipeNav>
   );
 }

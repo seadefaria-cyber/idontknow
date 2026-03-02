@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SwipeNav from "@/components/SwipeNav";
 
 const credits = [
   { artist: "Nettspend", project: "Artist Management" },
@@ -6,6 +7,7 @@ const credits = [
 
 export default function About() {
   return (
+    <SwipeNav rightTo={{ path: "/", label: "Home" }}>
     <div className="min-h-screen flex flex-col items-center justify-center sm:justify-start pt-16 sm:pt-32 pb-20 px-5 sm:px-8">
       <div className="max-w-xl w-full">
         {/* Header */}
@@ -63,5 +65,6 @@ export default function About() {
         </div>
       </div>
     </div>
+    </SwipeNav>
   );
 }
