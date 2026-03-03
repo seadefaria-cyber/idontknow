@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeFaria — Artist Management Infrastructure</title>
+    <meta name="description" content="The operating system for artist management. Contracts, finances, and files — one portal, every artist.">
+    <meta property="og:title" content="DeFaria">
+    <meta property="og:description" content="The operating system for artist management.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://defaria.nyc">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23fafafa'/><text x='50%25' y='22' text-anchor='middle' font-family='system-ui,sans-serif' font-size='13' fill='%23aaa' font-weight='700'>dF</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ═══ NAV ═══ */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 0 2.5rem;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-mark {
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: #b0b0b0;
+            text-decoration: none;
+            letter-spacing: -0.03em;
+        }
+        .nav-login {
+            font-size: 0.6rem;
+            font-weight: 500;
+            color: #c0c0c0;
+            text-decoration: none;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .nav-login:hover { color: #888; }
+
+        /* ═══ HERO ═══ */
+        .hero {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0;
+        }
+
+        /* ═══ dF MARK ═══ */
+        .df-scene {
+            perspective: 500px;
+            opacity: 0;
+            animation: enter 1.4s var(--ease) 0.2s forwards;
+            margin-bottom: 2rem;
+        }
+        .df-plate {
+            position: relative;
+            display: inline-block;
+            transform-style: preserve-3d;
+            will-change: transform;
+            cursor: default;
+        }
+        .df-text {
+            font-weight: 700;
+            font-size: clamp(3.5rem, 9vw, 6rem);
+            letter-spacing: -0.04em;
+            line-height: 1;
+            transform: scaleX(1.35);
+            display: block;
+            user-select: none;
+        }
+
+        /* Depth — subtle bevel */
+        .df-depth {
+            position: absolute;
+            top: 0; left: 0;
+            color: transparent;
+            text-shadow:
+                0 1px 0 #d8d8d8,
+                0 2px 0 #d2d2d2,
+                0 3px 0 #ccc,
+                0 4px 2px rgba(0,0,0,0.02),
+                0 6px 6px rgba(0,0,0,0.015);
+            z-index: 1;
+        }
+
+        /* Chrome — brushed aluminum */
+        .df-chrome {
+            position: relative;
+            z-index: 2;
+            --mx: 50%;
+            --my: 50%;
+            background:
+                radial-gradient(
+                    circle 40% at var(--mx) var(--my),
+                    rgba(255,255,255,0.95) 0%,
+                    rgba(230,232,235,0.4) 30%,
+                    transparent 55%
+                ),
+                linear-gradient(
+                    175deg,
+                    #9a9a9a 0%,
+                    #b0b0b0 10%,
+                    #a0a0a0 22%,
+                    #b8b8b8 35%,
+                    #c5c5c5 45%,
+                    #aaa 55%,
+                    #999 65%,
+                    #b0b0b0 78%,
+                    #a5a5a5 88%,
+                    #969696 100%
+                );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 300;
+            font-size: 0.6rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #c0c0c0;
+            opacity: 0;
+            animation: enter 1s var(--ease) 0.7s forwards;
+        }
+
+        .hero-rule {
+            width: 20px;
+            height: 1px;
+            background: #ddd;
+            margin: 1.5rem 0;
+            opacity: 0;
+            animation: enter 1s var(--ease) 0.9s forwards;
+        }
+
+        .cta {
+            font-size: 0.55rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+            opacity: 0;
+            animation: enter 1s var(--ease) 1.1s forwards;
+        }
+        .cta:hover { color: #888; }
+
+        @keyframes enter {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ═══ FEATURES ═══ */
+        .features {
+            padding: 4rem 2.5rem 5rem;
+            max-width: 840px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            border-top: 1px solid rgba(0,0,0,0.04);
+        }
+        .feat {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.7s var(--ease);
+        }
+        .feat.vis { opacity: 1; transform: translateY(0); }
+        .feat-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 300;
+            font-size: 0.45rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #ddd;
+            margin-bottom: 0.75rem;
+        }
+        .feat-title {
+            font-weight: 500;
+            font-size: 0.7rem;
+            color: #999;
+            margin-bottom: 0.25rem;
+        }
+        .feat-desc {
+            font-weight: 300;
+            font-size: 0.65rem;
+            color: #bbb;
+            line-height: 1.6;
+        }
+        .feat-tag {
+            display: inline-block;
+            margin-top: 0.625rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.4rem;
+            color: #d5d5d5;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        /* ═══ FOOTER ═══ */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(0,0,0,0.04);
+        }
+        footer p {
+            font-size: 0.4rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #ddd;
+        }
+
+        @media (max-width: 640px) {
+            nav { padding: 0 1.5rem; }
+            .df-text { transform: scaleX(1.2); }
+            .features {
+                grid-template-columns: 1fr;
+                gap: 1.75rem;
+                padding: 3rem 1.5rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.01ms !important; transition-duration: 0.1s !important; }
+            .df-scene, .feat { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/" class="nav-mark">dF</a>
+        <a href="https://riddlellc.biz/portal" class="nav-login">Login</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="df-scene" id="scene">
+                <div class="df-plate" id="plate">
+                    <span class="df-text df-depth" aria-hidden="true">dF</span>
+                    <span class="df-text df-chrome" id="chrome">dF</span>
+                </div>
+            </div>
+            <p class="tagline">The operating system for artist management</p>
+            <div class="hero-rule"></div>
+            <a href="mailto:sean@defaria.nyc" class="cta">Request a Demo</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feat" data-d="0">
+            <div class="feat-num">01 — Contracts</div>
+            <h3 class="feat-title">Send, sign, done.</h3>
+            <p class="feat-desc">Every deal flows through one place. Automated routing, real-time status.</p>
+            <span class="feat-tag">DocuSign</span>
+        </div>
+        <div class="feat" data-d="80">
+            <div class="feat-num">02 — Finances</div>
+            <h3 class="feat-title">Real-time numbers.</h3>
+            <p class="feat-desc">Earnings, expenses, and reimbursements — synced and current.</p>
+            <span class="feat-tag">QuickBooks</span>
+        </div>
+        <div class="feat" data-d="160">
+            <div class="feat-num">03 — Files</div>
+            <h3 class="feat-title">Every asset, one place.</h3>
+            <p class="feat-desc">Cloud storage unified. Access from a single view.</p>
+            <span class="feat-tag">Drive + S3</span>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 DeFaria LLC</p>
+    </footer>
+
+    <script>
+        const obs = new IntersectionObserver(ee => {
+            ee.forEach(e => {
+                if (e.isIntersecting) {
+                    setTimeout(() => e.target.classList.add('vis'), +(e.target.dataset.d || 0));
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        document.querySelectorAll('.feat').forEach(el => obs.observe(el));
+
+        /* ─── 3D tilt + specular ─── */
+        const plate = document.getElementById('plate');
+        const chrome = document.getElementById('chrome');
+        const scene = document.getElementById('scene');
+
+        let tx = 0, ty = 0, cx = 0, cy = 0;
+        let mx = 50, my = 50, sx = 50, sy = 50;
+        let running = false;
+
+        document.addEventListener('mousemove', e => {
+            const r = scene.getBoundingClientRect();
+            const midX = r.left + r.width / 2;
+            const midY = r.top + r.height / 2;
+
+            tx = ((e.clientX - midX) / (innerWidth / 2)) * 14;
+            ty = -((e.clientY - midY) / (innerHeight / 2)) * 10;
+
+            mx = ((e.clientX - r.left) / r.width) * 100;
+            my = ((e.clientY - r.top) / r.height) * 100;
+            mx = Math.max(-15, Math.min(115, mx));
+            my = Math.max(-15, Math.min(115, my));
+
+            if (!running) { running = true; tick(); }
+        }, { passive: true });
+
+        function tick() {
+            cx += (tx - cx) * 0.12;
+            cy += (ty - cy) * 0.12;
+            sx += (mx - sx) * 0.14;
+            sy += (my - sy) * 0.14;
+
+            plate.style.transform = `rotateY(${cx.toFixed(2)}deg) rotateX(${cy.toFixed(2)}deg)`;
+            chrome.style.setProperty('--mx', sx.toFixed(1) + '%');
+            chrome.style.setProperty('--my', sy.toFixed(1) + '%');
+
+            if (Math.abs(tx-cx) > 0.01 || Math.abs(ty-cy) > 0.01 ||
+                Math.abs(mx-sx) > 0.05 || Math.abs(my-sy) > 0.05) {
+                requestAnimationFrame(tick);
+            } else { running = false; }
+        }
+
+        document.addEventListener('mouseleave', () => {
+            tx = 0; ty = 0; mx = 50; my = 50;
+            if (!running) { running = true; tick(); }
+        });
+    </script>
+
+</body>
+</html>

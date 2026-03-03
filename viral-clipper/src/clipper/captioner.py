@@ -7,8 +7,10 @@ logger = structlog.get_logger()
 
 # ASS color format is &HBBGGRR& (BGR, not RGB)
 WHITE = "&H00FFFFFF&"
+SOFT_WHITE = "&H00E0E0E0&"
 BLACK = "&H00000000&"
-YELLOW_HIGHLIGHT = "&H0000FFFF&"  # Yellow in BGR
+DARK_OUTLINE = "&H00333333&"
+YELLOW_HIGHLIGHT = "&H0000FFFF&"  # Yellow in BGR — active word pop
 TRANSPARENT = "&H00000000&"
 
 
@@ -60,8 +62,8 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Default,Montserrat Bold,72,{WHITE},{YELLOW_HIGHLIGHT},{BLACK},{TRANSPARENT},-1,0,0,0,100,100,0,0,1,3,0,2,40,40,200,1
-Style: Highlight,Montserrat Bold,72,{YELLOW_HIGHLIGHT},{WHITE},{BLACK},{TRANSPARENT},-1,0,0,0,100,100,0,0,1,3,0,2,40,40,200,1
+Style: Default,Arial,62,{WHITE},{YELLOW_HIGHLIGHT},{BLACK},{TRANSPARENT},-1,0,0,0,100,100,0,0,1,4,0,5,50,200,400,1
+Style: Highlight,Arial,62,{YELLOW_HIGHLIGHT},{WHITE},{BLACK},{TRANSPARENT},-1,0,0,0,100,100,0,0,1,4,0,5,50,200,400,1
 """
 
 
@@ -106,7 +108,7 @@ def _build_events(
                 if not word_text:
                     continue
                 if j == i:
-                    # Highlight current word with override tag
+                    # Highlight current word — yellow pop against white
                     text_parts.append(
                         f"{{\\c{YELLOW_HIGHLIGHT}\\b1}}{word_text}{{\\c{WHITE}\\b1}}"
                     )

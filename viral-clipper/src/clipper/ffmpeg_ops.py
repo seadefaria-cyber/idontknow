@@ -83,10 +83,14 @@ class FFmpegService:
         # ASS filter requires escaping colons and backslashes in the path
         safe_ass_path = str(ass_path).replace("\\", "\\\\").replace(":", "\\:")
 
+        # Include system fonts directory so FFmpeg can find SF Pro (.SF NS)
+        fonts_dir = "/System/Library/Fonts/"
+        safe_fonts_dir = fonts_dir.replace("\\", "\\\\").replace(":", "\\:")
+
         cmd = [
             "ffmpeg",
             "-i", str(input_path),
-            "-vf", f"ass={safe_ass_path}",
+            "-vf", f"ass={safe_ass_path}:fontsdir={safe_fonts_dir}",
             *encoder_args,
             "-c:a", "copy",
             "-y",
@@ -114,8 +118,9 @@ class FFmpegService:
         drawtext_filter = (
             f"drawtext=text='{safe_text}'"
             f":fontfile='{safe_font}'"
-            f":fontsize=48:fontcolor=white:borderw=3:bordercolor=black"
-            f":x=(w-text_w)/2:y=h*0.15"
+            f":fontsize=52:fontcolor=white:borderw=4:bordercolor=black"
+            f":shadowx=2:shadowy=2:shadowcolor=0x000000AA"
+            f":x=(w-text_w)/2-50:y=h*0.12"
             f":enable='between(t,0,{duration})'"
         )
 
@@ -170,6 +175,55 @@ class FFmpegService:
             "-i", str(input_path),
             "-af", filter_chain,
             "-c:v", "copy",
+            "-y",
+            str(output_path),
+        ]
+        self._run(cmd)
+        return output_path
+
+    def mix_trending_sound(
+        self,
+        video_path: Path,
+        sound_path: Path,
+        output_path: Path,
+        original_volume: float = 0.3,
+        sound_volume: float = 0.8,
+    ) -> Path:
+        """Mix a trending sound into a video, ducking the original audio.
+
+        Blends the trending sound with the original audio track using FFmpeg's
+        amix filter. The sound is looped/trimmed to match the video duration.
+
+        Args:
+            video_path: Input video file (with original audio).
+            sound_path: Trending sound file (.mp3).
+            output_path: Output video file with mixed audio.
+            original_volume: Volume level for original audio (0.0-1.0).
+            sound_volume: Volume level for trending sound (0.0-1.0).
+        """
+        encoder_args = self._get_encoder_args()
+
+        # Get video duration to trim/loop the sound
+        info = self.get_video_info(video_path)
+        duration = float(info.get("format", {}).get("duration", 0))
+
+        # Filter: adjust volumes, loop sound to match video length, then mix
+        filter_complex = (
+            f"[0:a]volume={original_volume}[orig];"
+            f"[1:a]aloop=loop=-1:size=2e+09,atrim=0:{duration},volume={sound_volume}[snd];"
+            f"[orig][snd]amix=inputs=2:duration=shortest:dropout_transition=2[out]"
+        )
+
+        cmd = [
+            "ffmpeg",
+            "-i", str(video_path),
+            "-i", str(sound_path),
+            "-filter_complex", filter_complex,
+            "-map", "0:v",
+            "-map", "[out]",
+            *encoder_args,
+            "-c:a", "aac",
+            "-b:a", "192k",
             "-y",
             str(output_path),
         ]

@@ -252,6 +252,183 @@ def cmd_test_account(args) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Trending sounds
+# ---------------------------------------------------------------------------
+
+def cmd_add_sound(args) -> None:
+    """Download audio from a TikTok URL and save it as a sound."""
+    from src.sounds.sound_service import SoundService
+
+    service = SoundService()
+    print(f"Downloading sound '{args.name}' from: {args.url}")
+    path = service.download_sound(args.url, args.name)
+    print(f"Sound saved: {path}")
+
+
+def cmd_list_sounds(args) -> None:
+    """List all downloaded trending sounds."""
+    from src.sounds.sound_service import SoundService
+
+    service = SoundService()
+    sounds = service.list_sounds()
+
+    if not sounds:
+        print("No sounds downloaded yet. Add one with:")
+        print('  python -m src.cli add-sound "https://www.tiktok.com/..." --name "my-sound"')
+        return
+
+    print(f"\nDownloaded sounds ({len(sounds)}):")
+    print(f"{'─'*50}")
+    for s in sounds:
+        print(f"  {s['name']:30s}  {s['path']}")
+    print()
+
+
+# ---------------------------------------------------------------------------
+# Full pipeline (process + sound + post)
+# ---------------------------------------------------------------------------
+
+def cmd_full_pipeline(args) -> None:
+    """Process folder, mix in trending sound, and post to TikTok accounts."""
+    settings = get_settings()
+    init_db(settings.database_url)
+
+    input_dir = Path(args.folder)
+    output_dir = Path(args.output)
+    dry_run = args.dry_run
+    sound_name = args.sound
+
+    if not input_dir.is_dir():
+        print(f"ERROR: Not a directory: {input_dir}")
+        sys.exit(1)
+
+    # Resolve the sound file if specified
+    sound_path = None
+    tiktok_sound_name = None
+    if sound_name:
+        from src.sounds.sound_service import SoundService
+        service = SoundService()
+        sound_path = service.get_sound(sound_name)
+        if not sound_path:
+            print(f"ERROR: Sound '{sound_name}' not found. Download it first with:")
+            print(f'  python -m src.cli add-sound "<tiktok-url>" --name "{sound_name}"')
+            sys.exit(1)
+        tiktok_sound_name = sound_name
+        print(f"Using trending sound: {sound_name} ({sound_path})")
+
+    # Step 1: Find video files
+    video_extensions = {".mp4", ".mov", ".avi", ".mkv", ".webm", ".m4v"}
+    video_files = sorted(
+        f for f in input_dir.iterdir()
+        if f.suffix.lower() in video_extensions and not f.name.startswith(".")
+    )
+
+    if not video_files:
+        print(f"No video files found in {input_dir}")
+        sys.exit(1)
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Step 2: Process videos into clips (with sound mixing)
+    from src.services.pipeline_service import PipelineService
+    pipeline = PipelineService(settings)
+
+    all_clips = []
+    for i, video_path in enumerate(video_files, 1):
+        print(f"\n[{i}/{len(video_files)}] Processing: {video_path.name}")
+        video_output_dir = output_dir / video_path.stem
+        video_output_dir.mkdir(parents=True, exist_ok=True)
+        try:
+            clips = pipeline.process_video(video_path, video_output_dir, sound_path=sound_path)
+            all_clips.extend(clips)
+            print(f"  -> {len(clips)} clip(s)")
+        except Exception as e:
+            print(f"  ERROR: {e}")
+
+    if not all_clips:
+        print("No clips generated. Nothing to post.")
+        return
+
+    # Step 3: Get active TikTok accounts
+    import random
+    from src.models.distribution import Account, AccountStatus
+    with get_db_session() as session:
+        accounts = (
+            session.query(Account)
+            .filter_by(status=AccountStatus.ACTIVE, platform="tiktok")
+            .all()
+        )
+        if not accounts:
+            # Fall back to all active accounts
+            accounts = (
+                session.query(Account)
+                .filter_by(status=AccountStatus.ACTIVE)
+                .all()
+            )
+        if not accounts:
+            print("\nNo active accounts. Add some with: python -m src.cli add-account")
+            return
+
+        account_data = [
+            {"id": a.id, "platform": a.platform.value, "username": a.username}
+            for a in accounts
+        ]
+
+    # Step 4: Assign clips to accounts (round-robin with staggered timing)
+    assignments = []
+    for i, clip_path in enumerate(all_clips):
+        acct = account_data[i % len(account_data)]
+        delay_minutes = random.randint(15, 45) * (i // len(account_data))
+        assignments.append({
+            "clip_path": str(clip_path),
+            "account_id": acct["id"],
+            "platform": acct["platform"],
+            "username": acct["username"],
+            "delay_minutes": delay_minutes,
+        })
+
+    # Step 5: Preview or schedule
+    print(f"\n{'='*60}")
+    print(f"Distribution Plan: {len(all_clips)} clips -> {len(account_data)} accounts")
+    if tiktok_sound_name:
+        print(f"Sound: {tiktok_sound_name} (pre-mixed into audio + tagged on TikTok)")
+    print(f"{'='*60}")
+
+    for a in assignments:
+        delay_str = f"+{a['delay_minutes']}min" if a["delay_minutes"] > 0 else "now"
+        print(f"  {Path(a['clip_path']).name} -> {a['platform']}/@{a['username']} ({delay_str})")
+
+    if dry_run:
+        print("\n[DRY RUN] No posts scheduled. Remove --dry-run to post for real.")
+        return
+
+    # Save assignments as post jobs
+    from src.models.distribution import PostJob, PostStatus
+    now = datetime.now(timezone.utc)
+
+    with get_db_session() as session:
+        for a in assignments:
+            # Store sound_name in post_caption metadata for the worker
+            caption = ""
+            if tiktok_sound_name:
+                caption = f"[sound:{tiktok_sound_name}]"
+
+            job = PostJob(
+                clip_id=0,
+                account_id=a["account_id"],
+                scheduled_at=now + timedelta(minutes=a["delay_minutes"]),
+                status=PostStatus.QUEUED,
+                post_caption=caption,
+                hashtags="",
+                error_message=a["clip_path"],
+            )
+            session.add(job)
+
+    print(f"\nScheduled {len(assignments)} posts. Run the post worker:")
+    print("  python -m src.cli post-worker")
+
+
+# ---------------------------------------------------------------------------
 # Phase 5: clip-and-post, post-worker
 # ---------------------------------------------------------------------------
 
@@ -555,6 +732,21 @@ def main():
     ta.add_argument("--platform", required=True, help="Platform (instagram, tiktok, twitter)")
     ta.add_argument("--username", required=True, help="Account username")
 
+    # add-sound
+    as_parser = subparsers.add_parser("add-sound", help="Download a trending sound from a TikTok URL")
+    as_parser.add_argument("url", type=str, help="TikTok video URL with the sound")
+    as_parser.add_argument("--name", required=True, help="Name for the sound (e.g., 'nettspend-dookie')")
+
+    # list-sounds
+    subparsers.add_parser("list-sounds", help="List all downloaded trending sounds")
+
+    # full-pipeline
+    fp = subparsers.add_parser("full-pipeline", help="Process videos + mix sound + post to TikTok")
+    fp.add_argument("folder", type=str, help="Input folder with video files")
+    fp.add_argument("--output", "-o", default="./output", help="Output directory for clips")
+    fp.add_argument("--sound", type=str, default=None, help="Name of trending sound to mix in")
+    fp.add_argument("--dry-run", action="store_true", help="Preview without posting")
+
     # clip-and-post
     cap = subparsers.add_parser("clip-and-post", help="Process videos and distribute to accounts")
     cap.add_argument("folder", type=str, help="Input folder with video files")
@@ -594,6 +786,9 @@ def main():
         "list-accounts": cmd_list_accounts,
         "login-account": cmd_login_account,
         "test-account": cmd_test_account,
+        "add-sound": cmd_add_sound,
+        "list-sounds": cmd_list_sounds,
+        "full-pipeline": cmd_full_pipeline,
         "clip-and-post": cmd_clip_and_post,
         "post-worker": cmd_post_worker,
         "process-url": cmd_process_url,

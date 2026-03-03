@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import subprocess
 
 import structlog
@@ -25,7 +26,7 @@ def call_claude(system_prompt: str, user_prompt: str) -> str:
         ["claude", "-p", full_prompt, "--output-format", "json"],
         capture_output=True,
         text=True,
-        timeout=300,
+        timeout=600,
         env=env,
     )
 
@@ -35,13 +36,41 @@ def call_claude(system_prompt: str, user_prompt: str) -> str:
     output = json.loads(result.stdout)
     text = output["result"]
 
-    # Strip markdown code fences if Claude wrapped the response
-    if text.startswith("```"):
-        lines = text.split("\n")
-        # Remove first line (```json) and last line (```)
-        lines = lines[1:]
-        if lines and lines[-1].strip() == "```":
-            lines = lines[:-1]
-        text = "\n".join(lines)
+    return _extract_json(text)
 
+
+def _extract_json(text: str) -> str:
+    """Extract JSON from Claude's response, handling various wrapper formats.
+
+    Claude sometimes returns:
+    - Pure JSON
+    - JSON wrapped in ```json...``` code fences
+    - Text explanation followed by ```json...``` code fences
+    """
+    text = text.strip()
+
+    # Try 1: It's already valid JSON
+    if text.startswith("{") or text.startswith("["):
+        return text
+
+    # Try 2: Extract from markdown code fences (possibly with preceding text)
+    fence_match = re.search(r"```(?:json)?\s*\n(.*?)```", text, re.DOTALL)
+    if fence_match:
+        return fence_match.group(1).strip()
+
+    # Try 3: Find the first { or [ and extract to matching close
+    for i, ch in enumerate(text):
+        if ch == "{":
+            # Find matching closing brace by counting depth
+            depth = 0
+            for j in range(i, len(text)):
+                if text[j] == "{":
+                    depth += 1
+                elif text[j] == "}":
+                    depth -= 1
+                    if depth == 0:
+                        return text[i : j + 1]
+            break
+
+    # Fallback: return as-is and let the caller handle the parse error
     return text
