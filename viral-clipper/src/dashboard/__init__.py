@@ -1,4 +1,4 @@
-"""Dashboard web application for POST agency landing page."""
+"""Dashboard web application for Aperture agency landing page."""
 
 from src.dashboard.app import create_app
 

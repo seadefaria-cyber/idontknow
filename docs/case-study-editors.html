@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeFaria NYC — Case Study: Two Editors, Real Results</title>
+<style>
+  @page {
+    size: letter portrait;
+    margin: 0;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #0E0E10;
+    color: #EFEFF1;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 8.5in;
+    height: 11in;
+    padding: 0.35in 0.45in;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .header-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ── Hero ── */
+  .hero {}
+
+  .hero-artist {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #FF6319;
+    margin-bottom: 4px;
+  }
+
+  .hero-tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #FF6319;
+    margin-bottom: 4px;
+  }
+
+  .hero-headline {
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+
+  .hero-headline span {
+    color: #FF6319;
+  }
+
+  .hero-sub {
+    font-size: 10.5px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.45;
+  }
+
+  /* ── Big Stats Row ── */
+  .big-stats {
+    display: flex;
+    gap: 10px;
+  }
+
+  .big-stat {
+    flex: 1;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+  }
+
+  .big-stat .number {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: #FF6319;
+  }
+
+  .big-stat .label {
+    font-size: 7.5px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-top: 2px;
+  }
+
+  /* ── Account Cards ── */
+  .accounts {
+    display: flex;
+    gap: 12px;
+  }
+
+  .account-card {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 14px 14px 12px;
+  }
+
+  .account-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .account-artist {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #FF6319;
+    margin-bottom: 2px;
+  }
+
+  .account-handle {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+  }
+
+  .account-platform {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .account-hero {
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.02);
+  }
+
+  .account-hero .number {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .account-hero .label {
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-top: 1px;
+  }
+
+  .account-stats {
+    list-style: none;
+  }
+
+  .account-stats li {
+    font-size: 9.5px;
+    padding: 3.5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .account-stats li:last-child {
+    border-bottom: none;
+  }
+
+  .stat-label {
+    color: rgba(255,255,255,0.38);
+    font-size: 9px;
+  }
+
+  .stat-value {
+    font-weight: 600;
+    font-size: 9.5px;
+  }
+
+  .top-posts {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .top-posts-label {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 3px;
+  }
+
+  .top-post {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 0;
+  }
+
+  .top-post .title {
+    font-size: 8.5px;
+    color: rgba(255,255,255,0.45);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60%;
+  }
+
+  .top-post .views {
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  /* ── Audience Bar ── */
+  .audience-bar {
+    display: flex;
+    gap: 10px;
+  }
+
+  .audience-item {
+    flex: 1;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+
+  .audience-item .aud-label {
+    font-size: 7.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 3px;
+  }
+
+  .audience-item .aud-value {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .audience-item .aud-detail {
+    font-size: 8.5px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 1px;
+  }
+
+  /* ── Clients Bar ── */
+  .clients-bar {
+    padding: 10px 14px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+  }
+
+  .clients-bar .clients-label {
+    font-size: 7.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 5px;
+  }
+
+  .clients-list {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .clients-list .client-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    white-space: nowrap;
+  }
+
+  .clients-list .client-sep {
+    font-size: 9px;
+    color: rgba(255,255,255,0.15);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-note {
+    font-size: 8.5px;
+    color: rgba(255,255,255,0.25);
+    line-height: 1.4;
+    max-width: 70%;
+  }
+
+  .footer-email {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.6);
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">deFaria</div>
+    <div class="header-label">Case Study</div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-artist">Asspizza</div>
+    <div class="hero-tag">2 Editors · 2 Accounts · Built from Zero</div>
+    <div class="hero-headline"><span>10M+ views</span> and <span>1.4M likes</span> with dedicated editors</div>
+    <div class="hero-sub">Two accounts, two real editors clipping and distributing daily. Both started from scratch — no paid promotion, no bots, just consistent content and strategic clipping.</div>
+  </div>
+
+  <!-- Big Stats (Combined) -->
+  <div class="big-stats">
+    <div class="big-stat">
+      <div class="number">10.4M</div>
+      <div class="label">Combined Views</div>
+    </div>
+    <div class="big-stat">
+      <div class="number">1.4M</div>
+      <div class="label">Combined Likes</div>
+    </div>
+    <div class="big-stat">
+      <div class="number">14.1K</div>
+      <div class="label">Followers Built</div>
+    </div>
+    <div class="big-stat">
+      <div class="number">2</div>
+      <div class="label">Dedicated Editors</div>
+    </div>
+  </div>
+
+  <!-- Account Cards -->
+  <div class="accounts">
+
+    <!-- Asspizza -->
+    <div class="account-card">
+      <div class="account-card-header">
+        <div>
+          <div class="account-artist">Asspizza</div>
+          <div class="account-handle">@asspizza2026</div>
+        </div>
+        <div class="account-platform">TikTok + IG</div>
+      </div>
+      <div class="account-hero">
+        <div class="number">9.8M</div>
+        <div class="label">TikTok Views (90 Days)</div>
+      </div>
+      <ul class="account-stats">
+        <li><span class="stat-label">TikTok Followers</span><span class="stat-value">5,833</span></li>
+        <li><span class="stat-label">TikTok Likes</span><span class="stat-value">715K</span></li>
+        <li><span class="stat-label">Shares</span><span class="stat-value">29K</span></li>
+        <li><span class="stat-label">IG Followers</span><span class="stat-value">1,304</span></li>
+        <li><span class="stat-label">IG Views (90d)</span><span class="stat-value">605K</span></li>
+      </ul>
+      <div class="top-posts">
+        <div class="top-posts-label">Top Performing</div>
+        <div class="top-post"><span class="title">Fat Nick / Lil Peep</span><span class="views">691K</span></div>
+        <div class="top-post"><span class="title">Street Artist Lewis</span><span class="views">463K</span></div>
+        <div class="top-post"><span class="title">Kanye stealing idea</span><span class="views">322K</span></div>
+      </div>
+    </div>
+
+    <!-- 730 Archive -->
+    <div class="account-card">
+      <div class="account-card-header">
+        <div>
+          <div class="account-artist">730 Archive</div>
+          <div class="account-handle">@730.archive</div>
+        </div>
+        <div class="account-platform">TikTok</div>
+      </div>
+      <div class="account-hero">
+        <div class="number">703.6K</div>
+        <div class="label">Total Likes</div>
+      </div>
+      <ul class="account-stats">
+        <li><span class="stat-label">Followers</span><span class="stat-value">8,279</span></li>
+        <li><span class="stat-label">Likes</span><span class="stat-value">703.6K</span></li>
+        <li><span class="stat-label">Videos Posted</span><span class="stat-value">108</span></li>
+        <li><span class="stat-label">Avg Likes / Video</span><span class="stat-value">6.5K</span></li>
+        <li><span class="stat-label">Content Type</span><span class="stat-value">Archive clips</span></li>
+      </ul>
+      <div class="top-posts">
+        <div class="top-posts-label">Account Details</div>
+        <div class="top-post"><span class="title">Underground rap archive</span><span class="views"></span></div>
+        <div class="top-post"><span class="title">Curated rare footage</span><span class="views"></span></div>
+        <div class="top-post"><span class="title">Daily posting cadence</span><span class="views"></span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Audience Bar -->
+  <div class="audience-bar">
+    <div class="audience-item">
+      <div class="aud-label">Editors</div>
+      <div class="aud-value">2 Dedicated</div>
+      <div class="aud-detail">Real editors, real creative decisions</div>
+    </div>
+    <div class="audience-item">
+      <div class="aud-label">Discovery Rate</div>
+      <div class="aud-value">86.7%</div>
+      <div class="aud-detail">Views from non-followers</div>
+    </div>
+    <div class="audience-item">
+      <div class="aud-label">Timeframe</div>
+      <div class="aud-value">90 days</div>
+      <div class="aud-detail">Nov 2025 — Feb 2026</div>
+    </div>
+    <div class="audience-item">
+      <div class="aud-label">Starting Point</div>
+      <div class="aud-value">Zero</div>
+      <div class="aud-detail">Both accounts from scratch</div>
+    </div>
+  </div>
+
+  <!-- Clients -->
+  <div class="clients-bar">
+    <div class="clients-label">Other Clients</div>
+    <div class="clients-list">
+      <span class="client-name">Nettspend</span>
+      <span class="client-sep">/</span>
+      <span class="client-name">Chris Heyn Show</span>
+      <span class="client-sep">/</span>
+      <span class="client-name">Welcome JPEG</span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-note">All metrics pulled from TikTok Studio, Instagram Professional Dashboard &amp; public profiles. Results vary by artist, content quality, and market.</div>
+    <div class="footer-email">sean@defaria.nyc</div>
+  </div>
+
+</body>
+</html>

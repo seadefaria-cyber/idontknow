@@ -1,0 +1,27 @@
+# Large media files (stored locally, not in git)
+raw/*.mp4
+raw/*.mov
+raw/*.jpg
+raw/*.png
+output/
+sounds/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Temp extraction frames
+frame_*.png
+frame_half_*.png
+style_ref_*.png
+reference_short.*
+tiktok_thumbnail.jpg
+
+# Large reference videos/images (keep structure, not binaries)
+references/*.mp4
+references/*.image
+
+# Keep subtitle files
+!raw/subs/
+
+# Keep reference images and docs
+!references/*.jpg

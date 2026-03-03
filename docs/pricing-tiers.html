@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeFaria NYC — Pricing</title>
+<style>
+  @page {
+    size: letter portrait;
+    margin: 0;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #0E0E10;
+    color: #EFEFF1;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 8.5in;
+    height: 11in;
+    padding: 0.4in 0.4in;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* ── Header ── */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    margin-bottom: 14px;
+  }
+
+  .logo {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .pricing-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ── Platform Banner ── */
+  .platform-banner {
+    text-align: center;
+    margin-bottom: 14px;
+  }
+
+  .platform-banner p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 6px;
+  }
+
+  .platform-note {
+    font-size: 9.5px;
+    color: rgba(255,255,255,0.28);
+  }
+
+  /* ── Tiers ── */
+  .tiers {
+    display: flex;
+    gap: 10px;
+  }
+
+  .tier {
+    flex: 1;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 16px 12px 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tier-name {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .tier.seed .tier-name    { color: #FCCC0A; }
+  .tier.starter .tier-name { color: #FF6319; }
+  .tier.growth .tier-name  { color: #0039A6; }
+  .tier.pro .tier-name     { color: #00933C; }
+
+  .tier.seed    { border-top: 3px solid #FCCC0A; }
+  .tier.starter { border-top: 3px solid #FF6319; }
+  .tier.growth  { border-top: 3px solid #0039A6; }
+  .tier.pro     { border-top: 3px solid #00933C; }
+
+  .tier-tagline {
+    font-size: 9.5px;
+    color: rgba(255,255,255,0.28);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .price {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 1px;
+  }
+
+  .price span {
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0;
+  }
+
+  .setup {
+    font-size: 9.5px;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 12px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 10px;
+  }
+
+  /* ── Platform Breakdown ── */
+  .platform-breakdown {
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.02);
+    padding: 10px 10px 6px;
+    margin-bottom: 10px;
+  }
+
+  .platform-breakdown .section-label {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 8px;
+  }
+
+  .platform-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .platform-row:last-of-type {
+    border-bottom: none;
+  }
+
+  .platform-row .name {
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .platform-row .count {
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  /* ── Total bar ── */
+  .total-bar {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .total-bar .total-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .total-bar .total-number {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .tier.seed .total-bar .total-number    { color: #FCCC0A; }
+  .tier.starter .total-bar .total-number { color: #FF6319; }
+  .tier.growth .total-bar .total-number  { color: #0039A6; }
+  .tier.pro .total-bar .total-number     { color: #00933C; }
+
+  /* ── Features ── */
+  .features {
+    list-style: none;
+    flex: 1;
+  }
+
+  .features li {
+    font-size: 10px;
+    line-height: 1.3;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .features li:last-child {
+    border-bottom: none;
+  }
+
+  .feature-label {
+    color: rgba(255,255,255,0.4);
+    font-size: 9.5px;
+  }
+
+  .feature-value {
+    font-weight: 600;
+    font-size: 10px;
+    text-align: right;
+  }
+
+  .feature-value.subtle {
+    color: rgba(255,255,255,0.35);
+    font-weight: 400;
+  }
+
+  .feature-value.dash {
+    color: rgba(255,255,255,0.2);
+    font-weight: 400;
+  }
+
+  .feature-value.check {
+    color: #00933C;
+  }
+
+  /* ── Elite Tier ── */
+  .elite {
+    margin-top: 12px;
+    padding: 14px 18px;
+    border: 1px solid rgba(185, 51, 173, 0.35);
+    border-top: 3px solid #B933AD;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .elite-left {
+    flex: 1;
+  }
+
+  .elite-name {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #B933AD;
+    margin-bottom: 4px;
+  }
+
+  .elite-headline {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.2px;
+  }
+
+  .elite-desc {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.45;
+  }
+
+  .elite-right {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .elite-cta {
+    font-size: 13px;
+    font-weight: 700;
+    color: #B933AD;
+    letter-spacing: -0.2px;
+  }
+
+  .elite-sub {
+    font-size: 9px;
+    color: rgba(255,255,255,0.3);
+    margin-top: 2px;
+  }
+
+  /* ── Ramp-up Note ── */
+  .ramp-note {
+    margin-top: 12px;
+    padding: 8px 12px;
+    border-left: 3px solid rgba(255,255,255,0.12);
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.4;
+  }
+
+  /* ── Add-Ons ── */
+  .addons {
+    margin-top: 10px;
+    padding: 10px 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .addons-title {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    white-space: nowrap;
+  }
+
+  .addon-items {
+    display: flex;
+    gap: 24px;
+  }
+
+  .addon-item {
+    font-size: 10px;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .addon-item strong {
+    color: #EFEFF1;
+    font-weight: 600;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-note {
+    font-size: 9px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .footer-email {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.3px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">deFaria</div>
+    <div class="pricing-label">Pricing</div>
+  </div>
+
+  <!-- Platform Banner -->
+  <div class="platform-banner">
+    <p>Every post goes live daily on TikTok, Instagram, X & YouTube Shorts</p>
+    <div class="platform-note">Platform mix finalized on your onboarding call</div>
+  </div>
+
+  <!-- Tiers -->
+  <div class="tiers">
+
+    <!-- Seed -->
+    <div class="tier seed">
+      <div class="tier-name">Seed</div>
+      <div class="tier-tagline">Sound, text overlays & distribution</div>
+      <div class="price">$1,000<span>/mo</span></div>
+      <div class="setup">$500 one-time setup</div>
+      <hr class="divider">
+
+      <div class="platform-breakdown">
+        <div class="section-label">Daily Posts Per Platform</div>
+        <div class="platform-row"><span class="name">TikTok</span><span class="count">1 / day</span></div>
+        <div class="platform-row"><span class="name">Instagram</span><span class="count">1 / day</span></div>
+        <div class="platform-row"><span class="name">X</span><span class="count">1 / day</span></div>
+        <div class="platform-row"><span class="name">YouTube Shorts</span><span class="count">1 / day</span></div>
+        <div class="total-bar">
+          <span class="total-label">Total Daily</span>
+          <span class="total-number">4</span>
+        </div>
+      </div>
+
+      <ul class="features">
+        <li><span class="feature-label">Accounts</span><span class="feature-value">1 per platform</span></li>
+        <li><span class="feature-label">Editing</span><span class="feature-value subtle">Sound & overlays</span></li>
+        <li><span class="feature-label">Performance Report</span><span class="feature-value">Weekly</span></li>
+        <li><span class="feature-label">Strategy Call</span><span class="feature-value subtle">Optional</span></li>
+      </ul>
+    </div>
+
+    <!-- Starter -->
+    <div class="tier starter">
+      <div class="tier-name">Starter</div>
+      <div class="tier-tagline">Dedicated editor, full-service clips</div>
+      <div class="price">$2,000<span>/mo</span></div>
+      <div class="setup">$500 one-time setup</div>
+      <hr class="divider">
+
+      <div class="platform-breakdown">
+        <div class="section-label">Daily Posts Per Platform</div>
+        <div class="platform-row"><span class="name">TikTok</span><span class="count">2 / day</span></div>
+        <div class="platform-row"><span class="name">Instagram</span><span class="count">2 / day</span></div>
+        <div class="platform-row"><span class="name">X</span><span class="count">2 / day</span></div>
+        <div class="platform-row"><span class="name">YouTube Shorts</span><span class="count">2 / day</span></div>
+        <div class="total-bar">
+          <span class="total-label">Total Daily</span>
+          <span class="total-number">8</span>
+        </div>
+      </div>
+
+      <ul class="features">
+        <li><span class="feature-label">Accounts</span><span class="feature-value">1 per platform</span></li>
+        <li><span class="feature-label">Editing</span><span class="feature-value check">Dedicated editor</span></li>
+        <li><span class="feature-label">Performance Report</span><span class="feature-value">Weekly</span></li>
+        <li><span class="feature-label">Strategy Call</span><span class="feature-value subtle">Optional</span></li>
+      </ul>
+    </div>
+
+    <!-- Growth -->
+    <div class="tier growth">
+      <div class="tier-name">Growth</div>
+      <div class="tier-tagline">Dedicated editor, scaled output</div>
+      <div class="price">$3,500<span>/mo</span></div>
+      <div class="setup">$500 one-time setup</div>
+      <hr class="divider">
+
+      <div class="platform-breakdown">
+        <div class="section-label">Daily Posts Per Platform</div>
+        <div class="platform-row"><span class="name">TikTok</span><span class="count">4 / day</span></div>
+        <div class="platform-row"><span class="name">Instagram</span><span class="count">4 / day</span></div>
+        <div class="platform-row"><span class="name">X</span><span class="count">4 / day</span></div>
+        <div class="platform-row"><span class="name">YouTube Shorts</span><span class="count">4 / day</span></div>
+        <div class="total-bar">
+          <span class="total-label">Total Daily</span>
+          <span class="total-number">16</span>
+        </div>
+      </div>
+
+      <ul class="features">
+        <li><span class="feature-label">Accounts</span><span class="feature-value">1 per platform</span></li>
+        <li><span class="feature-label">Editing</span><span class="feature-value check">Dedicated editor</span></li>
+        <li><span class="feature-label">Performance Report</span><span class="feature-value">Weekly</span></li>
+        <li><span class="feature-label">Strategy Call</span><span class="feature-value subtle">Optional</span></li>
+      </ul>
+    </div>
+
+    <!-- Pro -->
+    <div class="tier pro">
+      <div class="tier-name">Pro</div>
+      <div class="tier-tagline">Dedicated editor, maximum saturation</div>
+      <div class="price">$5,000<span>/mo</span></div>
+      <div class="setup">$500 one-time setup</div>
+      <hr class="divider">
+
+      <div class="platform-breakdown">
+        <div class="section-label">Daily Posts Per Platform</div>
+        <div class="platform-row"><span class="name">TikTok</span><span class="count">8 / day</span></div>
+        <div class="platform-row"><span class="name">Instagram</span><span class="count">8 / day</span></div>
+        <div class="platform-row"><span class="name">X</span><span class="count">8 / day</span></div>
+        <div class="platform-row"><span class="name">YouTube Shorts</span><span class="count">8 / day</span></div>
+        <div class="total-bar">
+          <span class="total-label">Total Daily</span>
+          <span class="total-number">32</span>
+        </div>
+      </div>
+
+      <ul class="features">
+        <li><span class="feature-label">Accounts</span><span class="feature-value">1 per platform</span></li>
+        <li><span class="feature-label">Editing</span><span class="feature-value check">Dedicated editor</span></li>
+        <li><span class="feature-label">Performance Report</span><span class="feature-value">Weekly</span></li>
+        <li><span class="feature-label">Strategy Call</span><span class="feature-value subtle">Optional</span></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Elite Tier -->
+  <div class="elite">
+    <div class="elite-left">
+      <div class="elite-name">Elite</div>
+      <div class="elite-headline">Everything in Pro + publication & media seeding</div>
+      <div class="elite-desc">We curate which publications, blogs, and media outlets make sense for your artist — then seed directly to them. Custom strategy, custom pricing.</div>
+    </div>
+    <div class="elite-right">
+      <div class="elite-cta">Let's talk</div>
+      <div class="elite-sub">Custom pricing</div>
+    </div>
+  </div>
+
+  <!-- Ramp-up Note -->
+  <div class="ramp-note">
+    Please allow 2–3 weeks for organic account growth before results take effect.
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-note">3-month minimum contract &nbsp;·&nbsp; Setup covers account activation, scheduling setup & editor onboarding</div>
+    <div class="footer-email">sean@defaria.nyc</div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeFaria NYC — Pages We Run</title>
+<style>
+  @page {
+    size: letter portrait;
+    margin: 0;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #0E0E10;
+    color: #EFEFF1;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 8.5in;
+    height: 11in;
+    padding: 0.4in 0.45in;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* ── Header ── */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .header-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ── Intro ── */
+  .intro {
+    text-align: center;
+  }
+
+  .intro h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+
+  .intro p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    max-width: 85%;
+    margin: 0 auto;
+  }
+
+  /* ── Pages Grid ── */
+  .pages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .page-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 16px 16px 14px;
+  }
+
+  .page-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+
+  .page-artist {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #FF6319;
+    margin-bottom: 2px;
+  }
+
+  .page-handle {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .page-platform {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-top: 2px;
+  }
+
+  .page-stats {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .page-stat {
+    flex: 1;
+    text-align: center;
+    padding: 8px 0;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.02);
+  }
+
+  .page-stat .number {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .page-stat .label {
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-top: 1px;
+  }
+
+  .page-highlight {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .page-highlight .hl-label {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .page-highlight .hl-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #FF6319;
+  }
+
+  /* ── Featured card (Lexa Gates - big one) ── */
+  .featured {
+    border: 1px solid rgba(255,99,25,0.3);
+    border-top: 3px solid #FF6319;
+  }
+
+  /* ── Summary Bar ── */
+  .summary {
+    display: flex;
+    gap: 10px;
+  }
+
+  .summary-item {
+    flex: 1;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 12px 10px;
+  }
+
+  .summary-item .sum-number {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #FF6319;
+  }
+
+  .summary-item .sum-label {
+    font-size: 7.5px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-top: 2px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-note {
+    font-size: 8.5px;
+    color: rgba(255,255,255,0.25);
+    line-height: 1.4;
+    max-width: 65%;
+  }
+
+  .footer-email {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.6);
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">deFaria</div>
+    <div class="header-label">Portfolio</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro">
+    <h1>Pages We Run</h1>
+    <p>Other pages we run — take a look at what our editors can do.</p>
+  </div>
+
+  <!-- Pages Grid -->
+  <div class="pages">
+
+    <!-- Lexa Gates -->
+    <div class="page-card featured">
+      <div class="page-card-header">
+        <div>
+          <div class="page-artist">Lexa Gates</div>
+          <div class="page-handle">@lexagatesangels</div>
+        </div>
+        <div class="page-platform">TikTok</div>
+      </div>
+      <div class="page-stats">
+        <div class="page-stat">
+          <div class="number">249.8K</div>
+          <div class="label">Followers</div>
+        </div>
+        <div class="page-stat">
+          <div class="number">23.1M</div>
+          <div class="label">Likes</div>
+        </div>
+      </div>
+      <div class="page-highlight">
+        <span class="hl-label">Top Video</span>
+        <span class="hl-value">77.4M</span>
+      </div>
+    </div>
+
+    <!-- CeCe -->
+    <div class="page-card">
+      <div class="page-card-header">
+        <div>
+          <div class="page-artist">CeCe</div>
+          <div class="page-handle">@cecehq</div>
+        </div>
+        <div class="page-platform">TikTok</div>
+      </div>
+      <div class="page-stats">
+        <div class="page-stat">
+          <div class="number">8.1K</div>
+          <div class="label">Followers</div>
+        </div>
+        <div class="page-stat">
+          <div class="number">46.5K</div>
+          <div class="label">Likes</div>
+        </div>
+      </div>
+      <div class="page-highlight">
+        <span class="hl-label">Top Video</span>
+        <span class="hl-value">403.3K</span>
+      </div>
+    </div>
+
+    <!-- D Savage -->
+    <div class="page-card">
+      <div class="page-card-header">
+        <div>
+          <div class="page-artist">D Savage</div>
+          <div class="page-handle">@dsavagevault</div>
+        </div>
+        <div class="page-platform">TikTok</div>
+      </div>
+      <div class="page-stats">
+        <div class="page-stat">
+          <div class="number">4.7K</div>
+          <div class="label">Followers</div>
+        </div>
+        <div class="page-stat">
+          <div class="number">1.1M</div>
+          <div class="label">Likes</div>
+        </div>
+      </div>
+      <div class="page-highlight">
+        <span class="hl-label">Videos Posted</span>
+        <span class="hl-value">295</span>
+      </div>
+    </div>
+
+    <!-- 730 Archive -->
+    <div class="page-card">
+      <div class="page-card-header">
+        <div>
+          <div class="page-artist">730 Archive</div>
+          <div class="page-handle">@730.archive</div>
+        </div>
+        <div class="page-platform">TikTok</div>
+      </div>
+      <div class="page-stats">
+        <div class="page-stat">
+          <div class="number">8.3K</div>
+          <div class="label">Followers</div>
+        </div>
+        <div class="page-stat">
+          <div class="number">703.6K</div>
+          <div class="label">Likes</div>
+        </div>
+      </div>
+      <div class="page-highlight">
+        <span class="hl-label">Videos Posted</span>
+        <span class="hl-value">108</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Summary -->
+  <div class="summary">
+    <div class="summary-item">
+      <div class="sum-number">4</div>
+      <div class="sum-label">Artists</div>
+    </div>
+    <div class="summary-item">
+      <div class="sum-number">271K+</div>
+      <div class="sum-label">Total Followers</div>
+    </div>
+    <div class="summary-item">
+      <div class="sum-number">25M+</div>
+      <div class="sum-label">Total Likes</div>
+    </div>
+    <div class="summary-item">
+      <div class="sum-number">77.4M</div>
+      <div class="sum-label">Top Single Video</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-note">All accounts built and operated from scratch. Stats pulled from TikTok public profiles. Results vary by artist and content volume.</div>
+    <div class="footer-email">sean@defaria.nyc</div>
+  </div>
+
+</body>
+</html>

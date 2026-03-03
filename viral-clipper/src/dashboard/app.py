@@ -1,4 +1,4 @@
-"""FastAPI application factory for the POST agency landing page."""
+"""FastAPI application factory for the Aperture agency landing page."""
 
 from pathlib import Path
 
@@ -16,7 +16,7 @@ contact_submissions: list[dict] = []
 
 
 def create_app() -> FastAPI:
-    app = FastAPI(title="POST Agency", docs_url=None, redoc_url=None)
+    app = FastAPI(title="Aperture", docs_url=None, redoc_url=None)
 
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
@@ -25,6 +25,14 @@ def create_app() -> FastAPI:
     @app.get("/", response_class=HTMLResponse)
     async def landing(request: Request):
         return templates.TemplateResponse(request, "landing.html")
+
+    @app.get("/terms", response_class=HTMLResponse)
+    async def terms(request: Request):
+        return templates.TemplateResponse(request, "terms.html")
+
+    @app.get("/privacy", response_class=HTMLResponse)
+    async def privacy(request: Request):
+        return templates.TemplateResponse(request, "privacy.html")
 
     @app.post("/contact", response_class=HTMLResponse)
     async def contact(

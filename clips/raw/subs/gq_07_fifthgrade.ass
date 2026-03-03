@@ -1,0 +1,22 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Arial,30,&H0000FFFF,&H000000FF,&H00000000,&H80000000,-1,0,0,0,100,100,1,0,1,3,0,2,20,20,340,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.50,0:00:01.52,Default,,0,0,0,,I STARTED MAKING
+Dialogue: 0,0:00:01.52,0:00:02.54,Default,,0,0,0,,MUSIC IN FIFTH
+Dialogue: 0,0:00:02.54,0:00:03.56,Default,,0,0,0,,GRADE CUZ MY
+Dialogue: 0,0:00:03.56,0:00:04.58,Default,,0,0,0,,DAD MAKES COUNTRY
+Dialogue: 0,0:00:04.58,0:00:05.59,Default,,0,0,0,,MUSIC I LOVE
+Dialogue: 0,0:00:05.59,0:00:06.62,Default,,0,0,0,,MAKING MUSIC I
+Dialogue: 0,0:00:06.62,0:00:07.64,Default,,0,0,0,,DON'T WANT TO
+Dialogue: 0,0:00:07.64,0:00:08.66,Default,,0,0,0,,STOP NOTHING EVER
+Dialogue: 0,0:00:08.66,0:00:09.67,Default,,0,0,0,,FEELS LIKE IT'S
+Dialogue: 0,0:00:09.67,0:00:10.69,Default,,0,0,0,,ENOUGH

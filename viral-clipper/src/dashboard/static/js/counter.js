@@ -1,6 +1,6 @@
 /* ── The Number — count up animation ──────── */
 function animateCounter(el) {
-    const target = parseInt(el.dataset.target, 10);
+    const target = parseInt(el.dataset.display || el.dataset.target, 10);
     const suffix = el.dataset.suffix || '';
     const duration = 2500;
     const start = performance.now();

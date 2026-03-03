@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tempo — Content Scheduling</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #14141f;
+    --surface-2: #1e1e2e;
+    --border: #2a2a3a;
+    --text: #f0f0f5;
+    --muted: #8888a0;
+    --accent: #7c3aed;
+    --accent-glow: rgba(124, 58, 237, 0.3);
+    --green: #22c55e;
+    --pink: #ec4899;
+    --blue: #3b82f6;
+    --orange: #f97316;
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #7c3aed, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 28px;
+    align-items: center;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--text); }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    color: white;
+    box-shadow: 0 4px 20px var(--accent-glow);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--accent-glow);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--accent);
+  }
+
+  .btn-large {
+    padding: 16px 40px;
+    font-size: 17px;
+    border-radius: 12px;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    background: var(--surface);
+  }
+
+  .badge strong { color: var(--green); }
+
+  .hero h1 {
+    font-size: 64px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, #7c3aed, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero p {
+    font-size: 20px;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 40px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  /* STATS */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+    padding: 60px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #7c3aed, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .stat-label {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* FEATURES */
+  .features {
+    padding: 100px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .features-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .features-header h2 {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+
+  .features-header p {
+    color: var(--muted);
+    font-size: 18px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .feature {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px;
+    transition: all 0.3s;
+  }
+
+  .feature:hover {
+    border-color: #3a3a5a;
+    transform: translateY(-2px);
+  }
+
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .feature:nth-child(1) .feature-icon { background: rgba(124, 58, 237, 0.15); }
+  .feature:nth-child(2) .feature-icon { background: rgba(236, 72, 153, 0.15); }
+  .feature:nth-child(3) .feature-icon { background: rgba(59, 130, 246, 0.15); }
+  .feature:nth-child(4) .feature-icon { background: rgba(34, 197, 94, 0.15); }
+
+  .feature h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .feature p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* PLATFORMS */
+  .platforms {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px 60px 80px;
+  }
+
+  .platform {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .platform-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  /* CTA */
+  .cta {
+    text-align: center;
+    padding: 100px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta::before {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 400px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta h2 {
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+
+  .cta p {
+    color: var(--muted);
+    font-size: 18px;
+    margin-bottom: 36px;
+  }
+</style>
+</head>
+<body>
+  <nav>
+    <div class="logo">TEMPO</div>
+    <ul>
+      <li><a href="#">Features</a></li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#">Creators</a></li>
+      <li><a href="#" class="btn btn-outline">Log in</a></li>
+      <li><a href="#" class="btn btn-primary">Get started</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="badge">&#10024; Now with AI captions &mdash; <strong>New</strong></div>
+    <h1>Stop posting.<br>Start <em>publishing</em>.</h1>
+    <p>One workspace to plan, create, and schedule content across every platform that matters.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-primary btn-large">Start free trial</a>
+      <a href="#" class="btn btn-outline btn-large">Watch demo</a>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <div class="stat-number">12M+</div>
+      <div class="stat-label">Posts scheduled</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">8,200</div>
+      <div class="stat-label">Active creators</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">4.9</div>
+      <div class="stat-label">Average rating</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">6</div>
+      <div class="stat-label">Platforms supported</div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="features-header">
+      <h2>Everything you need to ship content</h2>
+      <p>From first draft to published &mdash; without switching tabs.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-icon">&#128197;</div>
+        <h3>Drag & Drop Calendar</h3>
+        <p>See your entire content pipeline at a glance. Move posts between days with a click. Batch-schedule a week in minutes.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">&#127912;</div>
+        <h3>Multi-Platform Composer</h3>
+        <p>Write once, customize per platform. Preview exactly how your post looks on Twitter, Instagram, LinkedIn, and TikTok.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">&#128202;</div>
+        <h3>Analytics Dashboard</h3>
+        <p>Track engagement, reach, and growth across all platforms. Weekly reports show what's working and what to try next.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">&#9889;</div>
+        <h3>AI Writing Assistant</h3>
+        <p>Generate captions, hashtag sets, and thread ideas from a single prompt. Edit and refine until it sounds like you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="platforms">
+    <div class="platform"><div class="platform-dot" style="background: #1da1f2"></div>Twitter / X</div>
+    <div class="platform"><div class="platform-dot" style="background: #e4405f"></div>Instagram</div>
+    <div class="platform"><div class="platform-dot" style="background: #0a66c2"></div>LinkedIn</div>
+    <div class="platform"><div class="platform-dot" style="background: #ff0050"></div>TikTok</div>
+    <div class="platform"><div class="platform-dot" style="background: #ff0000"></div>YouTube</div>
+    <div class="platform"><div class="platform-dot" style="background: #0866ff"></div>Threads</div>
+  </section>
+
+  <section class="cta">
+    <h2>Your audience is waiting</h2>
+    <p>14-day free trial. No credit card. Cancel anytime.</p>
+    <a href="#" class="btn btn-primary btn-large">Start scheduling now</a>
+  </section>
+</body>
+</html>
