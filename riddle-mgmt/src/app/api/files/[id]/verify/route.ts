@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import getDb from "@/lib/db";
+import { dbGet } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -21,15 +21,13 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       return NextResponse.json({ error: "File password is required" }, { status: 400 });
     }
 
-    const db = getDb();
-
     // Get file and verify ownership (or admin)
-    const file = db.prepare("SELECT * FROM files WHERE id = ?").get(id) as {
+    const file = await dbGet<{
       id: string;
       user_id: string;
       password_hash: string;
       original_name: string;
-    } | undefined;
+    }>("SELECT * FROM files WHERE id = ?", [id]);
 
     if (!file) {
       return NextResponse.json({ error: "File not found" }, { status: 404 });

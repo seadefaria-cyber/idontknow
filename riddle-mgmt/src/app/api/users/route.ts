@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import getDb from "@/lib/db";
+import { dbAll } from "@/lib/db";
 
 export async function GET() {
   const session = await getSession();
@@ -12,8 +12,7 @@ export async function GET() {
     return NextResponse.json({ error: "Not authorized" }, { status: 403 });
   }
 
-  const db = getDb();
-  const users = db.prepare("SELECT id, username, display_name, role, created_at FROM users ORDER BY created_at DESC").all();
+  const users = await dbAll("SELECT id, username, display_name, role, created_at FROM users ORDER BY created_at DESC");
 
   return NextResponse.json({ users });
 }

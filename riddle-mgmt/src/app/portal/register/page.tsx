@@ -58,7 +58,7 @@ export default function Register() {
           <h1 className="text-lg font-light tracking-tight animate-fade-in">
             Create Account
           </h1>
-          <p className="text-xs text-white/30 mt-3 tracking-wide animate-fade-in delay-100">
+          <p className="text-xs text-gray-400 mt-3 tracking-wide animate-fade-in delay-100">
             Set up your client portal access
           </p>
         </div>
@@ -107,7 +107,7 @@ export default function Register() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-lg text-xs tracking-[0.2em] uppercase bg-white text-black hover:bg-white/90 transition-all duration-300 font-medium disabled:opacity-50"
+              className="w-full py-3 rounded-lg text-xs tracking-[0.2em] uppercase bg-gray-900 text-white hover:bg-gray-800 transition-all duration-300 font-medium disabled:opacity-50"
             >
               {loading ? "Creating..." : "Create Account"}
             </button>
@@ -118,7 +118,7 @@ export default function Register() {
         <div className="text-center mt-8 animate-fade-in delay-600">
           <Link
             href="/portal"
-            className="text-xs text-white/30 hover:text-white/60 transition-colors duration-300 tracking-wide"
+            className="text-xs text-gray-400 hover:text-gray-500 transition-colors duration-300 tracking-wide"
           >
             Already have an account? Sign in
           </Link>

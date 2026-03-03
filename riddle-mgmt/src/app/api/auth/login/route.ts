@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import getDb from "@/lib/db";
+import { dbGet } from "@/lib/db";
 import { createToken, sessionCookieOptions } from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
@@ -11,15 +11,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Username and password are required" }, { status: 400 });
     }
 
-    const db = getDb();
-
-    const user = db.prepare("SELECT * FROM users WHERE username = ?").get(username.toLowerCase().trim()) as {
+    const user = await dbGet<{
       id: string;
       username: string;
       password_hash: string;
       display_name: string;
       role: string;
-    } | undefined;
+    }>("SELECT * FROM users WHERE username = ?", [username.toLowerCase().trim()]);
 
     if (!user) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });

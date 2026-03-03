@@ -14,10 +14,10 @@ export default function About() {
         <h1 className="text-2xl font-light tracking-tight animate-fade-in">
           About
         </h1>
-        <div className="w-8 h-px bg-white/10 mt-4 mb-10 animate-fade-in delay-100" />
+        <div className="w-8 h-px bg-gray-200 mt-4 mb-10 animate-fade-in delay-100" />
 
         {/* Bio */}
-        <div className="space-y-6 text-sm leading-relaxed text-white/60 font-light">
+        <div className="space-y-6 text-sm leading-relaxed text-gray-500 font-light">
           <p className="animate-fade-in delay-200">
             Riddle Management is a Los Angeles-based artist management
             company founded by Nolan Riddle.
@@ -37,18 +37,18 @@ export default function About() {
 
         {/* Selected Credits */}
         <div className="mt-16">
-          <h2 className="text-xs tracking-[0.2em] uppercase text-white/30 mb-6 animate-fade-in delay-400">
+          <h2 className="text-xs tracking-[0.2em] uppercase text-gray-400 mb-6 animate-fade-in delay-400">
             Selected Credits
           </h2>
           <div className="space-y-4">
             {credits.map((credit, i) => (
               <div
                 key={i}
-                className={`flex flex-col sm:flex-row sm:justify-between sm:items-baseline border-b border-white/5 pb-3 gap-0.5 sm:gap-4 animate-fade-in`}
+                className={`flex flex-col sm:flex-row sm:justify-between sm:items-baseline border-b border-gray-100 pb-3 gap-0.5 sm:gap-4 animate-fade-in`}
                 style={{ animationDelay: `${0.4 + i * 0.1}s`, opacity: 0 }}
               >
-                <span className="text-sm text-white/80 font-light">{credit.artist}</span>
-                <span className="text-xs text-white/30">{credit.project}</span>
+                <span className="text-sm text-gray-700 font-light">{credit.artist}</span>
+                <span className="text-xs text-gray-400">{credit.project}</span>
               </div>
             ))}
           </div>
@@ -58,7 +58,7 @@ export default function About() {
         <div className="mt-16 animate-fade-in delay-700">
           <Link
             href="/contact"
-            className="text-xs tracking-[0.2em] uppercase text-white/40 hover:text-white transition-all duration-300 link-underline"
+            className="text-xs tracking-[0.2em] uppercase text-gray-500 hover:text-gray-900 transition-all duration-300 link-underline"
           >
             Work with us &rarr;
           </Link>

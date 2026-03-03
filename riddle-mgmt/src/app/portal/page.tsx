@@ -46,7 +46,7 @@ export default function Portal() {
           <h1 className="text-lg font-light tracking-tight animate-fade-in">
             Client Portal
           </h1>
-          <p className="text-xs text-white/30 mt-3 tracking-wide animate-fade-in delay-100">
+          <p className="text-xs text-gray-400 mt-3 tracking-wide animate-fade-in delay-100">
             Secure access to your files
           </p>
         </div>
@@ -59,7 +59,7 @@ export default function Portal() {
         )}
 
         {/* Login form */}
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} autoComplete="off" className="space-y-5">
           <div className="animate-fade-in delay-200">
             <input
               type="text"
@@ -67,7 +67,8 @@ export default function Portal() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              autoComplete="username"
+              autoComplete="off"
+              name="portal-user"
               className="w-full px-4 py-3 rounded-lg text-sm font-light"
             />
           </div>
@@ -78,7 +79,8 @@ export default function Portal() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              autoComplete="current-password"
+              autoComplete="off"
+              name="portal-pass"
               className="w-full px-4 py-3 rounded-lg text-sm font-light"
             />
           </div>
@@ -86,28 +88,18 @@ export default function Portal() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-lg text-xs tracking-[0.2em] uppercase bg-white text-black hover:bg-white/90 transition-all duration-300 font-medium disabled:opacity-50"
+              className="w-full py-3 rounded-lg text-xs tracking-[0.2em] uppercase bg-gray-900 text-white hover:bg-gray-800 transition-all duration-300 font-medium disabled:opacity-50"
             >
               {loading ? "Signing in..." : "Log In"}
             </button>
           </div>
         </form>
 
-        {/* Register link */}
-        <div className="text-center mt-8 animate-fade-in delay-500">
-          <Link
-            href="/portal/register"
-            className="text-xs text-white/30 hover:text-white/60 transition-colors duration-300 tracking-wide"
-          >
-            Create an account
-          </Link>
-        </div>
-
         {/* Back to home */}
         <div className="text-center mt-12 animate-fade-in delay-600">
           <Link
             href="/"
-            className="text-xs tracking-[0.2em] uppercase text-white/20 hover:text-white/50 transition-colors duration-300"
+            className="text-xs tracking-[0.2em] uppercase text-gray-300 hover:text-gray-500 transition-colors duration-300"
           >
             &larr; Back
           </Link>

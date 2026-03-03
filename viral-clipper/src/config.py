@@ -9,10 +9,10 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 def _detect_mac_font() -> str:
     """Auto-detect a bold sans-serif font on macOS."""
     mac_font_paths = [
+        "/System/Library/Fonts/Supplemental/Impact.ttf",
         "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
-        "/System/Library/Fonts/Helvetica.ttc",
-        "/Library/Fonts/Arial Bold.ttf",
         "/System/Library/Fonts/SFNS.ttf",
+        "/System/Library/Fonts/Helvetica.ttc",
     ]
     for font_path in mac_font_paths:
         if Path(font_path).exists():

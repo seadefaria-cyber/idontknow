@@ -32,6 +32,7 @@ class TikTokPlaywrightPoster(PlaywrightBase):
         video_path: Path,
         caption: str,
         account: Account,
+        sound_name: str | None = None,
     ) -> PostResult:
         """Upload and post a video to TikTok.
 
@@ -108,6 +109,11 @@ class TikTokPlaywrightPoster(PlaywrightBase):
 
                 self.random_delay(2, 4)
 
+                # Add sound if specified
+                if sound_name:
+                    self._search_and_add_sound(page, sound_name)
+                    self.random_delay(2, 3)
+
                 # Click Post button
                 try:
                     page.click('button:has-text("Post")', timeout=10000)
@@ -156,6 +162,44 @@ class TikTokPlaywrightPoster(PlaywrightBase):
                 ) from e
             finally:
                 browser.close()
+
+    def _search_and_add_sound(self, page, sound_name: str) -> None:
+        """Search for and select a sound on TikTok's upload page.
+
+        Clicks the music/sound icon, searches for the sound by name,
+        and selects the first matching result.
+        """
+        try:
+            # Look for the sound/music button on the upload page
+            sound_btn = page.locator('[class*="sound"], [class*="music"], [aria-label*="sound"], [aria-label*="music"]').first
+            sound_btn.click(timeout=5000)
+            self.random_delay(1, 2)
+
+            # Search for the sound
+            search_input = page.locator('input[placeholder*="search" i], input[type="search"]').first
+            search_input.fill(sound_name)
+            self.random_delay(1, 2)
+
+            # Press Enter to search
+            page.keyboard.press("Enter")
+            self.random_delay(2, 3)
+
+            # Click the first search result
+            first_result = page.locator('[class*="sound-item"], [class*="music-item"], [class*="search-result"]').first
+            first_result.click(timeout=5000)
+            self.random_delay(1, 2)
+
+            # Confirm/use the sound
+            use_btn = page.locator('button:has-text("Use"), button:has-text("Add"), button:has-text("Select")').first
+            use_btn.click(timeout=5000)
+            self.random_delay(1, 2)
+
+            logger.info("tiktok_sound_added", sound_name=sound_name)
+
+        except Exception as e:
+            # Sound tagging is best-effort — don't fail the whole post
+            logger.warning("tiktok_sound_add_failed", sound_name=sound_name, error=str(e))
+            print(f"    Warning: Could not add sound '{sound_name}': {e}")
 
     def check_rate_limits(self, account: Account) -> bool:
         """Check if the account can post right now."""

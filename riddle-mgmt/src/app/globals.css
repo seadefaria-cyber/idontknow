@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #000000;
-  --color-foreground: #ffffff;
-  --color-silver: #b0b8c1;
-  --color-silver-light: #d0d6dc;
-  --color-dark: #0a0a0a;
-  --color-dark-light: #111111;
-  --color-dark-lighter: #1a1a1a;
+  --color-background: #ffffff;
+  --color-foreground: #111111;
+  --color-silver: #6b7280;
+  --color-silver-light: #9ca3af;
+  --color-dark: #f9fafb;
+  --color-dark-light: #f3f4f6;
+  --color-dark-lighter: #e5e7eb;
   --font-sans: var(--font-space-grotesk);
   --font-mono: var(--font-geist-mono);
 }
@@ -19,8 +19,8 @@
 }
 
 body {
-  background: #000000;
-  color: #ffffff;
+  background: #fafafa;
+  color: #111111;
   font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: hidden;
 }
@@ -35,10 +35,10 @@ html {
   width: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: #fafafa;
 }
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: #d1d5db;
   border-radius: 2px;
 }
 
@@ -78,12 +78,12 @@ html {
 .delay-600 { animation-delay: 0.6s; opacity: 0; }
 .delay-700 { animation-delay: 0.7s; opacity: 0; }
 
-/* Frosted glass */
+/* Light cards */
 .glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 /* Subtle glow on hover */
@@ -91,7 +91,7 @@ html {
   transition: all 0.3s ease;
 }
 .glow-hover:hover {
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+  text-shadow: none;
 }
 
 /* Link underline animation */
@@ -105,7 +105,7 @@ html {
   left: 0;
   width: 0;
   height: 1px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.4);
   transition: width 0.3s ease;
 }
 .link-underline:hover::after {
@@ -114,15 +114,81 @@ html {
 
 /* Input styles */
 input, textarea {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #111;
   transition: border-color 0.3s ease;
 }
 input:focus, textarea:focus {
   outline: none;
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: #9ca3af;
 }
 input::placeholder, textarea::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: #9ca3af;
 }
+
+/* Elevated cards */
+.glass-elevated {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.glass-elevated:hover {
+  background: #fafafa;
+  border-color: #d1d5db;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* Status pill badges */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.status-pill-draft { background: #f3f4f6; color: #6b7280; }
+.status-pill-pending { background: #fef9c3; color: #a16207; }
+.status-pill-signed { background: #dcfce7; color: #15803d; }
+.status-pill-expired { background: #fee2e2; color: #dc2626; }
+.status-pill-submitted { background: #dbeafe; color: #2563eb; }
+.status-pill-approved { background: #dcfce7; color: #15803d; }
+.status-pill-paid { background: #f3e8ff; color: #7c3aed; }
+.status-pill-rejected { background: #fee2e2; color: #dc2626; }
+
+/* Section enter animation */
+@keyframes sectionEnter {
+  from { opacity: 0; transform: translateX(8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.animate-section-enter {
+  animation: sectionEnter 0.3s ease-out forwards;
+}
+
+/* Unread dot */
+.unread-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3b82f6;
+  flex-shrink: 0;
+}
+
+/* Hide scrollbar for tab bar */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Event type left borders */
+.event-border-meeting { border-left: 3px solid #3b82f6; }
+.event-border-deadline { border-left: 3px solid #eab308; }
+.event-border-milestone { border-left: 3px solid #16a34a; }
+.event-border-session { border-left: 3px solid #7c3aed; }

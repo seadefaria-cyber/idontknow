@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import getDb from "@/lib/db";
+import { dbGet } from "@/lib/db";
+import { getDownloadUrl } from "@/lib/s3";
 import jwt from "jsonwebtoken";
-import { readFile } from "fs/promises";
 
 const FILE_ACCESS_SECRET = process.env.FILE_SECRET || "riddle-file-access-secret";
 
@@ -27,14 +27,13 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
       return NextResponse.json({ error: "Invalid download token" }, { status: 403 });
     }
 
-    const db = getDb();
-    const file = db.prepare("SELECT * FROM files WHERE id = ?").get(id) as {
+    const file = await dbGet<{
       id: string;
       user_id: string;
       file_path: string;
       original_name: string;
       mime_type: string;
-    } | undefined;
+    }>("SELECT * FROM files WHERE id = ?", [id]);
 
     if (!file) {
       return NextResponse.json({ error: "File not found" }, { status: 404 });
@@ -44,15 +43,9 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
       return NextResponse.json({ error: "Not authorized" }, { status: 403 });
     }
 
-    const fileBuffer = await readFile(file.file_path);
-
-    return new NextResponse(fileBuffer, {
-      headers: {
-        "Content-Type": file.mime_type,
-        "Content-Disposition": `attachment; filename="${file.original_name}"`,
-        "Content-Length": fileBuffer.length.toString(),
-      },
-    });
+    // Redirect to S3 signed URL for download
+    const url = await getDownloadUrl(file.file_path, file.original_name);
+    return NextResponse.redirect(url);
   } catch {
     return NextResponse.json({ error: "Download failed or token expired" }, { status: 403 });
   }

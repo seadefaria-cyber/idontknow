@@ -18,12 +18,15 @@ class PipelineService:
     def __init__(self, settings: Settings):
         self.settings = settings
 
-    def process_video(self, video_path: Path, output_dir: Path) -> list[Path]:
+    def process_video(
+        self, video_path: Path, output_dir: Path, sound_path: Path | None = None,
+    ) -> list[Path]:
         """Process a single video through the full pipeline.
 
         Args:
             video_path: Path to source video file.
             output_dir: Directory to write finished clips to.
+            sound_path: Optional path to a trending sound to mix into clips.
 
         Returns:
             List of paths to generated clip files.
@@ -84,6 +87,7 @@ class PipelineService:
                     moment=moment,
                     hook=hook,
                     transcript=transcript,
+                    sound_path=sound_path,
                 )
                 if clip_path:
                     finished_clips.append(clip_path)
@@ -128,10 +132,11 @@ class PipelineService:
         moment,
         hook,
         transcript: dict,
+        sound_path: Path | None = None,
     ) -> Path | None:
         """Extract, caption, and crop a single clip.
 
-        Pipeline: extract → burn captions → add hook overlay → crop to 9:16
+        Pipeline: extract → burn captions → add hook overlay → crop to 9:16 → mix sound
         """
         temp_dir = output_dir / ".temp"
         temp_dir.mkdir(exist_ok=True)
@@ -180,11 +185,26 @@ class PipelineService:
             current_input = hooked_path
 
         # Step D: Crop to vertical 9:16
-        final_path = output_dir / f"{prefix}.mp4"
+        cropped_path = temp_dir / f"{prefix}_cropped.mp4"
         ffmpeg.crop_to_vertical(
             input_path=current_input,
-            output_path=final_path,
+            output_path=cropped_path,
         )
+        current_input = cropped_path
+
+        # Step E: Mix trending sound (optional)
+        if sound_path:
+            mixed_path = temp_dir / f"{prefix}_mixed.mp4"
+            ffmpeg.mix_trending_sound(
+                video_path=current_input,
+                sound_path=sound_path,
+                output_path=mixed_path,
+            )
+            current_input = mixed_path
+
+        # Move final result to output dir
+        final_path = output_dir / f"{prefix}.mp4"
+        current_input.rename(final_path)
 
         # Clean up temp files
         for f in temp_dir.iterdir():

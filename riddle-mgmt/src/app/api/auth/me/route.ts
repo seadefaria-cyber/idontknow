@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import getDb from "@/lib/db";
+import { dbGet } from "@/lib/db";
 
 export async function GET() {
   const session = await getSession();
@@ -8,14 +8,13 @@ export async function GET() {
     return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   }
 
-  const db = getDb();
-  const user = db.prepare("SELECT id, username, display_name, role, created_at FROM users WHERE id = ?").get(session.userId) as {
+  const user = await dbGet<{
     id: string;
     username: string;
     display_name: string;
     role: string;
     created_at: string;
-  } | undefined;
+  }>("SELECT id, username, display_name, role, created_at FROM users WHERE id = ?", [session.userId]);
 
   if (!user) {
     return NextResponse.json({ error: "User not found" }, { status: 404 });
