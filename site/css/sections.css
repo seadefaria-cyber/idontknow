@@ -594,33 +594,28 @@
 
 /* ── CLIP. SEED. GROW. Section ──────────── */
 .csg {
-    padding: var(--space-md) 0;
+    padding: 0 0 var(--space-sm);
     border-bottom: 1px solid var(--border);
 }
 
 .csg__inner {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 0;
 }
 
 .csg__word {
     font-family: var(--font-headline);
-    font-size: clamp(0.65rem, 1.4vw, 0.85rem);
-    font-weight: 500;
-    letter-spacing: 0.25em;
+    font-size: clamp(5rem, 18vw, 12rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
     text-transform: uppercase;
-    line-height: 1;
-    transition: opacity 0.3s ease;
+    line-height: 1.05;
+    transition: transform 0.3s var(--ease), opacity 0.3s ease;
     cursor: default;
     position: relative;
-    opacity: 0.35;
-}
-
-.csg__word:hover {
-    opacity: 0.7;
 }
 
 .csg__word--clip {
@@ -633,6 +628,10 @@
 
 .csg__word--grow {
     color: var(--mta-orange);
+}
+
+.csg__word:hover {
+    transform: scale(1.06);
 }
 
 /* ── Phone Status Bar ───────────────────── */

@@ -103,7 +103,7 @@
         chat.scrollTop = chat.scrollHeight;
     }
 
-    setInterval(addMessage, 220);
+    setInterval(addMessage, 2200);
     addMessage();
 })();
 
