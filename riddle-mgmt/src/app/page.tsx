@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import SwipeNav from "@/components/SwipeNav";
+import { brand } from "@/lib/brand";
 
 export default function Home() {
   return (
@@ -11,8 +12,8 @@ export default function Home() {
         {/* Logo */}
         <div className="animate-fade-in-slow w-[220px] sm:w-[320px]">
           <Image
-            src="/logo.png"
-            alt="Riddle MGMT LLC"
+            src={brand.logoUrl}
+            alt={brand.name}
             width={320}
             height={76}
             priority
@@ -42,7 +43,7 @@ export default function Home() {
       {/* Bottom credit */}
       <div className="absolute bottom-8 text-center animate-fade-in delay-700">
         <p className="text-[10px] tracking-[0.3em] uppercase text-gray-300 font-light">
-          Los Angeles · New York City
+          {brand.location}
         </p>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { getSession } from "@/lib/auth";
 import { dbRun, dbGet, dbAll } from "@/lib/db";
 import { v4 as uuid } from "uuid";
 import nodemailer from "nodemailer";
+import { brand } from "@/lib/brand";
 
 export async function POST(req: NextRequest) {
   const session = await getSession();
@@ -40,10 +41,10 @@ export async function POST(req: NextRequest) {
       });
 
       await transporter.sendMail({
-        from: `"Riddle Portal" <${smtpUser}>`,
-        to: "team@riddlellc.biz",
+        from: `"${brand.portalName}" <${smtpUser}>`,
+        to: brand.email,
         subject: `[Request] ${subject.trim()} — ${user?.display_name || user?.username || "Unknown"}`,
-        text: `New request from ${user?.display_name || user?.username}:\n\nSubject: ${subject.trim()}\n\n${message.trim()}\n\n---\nRiddle MGMT Portal`,
+        text: `New request from ${user?.display_name || user?.username}:\n\nSubject: ${subject.trim()}\n\n${message.trim()}\n\n---\n${brand.portalName} Portal`,
       });
     }
   } catch {

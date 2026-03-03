@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SwipeNav from "@/components/SwipeNav";
+import { brand } from "@/lib/brand";
 
 const credits = [
   { artist: "Nettspend", project: "Artist Management" },
@@ -19,16 +20,14 @@ export default function About() {
         {/* Bio */}
         <div className="space-y-6 text-sm leading-relaxed text-gray-500 font-light">
           <p className="animate-fade-in delay-200">
-            Riddle Management is a Los Angeles-based artist management
-            company founded by Nolan Riddle.
+            {brand.portalName} is a {brand.location.split(" · ")[0]}-based artist management
+            company.
           </p>
           <p className="animate-fade-in delay-300">
-            With a background spanning directing, producing, and creative strategy,
-            Nolan has built a track record working alongside some of the most influential
-            names in music.
+            {brand.tagline}
           </p>
           <p className="animate-fade-in delay-400">
-            Riddle Management operates at the intersection of artist development,
+            {brand.portalName} operates at the intersection of artist development
             and strategic career building. The approach is simple:
             identify exceptional talent, provide the infrastructure and vision they need,
             and execute at the highest level.

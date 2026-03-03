@@ -3,6 +3,7 @@ import { getSession } from "@/lib/auth";
 import { dbGet, dbRun } from "@/lib/db";
 import { downloadFromS3 } from "@/lib/s3";
 import { getConnection, refreshTokenIfNeeded, createEnvelope } from "@/lib/docusign";
+import { brand } from "@/lib/brand";
 
 export async function POST(req: NextRequest) {
   const session = await getSession();
@@ -38,7 +39,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Signer not found" }, { status: 404 });
   }
 
-  const signerEmail = signer.email || signer.google_email || `${signer.username}@portal.riddlellc.biz`;
+  const signerEmail = signer.email || signer.google_email || `${signer.username}@portal.${brand.domain}`;
   const signerName = signer.display_name || signer.username;
 
   // Get DocuSign connection (admin's)

@@ -1,3 +1,5 @@
+import { brand } from "@/lib/brand";
+
 export default function Terms() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center sm:justify-start pt-0 sm:pt-32 pb-20 px-5 sm:px-8">
@@ -11,14 +13,14 @@ export default function Terms() {
           <p><strong className="text-white/60">Effective Date:</strong> March 1, 2026</p>
 
           <p>
-            These Terms of Service govern your use of the Riddle MGMT portal operated by
-            Riddle LLC at riddlellc.biz.
+            These Terms of Service govern your use of the {brand.portalName} portal operated by
+            {brand.companyName} at {brand.domain}.
           </p>
 
           <h2 className="text-xs text-white/50 tracking-[0.15em] uppercase pt-4">Use of Service</h2>
           <p>
-            The Riddle MGMT portal is a private management platform provided to authorized clients and
-            team members of Riddle LLC. Access is granted on an invitation basis. You agree to use the
+            The {brand.portalName} portal is a private management platform provided to authorized clients and
+            team members of {brand.companyName}. Access is granted on an invitation basis. You agree to use the
             portal only for its intended purpose of business management and communication.
           </p>
 
@@ -32,13 +34,13 @@ export default function Terms() {
           <p>
             The portal may connect to third-party services (such as accounting and cloud storage platforms)
             on your behalf. Your use of those services is subject to their respective terms. You authorize
-            Riddle MGMT to access and sync data from connected services for the purpose of providing
+            {brand.portalName} to access and sync data from connected services for the purpose of providing
             management services.
           </p>
 
           <h2 className="text-xs text-white/50 tracking-[0.15em] uppercase pt-4">Limitation of Liability</h2>
           <p>
-            The portal is provided &quot;as is.&quot; Riddle LLC is not liable for any indirect, incidental,
+            The portal is provided &quot;as is.&quot; {brand.companyName} is not liable for any indirect, incidental,
             or consequential damages arising from your use of the service.
           </p>
 
@@ -51,8 +53,8 @@ export default function Terms() {
           <h2 className="text-xs text-white/50 tracking-[0.15em] uppercase pt-4">Contact</h2>
           <p>
             Questions about these terms? Contact us at{" "}
-            <a href="mailto:team@riddlellc.biz" className="text-white/50 hover:text-white transition-colors">
-              team@riddlellc.biz
+            <a href={`mailto:${brand.email}`} className="text-white/50 hover:text-white transition-colors">
+              {brand.email}
             </a>.
           </p>
         </div>

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { dbGet } from "@/lib/db";
 import { getConnection, refreshTokenIfNeeded, getSigningUrl } from "@/lib/docusign";
+import { brand } from "@/lib/brand";
 
 export async function POST(req: NextRequest) {
   const session = await getSession();
@@ -41,7 +42,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Signer not found" }, { status: 404 });
   }
 
-  const signerEmail = signer.email || signer.google_email || `${signer.username}@portal.riddlellc.biz`;
+  const signerEmail = signer.email || signer.google_email || `${signer.username}@portal.${brand.domain}`;
   const signerName = signer.display_name || signer.username;
 
   // Get DocuSign connection for the doc owner
@@ -53,7 +54,7 @@ export async function POST(req: NextRequest) {
   try {
     const freshConn = await refreshTokenIfNeeded(conn);
 
-    const origin = req.nextUrl.origin || "https://riddlellc.biz";
+    const origin = req.nextUrl.origin || `https://${brand.domain}`;
     const returnUrl = `${origin}/api/docusign/signing-complete?envelopeId=${doc.envelope_id}`;
 
     const signingUrl = await getSigningUrl(

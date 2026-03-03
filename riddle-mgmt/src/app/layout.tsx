@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
+import { brand } from "@/lib/brand";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -16,9 +17,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Riddle Management",
-  description: "Artist management by Nolan Riddle. Director, producer, and manager working with the next generation of culture.",
-  keywords: ["artist management", "music management", "Nolan Riddle", "Riddle Management", "music industry"],
+  title: brand.portalName,
+  description: brand.tagline,
+  keywords: ["artist management", "music management", "client portal", brand.name],
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 };
 

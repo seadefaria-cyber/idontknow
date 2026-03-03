@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { brand } from "@/lib/brand";
 
 export default function Nav() {
   const pathname = usePathname();
@@ -47,7 +48,7 @@ export default function Nav() {
       {/* Center: Logo text */}
       <Link href="/" className="absolute left-1/2 -translate-x-1/2">
         <span className="text-[10px] sm:text-xs tracking-[0.25em] sm:tracking-[0.3em] uppercase font-light text-gray-500 hover:text-gray-900 transition-colors duration-300">
-          Riddle Mgmt
+          {brand.name}
         </span>
       </Link>
 

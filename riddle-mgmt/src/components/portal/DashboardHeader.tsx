@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { brand } from "@/lib/brand";
 
 interface DashboardHeaderProps {
   displayName: string;
@@ -24,7 +25,7 @@ export default function DashboardHeader({ displayName, role, onRefresh }: Dashbo
 
   return (
     <div className="flex flex-col items-center justify-center mb-6 sm:mb-8 text-center">
-      <p className="text-[10px] tracking-[0.3em] uppercase text-gray-300 mb-3 animate-fade-in">RIDDLE MGMT.</p>
+      <p className="text-[10px] tracking-[0.3em] uppercase text-gray-300 mb-3 animate-fade-in">{brand.name.toUpperCase()}.</p>
       <div className="flex items-center gap-3">
         <h1 className="text-xl sm:text-2xl font-light tracking-tight animate-fade-in">
           {displayName}
@@ -56,14 +57,16 @@ export default function DashboardHeader({ displayName, role, onRefresh }: Dashbo
       <p className="text-[10px] sm:text-xs text-gray-400 mt-1.5 tracking-wide animate-fade-in delay-100">
         {role === "admin" ? "Administrator" : "Client"} &middot; Secure Portal
       </p>
-      <a
-        href="https://instagram.com/riddle"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-[10px] text-gray-300 hover:text-gray-400 transition-colors tracking-[0.12em] animate-fade-in mt-2"
-      >
-        @riddle
-      </a>
+      {brand.socialUrl && (
+        <a
+          href={brand.socialUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[10px] text-gray-300 hover:text-gray-400 transition-colors tracking-[0.12em] animate-fade-in mt-2"
+        >
+          {brand.socialHandle}
+        </a>
+      )}
     </div>
   );
 }

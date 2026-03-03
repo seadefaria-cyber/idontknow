@@ -1,9 +1,10 @@
 import { ImageResponse } from "next/og";
 import { readFileSync } from "fs";
 import { join } from "path";
+import { brand } from "@/lib/brand";
 
 export const runtime = "nodejs";
-export const alt = "Riddle Management — Artist Management";
+export const alt = `${brand.portalName} — Artist Management`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

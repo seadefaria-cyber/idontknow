@@ -1,0 +1,16 @@
+export const brand = {
+  name: process.env.NEXT_PUBLIC_BRAND_NAME || "Riddle Mgmt",
+  tagline: process.env.NEXT_PUBLIC_BRAND_TAGLINE || "Artist management by Nolan Riddle. Director, producer, and manager working with the next generation of culture.",
+  email: process.env.NEXT_PUBLIC_BRAND_EMAIL || "team@riddlellc.biz",
+  socialUrl: process.env.NEXT_PUBLIC_BRAND_SOCIAL_URL || "https://instagram.com/riddle",
+  socialHandle: process.env.NEXT_PUBLIC_BRAND_SOCIAL_HANDLE || "@riddle",
+  location: process.env.NEXT_PUBLIC_BRAND_LOCATION || "Los Angeles · New York City",
+  domain: process.env.NEXT_PUBLIC_BRAND_DOMAIN || "riddlellc.biz",
+  logoUrl: process.env.NEXT_PUBLIC_BRAND_LOGO_URL || "/logo.png",
+  primaryColor: process.env.NEXT_PUBLIC_BRAND_PRIMARY_COLOR || "#000000",
+  showPoweredBy: process.env.NEXT_PUBLIC_SHOW_POWERED_BY !== "false",
+  poweredByName: process.env.NEXT_PUBLIC_POWERED_BY_NAME || "DeFaria",
+  poweredByUrl: process.env.NEXT_PUBLIC_POWERED_BY_URL || "https://defaria.nyc/",
+  companyName: process.env.NEXT_PUBLIC_BRAND_COMPANY_NAME || "Riddle LLC",
+  portalName: process.env.NEXT_PUBLIC_BRAND_PORTAL_NAME || "Riddle MGMT",
+};

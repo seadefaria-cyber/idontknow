@@ -1,3 +1,5 @@
+import { brand } from "@/lib/brand";
+
 export default function Privacy() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center sm:justify-start pt-0 sm:pt-32 pb-20 px-5 sm:px-8">
@@ -11,7 +13,7 @@ export default function Privacy() {
           <p><strong className="text-white/60">Effective Date:</strong> March 1, 2026</p>
 
           <p>
-            Riddle LLC (&quot;Riddle MGMT,&quot; &quot;we,&quot; &quot;us&quot;) operates the management portal at riddlellc.biz.
+            {brand.companyName} (&quot;{brand.portalName},&quot; &quot;we,&quot; &quot;us&quot;) operates the management portal at {brand.domain}.
             This policy describes how we collect, use, and protect your information.
           </p>
 
@@ -25,7 +27,7 @@ export default function Privacy() {
           <h2 className="text-xs text-white/50 tracking-[0.15em] uppercase pt-4">How We Use Your Information</h2>
           <p>
             Your information is used solely to provide management services, including financial tracking,
-            document management, scheduling, and client communication through the Riddle MGMT portal.
+            document management, scheduling, and client communication through the {brand.portalName} portal.
             We do not sell, rent, or share your data with third parties for marketing purposes.
           </p>
 
@@ -52,8 +54,8 @@ export default function Privacy() {
           <h2 className="text-xs text-white/50 tracking-[0.15em] uppercase pt-4">Contact</h2>
           <p>
             For privacy-related questions, contact us at{" "}
-            <a href="mailto:team@riddlellc.biz" className="text-white/50 hover:text-white transition-colors">
-              team@riddlellc.biz
+            <a href={`mailto:${brand.email}`} className="text-white/50 hover:text-white transition-colors">
+              {brand.email}
             </a>.
           </p>
         </div>

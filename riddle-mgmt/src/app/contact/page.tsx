@@ -1,4 +1,5 @@
 import SwipeNav from "@/components/SwipeNav";
+import { brand } from "@/lib/brand";
 
 export default function Contact() {
   return (
@@ -19,10 +20,10 @@ export default function Contact() {
             Reach out directly at
           </p>
           <a
-            href="mailto:team@riddlellc.biz"
+            href={`mailto:${brand.email}`}
             className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-300 font-light mt-2 inline-block"
           >
-            team@riddlellc.biz
+            {brand.email}
           </a>
         </div>
       </div>

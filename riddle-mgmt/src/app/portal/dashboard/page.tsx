@@ -9,6 +9,7 @@ import LegalSection from "@/components/portal/LegalSection";
 import ScheduleSection from "@/components/portal/ScheduleSection";
 import ReimbursementsSection from "@/components/portal/ReimbursementsSection";
 import IntegrationsSection from "@/components/portal/IntegrationsSection";
+import { brand } from "@/lib/brand";
 
 interface UserInfo {
   id: string;
@@ -163,18 +164,19 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {/* Powered by DeFaria */}
-      <div className="mt-8 mb-6 flex flex-col items-center gap-2">
-        <a
-          href="https://defaria.nyc/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 text-gray-300 hover:text-gray-400 transition-colors group"
-        >
-          <span className="text-sm font-semibold tracking-tight text-gray-300 group-hover:text-gray-400 transition-colors">dF</span>
-          <span className="text-[9px] tracking-[0.2em] uppercase text-gray-300 group-hover:text-gray-400 transition-colors">Powered by DeFaria</span>
-        </a>
-      </div>
+      {/* Powered by attribution */}
+      {brand.showPoweredBy && (
+        <div className="mt-8 mb-6 flex flex-col items-center gap-2">
+          <a
+            href={brand.poweredByUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-gray-300 hover:text-gray-400 transition-colors group"
+          >
+            <span className="text-[9px] tracking-[0.2em] uppercase text-gray-300 group-hover:text-gray-400 transition-colors">Powered by {brand.poweredByName}</span>
+          </a>
+        </div>
+      )}
     </div>
   );
 }
