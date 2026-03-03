@@ -1,0 +1,46 @@
+:root {
+    /* NYC Subway palette — Dark blue + white + black */
+    --bg: #0E0E10;
+    --surface: #18181B;
+    --surface-alt: #1F1F23;
+    --text: #EFEFF1;
+    --text-muted: #ADADB8;
+    --accent: #0039A6;
+    --accent-light: #1A5EC7;
+    --accent-glow: rgba(0, 57, 166, 0.15);
+    --border: rgba(255, 255, 255, 0.08);
+    --border-light: rgba(255, 255, 255, 0.04);
+
+    /* MTA Line Colors */
+    --mta-red: #EE352E;
+    --mta-orange: #FF6319;
+    --mta-yellow: #FCCC0A;
+    --mta-green: #00933C;
+    --mta-blue: #0039A6;
+    --mta-purple: #B933AD;
+    --mta-gray: #808183;
+
+    /* Legacy multi-color accents */
+    --green: #00933C;
+    --yellow: #FCCC0A;
+    --orange: #FF6319;
+    --red: #EE352E;
+    --cyan: #0039A6;
+
+    /* Fonts — Helvetica is the NYC Subway typeface */
+    --font-headline: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+    --space-xl: 8rem;
+    --space-2xl: 12rem;
+
+    --nav-height: 64px;
+    --container: 1400px;
+    --duration: 0.3s;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
