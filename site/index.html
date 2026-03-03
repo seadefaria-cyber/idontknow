@@ -15,7 +15,9 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://defaria.nyc/img/og-image.png">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230039A6'/><text x='50%25' y='23' text-anchor='middle' font-family='Helvetica Neue,sans-serif' font-size='16' fill='white' font-weight='bold'>dF</text></svg>">
-    <!-- Helvetica Neue — system font, no import needed -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/variables.css?v=65">
     <link rel="stylesheet" href="css/layout.css">
@@ -37,12 +39,8 @@
 <!-- Nav -->
 <nav class="nav" id="nav">
     <div class="nav__inner container">
-        <a href="#" class="nav__logo">
-            <span class="nav__logo-text"><span class="nav__logo-l">d</span><span class="nav__logo-l">e</span><span class="nav__logo-l">F</span><span class="nav__logo-l">a</span><span class="nav__logo-l">r</span><span class="nav__logo-l">i</span><span class="nav__logo-l">a</span></span>
-            <span class="nav__tagline"><span class="nav__tagline-w nav__tagline-w--clip">Digital</span> <span class="nav__tagline-w nav__tagline-w--dist">Seeding</span> <span class="nav__tagline-w nav__tagline-w--creative">+</span> <span class="nav__tagline-w nav__tagline-w--agency">Distribution</span></span>
-        </a>
+        <a href="#" class="nav__logo" style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#2563FF;letter-spacing:-0.04em;text-decoration:none;">dF</a>
         <ul class="nav__links" id="nav-links">
-            <li><a href="#work">Work</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -56,90 +54,10 @@
 
 <!-- Hero -->
 <section class="hero" id="hero">
-    <!-- Phone Status Bar -->
-    <div class="phone-status" aria-hidden="true">
-        <span class="phone-status__time" id="status-time">9:41</span>
-        <div class="phone-status__right">
-            <svg class="phone-status__signal" width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="0.5" opacity="0.3"/><rect x="4.5" y="5" width="3" height="7" rx="0.5" opacity="0.5"/><rect x="9" y="2" width="3" height="10" rx="0.5" opacity="0.7"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5" opacity="1"/></svg>
-            <svg class="phone-status__battery" width="28" height="13" viewBox="0 0 28 13" fill="none"><rect x="0.5" y="0.5" width="23" height="12" rx="2.5" stroke="currentColor" stroke-width="1"/><rect x="2" y="2" width="20" height="9" rx="1.5" fill="#4A90D9"/><rect x="24" y="3.5" width="3" height="6" rx="1.5" fill="currentColor"/><path d="M11 3L9 6.5h3L10 10l4-4h-3l2-3h-2z" fill="#fff" opacity="0.9"/></svg>
-        </div>
-    </div>
-
     <div class="container hero__inner">
         <h1 class="hero__headline"><span class="hero__word">We</span> <span class="hero__word">Know</span><br><span class="hero__word">How</span> <span class="hero__word">It</span><br><span class="hero__word">Works.</span></h1>
-        <p class="hero__sub">Viral infrastructure built for <a href="#services" class="hero__sub-link">artists and labels</a>.</p>
+        <p class="hero__sub">Digital seeding and creative distribution for <a href="#services" class="hero__sub-link">artists and labels</a>.</p>
         <a href="#contact" class="btn btn--primary">Start A Project</a>
-    </div>
-
-    <!-- Twitch Chat Overlay -->
-    <div class="twitch-chat" id="twitch-chat" aria-hidden="true"></div>
-
-    <!-- Floating Engagement Likes -->
-    <div class="engagement-likes" id="engagement-likes" aria-hidden="true"></div>
-
-</section>
-
-<!-- Showcase -->
-<section class="showcase" id="work">
-    <div class="showcase__sticky">
-        <div class="container">
-            <p class="showcase__eyebrow"><span class="live-indicator"><span class="live-indicator__dot"></span>LIVE</span></p>
-            <h2 class="showcase__headline"><span class="heart-word">Virality</span> isn't luck.<br><span class="text-accent text-accent--green infra-word">It's infrastructure.</span></h2>
-            <div class="showcase__phones">
-                <!-- Phone 1 -->
-                <div class="showcase__phone showcase__phone--left">
-                    <div class="phone">
-                        <div class="phone__notch"></div>
-                        <div class="phone__screen">
-                            <div class="phone__feed" data-speed="0.85">
-                                <div class="phone__video" style="background:url('img/videos/ym-reel1.jpg') center/cover"><span class="phone__handle">@yourmultimedia</span><div class="phone__overlay"><span class="phone__platform">Instagram</span><p class="phone__desc">asspizza in the store</p></div></div>
-                                <div class="phone__video" style="background:url('img/videos/ym-reel2.jpg') center/cover"><span class="phone__handle">@yourmultimedia</span><div class="phone__overlay"><span class="phone__platform">Instagram</span><p class="phone__desc">interview clip</p></div></div>
-                                <div class="phone__video" style="background:url('img/videos/ym-reel4.jpg') center/cover"><span class="phone__handle">@yourmultimedia</span><div class="phone__overlay"><span class="phone__platform">Instagram</span><p class="phone__desc">HOTMODELS on the scene</p></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Phone 2 -->
-                <div class="showcase__phone showcase__phone--center">
-                    <div class="phone">
-                        <div class="phone__notch"></div>
-                        <div class="phone__screen">
-                            <div class="phone__feed" data-speed="1">
-                                <div class="phone__video" style="background:url('img/videos/viral-clip.jpg') center/cover"><span class="phone__handle">@asspizza</span><div class="phone__overlay"><span class="phone__platform">TikTok</span><p class="phone__desc">this clip went viral</p></div></div>
-                                <div class="phone__video" style="background:url('img/videos/nett2.jpg') center/cover"><span class="phone__handle">@asspizza</span><div class="phone__overlay"><span class="phone__platform">TikTok</span><p class="phone__desc">Nettspend unreleased heat</p></div></div>
-                                <div class="phone__video" style="background:url('img/videos/chrisheyn1.jpg') center/cover"><span class="phone__handle">@chrisheyn</span><div class="phone__overlay"><span class="phone__platform">TikTok</span><p class="phone__desc">they got clout</p></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Phone 3 -->
-                <div class="showcase__phone showcase__phone--right">
-                    <div class="phone">
-                        <div class="phone__notch"></div>
-                        <div class="phone__screen">
-                            <div class="phone__feed" data-speed="0.7">
-                                <div class="phone__video" style="background:url('img/videos/chrisheyn2.jpg') center/cover"><span class="phone__handle">@chrisheyn</span><div class="phone__overlay"><span class="phone__platform">TikTok</span><p class="phone__desc">welcome to the show</p></div></div>
-                                <div class="phone__video" style="background:url('img/videos/ian-show.jpg') center/cover"><span class="phone__handle">@chrisheyn</span><div class="phone__overlay"><span class="phone__platform">TikTok</span><p class="phone__desc">Ian dapping people up at the show</p></div></div>
-                                <div class="phone__video" style="background:url('img/videos/designers.jpg') center/cover"><span class="phone__handle">@chrisheyn</span><div class="phone__overlay"><span class="phone__platform">TikTok</span><p class="phone__desc">the designers went crazy</p></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- The System — Process -->
-<section class="process" id="process">
-    <div class="container">
-        <h2 class="process__headline">How It Works</h2>
-        <div class="process__line">
-            <div class="process__stop"><span class="process__dot process__dot--pink"></span><div class="process__content"><h3 class="process__title">Clip</h3><p class="process__desc">Clips cut, captioned, and ready within hours. Every edit is designed to stop the scroll and frame the moment.</p></div></div>
-            <div class="process__stop"><span class="process__dot process__dot--yellow"></span><div class="process__content"><h3 class="process__title">Seed</h3><p class="process__desc">Every clip gets micro-seeded across platforms. Rap pages, city pages, lifestyle accounts &mdash; hundreds of placements, all coordinated.</p></div></div>
-            <div class="process__stop"><span class="process__dot process__dot--green"></span><div class="process__content"><h3 class="process__title">Target</h3><p class="process__desc">City-level targeting with direct connections in every major market. We know who to call and when to call them.</p></div></div>
-            <div class="process__stop process__stop--last"><span class="process__dot process__dot--orange"></span><div class="process__content"><h3 class="process__title">Sustain</h3><p class="process__desc">This isn't a one-off. We build owned accounts that keep working after the campaign ends. Permanent assets, not rented attention.</p></div></div>
-        </div>
     </div>
 </section>
 
@@ -164,7 +82,7 @@
 <!-- About Banner -->
 <div class="about-banner">
     <div class="container">
-        <p class="about-banner__text reveal"><span class="about-banner__white">We take your content and <span class="about-banner__system">flood the internet</span> with it.</span> <span class="about-banner__accent">Same-night clips. Hundreds of placements. Every platform.</span></p>
+        <p class="about-banner__text reveal"><span class="about-banner__white">Your content, <span class="about-banner__system">everywhere it matters.</span></span> <span class="about-banner__accent">Clipped. Seeded. Tracked.</span></p>
         <a href="#contact" class="about-banner__track" aria-label="Scroll to Start a Project">
             <span class="about-banner__rail"></span>
             <span class="about-banner__station"></span>
@@ -211,10 +129,7 @@
 <footer class="footer">
     <div class="container footer__inner">
         <div class="footer__top">
-            <a href="/" class="footer__logo">
-                <span class="footer__logo-text">deFaria</span>
-                <span class="footer__tagline"><span class="nav__tagline-w nav__tagline-w--clip">Digital</span> <span class="nav__tagline-w nav__tagline-w--dist">Seeding</span> <span class="nav__tagline-w nav__tagline-w--creative">+</span> <span class="nav__tagline-w nav__tagline-w--agency">Distribution</span></span>
-            </a>
+            <a href="/" class="footer__logo" style="font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;color:#2563FF;letter-spacing:-0.04em;text-decoration:none;">dF</a>
             <ul class="footer__links">
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
