@@ -5,6 +5,10 @@ import { dbGet, dbRun } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
   try {
+    if (process.env.ALLOW_REGISTRATION !== "true") {
+      return NextResponse.json({ error: "Registration is by invitation only" }, { status: 403 });
+    }
+
     const { username, password, displayName } = await req.json();
 
     if (!username || !password) {
@@ -15,8 +19,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Username must be at least 3 characters" }, { status: 400 });
     }
 
-    if (password.length < 4) {
-      return NextResponse.json({ error: "Password must be at least 4 characters" }, { status: 400 });
+    if (password.length < 8) {
+      return NextResponse.json({ error: "Password must be at least 8 characters" }, { status: 400 });
     }
 
     const existing = await dbGet<{ id: string }>("SELECT id FROM users WHERE username = ?", [username]);

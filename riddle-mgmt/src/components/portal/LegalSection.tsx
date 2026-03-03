@@ -22,7 +22,7 @@ interface LegalDoc {
 
 interface LegalSectionProps {
   role: string;
-  allUsers: { id: string; username: string; display_name: string }[];
+  allUsers: { id: string; username: string; display_name: string; role: string }[];
   refreshSignal?: number;
 }
 
@@ -245,7 +245,7 @@ export default function LegalSection({ role, allUsers, refreshSignal }: LegalSec
               className="flex-1 px-4 py-3 rounded-lg text-sm font-light bg-white border border-gray-200 text-gray-900"
             >
               <option value="" className="bg-white">Client...</option>
-              {allUsers.filter((u) => u.username !== "seandefaria").map((u) => (
+              {allUsers.filter((u) => u.role !== "admin").map((u) => (
                 <option key={u.id} value={u.id} className="bg-white">{u.display_name || u.username}</option>
               ))}
             </select>

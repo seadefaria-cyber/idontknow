@@ -21,7 +21,7 @@ export default function Dashboard() {
   const [user, setUser] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeSection, setActiveSection] = useState<Section>("creative");
-  const [allUsers, setAllUsers] = useState<{ id: string; username: string; display_name: string }[]>([]);
+  const [allUsers, setAllUsers] = useState<{ id: string; username: string; display_name: string; role: string }[]>([]);
   const [showSettings, setShowSettings] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
   const router = useRouter();

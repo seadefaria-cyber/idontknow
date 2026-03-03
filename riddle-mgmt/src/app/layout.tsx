@@ -30,8 +30,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${spaceGrotesk.variable} ${inter.variable} antialiased`}>
-        <Nav />
-        <main>{children}</main>
+          <Nav />
+          <main>{children}</main>
       </body>
     </html>
   );

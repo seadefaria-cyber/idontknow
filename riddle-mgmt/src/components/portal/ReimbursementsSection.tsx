@@ -77,7 +77,7 @@ interface QBData {
 
 interface ReimbursementsSectionProps {
   role: string;
-  allUsers: { id: string; username: string; display_name: string }[];
+  allUsers: { id: string; username: string; display_name: string; role: string }[];
   userId?: string;
   refreshSignal?: number;
 }
@@ -294,7 +294,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
               <label className="text-xs text-gray-400 tracking-wide block mb-2">Client</label>
               <select value={clientId} onChange={(e) => setClientId(e.target.value)} required className="w-full px-4 py-3 rounded-lg text-sm font-light bg-white border border-gray-200 text-gray-900">
                 <option value="" className="bg-white">Select client...</option>
-                {allUsers.filter((u) => u.username !== "seandefaria").map((u) => (
+                {allUsers.filter((u) => u.role !== "admin").map((u) => (
                   <option key={u.id} value={u.id} className="bg-white">{u.display_name || u.username}</option>
                 ))}
               </select>

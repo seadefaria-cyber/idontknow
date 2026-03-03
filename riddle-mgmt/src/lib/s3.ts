@@ -9,7 +9,11 @@ const s3 = new S3Client({
   },
 });
 
-const BUCKET = process.env.AWS_S3_BUCKET || "riddle-mgmt-files";
+function getBucket(): string {
+  const bucket = process.env.AWS_S3_BUCKET;
+  if (!bucket) throw new Error("AWS_S3_BUCKET environment variable is required");
+  return bucket;
+}
 
 /**
  * Upload a file to S3.
@@ -22,7 +26,7 @@ export async function uploadToS3(
 ): Promise<void> {
   await s3.send(
     new PutObjectCommand({
-      Bucket: BUCKET,
+      Bucket: getBucket(),
       Key: key,
       Body: body,
       ContentType: contentType,
@@ -36,7 +40,7 @@ export async function uploadToS3(
  */
 export async function getDownloadUrl(key: string, fileName?: string): Promise<string> {
   const command = new GetObjectCommand({
-    Bucket: BUCKET,
+    Bucket: getBucket(),
     Key: key,
     ...(fileName ? { ResponseContentDisposition: `attachment; filename="${fileName}"` } : {}),
   });
@@ -47,7 +51,7 @@ export async function getDownloadUrl(key: string, fileName?: string): Promise<st
  * Download a file from S3 as a Buffer.
  */
 export async function downloadFromS3(key: string): Promise<Buffer> {
-  const command = new GetObjectCommand({ Bucket: BUCKET, Key: key });
+  const command = new GetObjectCommand({ Bucket: getBucket(), Key: key });
   const response = await s3.send(command);
   const byteArray = await response.Body?.transformToByteArray();
   if (!byteArray) throw new Error("Empty S3 response");
@@ -60,7 +64,7 @@ export async function downloadFromS3(key: string): Promise<Buffer> {
 export async function deleteFromS3(key: string): Promise<void> {
   await s3.send(
     new DeleteObjectCommand({
-      Bucket: BUCKET,
+      Bucket: getBucket(),
       Key: key,
     })
   );

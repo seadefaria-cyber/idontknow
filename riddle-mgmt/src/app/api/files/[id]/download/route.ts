@@ -4,7 +4,11 @@ import { dbGet } from "@/lib/db";
 import { getDownloadUrl } from "@/lib/s3";
 import jwt from "jsonwebtoken";
 
-const FILE_ACCESS_SECRET = process.env.FILE_SECRET || "riddle-file-access-secret";
+function getFileSecret(): string {
+  const secret = process.env.FILE_SECRET;
+  if (!secret) throw new Error("FILE_SECRET environment variable is required");
+  return secret;
+}
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getSession();
@@ -21,7 +25,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
 
   try {
     // Verify the download token
-    const payload = jwt.verify(token, FILE_ACCESS_SECRET) as { fileId: string; userId: string };
+    const payload = jwt.verify(token, getFileSecret()) as { fileId: string; userId: string };
 
     if (payload.fileId !== id || payload.userId !== session.userId) {
       return NextResponse.json({ error: "Invalid download token" }, { status: 403 });

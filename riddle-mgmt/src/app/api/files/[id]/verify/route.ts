@@ -4,7 +4,11 @@ import { dbGet } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-const FILE_ACCESS_SECRET = process.env.FILE_SECRET || "riddle-file-access-secret";
+function getFileSecret(): string {
+  const secret = process.env.FILE_SECRET;
+  if (!secret) throw new Error("FILE_SECRET environment variable is required");
+  return secret;
+}
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getSession();
@@ -45,7 +49,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     // Generate a short-lived download token (5 minutes)
     const downloadToken = jwt.sign(
       { fileId: file.id, userId: session.userId },
-      FILE_ACCESS_SECRET,
+      getFileSecret(),
       { expiresIn: "5m" }
     );
 

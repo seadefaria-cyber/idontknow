@@ -299,38 +299,22 @@ async function initSchema() {
   await tryExec("ALTER TABLE docusign_connections ADD COLUMN account_id TEXT");
   await tryExec("ALTER TABLE docusign_connections ADD COLUMN base_uri TEXT");
 
-  // Seed users
+  // Create initial admin from env vars if no users exist
   const { v4: uuid } = require("uuid");
-
-  const adminExists = (await client.execute({ sql: "SELECT id, password_hash FROM users WHERE username = ?", args: ["seandefaria"] })).rows[0];
-  if (!adminExists) {
-    const hash = bcrypt.hashSync("S04131959d?", 12);
-    await client.execute({ sql: "INSERT INTO users (id, username, password_hash, display_name, role) VALUES (?, ?, ?, ?, ?)", args: [uuid(), "seandefaria", hash, "Sean DeFaria", "admin"] });
-  } else {
-    if (bcrypt.compareSync("test1", adminExists.password_hash as string)) {
-      const newHash = bcrypt.hashSync("S04131959d?", 12);
-      await client.execute({ sql: "UPDATE users SET password_hash = ? WHERE id = ?", args: [newHash, adminExists.id as string] });
+  const userCount = (await client.execute("SELECT COUNT(*) as count FROM users")).rows[0];
+  if (userCount && Number(userCount.count) === 0) {
+    const adminUsername = process.env.ADMIN_USERNAME;
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    if (adminUsername && adminPassword) {
+      const hash = bcrypt.hashSync(adminPassword, 12);
+      await client.execute({
+        sql: "INSERT INTO users (id, username, password_hash, display_name, role) VALUES (?, ?, ?, ?, ?)",
+        args: [uuid(), adminUsername.toLowerCase().trim(), hash, adminUsername, "admin"]
+      });
+      console.log(`[FIRST BOOT] Admin account created: ${adminUsername}`);
+    } else {
+      console.warn("[FIRST BOOT] No users exist and ADMIN_USERNAME/ADMIN_PASSWORD env vars are not set. Set them to create the initial admin account.");
     }
-  }
-
-  const testExists = (await client.execute({ sql: "SELECT id FROM users WHERE username = ?", args: ["test1"] })).rows[0];
-  if (!testExists) {
-    const hash = bcrypt.hashSync("test1", 12);
-    await client.execute({ sql: "INSERT INTO users (id, username, password_hash, display_name, role) VALUES (?, ?, ?, ?, ?)", args: [uuid(), "test1", hash, "Test User", "client"] });
-  }
-
-  const client1Exists = (await client.execute({ sql: "SELECT id FROM users WHERE username = ?", args: ["client1"] })).rows[0];
-  if (!client1Exists) {
-    const hash = bcrypt.hashSync("client1", 12);
-    await client.execute({ sql: "INSERT INTO users (id, username, password_hash, display_name, role) VALUES (?, ?, ?, ?, ?)", args: [uuid(), "client1", hash, "Client One", "client"] });
-  }
-
-  const nettspendExists = (await client.execute({ sql: "SELECT id FROM users WHERE username = ?", args: ["nettspend"] })).rows[0];
-  if (!nettspendExists) {
-    const hash = bcrypt.hashSync("123457", 12);
-    await client.execute({ sql: "INSERT INTO users (id, username, password_hash, display_name, role, google_email) VALUES (?, ?, ?, ?, ?, ?)", args: [uuid(), "nettspend", hash, "Nettspend", "client", "nettspend@riddlellc.biz"] });
-  } else {
-    await client.execute({ sql: "UPDATE users SET google_email = ? WHERE username = ? AND google_email IS NULL", args: ["nettspend@riddlellc.biz", "nettspend"] });
   }
 }
 
