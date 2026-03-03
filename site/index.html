@@ -6,186 +6,546 @@
     <title>deFaria — Digital Seeding + Creative Distribution</title>
     <meta name="description" content="Digital distribution for artists and labels. Strategic seeding, multi-platform placement, and full campaign tracking.">
     <meta property="og:title" content="deFaria — Digital Seeding + Creative Distribution">
-    <meta property="og:description" content="Digital distribution for artists and labels. Strategic seeding, multi-platform placement, and full campaign tracking.">
+    <meta property="og:description" content="Digital distribution for artists and labels.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://defaria.nyc">
     <meta property="og:image" content="https://defaria.nyc/img/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://defaria.nyc/img/og-image.png">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230039A6'/><text x='50%25' y='23' text-anchor='middle' font-family='Helvetica Neue,sans-serif' font-size='16' fill='white' font-weight='bold'>dF</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230A0A0A'/><text x='50%25' y='23' text-anchor='middle' font-family='system-ui,sans-serif' font-size='16' fill='%232563FF' font-weight='bold'>dF</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/variables.css?v=65">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/sections.css?v=65">
-    <link rel="stylesheet" href="css/responsive.css?v=65">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #000000;
+            --surface: #0A0A0A;
+            --card: #111111;
+            --border: #1a1a1a;
+            --accent: #2563FF;
+            --accent-glow: rgba(37, 99, 255, 0.15);
+            --white: #ffffff;
+            --grey: #999999;
+            --dim: #555555;
+            --font: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-display: 'Space Grotesk', 'Inter', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--white);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* ═══ NAV ═══ */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 clamp(1.5rem, 5vw, 4rem);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: -0.04em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--grey);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--white); }
+
+        /* ═══ HERO ═══ */
+        .hero {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-family: var(--font);
+            font-weight: 900;
+            font-size: clamp(3rem, 10vw, 6.5rem);
+            letter-spacing: -0.04em;
+            line-height: 0.95;
+            color: var(--white);
+            opacity: 0;
+            animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            font-weight: 400;
+            color: var(--grey);
+            margin-top: 1.5rem;
+            line-height: 1.6;
+            opacity: 0;
+            animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            margin-top: 2.5rem;
+            padding: 1rem 2.5rem;
+            font-family: var(--font);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--white);
+            background: var(--accent);
+            border: none;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            opacity: 0;
+            animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ═══ SECTIONS ═══ */
+        .section {
+            padding: clamp(5rem, 12vw, 8rem) clamp(1.5rem, 5vw, 4rem);
+        }
+
+        .section-label {
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-heading {
+            font-family: var(--font);
+            font-weight: 800;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            color: var(--white);
+            margin-bottom: 4rem;
+        }
+
+        /* ═══ SERVICES ═══ */
+        .services {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+
+        .service {
+            background: var(--surface);
+            padding: clamp(2rem, 4vw, 3rem);
+            transition: background 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .service.vis {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        background 0.3s;
+        }
+
+        .service:hover {
+            background: #0f0f0f;
+        }
+
+        .service h3 {
+            font-family: var(--font);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .service p {
+            font-size: 0.9rem;
+            font-weight: 400;
+            line-height: 1.65;
+            color: var(--grey);
+        }
+
+        /* Code rain canvas */
+        .code-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.04;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ═══ STATEMENT ═══ */
+        .statement {
+            padding: clamp(6rem, 14vw, 10rem) clamp(1.5rem, 5vw, 4rem);
+            text-align: center;
+        }
+
+        .statement h2 {
+            font-family: var(--font);
+            font-weight: 900;
+            font-size: clamp(2rem, 7vw, 4.5rem);
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            color: var(--white);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .statement h2 span {
+            color: var(--accent);
+        }
+
+        .statement-sub {
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
+            font-weight: 400;
+            color: var(--dim);
+            margin-top: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ═══ CONTACT ═══ */
+        .contact {
+            max-width: 540px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-family: var(--font);
+            font-weight: 800;
+            font-size: clamp(2rem, 6vw, 3rem);
+            letter-spacing: -0.03em;
+            color: var(--white);
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            font-family: var(--font);
+            font-size: 0.9rem;
+            color: var(--white);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--dim);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            margin-top: 0.5rem;
+            padding: 1rem 2rem;
+            font-family: var(--font);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--white);
+            background: var(--accent);
+            border: none;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+
+        /* ═══ SRG ═══ */
+        .srg {
+            padding: clamp(5rem, 12vw, 8rem) 2rem;
+            text-align: center;
+        }
+
+        .srg-word {
+            display: block;
+            font-family: var(--font);
+            font-weight: 900;
+            font-size: clamp(4rem, 15vw, 10rem);
+            letter-spacing: -0.05em;
+            line-height: 0.9;
+        }
+
+        .srg-word:nth-child(1) { color: var(--accent); }
+        .srg-word:nth-child(2) { color: #00c853; }
+        .srg-word:nth-child(3) { color: #ff6d00; }
+
+        /* ═══ FOOTER ═══ */
+        footer {
+            padding: 3rem clamp(1.5rem, 5vw, 4rem);
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: -0.04em;
+        }
+
+        .footer-info {
+            font-size: 0.75rem;
+            color: var(--dim);
+            text-align: right;
+            line-height: 1.8;
+        }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links { gap: 1.5rem; }
+            footer {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            .footer-info { text-align: center; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.01ms !important; transition-duration: 0.1s !important; }
+            .hero h1, .hero-sub, .hero-cta, .service { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- Metro Sidebar — full-page progress line -->
-<div class="metro-sidebar" id="metro-sidebar" aria-hidden="true">
-    <div class="metro-sidebar__line">
-        <div class="metro-sidebar__progress" id="metro-progress">
-            <span class="metro-sidebar__dot"></span>
-        </div>
-    </div>
-</div>
-
-<!-- Nav -->
-<nav class="nav" id="nav">
-    <div class="nav__inner container">
-        <a href="#" class="nav__logo" style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#2563FF;letter-spacing:-0.04em;text-decoration:none;">dF</a>
-        <ul class="nav__links" id="nav-links">
+    <nav>
+        <a href="/" class="nav-logo">dF</a>
+        <ul class="nav-links">
             <li><a href="#services">Services</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-        <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </div>
-</nav>
+    </nav>
 
-<!-- Hero -->
-<section class="hero" id="hero">
-    <div class="container hero__inner">
-        <h1 class="hero__headline"><span class="hero__word">We</span> <span class="hero__word">Know</span> <span class="hero__word">How</span><br><span class="hero__word">It</span> <span class="hero__word">Works.</span></h1>
-        <p class="hero__sub" style="text-align:center;max-width:440px;margin-left:auto;margin-right:auto;">Digital seeding and creative distribution<br>for <a href="#services" class="hero__sub-link">artists and labels</a>.</p>
-        <a href="#contact" class="btn btn--primary">Start A Project</a>
-    </div>
-</section>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>We Move<br><span>Content.</span></h1>
+            <p class="hero-sub">Digital seeding and creative distribution<br>for artists and labels.</p>
+            <a href="#contact" class="hero-cta">Start a Project</a>
+        </div>
+    </section>
 
-<!-- Services — What We Do -->
-<section class="creative" id="services" style="position:relative;overflow:hidden;">
-    <canvas id="code-bg" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.06;z-index:0;pointer-events:none;"></canvas>
-    <div class="container" style="position:relative;z-index:1;">
-        <h2 class="creative__headline">What We Do</h2>
-        <div class="creative__route">
-            <div class="creative__track"></div>
-            <div class="creative__grid">
-                <div class="creative__item"><div class="creative__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><h3 class="creative__title">Digital Distribution</h3><p class="creative__desc">Multi-platform content placement across pages, blogs, and accounts. Coordinated rollouts that reach every corner of the internet.</p></div>
-                <div class="creative__item"><div class="creative__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div><h3 class="creative__title">Content Strategy</h3><p class="creative__desc">We plan what goes where and when. Platform-specific formats, timing, and narrative &mdash; built around your release cycle.</p></div>
-                <div class="creative__item"><div class="creative__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div><h3 class="creative__title">Creative Production</h3><p class="creative__desc">Short-form content, edits, and visual assets for every platform &mdash; plus a full live production team for streaming and event coverage.</p></div>
-                <div class="creative__item"><div class="creative__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3 class="creative__title">Seeding Network</h3><p class="creative__desc">Direct connections to pages, blogs, and accounts across every platform. A deep network built over years &mdash; not cold outreach.</p></div>
-                <div class="creative__item"><div class="creative__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></svg></div><h3 class="creative__title">Paid Media</h3><p class="creative__desc">Targeted ad placement and promotion across platforms. City-level, demographic, and interest-based &mdash; we put budget where it performs.</p></div>
-                <div class="creative__item"><div class="creative__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3 class="creative__title">Influencer Marketing</h3><p class="creative__desc">We connect with the right creators to amplify reach and drive real engagement.</p></div>
+    <!-- Services -->
+    <section class="section services" id="services">
+        <canvas class="code-canvas" id="code-bg"></canvas>
+        <div class="services-inner" style="position:relative;z-index:1;">
+            <div class="section-label">What We Do</div>
+            <div class="section-heading">Six ways we get<br>your music heard.</div>
+            <div class="services-grid">
+                <div class="service" data-d="0">
+                    <h3>Digital Distribution</h3>
+                    <p>Multi-platform content placement across pages, blogs, and accounts. Coordinated rollouts that reach every corner of the internet.</p>
+                </div>
+                <div class="service" data-d="60">
+                    <h3>Content Strategy</h3>
+                    <p>We plan what goes where and when. Platform-specific formats, timing, and narrative — built around your release cycle.</p>
+                </div>
+                <div class="service" data-d="120">
+                    <h3>Creative Production</h3>
+                    <p>Short-form content, edits, and visual assets for every platform — plus a full live production team for streaming and event coverage.</p>
+                </div>
+                <div class="service" data-d="180">
+                    <h3>Seeding Network</h3>
+                    <p>Direct connections to pages, blogs, and accounts across every platform. A deep network built over years — not cold outreach.</p>
+                </div>
+                <div class="service" data-d="240">
+                    <h3>Paid Placement</h3>
+                    <p>Strategic paid placements across high-traffic pages, blogs, and playlists. We buy reach through real channels, not ad dashboards.</p>
+                </div>
+                <div class="service" data-d="300">
+                    <h3>Influencer Marketing</h3>
+                    <p>We connect with the right creators to amplify reach and drive real engagement.</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- About Banner -->
-<div class="about-banner">
-    <div class="container">
-        <p class="about-banner__text reveal"><span class="about-banner__white">Your content, <span class="about-banner__system">everywhere it matters.</span></span> <span class="about-banner__accent">Distributed. Targeted. Tracked.</span></p>
-        <a href="#contact" class="about-banner__track" aria-label="Scroll to Start a Project">
-            <span class="about-banner__rail"></span>
-            <span class="about-banner__station"></span>
-        </a>
-    </div>
-</div>
+    <!-- Statement -->
+    <section class="statement">
+        <h2>Your content,<br><span>everywhere it matters.</span></h2>
+        <p class="statement-sub">Distributed. Targeted. Tracked.</p>
+    </section>
 
-<!-- Contact -->
-<section class="contact" id="contact">
-    <div class="container contact__inner">
-        <h2 class="contact__headline">Start A <span class="contact__project-glow">Project.</span></h2>
-        <form class="contact__form" id="contact-form" action="https://formsubmit.co/sean@defaria.nyc" method="POST">
+    <!-- Contact -->
+    <section class="section contact" id="contact">
+        <h2>Start a Project</h2>
+        <form class="contact-form" action="https://formsubmit.co/sean@defaria.nyc" method="POST">
             <input type="hidden" name="_subject" value="New inquiry from defaria.nyc">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_next" value="https://defaria.nyc/thanks.html">
-            <div class="contact__fields">
-                <input type="text" name="project" placeholder="Project Name" required class="input">
-                <input type="text" name="name" placeholder="Your Name" required class="input">
-                <input type="email" name="email" placeholder="Email" required class="input">
-                <textarea name="message" placeholder="Tell us about your project" rows="4" class="input input--textarea"></textarea>
-            </div>
-            <button type="submit" class="btn btn--dark">Get Started</button>
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="project" placeholder="Artist / Project">
+            <textarea name="message" placeholder="Tell us about your project"></textarea>
+            <button type="submit">Get Started</button>
         </form>
-    </div>
-</section>
+    </section>
 
-<!-- CLIP. SEED. GROW. -->
-<section class="csg">
-    <div class="container csg__inner">
-        <span class="csg__word csg__word--clip">SEED.</span>
-        <span class="csg__word csg__word--seed">REACH.</span>
-        <span class="csg__word csg__word--grow">GROW.</span>
-    </div>
-</section>
+    <!-- SEED. REACH. GROW. -->
+    <section class="srg">
+        <span class="srg-word">SEED.</span>
+        <span class="srg-word">REACH.</span>
+        <span class="srg-word">GROW.</span>
+    </section>
 
-<!-- Footer -->
-<footer class="footer">
-    <div class="container footer__inner">
-        <div class="footer__top">
-            <a href="/" class="footer__logo" style="font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;color:#2563FF;letter-spacing:-0.04em;text-decoration:none;">dF</a>
-            <ul class="footer__links">
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+    <footer>
+        <a href="/" class="footer-logo">dF</a>
+        <div class="footer-info">
+            &copy; 2026 DeFaria LLC<br>
+            New York City
         </div>
-        <div class="footer__bottom">
-            <p>&copy; 2026 DEFARIA LLC. ALL RIGHTS RESERVED.</p>
-            <p class="footer__location">Located in New York City</p>
-        </div>
-    </div>
-</footer>
+    </footer>
 
+    <script>
+        /* Scroll reveal */
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    setTimeout(() => e.target.classList.add('vis'), +(e.target.dataset.d || 0));
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.service').forEach(el => obs.observe(el));
 
-<script src="js/counter.js"></script>
-<script src="js/main.js?v=65"></script>
-<script>
-/* ── Code rain background for services section ── */
-(function(){
-    const canvas = document.getElementById('code-bg');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const section = canvas.parentElement;
-
-    function resize() {
-        canvas.width = section.offsetWidth * 2;
-        canvas.height = section.offsetHeight * 2;
-        canvas.style.width = section.offsetWidth + 'px';
-        canvas.style.height = section.offsetHeight + 'px';
-        ctx.scale(2, 2);
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン{}[]<>/=;:._-+*&#@!?$%^~|\\';
-    const fontSize = 11;
-    const cols = Math.floor(section.offsetWidth / fontSize);
-    const drops = Array(cols).fill(0).map(() => Math.random() * -100);
-
-    function draw() {
-        ctx.fillStyle = 'rgba(10,10,10,0.15)';
-        ctx.fillRect(0, 0, section.offsetWidth, section.offsetHeight);
-        ctx.fillStyle = '#2563FF';
-        ctx.font = fontSize + 'px monospace';
-
-        for (let i = 0; i < drops.length; i++) {
-            const char = chars[Math.floor(Math.random() * chars.length)];
-            ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-            if (drops[i] * fontSize > section.offsetHeight && Math.random() > 0.985) {
-                drops[i] = 0;
+        /* Code rain */
+        (function(){
+            const canvas = document.getElementById('code-bg');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const section = canvas.parentElement;
+            function resize() {
+                canvas.width = section.offsetWidth * 2;
+                canvas.height = section.offsetHeight * 2;
+                canvas.style.width = section.offsetWidth + 'px';
+                canvas.style.height = section.offsetHeight + 'px';
+                ctx.scale(2, 2);
             }
-            drops[i] += 0.4;
-        }
-    }
+            resize();
+            window.addEventListener('resize', resize);
+            const chars = '01{}[]<>/=;:._-+*&#@$%~|\\';
+            const fontSize = 12;
+            const cols = Math.floor(section.offsetWidth / fontSize);
+            const drops = Array(cols).fill(0).map(() => Math.random() * -80);
+            function draw() {
+                ctx.fillStyle = 'rgba(0,0,0,0.12)';
+                ctx.fillRect(0, 0, section.offsetWidth, section.offsetHeight);
+                ctx.fillStyle = '#2563FF';
+                ctx.font = fontSize + 'px monospace';
+                for (let i = 0; i < drops.length; i++) {
+                    const char = chars[Math.floor(Math.random() * chars.length)];
+                    ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > section.offsetHeight && Math.random() > 0.985) drops[i] = 0;
+                    drops[i] += 0.35;
+                }
+            }
+            let f = 0;
+            (function loop() { if (f++ % 3 === 0) draw(); requestAnimationFrame(loop); })();
+        })();
+    </script>
 
-    let frame = 0;
-    function loop() {
-        if (frame % 3 === 0) draw();
-        frame++;
-        requestAnimationFrame(loop);
-    }
-    loop();
-})();
-</script>
 </body>
 </html>
