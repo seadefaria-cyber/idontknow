@@ -184,7 +184,9 @@ export async function listFilesWithFolders(accessToken: string): Promise<DriveFi
       folderCategory[id] = "legal";
     } else if (lower === "creative" || lower === "creative assets" || lower === "assets" || lower === "media") {
       folderCategory[id] = "creative";
-    } else if (lower === "royalties" || lower === "royalty statements" || lower === "royalty") {
+    } else if (lower === "distribution" || lower === "royalties" || lower === "royalty statements") {
+      folderCategory[id] = "royalties";
+    } else if (lower === "publishing") {
       folderCategory[id] = "royalties";
     }
   }

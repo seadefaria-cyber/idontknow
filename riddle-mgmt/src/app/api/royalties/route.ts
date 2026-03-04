@@ -61,12 +61,14 @@ export async function POST(req: NextRequest) {
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `, [docId, userId, title, category, period, amount, storedName, file.name, s3Key, buffer.length, file.type || "application/octet-stream"]);
 
-  // Two-way sync: upload to client's Google Drive "Royalties" folder if connected
+  // Two-way sync: upload to client's Google Drive folder based on category
+  // recording → "Distribution" folder, publishing → "Publishing" folder
   try {
     const driveConn = await getConnection(userId);
     if (driveConn) {
       const freshConn = await refreshTokenIfNeeded(driveConn);
-      const folderId = await getOrCreateFolder(freshConn.access_token, "Royalties");
+      const driveFolderName = category === "publishing" ? "Publishing" : "Distribution";
+      const folderId = await getOrCreateFolder(freshConn.access_token, driveFolderName);
       await uploadFileToDrive(freshConn.access_token, file.name, file.type || "application/octet-stream", buffer, folderId);
     }
   } catch {
