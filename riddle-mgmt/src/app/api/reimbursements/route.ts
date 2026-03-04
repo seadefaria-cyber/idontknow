@@ -65,7 +65,7 @@ export async function GET(req: NextRequest) {
       COALESCE(SUM(CASE WHEN status = 'approved' THEN amount END), 0) as approved_total,
       COALESCE(SUM(CASE WHEN status = 'paid' THEN amount END), 0) as paid_total,
       COALESCE(SUM(CASE WHEN status = 'rejected' THEN amount END), 0) as rejected_total,
-      COALESCE(SUM(amount), 0) as grand_total,
+      COALESCE(SUM(CASE WHEN status != 'rejected' THEN amount END), 0) as grand_total,
       COUNT(*) as total_count,
       COUNT(CASE WHEN status = 'submitted' THEN 1 END) as pending_count,
       COUNT(CASE WHEN status = 'approved' THEN 1 END) as approved_count,

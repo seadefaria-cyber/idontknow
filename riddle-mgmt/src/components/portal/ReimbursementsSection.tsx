@@ -132,6 +132,13 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
   const [expandedInvoice, setExpandedInvoice] = useState<string | null>(null);
   const [expandedExpense, setExpandedExpense] = useState<string | null>(null);
   const [pendingCategory, setPendingCategory] = useState<string>("all");
+  const [confirmDeleteExpenseId, setConfirmDeleteExpenseId] = useState<string | null>(null);
+
+  async function handleDeleteExpense(id: string) {
+    await fetch(`/api/reimbursements/${id}`, { method: "DELETE" });
+    setConfirmDeleteExpenseId(null);
+    refresh();
+  }
 
   const buildUrl = useCallback(() => {
     const params = new URLSearchParams();
@@ -689,6 +696,27 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                                 </svg>
                                 View Receipt
                               </a>
+                            )}
+
+                            {/* Delete expense */}
+                            {item.raw && (
+                              confirmDeleteExpenseId === item.id ? (
+                                <div className="flex items-center gap-2 pt-2">
+                                  <button onClick={() => handleDeleteExpense(item.id)} className="text-[10px] tracking-[0.1em] uppercase px-3 py-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-all">Confirm Delete</button>
+                                  <button onClick={() => setConfirmDeleteExpenseId(null)} className="text-[10px] tracking-[0.1em] uppercase px-3 py-1.5 rounded-lg text-gray-400 hover:text-gray-500 transition-all">Cancel</button>
+                                </div>
+                              ) : (
+                                <button
+                                  onClick={() => setConfirmDeleteExpenseId(item.id)}
+                                  className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase text-gray-300 hover:text-red-500 transition-colors pt-2"
+                                >
+                                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="opacity-50">
+                                    <polyline points="3 6 5 6 21 6" />
+                                    <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
+                                  </svg>
+                                  Delete
+                                </button>
+                              )
                             )}
                           </div>
                         </div>
