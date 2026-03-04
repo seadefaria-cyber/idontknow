@@ -74,6 +74,7 @@ export default function LegalSection({ role, allUsers, refreshSignal }: LegalSec
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [status, setStatus] = useState<"pending" | "signed">("pending");
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [uploadError, setUploadError] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => { if (refreshSignal) refresh(); }, [refreshSignal]);
@@ -110,18 +111,25 @@ export default function LegalSection({ role, allUsers, refreshSignal }: LegalSec
     formData.append("category", category);
     formData.append("userId", role === "admin" ? clientId : "");
     formData.append("status", status);
-    const res = await fetch("/api/legal", { method: "POST", body: formData });
-    if (res.ok) {
-      setTitle("");
-      setCategory("contract");
-      setSummary("");
-      setClientId("");
-      setSelectedFile(null);
-      setAnalyzed(false);
-      setStatus("pending");
-      setShowUpload(false);
-      if (fileRef.current) fileRef.current.value = "";
-      refresh();
+    try {
+      const res = await fetch("/api/legal", { method: "POST", body: formData });
+      if (res.ok) {
+        setTitle("");
+        setCategory("contract");
+        setSummary("");
+        setClientId("");
+        setSelectedFile(null);
+        setAnalyzed(false);
+        setStatus("pending");
+        setShowUpload(false);
+        if (fileRef.current) fileRef.current.value = "";
+        refresh();
+      } else {
+        const data = await res.json().catch(() => ({ error: "Upload failed" }));
+        setUploadError(data.error || `Upload failed (${res.status})`);
+      }
+    } catch {
+      setUploadError("Network error — please try again");
     }
     setUploading(false);
   }
@@ -158,8 +166,14 @@ export default function LegalSection({ role, allUsers, refreshSignal }: LegalSec
       />
 
       {/* Upload with AI auto-detect */}
+      {uploadError && (
+        <div className="mb-4 px-4 py-3 rounded-lg bg-red-50 text-red-600 text-xs text-center">
+          {uploadError}
+        </div>
+      )}
+
       {showUpload && (
-        <form onSubmit={handleUpload} className="glass rounded-lg p-6 mb-6 space-y-4 animate-fade-in">
+        <form onSubmit={(e) => { setUploadError(""); handleUpload(e); }} className="glass rounded-lg p-6 mb-6 space-y-4 animate-fade-in">
           {/* File picker — first step */}
           <input
             ref={fileRef}
