@@ -59,6 +59,23 @@ export async function downloadFromS3(key: string): Promise<Buffer> {
 }
 
 /**
+ * Get a presigned PUT URL so the browser can upload directly to S3.
+ * Expires in 15 minutes.
+ */
+export async function getPresignedUploadUrl(
+  key: string,
+  contentType: string
+): Promise<string> {
+  const command = new PutObjectCommand({
+    Bucket: getBucket(),
+    Key: key,
+    ContentType: contentType,
+    ServerSideEncryption: "AES256",
+  });
+  return getSignedUrl(s3, command, { expiresIn: 900 });
+}
+
+/**
  * Delete a file from S3.
  */
 export async function deleteFromS3(key: string): Promise<void> {

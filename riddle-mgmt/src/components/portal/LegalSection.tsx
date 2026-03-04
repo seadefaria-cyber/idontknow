@@ -105,14 +105,54 @@ export default function LegalSection({ role, allUsers, refreshSignal }: LegalSec
     if (!selectedFile || !title) return;
     if (role === "admin" && !clientId) return;
     setUploading(true);
-    const formData = new FormData();
-    formData.append("file", selectedFile);
-    formData.append("title", title);
-    formData.append("category", category);
-    formData.append("userId", role === "admin" ? clientId : "");
-    formData.append("status", status);
     try {
-      const res = await fetch("/api/legal", { method: "POST", body: formData });
+      // Step 1: Get presigned S3 URL
+      const presignRes = await fetch("/api/legal/presign", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fileName: selectedFile.name,
+          contentType: selectedFile.type || "application/octet-stream",
+          userId: role === "admin" ? clientId : undefined,
+        }),
+      });
+      if (!presignRes.ok) {
+        const data = await presignRes.json().catch(() => ({ error: "Failed to prepare upload" }));
+        setUploadError(data.error || `Presign failed (${presignRes.status})`);
+        setUploading(false);
+        return;
+      }
+      const { presignedUrl, s3Key, docId, storedName } = await presignRes.json();
+
+      // Step 2: Upload file directly to S3 (bypasses Vercel 4.5MB limit)
+      const s3Res = await fetch(presignedUrl, {
+        method: "PUT",
+        headers: { "Content-Type": selectedFile.type || "application/octet-stream" },
+        body: selectedFile,
+      });
+      if (!s3Res.ok) {
+        setUploadError(`S3 upload failed (${s3Res.status})`);
+        setUploading(false);
+        return;
+      }
+
+      // Step 3: Register in DB + trigger Drive sync
+      const res = await fetch("/api/legal", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          docId,
+          s3Key,
+          storedName,
+          title,
+          category,
+          status,
+          originalName: selectedFile.name,
+          fileSize: selectedFile.size,
+          mimeType: selectedFile.type || "application/octet-stream",
+          userId: role === "admin" ? clientId : undefined,
+        }),
+      });
       if (res.ok) {
         setTitle("");
         setCategory("contract");
