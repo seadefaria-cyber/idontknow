@@ -5,6 +5,8 @@ import { analyzeLegalDocument } from "@/lib/ai";
 import { uploadToS3 } from "@/lib/s3";
 import { v4 as uuid } from "uuid";
 import path from "path";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const pdfParse = require("pdf-parse");
 
 export async function GET() {
   const session = await getSession();
@@ -30,16 +32,18 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
-  if (session.role !== "admin") return NextResponse.json({ error: "Not authorized" }, { status: 403 });
-
   const formData = await req.formData();
   const file = formData.get("file") as File | null;
   const title = formData.get("title") as string;
   const category = formData.get("category") as string || "contract";
-  const userId = formData.get("userId") as string;
   const status = formData.get("status") as string || "draft";
 
-  if (!file || !title || !userId) return NextResponse.json({ error: "File, title, and client required" }, { status: 400 });
+  // Admin can specify a client; clients upload to their own account
+  const userId = session.role === "admin"
+    ? (formData.get("userId") as string) || session.userId
+    : session.userId;
+
+  if (!file || !title) return NextResponse.json({ error: "File and title required" }, { status: 400 });
 
   const docId = uuid();
   const ext = path.extname(file.name);
@@ -52,15 +56,24 @@ export async function POST(req: NextRequest) {
   // Upload to S3
   await uploadToS3(s3Key, buffer, file.type || "application/octet-stream");
 
+  // Extract PDF text for AI analysis
+  let pdfText = "";
+  if (file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")) {
+    try {
+      const parsed = await pdfParse(buffer);
+      pdfText = parsed.text;
+    } catch { /* fallback to filename */ }
+  }
+
   // AI analysis
   let finalTitle = title;
   let finalCategory = category;
   let aiSummary: string | null = null;
 
-  const ai = await analyzeLegalDocument(file.name, file.type || "application/octet-stream");
+  const ai = await analyzeLegalDocument(file.name, file.type || "application/octet-stream", pdfText);
   if (ai) {
     if (title.length <= 10) finalTitle = ai.suggestedTitle;
-    finalCategory = ai.category;
+    if (category === "contract" || category === "other") finalCategory = ai.category;
     aiSummary = ai.summary;
   }
 

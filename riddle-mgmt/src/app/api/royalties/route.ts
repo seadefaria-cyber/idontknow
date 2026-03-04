@@ -29,18 +29,20 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
-  if (session.role !== "admin") return NextResponse.json({ error: "Not authorized" }, { status: 403 });
-
   const formData = await req.formData();
   const file = formData.get("file") as File | null;
   const title = formData.get("title") as string;
   const category = (formData.get("category") as string) || "recording";
   const period = (formData.get("period") as string) || null;
   const amount = formData.get("amount") ? parseFloat(formData.get("amount") as string) : null;
-  const userId = formData.get("userId") as string;
 
-  if (!file || !title || !userId) {
-    return NextResponse.json({ error: "File, title, and client required" }, { status: 400 });
+  // Admin can specify a client; clients upload to their own account
+  const userId = session.role === "admin"
+    ? (formData.get("userId") as string) || session.userId
+    : session.userId;
+
+  if (!file || !title) {
+    return NextResponse.json({ error: "File and title required" }, { status: 400 });
   }
 
   const docId = uuid();

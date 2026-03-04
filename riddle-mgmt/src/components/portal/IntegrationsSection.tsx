@@ -12,30 +12,21 @@ interface QBStatus {
   company_name?: string;
 }
 
-interface DSStatus {
-  connected: boolean;
-  email: string | null;
-}
-
 export default function IntegrationsSection() {
   const [drive, setDrive] = useState<DriveStatus>({ connected: false, email: null });
   const [qb, setQB] = useState<QBStatus>({ connected: false });
-  const [ds, setDS] = useState<DSStatus>({ connected: false, email: null });
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [disconnectingDrive, setDisconnectingDrive] = useState(false);
   const [disconnectingQB, setDisconnectingQB] = useState(false);
-  const [disconnectingDS, setDisconnectingDS] = useState(false);
 
   useEffect(() => {
     Promise.all([
       fetch("/api/google-drive/files").then((r) => r.ok ? r.json() : null).catch(() => null),
       fetch("/api/quickbooks/expenses").then((r) => r.ok ? r.json() : null).catch(() => null),
-      fetch("/api/docusign/status").then((r) => r.ok ? r.json() : null).catch(() => null),
-    ]).then(([driveData, qbData, dsData]) => {
+    ]).then(([driveData, qbData]) => {
       if (driveData) setDrive({ connected: driveData.connected, email: driveData.email });
       if (qbData) setQB({ connected: qbData.connected, company_name: qbData.company_name });
-      if (dsData) setDS({ connected: dsData.connected, email: dsData.email });
       setLoading(false);
     });
   }, []);
@@ -58,13 +49,6 @@ export default function IntegrationsSection() {
     await fetch("/api/quickbooks/disconnect", { method: "POST" }).catch(() => {});
     setQB({ connected: false });
     setDisconnectingQB(false);
-  }
-
-  async function handleDSDisconnect() {
-    setDisconnectingDS(true);
-    await fetch("/api/docusign/disconnect", { method: "POST" }).catch(() => {});
-    setDS({ connected: false, email: null });
-    setDisconnectingDS(false);
   }
 
   if (loading) return null;
@@ -152,40 +136,6 @@ export default function IntegrationsSection() {
         )}
       </div>
 
-      {/* DocuSign */}
-      <div className="glass rounded-lg p-5">
-        <div className="flex items-center gap-3 mb-3">
-          <div className="w-9 h-9 rounded-lg bg-gray-50 flex items-center justify-center shrink-0">
-            <span className="text-[10px] tracking-wider text-gray-400 font-medium">DS</span>
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="text-sm text-gray-500 font-light">DocuSign</p>
-            <p className="text-[10px] text-gray-300 mt-0.5">E-Signatures &amp; Contracts</p>
-          </div>
-          {ds.connected && (
-            <span className="text-[9px] px-2.5 py-1 rounded-full bg-gray-100 text-gray-400 tracking-wider uppercase shrink-0">Connected</span>
-          )}
-        </div>
-        {ds.connected ? (
-          <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-            <p className="text-xs text-gray-400 font-light truncate">{ds.email}</p>
-            <button
-              onClick={handleDSDisconnect}
-              disabled={disconnectingDS}
-              className="text-[10px] tracking-[0.15em] uppercase text-gray-300 hover:text-red-500 transition-colors disabled:opacity-30"
-            >
-              {disconnectingDS ? "..." : "Disconnect"}
-            </button>
-          </div>
-        ) : (
-          <a
-            href="/api/docusign/connect"
-            className="block w-full py-3 rounded-lg text-xs tracking-[0.2em] uppercase text-center bg-gray-900 text-white hover:bg-gray-800 transition-all font-medium"
-          >
-            Connect DocuSign
-          </a>
-        )}
-      </div>
     </div>
   );
 }

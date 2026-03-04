@@ -314,6 +314,9 @@ async function initSchema() {
   await tryExec("ALTER TABLE qb_invoices ADD COLUMN invoice_link TEXT");
   await tryExec("ALTER TABLE docusign_connections ADD COLUMN account_id TEXT");
   await tryExec("ALTER TABLE docusign_connections ADD COLUMN base_uri TEXT");
+  await tryExec("ALTER TABLE reimbursements ADD COLUMN submitter_name TEXT");
+  await tryExec("ALTER TABLE reimbursements ADD COLUMN submitter_email TEXT");
+  await tryExec("ALTER TABLE reimbursements ADD COLUMN submitter_google_id TEXT");
 
   // Create initial admin from env vars if no users exist
   const { v4: uuid } = require("uuid");

@@ -64,17 +64,22 @@ interface LegalAnalysis {
 
 export async function analyzeLegalDocument(
   fileName: string,
-  mimeType: string
+  mimeType: string,
+  pdfText?: string
 ): Promise<LegalAnalysis | null> {
   try {
+    const truncated = pdfText ? pdfText.slice(0, 4000) : "";
+    const contentSection = truncated
+      ? `\n\nExtracted text from the document:\n"""\n${truncated}\n"""`
+      : "";
     const text = await ask(
       `Analyze this legal document for a music management company.
-File: "${fileName}" (${mimeType})
+File: "${fileName}" (${mimeType})${contentSection}
 Categories: contract, nda, agreement, other
 
 Reply with ONLY valid JSON:
 {"suggestedTitle":"<professional title>","category":"<contract|nda|agreement|other>","summary":"<1-2 sentence summary for the client>"}`,
-      200
+      300
     );
     if (!text) return null;
     const match = text.match(/\{[\s\S]+?\}/);
@@ -149,6 +154,55 @@ Reply with ONLY valid JSON:
     if (!match) return null;
     const parsed = JSON.parse(match[0]);
     if (typeof parsed.description === "string") return parsed;
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+// --- Royalty statement analysis ---
+
+interface RoyaltyAnalysis {
+  title: string;
+  category: "recording" | "publishing";
+  source: string;
+  period: string;
+  amount: number | null;
+}
+
+export async function analyzeRoyaltyStatement(
+  fileName: string,
+  pdfText: string
+): Promise<RoyaltyAnalysis | null> {
+  try {
+    // Truncate PDF text to avoid token limits
+    const truncated = pdfText.slice(0, 4000);
+    const text = await ask(
+      `Analyze this royalty statement for a music management company.
+
+File name: "${fileName}"
+
+Extracted text from the document:
+"""
+${truncated}
+"""
+
+Determine:
+1. "title" — a clean, descriptive title (e.g. "TuneCore Q4 2025 Statement")
+2. "category" — "recording" if it's from a distributor (TuneCore, DistroKid, CD Baby, EMPIRE, UnitedMasters, Stem, AWAL, etc.) or "publishing" if it's from a PRO (BMI, ASCAP, SESAC, SOCAN, etc.)
+3. "source" — the specific platform/organization (e.g. "TuneCore", "BMI", "DistroKid")
+4. "period" — the time period covered (e.g. "Q4 2025", "Jan-Mar 2025", "2025")
+5. "amount" — the total royalty amount in USD as a number, or null if unclear
+
+Reply with ONLY valid JSON:
+{"title":"...","category":"recording|publishing","source":"...","period":"...","amount":number|null}`,
+      300
+    );
+    if (!text) return null;
+    const match = text.match(/\{[\s\S]+?\}/);
+    if (!match) return null;
+    const parsed = JSON.parse(match[0]);
+    if (parsed.title && parsed.category && parsed.source) return parsed;
     return null;
   } catch {
     return null;

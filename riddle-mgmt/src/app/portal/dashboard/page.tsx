@@ -30,15 +30,6 @@ export default function Dashboard() {
 
   useEffect(() => {
     checkAuth();
-    // Auto-open integrations panel if returning from DocuSign OAuth
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get("ds_connected") || params.get("ds_error")) {
-        setShowSettings(true);
-        // Clean up URL params
-        window.history.replaceState({}, "", "/portal/dashboard");
-      }
-    }
   }, []);
 
   // Keyboard shortcuts: 1-4 to switch sections

@@ -22,6 +22,8 @@ interface Reimbursement {
   submitted_at: string;
   reviewed_at: string | null;
   client_name?: string;
+  submitter_name: string | null;
+  submitter_email: string | null;
 }
 
 interface Summary {
@@ -562,7 +564,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
                               </a>
                             )}
-                            {role === "admin" && item.raw && (item.status === "submitted" || item.status === "approved") && (
+                            {((role === "admin" && item.raw && (item.status === "submitted" || item.status === "approved")) || (role !== "admin" && item.raw && item.status === "submitted")) && (
                               <button
                                 onClick={(e) => { e.stopPropagation(); setReviewingId(reviewingId === item.id ? null : item.id); setAdminNotes(""); }}
                                 className="text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-500 transition-colors"
@@ -591,6 +593,19 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                                 {item.status}
                               </span>
                             </div>
+
+                            {/* Submitter identity (external submissions) */}
+                            {item.raw?.submitter_name && (
+                              <div className="bg-blue-50 rounded-lg px-3 py-2">
+                                <p className="text-[10px] text-blue-400 uppercase tracking-wider mb-0.5">Submitted by</p>
+                                <p className="text-sm text-blue-700 font-light">
+                                  {item.raw.submitter_name}
+                                  {item.raw.submitter_email && (
+                                    <span className="text-blue-400 ml-1">({item.raw.submitter_email})</span>
+                                  )}
+                                </p>
+                              </div>
+                            )}
 
                             {/* Details grid */}
                             <div className="grid grid-cols-2 gap-4">
@@ -679,7 +694,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                         </div>
                       )}
 
-                      {reviewingId === item.id && role === "admin" && item.raw && (
+                      {reviewingId === item.id && item.raw && (role === "admin" || (role !== "admin" && item.status === "submitted")) && (
                         <div className="px-4 sm:px-5 pb-4 sm:pb-5 border-t border-gray-100 space-y-3 animate-fade-in" onClick={(e) => e.stopPropagation()}>
                           <div className="pt-4">
                             <input type="text" placeholder="Notes (optional)" value={adminNotes} onChange={(e) => setAdminNotes(e.target.value)} className="w-full px-4 py-2 rounded-lg text-sm font-light" />
@@ -1013,7 +1028,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                             {item.dueDate && <span className="text-[10px] text-gray-300">Due {formatShortDate(item.dueDate)}</span>}
                           </div>
                         </div>
-                        {role === "admin" && item.raw && (item.status === "submitted" || item.status === "approved") && (
+                        {((role === "admin" && item.raw && (item.status === "submitted" || item.status === "approved")) || (role !== "admin" && item.raw && item.status === "submitted")) && (
                           <button
                             onClick={() => { setReviewingId(reviewingId === item.id ? null : item.id); setAdminNotes(""); }}
                             className="text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-500 transition-colors shrink-0"
@@ -1022,7 +1037,19 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                           </button>
                         )}
                       </div>
-                      {reviewingId === item.id && role === "admin" && item.raw && (
+                      {/* Submitter identity in pending view */}
+                      {item.raw?.submitter_name && (
+                        <div className="mt-3 bg-blue-50 rounded-lg px-3 py-2">
+                          <p className="text-[10px] text-blue-400 uppercase tracking-wider mb-0.5">Submitted by</p>
+                          <p className="text-sm text-blue-700 font-light">
+                            {item.raw.submitter_name}
+                            {item.raw.submitter_email && (
+                              <span className="text-blue-400 ml-1">({item.raw.submitter_email})</span>
+                            )}
+                          </p>
+                        </div>
+                      )}
+                      {reviewingId === item.id && item.raw && (role === "admin" || (role !== "admin" && item.status === "submitted")) && (
                         <div className="mt-4 pt-4 border-t border-gray-100 space-y-3 animate-fade-in">
                           <input type="text" placeholder="Notes (optional)" value={adminNotes} onChange={(e) => setAdminNotes(e.target.value)} className="w-full px-4 py-2 rounded-lg text-sm font-light" />
                           <div className="flex gap-3">
