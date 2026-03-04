@@ -2,14 +2,17 @@
 
 import React from "react";
 
-export type Section = "creative" | "legal" | "schedule" | "reimbursements" | "royalties";
+export type Section = "home" | "updates" | "creative" | "legal" | "schedule" | "reimbursements" | "royalties";
 
 interface TabBarProps {
   active: Section;
   onChange: (section: Section) => void;
+  badges?: Partial<Record<Section, number>>;
 }
 
 const TABS: { key: Section; label: string }[] = [
+  { key: "home", label: "Home" },
+  { key: "updates", label: "Updates" },
   { key: "creative", label: "Creative" },
   { key: "legal", label: "Legal" },
   { key: "schedule", label: "Schedule" },
@@ -17,7 +20,7 @@ const TABS: { key: Section; label: string }[] = [
   { key: "royalties", label: "Royalties" },
 ];
 
-export default function TabBar({ active, onChange }: TabBarProps) {
+export default function TabBar({ active, onChange, badges }: TabBarProps) {
   return (
     <nav className="w-full overflow-x-auto scrollbar-hide">
       <div className="flex items-center justify-center gap-0 sm:gap-1">
@@ -25,13 +28,16 @@ export default function TabBar({ active, onChange }: TabBarProps) {
           <button
             key={tab.key}
             onClick={() => onChange(tab.key)}
-            className={`relative px-2.5 sm:px-4 py-2.5 text-[10px] sm:text-xs tracking-[0.08em] sm:tracking-[0.12em] uppercase transition-all duration-200 whitespace-nowrap ${
+            className={`relative px-2.5 sm:px-4 py-3 text-[11px] sm:text-xs tracking-[0.08em] sm:tracking-[0.12em] uppercase transition-all duration-200 whitespace-nowrap ${
               active === tab.key
                 ? "text-gray-900"
                 : "text-gray-400 hover:text-gray-500"
             }`}
           >
             {tab.label}
+            {badges && badges[tab.key] && badges[tab.key]! > 0 && (
+              <span className="absolute top-1.5 right-0.5 sm:right-1 w-1.5 h-1.5 rounded-full bg-red-400" />
+            )}
             {active === tab.key && (
               <span className="absolute bottom-0 left-2 right-2 h-px bg-gray-300" />
             )}

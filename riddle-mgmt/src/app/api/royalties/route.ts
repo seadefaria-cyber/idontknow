@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { dbAll, dbRun } from "@/lib/db";
 import { uploadToS3 } from "@/lib/s3";
+import { getConnection, refreshTokenIfNeeded, uploadFileToDrive, getOrCreateFolder } from "@/lib/google-drive";
 import { v4 as uuid } from "uuid";
 import path from "path";
 
@@ -59,6 +60,18 @@ export async function POST(req: NextRequest) {
     INSERT INTO royalty_statements (id, user_id, title, category, period, amount, file_name, original_name, file_path, file_size, mime_type)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `, [docId, userId, title, category, period, amount, storedName, file.name, s3Key, buffer.length, file.type || "application/octet-stream"]);
+
+  // Two-way sync: upload to client's Google Drive "Royalties" folder if connected
+  try {
+    const driveConn = await getConnection(userId);
+    if (driveConn) {
+      const freshConn = await refreshTokenIfNeeded(driveConn);
+      const folderId = await getOrCreateFolder(freshConn.access_token, "Royalties");
+      await uploadFileToDrive(freshConn.access_token, file.name, file.type || "application/octet-stream", buffer, folderId);
+    }
+  } catch {
+    // Drive upload is best-effort
+  }
 
   return NextResponse.json({ id: docId });
 }

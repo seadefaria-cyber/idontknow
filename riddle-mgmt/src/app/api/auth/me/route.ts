@@ -20,6 +20,11 @@ export async function GET() {
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
+  // Block access if MFA not verified
+  if (!session.mfaVerified) {
+    return NextResponse.json({ error: "MFA verification required" }, { status: 403 });
+  }
+
   return NextResponse.json({
     user: {
       id: user.id,

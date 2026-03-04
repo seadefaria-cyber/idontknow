@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { dbGet } from "@/lib/db";
-import { createToken, sessionCookieOptions } from "@/lib/auth";
+import { createMfaPendingToken, mfaPendingCookieOptions } from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
   try {
@@ -17,6 +17,7 @@ export async function POST(req: NextRequest) {
       password_hash: string;
       display_name: string;
       role: string;
+      mfa_setup_complete: number | null;
     }>("SELECT * FROM users WHERE username = ?", [username.toLowerCase().trim()]);
 
     if (!user) {
@@ -28,23 +29,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 
-    const token = createToken({
-      userId: user.id,
-      username: user.username,
-      role: user.role,
-    });
+    // Issue a short-lived MFA pending token (never a full session)
+    const pendingToken = createMfaPendingToken(user.id, user.username, user.role);
+    const mfaSetupDone = user.mfa_setup_complete === 1;
 
     const response = NextResponse.json({
       success: true,
-      user: {
-        id: user.id,
-        username: user.username,
-        displayName: user.display_name,
-        role: user.role,
-      },
+      mfaRequired: mfaSetupDone,
+      mfaSetupRequired: !mfaSetupDone,
     });
 
-    response.cookies.set(sessionCookieOptions(token));
+    response.cookies.set(mfaPendingCookieOptions(pendingToken));
 
     return response;
   } catch {

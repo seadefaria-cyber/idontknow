@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { dbGet, dbRun } from "@/lib/db";
 import { classifyFile } from "@/lib/ai";
-import { getConnection, refreshTokenIfNeeded, uploadFileToDrive } from "@/lib/google-drive";
+import { getConnection, refreshTokenIfNeeded, uploadFileToDrive, getOrCreateFolder } from "@/lib/google-drive";
 import { uploadToS3 } from "@/lib/s3";
 import bcrypt from "bcryptjs";
 import { v4 as uuid } from "uuid";
@@ -85,12 +85,13 @@ export async function POST(req: NextRequest) {
       aiClassified
     ]);
 
-    // Two-way sync: upload to client's Google Drive if connected
+    // Two-way sync: upload to client's Google Drive "Creative" folder if connected
     try {
       const driveConn = await getConnection(targetUserId);
       if (driveConn) {
         const freshConn = await refreshTokenIfNeeded(driveConn);
-        await uploadFileToDrive(freshConn.access_token, file.name, file.type || "application/octet-stream", buffer);
+        const folderId = await getOrCreateFolder(freshConn.access_token, "Creative");
+        await uploadFileToDrive(freshConn.access_token, file.name, file.type || "application/octet-stream", buffer, folderId);
       }
     } catch {
       // Drive upload is best-effort

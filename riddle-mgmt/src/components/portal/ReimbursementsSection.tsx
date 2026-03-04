@@ -191,7 +191,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
   const activeInvoices = qb.invoices.filter(inv => inv.status !== "voided");
   const totalInvoiced = activeInvoices.reduce((s, inv) => s + inv.total_amount, 0);
   const totalOutstanding = activeInvoices.filter(i => i.status === "open" || i.status === "overdue").reduce((s, i) => s + i.balance, 0);
-  const totalSpending = qb.expenses.reduce((s, e) => s + e.total_amount, 0) + (summary?.grand_total || 0);
+  const totalSpending = qb.expenses.reduce((s, e) => s + e.total_amount, 0) + (summary?.paid_total || 0);
   const totalReimbursed = (summary?.paid_total || 0);
   const netCash = totalEarnings - totalSpending;
 

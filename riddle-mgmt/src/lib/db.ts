@@ -268,6 +268,18 @@ async function initSchema() {
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     );
 
+    CREATE TABLE IF NOT EXISTS links (
+      id TEXT PRIMARY KEY,
+      client_id TEXT NOT NULL,
+      title TEXT NOT NULL,
+      url TEXT NOT NULL,
+      category TEXT DEFAULT 'other',
+      icon TEXT,
+      sort_order INTEGER DEFAULT 0,
+      created_at TEXT DEFAULT (datetime('now')),
+      FOREIGN KEY (client_id) REFERENCES users(id)
+    );
+
     CREATE TABLE IF NOT EXISTS requests (
       id TEXT PRIMARY KEY,
       user_id TEXT NOT NULL,
@@ -317,6 +329,11 @@ async function initSchema() {
   await tryExec("ALTER TABLE reimbursements ADD COLUMN submitter_name TEXT");
   await tryExec("ALTER TABLE reimbursements ADD COLUMN submitter_email TEXT");
   await tryExec("ALTER TABLE reimbursements ADD COLUMN submitter_google_id TEXT");
+
+  // MFA columns
+  await tryExec("ALTER TABLE users ADD COLUMN mfa_secret TEXT");
+  await tryExec("ALTER TABLE users ADD COLUMN mfa_backup_codes TEXT");
+  await tryExec("ALTER TABLE users ADD COLUMN mfa_setup_complete INTEGER DEFAULT 0");
 
   // Create initial admin from env vars if no users exist
   const { v4: uuid } = require("uuid");

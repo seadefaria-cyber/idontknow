@@ -184,6 +184,8 @@ export async function listFilesWithFolders(accessToken: string): Promise<DriveFi
       folderCategory[id] = "legal";
     } else if (lower === "creative" || lower === "creative assets" || lower === "assets" || lower === "media") {
       folderCategory[id] = "creative";
+    } else if (lower === "royalties" || lower === "royalty statements" || lower === "royalty") {
+      folderCategory[id] = "royalties";
     }
   }
 
@@ -205,17 +207,68 @@ export async function listDocs(accessToken: string): Promise<DriveFile[]> {
   return listFiles(accessToken, "mimeType = 'application/vnd.google-apps.document' and trashed = false");
 }
 
+/**
+ * Get or create a folder in Google Drive by name.
+ * Caches folder IDs in a module-level map to avoid repeated lookups within the same process.
+ */
+const folderIdCache = new Map<string, string>();
+
+export async function getOrCreateFolder(accessToken: string, folderName: string): Promise<string> {
+  const cacheKey = `${accessToken.slice(-8)}_${folderName}`;
+  const cached = folderIdCache.get(cacheKey);
+  if (cached) return cached;
+
+  // Search for existing folder
+  const q = `mimeType='application/vnd.google-apps.folder' and name='${folderName}' and trashed=false`;
+  const params = new URLSearchParams({ q, fields: "files(id)", pageSize: "1" });
+  const searchRes = await fetch(`https://www.googleapis.com/drive/v3/files?${params.toString()}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  if (searchRes.ok) {
+    const data = await searchRes.json();
+    if (data.files?.length > 0) {
+      folderIdCache.set(cacheKey, data.files[0].id);
+      return data.files[0].id;
+    }
+  }
+
+  // Create new folder
+  const createRes = await fetch("https://www.googleapis.com/drive/v3/files?fields=id", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: folderName,
+      mimeType: "application/vnd.google-apps.folder",
+    }),
+  });
+
+  if (!createRes.ok) {
+    const text = await createRes.text();
+    throw new Error(`Failed to create Drive folder: ${text}`);
+  }
+
+  const folder = await createRes.json();
+  folderIdCache.set(cacheKey, folder.id);
+  return folder.id;
+}
+
 export async function uploadFileToDrive(
   accessToken: string,
   fileName: string,
   mimeType: string,
-  fileBuffer: Buffer
+  fileBuffer: Buffer,
+  parentFolderId?: string
 ): Promise<DriveFile> {
   const boundary = "-------drive_upload_boundary";
-  const metadata = JSON.stringify({
-    name: fileName,
-    mimeType,
-  });
+  const metadataObj: Record<string, unknown> = { name: fileName, mimeType };
+  if (parentFolderId) {
+    metadataObj.parents = [parentFolderId];
+  }
+  const metadata = JSON.stringify(metadataObj);
 
   const bodyParts = [
     `--${boundary}\r\n`,

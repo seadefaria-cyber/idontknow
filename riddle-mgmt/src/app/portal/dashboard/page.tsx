@@ -4,6 +4,8 @@ import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import TabBar, { Section } from "@/components/portal/TabBar";
 import DashboardHeader from "@/components/portal/DashboardHeader";
+import HomeSection from "@/components/portal/HomeSection";
+import NotesSection from "@/components/portal/NotesSection";
 import FilesSection from "@/components/portal/FilesSection";
 import LegalSection from "@/components/portal/LegalSection";
 import ScheduleSection from "@/components/portal/ScheduleSection";
@@ -22,28 +24,62 @@ interface UserInfo {
 export default function Dashboard() {
   const [user, setUser] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeSection, setActiveSection] = useState<Section>("creative");
+  const [activeSection, setActiveSection] = useState<Section>("home");
   const [allUsers, setAllUsers] = useState<{ id: string; username: string; display_name: string; role: string }[]>([]);
   const [showSettings, setShowSettings] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
+  const [badges, setBadges] = useState<Partial<Record<Section, number>>>({});
   const router = useRouter();
 
   useEffect(() => {
     checkAuth();
   }, []);
 
-  // Keyboard shortcuts: 1-4 to switch sections
+  // Keyboard shortcuts: 1-7 to switch sections
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       const tag = (e.target as HTMLElement)?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
 
-      const map: Record<string, Section> = { "1": "creative", "2": "legal", "3": "schedule", "4": "reimbursements", "5": "royalties" };
+      const map: Record<string, Section> = {
+        "1": "home", "2": "updates", "3": "creative",
+        "4": "legal", "5": "schedule", "6": "reimbursements", "7": "royalties",
+      };
       const section = map[e.key];
       if (section) setActiveSection(section);
     }
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Fetch badge counts
+  const fetchBadges = useCallback(async () => {
+    try {
+      const [legalRes, reimbRes] = await Promise.all([
+        fetch("/api/legal"),
+        fetch("/api/reimbursements"),
+      ]);
+      const newBadges: Partial<Record<Section, number>> = { ...badges };
+      if (legalRes.ok) {
+        const d = await legalRes.json();
+        const unsigned = (d.documents || []).filter((doc: { status: string }) => doc.status === "sent" || doc.status === "draft").length;
+        newBadges.legal = unsigned;
+      }
+      if (reimbRes.ok) {
+        const d = await reimbRes.json();
+        newBadges.reimbursements = d.summary?.pending_count || 0;
+      }
+      setBadges(newBadges);
+    } catch {
+      // silently fail
+    }
+  }, []);
+
+  useEffect(() => { fetchBadges(); }, [fetchBadges]);
+  useEffect(() => { if (refreshKey) fetchBadges(); }, [refreshKey, fetchBadges]);
+
+  const handleUnreadChange = useCallback((count: number) => {
+    setBadges((prev) => ({ ...prev, updates: count }));
   }, []);
 
   async function checkAuth() {
@@ -98,7 +134,7 @@ export default function Dashboard() {
 
         <div className="flex items-center gap-2">
           <div className="flex-1">
-            <TabBar active={activeSection} onChange={setActiveSection} />
+            <TabBar active={activeSection} onChange={setActiveSection} badges={badges} />
           </div>
           <button
             onClick={() => setShowSettings(!showSettings)}
@@ -122,6 +158,24 @@ export default function Dashboard() {
         <div className="w-full h-px bg-gray-50" />
 
         {/* Section content */}
+        {activeSection === "home" && user && (
+          <HomeSection
+            userId={user.id}
+            displayName={user.displayName || user.username}
+            role={user.role}
+            allUsers={allUsers}
+            refreshSignal={refreshKey}
+            onNavigate={setActiveSection}
+          />
+        )}
+        {activeSection === "updates" && user && (
+          <NotesSection
+            userId={user.id}
+            role={user.role}
+            allUsers={allUsers}
+            onUnreadChange={handleUnreadChange}
+          />
+        )}
         {activeSection === "creative" && (
           <FilesSection
             role={user?.role || "client"}
@@ -145,19 +199,19 @@ export default function Dashboard() {
 
       {/* Sign out + Request + Expense — bottom of page */}
       <div className="mt-16 mb-4 flex flex-col items-center gap-3">
-        <div className="flex items-center gap-4">
-          <a
-            href="/portal/request"
-            className="text-[10px] text-gray-300 hover:text-gray-400 transition-colors tracking-[0.15em] uppercase"
+        <div className="flex items-center gap-5">
+          <button
+            onClick={() => setActiveSection("updates")}
+            className="text-xs text-gray-300 hover:text-gray-400 transition-colors tracking-[0.12em] uppercase"
           >
-            Submit a Request
-          </a>
+            Message Your Team
+          </button>
           <span className="text-gray-200">|</span>
           <a
             href="/portal/expenses"
-            className="text-[10px] text-gray-300 hover:text-gray-400 transition-colors tracking-[0.15em] uppercase"
+            className="text-xs text-gray-300 hover:text-gray-400 transition-colors tracking-[0.12em] uppercase"
           >
-            Submit Expense
+            Submit an Expense
           </a>
         </div>
         <button
