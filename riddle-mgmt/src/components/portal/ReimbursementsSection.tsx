@@ -247,26 +247,26 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
         <p className={`text-3xl sm:text-5xl font-extralight tracking-tight ${netCash >= 0 ? "text-green-600" : "text-red-600"}`}>
           {netCash >= 0 ? "+" : ""}{formatCurrency(netCash)}
         </p>
-        <div className="grid grid-cols-5 mt-4 sm:mt-5">
-          <button onClick={() => setView("earnings")} className="py-2 rounded-lg hover:bg-gray-50 transition-all cursor-pointer group text-center">
-            <p className="text-[9px] sm:text-[10px] text-gray-300 tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Earned</p>
-            <p className="text-sm sm:text-lg font-light text-green-600 mt-0.5 group-hover:text-green-700 transition-colors">{formatCurrency(totalEarnings)}</p>
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-1 mt-4 sm:mt-5">
+          <button onClick={() => setView("earnings")} className="py-3 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all cursor-pointer group text-center">
+            <p className="text-[10px] sm:text-[10px] text-gray-300 tracking-[0.15em] sm:tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Earned</p>
+            <p className="text-base sm:text-lg font-light text-green-600 mt-0.5 group-hover:text-green-700 transition-colors">{formatCurrency(totalEarnings)}</p>
           </button>
-          <button onClick={() => setView("spending")} className="py-2 rounded-lg hover:bg-gray-50 transition-all cursor-pointer group text-center border-x border-gray-100">
-            <p className="text-[9px] sm:text-[10px] text-gray-300 tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Spent</p>
-            <p className="text-sm sm:text-lg font-light text-red-600 mt-0.5 group-hover:text-red-700 transition-colors">{formatCurrency(totalSpending)}</p>
+          <button onClick={() => setView("spending")} className="py-3 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all cursor-pointer group text-center">
+            <p className="text-[10px] sm:text-[10px] text-gray-300 tracking-[0.15em] sm:tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Spent</p>
+            <p className="text-base sm:text-lg font-light text-red-600 mt-0.5 group-hover:text-red-700 transition-colors">{formatCurrency(totalSpending)}</p>
           </button>
-          <button onClick={() => setView("owed")} className="py-2 rounded-lg hover:bg-gray-50 transition-all cursor-pointer group text-center border-r border-gray-100">
-            <p className="text-[9px] sm:text-[10px] text-gray-300 tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Owed</p>
-            <p className="text-sm sm:text-lg font-light text-yellow-600 mt-0.5 group-hover:text-yellow-700 transition-colors">{formatCurrency(totalOutstanding)}</p>
+          <button onClick={() => setView("owed")} className="py-3 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all cursor-pointer group text-center">
+            <p className="text-[10px] sm:text-[10px] text-gray-300 tracking-[0.15em] sm:tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Owed</p>
+            <p className="text-base sm:text-lg font-light text-yellow-600 mt-0.5 group-hover:text-yellow-700 transition-colors">{formatCurrency(totalOutstanding)}</p>
           </button>
-          <button onClick={() => setView("pending")} className="py-2 rounded-lg hover:bg-gray-50 transition-all cursor-pointer group text-center border-r border-gray-100">
-            <p className="text-[9px] sm:text-[10px] text-gray-300 tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Pending</p>
-            <p className="text-sm sm:text-lg font-light text-orange-500 mt-0.5 group-hover:text-orange-600 transition-colors">{formatCurrency(summary?.pending_total || 0)}</p>
+          <button onClick={() => setView("pending")} className="py-3 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all cursor-pointer group text-center">
+            <p className="text-[10px] sm:text-[10px] text-gray-300 tracking-[0.15em] sm:tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Pending</p>
+            <p className="text-base sm:text-lg font-light text-orange-500 mt-0.5 group-hover:text-orange-600 transition-colors">{formatCurrency(summary?.pending_total || 0)}</p>
           </button>
-          <button onClick={() => setView("reimbursed")} className="py-2 rounded-lg hover:bg-gray-50 transition-all cursor-pointer group text-center">
-            <p className="text-[9px] sm:text-[10px] text-gray-300 tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Reimburse</p>
-            <p className="text-sm sm:text-lg font-light text-blue-600 mt-0.5 group-hover:text-blue-700 transition-colors">{formatCurrency(totalReimbursed)}</p>
+          <button onClick={() => setView("reimbursed")} className="py-3 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all cursor-pointer group text-center">
+            <p className="text-[10px] sm:text-[10px] text-gray-300 tracking-[0.15em] sm:tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Reimburse</p>
+            <p className="text-base sm:text-lg font-light text-blue-600 mt-0.5 group-hover:text-blue-700 transition-colors">{formatCurrency(totalReimbursed)}</p>
           </button>
         </div>
       </div>

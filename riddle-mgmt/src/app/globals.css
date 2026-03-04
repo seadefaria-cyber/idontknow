@@ -113,18 +113,36 @@ html {
 }
 
 /* Input styles */
-input, textarea {
+input, textarea, select {
   background: #ffffff;
   border: 1px solid #e5e7eb;
   color: #111;
   transition: border-color 0.3s ease;
+  font-size: 16px; /* prevents iOS auto-zoom on focus */
+  -webkit-appearance: none;
 }
-input:focus, textarea:focus {
+@media (min-width: 640px) {
+  input, textarea, select {
+    font-size: inherit; /* restore on desktop */
+  }
+}
+input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: #9ca3af;
 }
 input::placeholder, textarea::placeholder {
   color: #9ca3af;
+}
+
+/* Better mobile tap targets */
+@media (max-width: 639px) {
+  button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .scrollbar-hide {
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 /* Elevated cards */

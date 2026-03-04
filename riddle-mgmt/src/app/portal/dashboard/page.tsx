@@ -90,8 +90,8 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center sm:justify-center px-4 sm:px-10 md:px-16 pt-16 sm:pt-32 pb-24 md:pb-20">
-      <div className="w-full max-w-xl space-y-10">
+    <div className="min-h-screen flex flex-col items-center sm:justify-center px-3 sm:px-10 md:px-16 pt-8 sm:pt-32 pb-20 md:pb-20">
+      <div className="w-full max-w-xl space-y-6 sm:space-y-10">
         <DashboardHeader
           displayName={user?.username || ""}
           role={user?.role || "client"}

@@ -70,7 +70,6 @@ export async function getPresignedUploadUrl(
     Bucket: getBucket(),
     Key: key,
     ContentType: contentType,
-    ServerSideEncryption: "AES256",
   });
   return getSignedUrl(s3, command, { expiresIn: 900 });
 }

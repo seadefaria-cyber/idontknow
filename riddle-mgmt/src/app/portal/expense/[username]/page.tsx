@@ -270,7 +270,7 @@ export default function ExpenseSubmitPage({ params }: PageProps) {
           <div>
             <p className="text-[10px] tracking-[0.2em] uppercase text-gray-400 mb-3">Expense Details</p>
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
                   <label className="text-xs text-gray-400 tracking-wide block mb-2">Amount ($) *</label>
                   <input
@@ -306,7 +306,7 @@ export default function ExpenseSubmitPage({ params }: PageProps) {
                   className="w-full px-4 py-3 rounded-lg text-sm font-light border border-gray-200"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
                   <label className="text-xs text-gray-400 tracking-wide block mb-2">Category</label>
                   <select

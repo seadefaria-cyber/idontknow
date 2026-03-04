@@ -42,7 +42,7 @@ export default function Portal() {
     <div className="min-h-screen flex flex-col items-center justify-center px-5 sm:px-8">
       <div className="max-w-sm w-full">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-lg font-light tracking-tight animate-fade-in">
             Client Portal
           </h1>

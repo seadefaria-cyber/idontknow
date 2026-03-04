@@ -25,7 +25,7 @@ export default function TabBar({ active, onChange }: TabBarProps) {
           <button
             key={tab.key}
             onClick={() => onChange(tab.key)}
-            className={`relative px-2.5 sm:px-4 py-3 text-[11px] sm:text-xs tracking-[0.08em] sm:tracking-[0.12em] uppercase transition-all duration-200 whitespace-nowrap ${
+            className={`relative px-3 sm:px-4 py-3 text-xs sm:text-xs tracking-[0.1em] sm:tracking-[0.12em] uppercase transition-all duration-200 whitespace-nowrap ${
               active === tab.key
                 ? "text-gray-900"
                 : "text-gray-400 hover:text-gray-500"
