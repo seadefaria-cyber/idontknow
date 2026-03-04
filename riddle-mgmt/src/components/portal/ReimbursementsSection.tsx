@@ -192,7 +192,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
   const totalInvoiced = activeInvoices.reduce((s, inv) => s + inv.total_amount, 0);
   const totalOutstanding = activeInvoices.filter(i => i.status === "open" || i.status === "overdue").reduce((s, i) => s + i.balance, 0);
   const totalSpending = qb.expenses.reduce((s, e) => s + e.total_amount, 0) + (summary?.paid_total || 0);
-  const totalReimbursed = (summary?.paid_total || 0);
+  const totalReimbursed = (summary?.approved_total || 0) + (summary?.paid_total || 0);
   const netCash = totalEarnings - totalSpending;
 
   const statusColor = (s: string) => {
@@ -970,7 +970,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
 
           {(() => {
             const pendingInvoices = activeInvoices.filter(i => i.status === "sent" || i.status === "delivered");
-            const pendingExpenses = expenses.filter(r => r.status === "submitted" || r.status === "approved");
+            const pendingExpenses = expenses.filter(r => r.status === "submitted");
 
             // Build all pending items with normalized categories from both QB and portal
             const allPendingItems = [
@@ -1117,10 +1117,10 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
       {view === "reimbursed" && (
         <div className="space-y-6 animate-section-enter">
           {(() => {
-            const paidExpenses = expenses.filter(r => r.status === "paid");
+            const paidExpenses = expenses.filter(r => r.status === "paid" || r.status === "approved");
 
             if (paidExpenses.length === 0) {
-              return <EmptyState title="No reimbursements yet" description="Paid expenses will appear here" />;
+              return <EmptyState title="No reimbursements yet" description="Approved and paid expenses will appear here" />;
             }
 
             const totalPaid = paidExpenses.reduce((s, r) => s + r.amount, 0);
