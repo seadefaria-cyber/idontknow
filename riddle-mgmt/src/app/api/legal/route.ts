@@ -68,6 +68,7 @@ export async function POST(req: NextRequest) {
   // AI analysis
   let finalTitle = title;
   let finalCategory = category;
+  let finalStatus = status;
   let aiSummary: string | null = null;
 
   const ai = await analyzeLegalDocument(file.name, file.type || "application/octet-stream", pdfText);
@@ -75,12 +76,14 @@ export async function POST(req: NextRequest) {
     if (title.length <= 10) finalTitle = ai.suggestedTitle;
     if (category === "contract" || category === "other") finalCategory = ai.category;
     aiSummary = ai.summary;
+    // AI can detect signed status if not already set by the client
+    if (ai.signed && finalStatus !== "signed") finalStatus = "signed";
   }
 
   await dbRun(`
     INSERT INTO legal_documents (id, user_id, title, category, status, file_name, original_name, file_path, file_size, mime_type, ai_summary)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `, [docId, userId, finalTitle, finalCategory, status, storedName, file.name, s3Key, buffer.length, file.type || "application/octet-stream", aiSummary]);
+  `, [docId, userId, finalTitle, finalCategory, finalStatus, storedName, file.name, s3Key, buffer.length, file.type || "application/octet-stream", aiSummary]);
 
   return NextResponse.json({ id: docId });
 }

@@ -60,6 +60,7 @@ interface LegalAnalysis {
   suggestedTitle: string;
   category: string;
   summary: string;
+  signed: boolean;
 }
 
 export async function analyzeLegalDocument(
@@ -77,8 +78,15 @@ export async function analyzeLegalDocument(
 File: "${fileName}" (${mimeType})${contentSection}
 Categories: contract, nda, agreement, other
 
+Also determine if this document has been SIGNED. Look for:
+- Actual signatures, handwritten or digital (e.g. "/s/ John Doe", signature images, DocuSign completion markers)
+- "Signed by", "Executed by", "Agreed and accepted" with names/dates filled in
+- Witness signatures, notarization stamps
+- Digital signature metadata (DocuSign, Adobe Sign, HelloSign completion indicators)
+If the document is a blank template, has empty signature lines, or shows no evidence of execution, it is NOT signed.
+
 Reply with ONLY valid JSON:
-{"suggestedTitle":"<professional title>","category":"<contract|nda|agreement|other>","summary":"<1-2 sentence summary for the client>"}`,
+{"suggestedTitle":"<professional title>","category":"<contract|nda|agreement|other>","summary":"<1-2 sentence summary for the client>","signed":<true or false>}`,
       300
     );
     if (!text) return null;

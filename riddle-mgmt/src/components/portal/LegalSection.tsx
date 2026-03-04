@@ -92,6 +92,7 @@ export default function LegalSection({ role, allUsers, refreshSignal }: LegalSec
         setTitle(data.suggestedTitle || file.name.replace(/\.[^.]+$/, ""));
         setCategory(data.category || "other");
         setSummary(data.summary || "");
+        if (data.signed) setStatus("signed");
         setAnalyzed(true);
       }
     } catch { /* keep manual entry */ }

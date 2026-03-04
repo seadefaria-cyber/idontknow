@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
       suggestedTitle: file.name.replace(/\.[^.]+$/, "").replace(/[_-]/g, " "),
       category: "other",
       summary: "",
+      signed: false,
     });
   }
 
