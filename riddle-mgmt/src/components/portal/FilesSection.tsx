@@ -156,21 +156,24 @@ export default function FilesSection({ role, allUsers, refreshSignal }: FilesSec
 
   async function handleUpload(e: React.FormEvent) {
     e.preventDefault();
-    if (!fileInputRef.current?.files?.[0] || !uploadUserId) return;
+    if (!fileInputRef.current?.files?.[0]) return;
+    if (role === "admin" && !uploadUserId) return;
     setUploading(true);
     const formData = new FormData();
     formData.append("file", fileInputRef.current.files[0]);
     formData.append("filePassword", "creative");
-    formData.append("userId", uploadUserId);
+    if (role === "admin") formData.append("userId", uploadUserId);
     formData.append("description", uploadDescription);
     formData.append("folder", "creative");
     try {
-      const res = await fetch("/api/files/upload", { method: "POST", body: formData });
+      const endpoint = role === "admin" ? "/api/files/upload" : "/api/files/upload-own";
+      const res = await fetch(endpoint, { method: "POST", body: formData });
       if (res.ok) {
         setUploadUserId("");
         setUploadDescription("");
         if (fileInputRef.current) fileInputRef.current.value = "";
         refresh();
+        fetchDriveFiles();
       }
     } catch {
       // silent
@@ -236,7 +239,7 @@ export default function FilesSection({ role, allUsers, refreshSignal }: FilesSec
     <div className="animate-section-enter">
       <SectionHeader
         title="Creative"
-        action={role === "admin" ? { label: uploading ? "Uploading..." : "+ Upload", onClick: () => {} } : undefined}
+        action={{ label: uploading ? "Uploading..." : "+ Upload", onClick: () => fileInputRef.current?.click() }}
       />
 
       {/* Admin upload */}
@@ -275,6 +278,39 @@ export default function FilesSection({ role, allUsers, refreshSignal }: FilesSec
             <button
               type="submit"
               disabled={uploading || !uploadUserId}
+              className="px-5 py-2.5 rounded-lg text-xs tracking-[0.15em] uppercase bg-gray-900 text-white hover:bg-gray-800 transition-all font-medium disabled:opacity-30 shrink-0"
+            >
+              Upload
+            </button>
+          </div>
+        </form>
+      )}
+
+      {/* Client upload */}
+      {role !== "admin" && (
+        <form onSubmit={handleUpload} className="glass rounded-lg p-5 mb-6 space-y-3">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex-1">
+              <input
+                ref={fileInputRef}
+                type="file"
+                required
+                accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.ppt,.pptx,.gif"
+                className="w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:tracking-wider file:uppercase file:bg-gray-50 file:text-gray-500 hover:file:bg-gray-100 file:cursor-pointer file:transition-all"
+              />
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <input
+              type="text"
+              placeholder="Description (optional)"
+              value={uploadDescription}
+              onChange={(e) => setUploadDescription(e.target.value)}
+              className="flex-1 px-4 py-2.5 rounded-lg text-sm font-light"
+            />
+            <button
+              type="submit"
+              disabled={uploading}
               className="px-5 py-2.5 rounded-lg text-xs tracking-[0.15em] uppercase bg-gray-900 text-white hover:bg-gray-800 transition-all font-medium disabled:opacity-30 shrink-0"
             >
               Upload
