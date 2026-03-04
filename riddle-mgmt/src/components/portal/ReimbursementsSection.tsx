@@ -529,122 +529,161 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                   return (
                     <div
                       key={expKey}
-                      className="glass-elevated rounded-lg p-4 sm:p-5 animate-fade-in cursor-pointer hover:bg-gray-50 transition-all"
+                      className="glass-elevated rounded-lg animate-fade-in cursor-pointer hover:bg-gray-50 transition-all"
                       style={{ animationDelay: `${i * 0.02}s`, opacity: 0 }}
-                      onClick={() => {
-                        if (qbLink) {
-                          window.open(qbLink, "_blank", "noopener,noreferrer");
-                        } else {
-                          setExpandedExpense(isExpanded ? null : expKey);
-                        }
-                      }}
+                      onClick={() => setExpandedExpense(isExpanded ? null : expKey)}
                     >
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <span className="text-base font-light text-red-600">-{formatCurrencyFull(item.amount)}</span>
-                            <span className={`text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full ${statusColor(item.status)}`}>
-                              {item.status}
-                            </span>
-                            {item.category && (
-                              <span className="text-[9px] uppercase tracking-wider text-gray-300">{item.category}</span>
+                      <div className="p-4 sm:p-5">
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="text-base font-light text-red-600">-{formatCurrencyFull(item.amount)}</span>
+                              <span className={`text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full ${statusColor(item.status)}`}>
+                                {item.status}
+                              </span>
+                              {item.category && (
+                                <span className="text-[9px] uppercase tracking-wider text-gray-300">{item.category}</span>
+                              )}
+                            </div>
+                            <p className="text-sm text-gray-500 mt-1">{item.title}</p>
+                            {!isExpanded && item.subtitle && item.subtitle !== item.title && (
+                              <p className="text-xs text-gray-300 mt-0.5 truncate">{item.subtitle}</p>
+                            )}
+                            {!isExpanded && (
+                              <div className="flex items-center gap-3 mt-1.5">
+                                {item.date && <span className="text-[10px] text-gray-300">{formatDate(item.date)}</span>}
+                                {role === "admin" && item.clientName && <span className="text-[10px] text-gray-300">{item.clientName}</span>}
+                              </div>
                             )}
                           </div>
-                          <p className="text-sm text-gray-500 mt-1">{item.title}</p>
-                          {!isExpanded && item.subtitle && item.subtitle !== item.title && (
-                            <p className="text-xs text-gray-300 mt-0.5 truncate">{item.subtitle}</p>
-                          )}
-                          {!isExpanded && (
-                            <div className="flex items-center gap-3 mt-1.5">
-                              {item.date && <span className="text-[10px] text-gray-300">{formatDate(item.date)}</span>}
-                              {role === "admin" && item.clientName && <span className="text-[10px] text-gray-300">{item.clientName}</span>}
-                            </div>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-2 shrink-0">
-                          {item.receipt && (
-                            <a href={`/api/reimbursements/${item.id}/receipt`} onClick={(e) => e.stopPropagation()} className="text-gray-300 hover:text-gray-500 transition-colors" title="Receipt">
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
-                            </a>
-                          )}
-                          {role === "admin" && item.raw && (item.status === "submitted" || item.status === "approved") && (
-                            <button
-                              onClick={(e) => { e.stopPropagation(); setReviewingId(reviewingId === item.id ? null : item.id); setAdminNotes(""); }}
-                              className="text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-500 transition-colors"
-                            >
-                              Review
-                            </button>
-                          )}
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`text-gray-300 transition-transform ${isExpanded ? "rotate-180" : ""}`}>
-                            <polyline points="6 9 12 15 18 9" />
-                          </svg>
+                          <div className="flex items-center gap-2 shrink-0">
+                            {item.receipt && (
+                              <a href={`/api/reimbursements/${item.id}/receipt`} onClick={(e) => e.stopPropagation()} className="text-gray-300 hover:text-gray-500 transition-colors" title="Receipt">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
+                              </a>
+                            )}
+                            {role === "admin" && item.raw && (item.status === "submitted" || item.status === "approved") && (
+                              <button
+                                onClick={(e) => { e.stopPropagation(); setReviewingId(reviewingId === item.id ? null : item.id); setAdminNotes(""); }}
+                                className="text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-500 transition-colors"
+                              >
+                                Review
+                              </button>
+                            )}
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={`text-gray-300 transition-transform ${isExpanded ? "rotate-180" : ""}`}>
+                              <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                          </div>
                         </div>
                       </div>
 
-                      {/* Expanded details */}
+                      {/* Expanded details — matches invoice expand style */}
                       {isExpanded && (
-                        <div className="mt-4 pt-4 border-t border-gray-100 animate-fade-in" onClick={(e) => e.stopPropagation()}>
-                          <div className="grid grid-cols-2 gap-3 text-xs">
-                            {item.date && (
+                        <div className="px-4 sm:px-5 pb-4 sm:pb-5 border-t border-gray-100 animate-fade-in" onClick={(e) => e.stopPropagation()}>
+                          <div className="pt-4 space-y-4">
+                            {/* Expense header */}
+                            <div className="flex items-start justify-between">
                               <div>
-                                <p className="text-[9px] tracking-wider uppercase text-gray-300 mb-0.5">Date</p>
-                                <p className="text-gray-600 font-light">{formatDate(item.date)}</p>
+                                <p className="text-[10px] tracking-[0.2em] uppercase text-gray-400 mb-1">Expense</p>
+                                <p className="text-lg font-light text-gray-900">{formatCurrencyFull(item.amount)}</p>
+                              </div>
+                              <span className={`text-[9px] uppercase tracking-wider px-3 py-1 rounded-full ${statusColor(item.status)}`}>
+                                {item.status}
+                              </span>
+                            </div>
+
+                            {/* Details grid */}
+                            <div className="grid grid-cols-2 gap-4">
+                              {item.date && (
+                                <div>
+                                  <p className="text-[10px] text-gray-300 uppercase tracking-wider mb-0.5">Date</p>
+                                  <p className="text-sm text-gray-600 font-light">{formatDate(item.date)}</p>
+                                </div>
+                              )}
+                              {item.title && (
+                                <div>
+                                  <p className="text-[10px] text-gray-300 uppercase tracking-wider mb-0.5">Vendor</p>
+                                  <p className="text-sm text-gray-600 font-light">{item.title}</p>
+                                </div>
+                              )}
+                              {item.category && (
+                                <div>
+                                  <p className="text-[10px] text-gray-300 uppercase tracking-wider mb-0.5">Category</p>
+                                  <p className="text-sm text-gray-600 font-light capitalize">{item.category}</p>
+                                </div>
+                              )}
+                              {qbExpense?.payment_type && (
+                                <div>
+                                  <p className="text-[10px] text-gray-300 uppercase tracking-wider mb-0.5">Payment Type</p>
+                                  <p className="text-sm text-gray-600 font-light capitalize">{qbExpense.payment_type}</p>
+                                </div>
+                              )}
+                              {qbExpense?.account_name && (
+                                <div>
+                                  <p className="text-[10px] text-gray-300 uppercase tracking-wider mb-0.5">Account</p>
+                                  <p className="text-sm text-gray-600 font-light">{qbExpense.account_name}</p>
+                                </div>
+                              )}
+                              {role === "admin" && item.clientName && (
+                                <div>
+                                  <p className="text-[10px] text-gray-300 uppercase tracking-wider mb-0.5">Client</p>
+                                  <p className="text-sm text-gray-600 font-light">{item.clientName}</p>
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Description/memo */}
+                            {(item.subtitle || qbExpense?.memo) && (
+                              <div>
+                                <p className="text-[10px] text-gray-300 uppercase tracking-wider mb-0.5">Description</p>
+                                <p className="text-xs text-gray-400 font-light">{item.subtitle || qbExpense?.memo}</p>
                               </div>
                             )}
-                            {item.title && (
-                              <div>
-                                <p className="text-[9px] tracking-wider uppercase text-gray-300 mb-0.5">Vendor</p>
-                                <p className="text-gray-600 font-light">{item.title}</p>
-                              </div>
+
+                            {item.notes && <p className="text-[10px] text-gray-300 italic">Note: {item.notes}</p>}
+
+                            {/* View Full Invoice link */}
+                            {qbLink && (
+                              <a
+                                href={qbLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-500 transition-colors pt-2"
+                              >
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="opacity-50">
+                                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                                  <polyline points="15 3 21 3 21 9" />
+                                  <line x1="10" y1="14" x2="21" y2="3" />
+                                </svg>
+                                View Full Invoice
+                              </a>
                             )}
-                            {qbExpense?.payment_type && (
-                              <div>
-                                <p className="text-[9px] tracking-wider uppercase text-gray-300 mb-0.5">Payment Type</p>
-                                <p className="text-gray-600 font-light capitalize">{qbExpense.payment_type}</p>
-                              </div>
-                            )}
-                            {qbExpense?.account_name && (
-                              <div>
-                                <p className="text-[9px] tracking-wider uppercase text-gray-300 mb-0.5">Account</p>
-                                <p className="text-gray-600 font-light">{qbExpense.account_name}</p>
-                              </div>
-                            )}
-                            {item.category && (
-                              <div>
-                                <p className="text-[9px] tracking-wider uppercase text-gray-300 mb-0.5">Category</p>
-                                <p className="text-gray-600 font-light capitalize">{item.category}</p>
-                              </div>
-                            )}
-                            {role === "admin" && item.clientName && (
-                              <div>
-                                <p className="text-[9px] tracking-wider uppercase text-gray-300 mb-0.5">Client</p>
-                                <p className="text-gray-600 font-light">{item.clientName}</p>
-                              </div>
+                            {item.receipt && (
+                              <a
+                                href={`/api/reimbursements/${item.id}/receipt`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-500 transition-colors pt-2"
+                              >
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="opacity-50">
+                                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                                  <polyline points="15 3 21 3 21 9" />
+                                  <line x1="10" y1="14" x2="21" y2="3" />
+                                </svg>
+                                View Receipt
+                              </a>
                             )}
                           </div>
-                          {(item.subtitle || qbExpense?.memo) && (
-                            <div className="mt-3">
-                              <p className="text-[9px] tracking-wider uppercase text-gray-300 mb-0.5">Description</p>
-                              <p className="text-xs text-gray-500 font-light">{item.subtitle || qbExpense?.memo}</p>
-                            </div>
-                          )}
-                          {item.notes && <p className="text-[10px] text-gray-300 mt-2 italic">Note: {item.notes}</p>}
-                          {qbLink && (
-                            <a
-                              href={qbLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-block mt-3 px-4 py-2 rounded-lg text-[10px] tracking-[0.15em] uppercase bg-gray-900 text-white hover:bg-gray-800 transition-all font-medium"
-                            >
-                              View in QuickBooks
-                            </a>
-                          )}
                         </div>
                       )}
 
                       {reviewingId === item.id && role === "admin" && item.raw && (
-                        <div className="mt-4 pt-4 border-t border-gray-100 space-y-3 animate-fade-in" onClick={(e) => e.stopPropagation()}>
-                          <input type="text" placeholder="Notes (optional)" value={adminNotes} onChange={(e) => setAdminNotes(e.target.value)} className="w-full px-4 py-2 rounded-lg text-sm font-light" />
+                        <div className="px-4 sm:px-5 pb-4 sm:pb-5 border-t border-gray-100 space-y-3 animate-fade-in" onClick={(e) => e.stopPropagation()}>
+                          <div className="pt-4">
+                            <input type="text" placeholder="Notes (optional)" value={adminNotes} onChange={(e) => setAdminNotes(e.target.value)} className="w-full px-4 py-2 rounded-lg text-sm font-light" />
+                          </div>
                           <div className="flex gap-3">
                             {item.status === "submitted" && (
                               <button onClick={() => handleReview(item.id, "approved")} className="flex-1 py-2 rounded-lg text-xs tracking-[0.15em] uppercase bg-green-50 text-green-600 hover:bg-green-100 transition-all">Approve</button>
@@ -826,6 +865,56 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
       {/* === PENDING VIEW === */}
       {view === "pending" && (
         <div className="space-y-6 animate-section-enter">
+          {/* Client expense upload form */}
+          {role !== "admin" && (
+            <div>
+              <button
+                onClick={() => setShowExpenseForm(!showExpenseForm)}
+                className="text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-500 transition-colors flex items-center gap-1 mb-4"
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                Submit Expense
+              </button>
+              {showExpenseForm && (
+                <form onSubmit={handleSubmit} className="glass rounded-lg p-6 mb-6 space-y-4 animate-fade-in">
+                  <p className="text-xs tracking-[0.2em] uppercase text-gray-400 mb-2">Submit Expense for Reimbursement</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div>
+                      <label className="text-xs text-gray-400 tracking-wide block mb-2">Amount ($)</label>
+                      <input type="number" step="0.01" min="0.01" placeholder="0.00" value={amount} onChange={(e) => setAmount(e.target.value)} required className="w-full px-4 py-3 rounded-lg text-sm font-light" />
+                    </div>
+                    <div>
+                      <label className="text-xs text-gray-400 tracking-wide block mb-2">Vendor</label>
+                      <input type="text" placeholder="e.g. Uber" value={vendor} onChange={(e) => setVendor(e.target.value)} className="w-full px-4 py-3 rounded-lg text-sm font-light" />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-xs text-gray-400 tracking-wide block mb-2">Description</label>
+                    <input type="text" placeholder="What was this for?" value={description} onChange={(e) => setDescription(e.target.value)} required className="w-full px-4 py-3 rounded-lg text-sm font-light" />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div>
+                      <label className="text-xs text-gray-400 tracking-wide block mb-2">Category</label>
+                      <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full px-4 py-3 rounded-lg text-sm font-light bg-white border border-gray-200 text-gray-900">
+                        {CATEGORIES.map((c) => <option key={c} value={c} className="bg-white">{c.charAt(0).toUpperCase() + c.slice(1)}</option>)}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-xs text-gray-400 tracking-wide block mb-2">Receipt</label>
+                      <input type="file" accept="image/*,.pdf" onChange={(e) => setReceipt(e.target.files?.[0] || null)} className="w-full text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:bg-gray-50 file:text-gray-500 hover:file:bg-gray-100" />
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <button type="submit" disabled={submitting} className="flex-1 py-3 rounded-lg text-xs tracking-[0.2em] uppercase bg-gray-900 text-white hover:bg-gray-800 transition-all font-medium disabled:opacity-30">
+                      {submitting ? "Submitting..." : "Submit Expense"}
+                    </button>
+                    <button type="button" onClick={() => setShowExpenseForm(false)} className="px-6 py-3 rounded-lg text-xs tracking-[0.2em] uppercase text-gray-400 hover:text-gray-500 border border-gray-200 transition-all">Cancel</button>
+                  </div>
+                </form>
+              )}
+            </div>
+          )}
+
           {(() => {
             const pendingInvoices = activeInvoices.filter(i => i.status === "sent" || i.status === "delivered");
             const pendingExpenses = expenses.filter(r => r.status === "submitted" || r.status === "approved");

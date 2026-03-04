@@ -152,14 +152,23 @@ export default function Dashboard() {
         )}
       </div>
 
-      {/* Sign out + Request — bottom of page */}
+      {/* Sign out + Request + Expense — bottom of page */}
       <div className="mt-16 mb-4 flex flex-col items-center gap-3">
-        <a
-          href="/portal/request"
-          className="text-[10px] text-gray-300 hover:text-gray-400 transition-colors tracking-[0.15em] uppercase"
-        >
-          Submit a Request
-        </a>
+        <div className="flex items-center gap-4">
+          <a
+            href="/portal/request"
+            className="text-[10px] text-gray-300 hover:text-gray-400 transition-colors tracking-[0.15em] uppercase"
+          >
+            Submit a Request
+          </a>
+          <span className="text-gray-200">|</span>
+          <a
+            href="/portal/expenses"
+            className="text-[10px] text-gray-300 hover:text-gray-400 transition-colors tracking-[0.15em] uppercase"
+          >
+            Submit Expense
+          </a>
+        </div>
         <button
           onClick={handleLogout}
           className="text-[10px] text-gray-200 hover:text-gray-400 transition-colors tracking-[0.15em] uppercase"

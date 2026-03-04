@@ -95,14 +95,24 @@ export default function Portal() {
           </div>
         </form>
 
-        {/* Back to home */}
-        <div className="text-center mt-12 animate-fade-in delay-600">
-          <Link
-            href="/"
-            className="text-xs tracking-[0.2em] uppercase text-gray-300 hover:text-gray-500 transition-colors duration-300"
-          >
-            &larr; Back
-          </Link>
+        {/* Links */}
+        <div className="text-center mt-12 space-y-4 animate-fade-in delay-600">
+          <div>
+            <Link
+              href="/portal/submit-expense"
+              className="text-[10px] tracking-[0.15em] uppercase text-gray-300 hover:text-gray-500 transition-colors duration-300"
+            >
+              Submit an Expense
+            </Link>
+          </div>
+          <div>
+            <Link
+              href="/"
+              className="text-xs tracking-[0.2em] uppercase text-gray-300 hover:text-gray-500 transition-colors duration-300"
+            >
+              &larr; Back
+            </Link>
+          </div>
         </div>
       </div>
     </div>
