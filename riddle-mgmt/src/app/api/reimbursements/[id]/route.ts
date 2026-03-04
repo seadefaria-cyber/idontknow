@@ -33,15 +33,19 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ success: true });
   }
 
-  // Client can only approve/reject their own submitted expenses
+  // Client can approve/reject submitted expenses, or revert approved back to submitted
   const item = await dbGet<{ client_id: string; status: string }>(
     "SELECT client_id, status FROM reimbursements WHERE id = ?",
     [id]
   );
   if (!item) return NextResponse.json({ error: "Not found" }, { status: 404 });
   if (item.client_id !== session.userId) return NextResponse.json({ error: "Not authorized" }, { status: 403 });
-  if (item.status !== "submitted") return NextResponse.json({ error: "Can only review submitted expenses" }, { status: 400 });
-  if (status !== "approved" && status !== "rejected") return NextResponse.json({ error: "Clients can only approve or reject" }, { status: 400 });
+
+  // Allow: submitted → approved/rejected, approved → submitted (undo)
+  const allowed =
+    (item.status === "submitted" && (status === "approved" || status === "rejected")) ||
+    (item.status === "approved" && status === "submitted");
+  if (!allowed) return NextResponse.json({ error: "Invalid status transition" }, { status: 400 });
 
   await dbRun("UPDATE reimbursements SET status = ?, admin_notes = ?, reviewed_at = datetime('now') WHERE id = ?", [status, adminNotes || null, id]);
   return NextResponse.json({ success: true });

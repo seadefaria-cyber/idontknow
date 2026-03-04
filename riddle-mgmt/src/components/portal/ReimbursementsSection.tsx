@@ -84,7 +84,7 @@ interface ReimbursementsSectionProps {
   refreshSignal?: number;
 }
 
-type FinanceView = "earnings" | "spending" | "owed" | "pending";
+type FinanceView = "earnings" | "spending" | "owed" | "pending" | "reimbursed";
 
 const CATEGORIES = ["travel", "equipment", "meals", "studio", "marketing", "other"];
 
@@ -219,7 +219,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
     setSubmitting(false);
   }
 
-  async function handleReview(id: string, status: "approved" | "rejected") {
+  async function handleReview(id: string, status: "approved" | "rejected" | "paid" | "submitted") {
     await fetch(`/api/reimbursements/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -253,7 +253,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
             <p className="text-[9px] sm:text-[10px] text-gray-300 tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Owed</p>
             <p className="text-sm sm:text-lg font-light text-yellow-600 mt-0.5 group-hover:text-yellow-700 transition-colors">{formatCurrency(totalOutstanding)}</p>
           </button>
-          <button onClick={() => setView("pending")} className="py-2 rounded-lg hover:bg-gray-50 transition-all cursor-pointer group text-center">
+          <button onClick={() => setView("reimbursed")} className="py-2 rounded-lg hover:bg-gray-50 transition-all cursor-pointer group text-center">
             <p className="text-[9px] sm:text-[10px] text-gray-300 tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Reimbursed</p>
             <p className="text-sm sm:text-lg font-light text-blue-600 mt-0.5 group-hover:text-blue-700 transition-colors">{formatCurrency(totalReimbursed)}</p>
           </button>
@@ -564,7 +564,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
                               </a>
                             )}
-                            {((role === "admin" && item.raw && (item.status === "submitted" || item.status === "approved")) || (role !== "admin" && item.raw && item.status === "submitted")) && (
+                            {((role === "admin" && item.raw && (item.status === "submitted" || item.status === "approved")) || (role !== "admin" && item.raw && (item.status === "submitted" || item.status === "approved"))) && (
                               <button
                                 onClick={(e) => { e.stopPropagation(); setReviewingId(reviewingId === item.id ? null : item.id); setAdminNotes(""); }}
                                 className="text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-500 transition-colors"
@@ -694,7 +694,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                         </div>
                       )}
 
-                      {reviewingId === item.id && item.raw && (role === "admin" || (role !== "admin" && item.status === "submitted")) && (
+                      {reviewingId === item.id && item.raw && (
                         <div className="px-4 sm:px-5 pb-4 sm:pb-5 border-t border-gray-100 space-y-3 animate-fade-in" onClick={(e) => e.stopPropagation()}>
                           <div className="pt-4">
                             <input type="text" placeholder="Notes (optional)" value={adminNotes} onChange={(e) => setAdminNotes(e.target.value)} className="w-full px-4 py-2 rounded-lg text-sm font-light" />
@@ -702,6 +702,12 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                           <div className="flex gap-3">
                             {item.status === "submitted" && (
                               <button onClick={() => handleReview(item.id, "approved")} className="flex-1 py-2 rounded-lg text-xs tracking-[0.15em] uppercase bg-green-50 text-green-600 hover:bg-green-100 transition-all">Approve</button>
+                            )}
+                            {item.status === "approved" && role === "admin" && (
+                              <button onClick={() => handleReview(item.id, "paid")} className="flex-1 py-2 rounded-lg text-xs tracking-[0.15em] uppercase bg-green-50 text-green-600 hover:bg-green-100 transition-all">Mark as Paid</button>
+                            )}
+                            {item.status === "approved" && role !== "admin" && (
+                              <button onClick={() => handleReview(item.id, "submitted")} className="flex-1 py-2 rounded-lg text-xs tracking-[0.15em] uppercase bg-yellow-50 text-yellow-600 hover:bg-yellow-100 transition-all">Undo Approval</button>
                             )}
                             <button onClick={() => handleReview(item.id, "rejected")} className="flex-1 py-2 rounded-lg text-xs tracking-[0.15em] uppercase bg-red-50 text-red-600 hover:bg-red-100 transition-all">Reject</button>
                           </div>
@@ -1028,7 +1034,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                             {item.dueDate && <span className="text-[10px] text-gray-300">Due {formatShortDate(item.dueDate)}</span>}
                           </div>
                         </div>
-                        {((role === "admin" && item.raw && (item.status === "submitted" || item.status === "approved")) || (role !== "admin" && item.raw && item.status === "submitted")) && (
+                        {((role === "admin" && item.raw && (item.status === "submitted" || item.status === "approved")) || (role !== "admin" && item.raw && (item.status === "submitted" || item.status === "approved"))) && (
                           <button
                             onClick={() => { setReviewingId(reviewingId === item.id ? null : item.id); setAdminNotes(""); }}
                             className="text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-500 transition-colors shrink-0"
@@ -1049,12 +1055,18 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                           </p>
                         </div>
                       )}
-                      {reviewingId === item.id && item.raw && (role === "admin" || (role !== "admin" && item.status === "submitted")) && (
+                      {reviewingId === item.id && item.raw && (
                         <div className="mt-4 pt-4 border-t border-gray-100 space-y-3 animate-fade-in">
                           <input type="text" placeholder="Notes (optional)" value={adminNotes} onChange={(e) => setAdminNotes(e.target.value)} className="w-full px-4 py-2 rounded-lg text-sm font-light" />
                           <div className="flex gap-3">
                             {item.status === "submitted" && (
                               <button onClick={() => handleReview(item.id, "approved")} className="flex-1 py-2 rounded-lg text-xs tracking-[0.15em] uppercase bg-green-50 text-green-600 hover:bg-green-100 transition-all">Approve</button>
+                            )}
+                            {item.status === "approved" && role === "admin" && (
+                              <button onClick={() => handleReview(item.id, "paid")} className="flex-1 py-2 rounded-lg text-xs tracking-[0.15em] uppercase bg-green-50 text-green-600 hover:bg-green-100 transition-all">Mark as Paid</button>
+                            )}
+                            {item.status === "approved" && role !== "admin" && (
+                              <button onClick={() => handleReview(item.id, "submitted")} className="flex-1 py-2 rounded-lg text-xs tracking-[0.15em] uppercase bg-yellow-50 text-yellow-600 hover:bg-yellow-100 transition-all">Undo Approval</button>
                             )}
                             <button onClick={() => handleReview(item.id, "rejected")} className="flex-1 py-2 rounded-lg text-xs tracking-[0.15em] uppercase bg-red-50 text-red-600 hover:bg-red-100 transition-all">Reject</button>
                           </div>
@@ -1062,6 +1074,158 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                       )}
                     </div>
                   ))}
+                </div>
+              </>
+            );
+          })()}
+        </div>
+      )}
+
+      {/* === REIMBURSED VIEW === */}
+      {view === "reimbursed" && (
+        <div className="space-y-6 animate-section-enter">
+          {(() => {
+            const paidExpenses = expenses.filter(r => r.status === "paid");
+
+            if (paidExpenses.length === 0) {
+              return <EmptyState title="No reimbursements yet" description="Paid expenses will appear here" />;
+            }
+
+            const totalPaid = paidExpenses.reduce((s, r) => s + r.amount, 0);
+
+            return (
+              <>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-[10px] tracking-[0.2em] uppercase text-gray-400">Reimbursed</h3>
+                  <span className="text-sm font-light text-blue-600">{formatCurrency(totalPaid)}</span>
+                </div>
+                <div className="space-y-2">
+                  {paidExpenses.map((r, i) => {
+                    const expKey = `reimbursed-${r.id}`;
+                    const isExpanded = expandedExpense === expKey;
+                    return (
+                      <div
+                        key={expKey}
+                        className="glass-elevated rounded-lg animate-fade-in cursor-pointer hover:bg-gray-50 transition-all"
+                        style={{ animationDelay: `${i * 0.02}s`, opacity: 0 }}
+                        onClick={() => setExpandedExpense(isExpanded ? null : expKey)}
+                      >
+                        <div className="p-4 sm:p-5">
+                          <div className="flex items-center justify-between gap-3">
+                            <div className="min-w-0 flex-1">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className="text-base font-light text-blue-600">{formatCurrencyFull(r.amount)}</span>
+                                <span className={`text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full ${statusColor("paid")}`}>Paid</span>
+                                {r.category && r.category !== "other" && (
+                                  <span className="text-[9px] uppercase tracking-wider text-gray-300">{r.category}</span>
+                                )}
+                              </div>
+                              <p className="text-sm text-gray-500 mt-1">{r.vendor || r.description}</p>
+                              {!isExpanded && (
+                                <div className="flex items-center gap-3 mt-1.5">
+                                  {r.submitted_at && <span className="text-[10px] text-gray-300">{formatDate(r.submitted_at)}</span>}
+                                  {role === "admin" && r.client_name && <span className="text-[10px] text-gray-300">{r.client_name}</span>}
+                                </div>
+                              )}
+                            </div>
+                            <div className="flex items-center gap-2 shrink-0">
+                              {r.receipt_original_name && (
+                                <a href={`/api/reimbursements/${r.id}/receipt`} onClick={(e) => e.stopPropagation()} className="text-gray-300 hover:text-gray-500 transition-colors" title="Receipt">
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
+                                </a>
+                              )}
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={`text-gray-300 transition-transform ${isExpanded ? "rotate-180" : ""}`}>
+                                <polyline points="6 9 12 15 18 9" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Expanded details */}
+                        {isExpanded && (
+                          <div className="px-4 sm:px-5 pb-4 sm:pb-5 border-t border-gray-100 animate-fade-in" onClick={(e) => e.stopPropagation()}>
+                            <div className="pt-4 space-y-4">
+                              <div className="flex items-start justify-between">
+                                <div>
+                                  <p className="text-[10px] tracking-[0.2em] uppercase text-gray-400 mb-1">Reimbursed Expense</p>
+                                  <p className="text-lg font-light text-gray-900">{formatCurrencyFull(r.amount)}</p>
+                                </div>
+                                <span className={`text-[9px] uppercase tracking-wider px-3 py-1 rounded-full ${statusColor("paid")}`}>Paid</span>
+                              </div>
+
+                              {r.submitter_name && (
+                                <div className="bg-blue-50 rounded-lg px-3 py-2">
+                                  <p className="text-[10px] text-blue-400 uppercase tracking-wider mb-0.5">Submitted by</p>
+                                  <p className="text-sm text-blue-700 font-light">
+                                    {r.submitter_name}
+                                    {r.submitter_email && <span className="text-blue-400 ml-1">({r.submitter_email})</span>}
+                                  </p>
+                                </div>
+                              )}
+
+                              <div className="grid grid-cols-2 gap-4">
+                                {r.submitted_at && (
+                                  <div>
+                                    <p className="text-[10px] text-gray-300 uppercase tracking-wider mb-0.5">Submitted</p>
+                                    <p className="text-sm text-gray-600 font-light">{formatDate(r.submitted_at)}</p>
+                                  </div>
+                                )}
+                                {r.reviewed_at && (
+                                  <div>
+                                    <p className="text-[10px] text-gray-300 uppercase tracking-wider mb-0.5">Paid</p>
+                                    <p className="text-sm text-gray-600 font-light">{formatDate(r.reviewed_at)}</p>
+                                  </div>
+                                )}
+                                {(r.vendor || r.description) && (
+                                  <div>
+                                    <p className="text-[10px] text-gray-300 uppercase tracking-wider mb-0.5">Vendor</p>
+                                    <p className="text-sm text-gray-600 font-light">{r.vendor || r.description}</p>
+                                  </div>
+                                )}
+                                {r.category && (
+                                  <div>
+                                    <p className="text-[10px] text-gray-300 uppercase tracking-wider mb-0.5">Category</p>
+                                    <p className="text-sm text-gray-600 font-light capitalize">{r.category}</p>
+                                  </div>
+                                )}
+                                {role === "admin" && r.client_name && (
+                                  <div>
+                                    <p className="text-[10px] text-gray-300 uppercase tracking-wider mb-0.5">Client</p>
+                                    <p className="text-sm text-gray-600 font-light">{r.client_name}</p>
+                                  </div>
+                                )}
+                              </div>
+
+                              {r.description && r.description !== r.vendor && (
+                                <div>
+                                  <p className="text-[10px] text-gray-300 uppercase tracking-wider mb-0.5">Description</p>
+                                  <p className="text-xs text-gray-400 font-light">{r.description}</p>
+                                </div>
+                              )}
+
+                              {r.admin_notes && <p className="text-[10px] text-gray-300 italic">Note: {r.admin_notes}</p>}
+
+                              {r.receipt_original_name && (
+                                <a
+                                  href={`/api/reimbursements/${r.id}/receipt`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-500 transition-colors pt-2"
+                                >
+                                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="opacity-50">
+                                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                                    <polyline points="15 3 21 3 21 9" />
+                                    <line x1="10" y1="14" x2="21" y2="3" />
+                                  </svg>
+                                  View Receipt
+                                </a>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </>
             );
