@@ -265,7 +265,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
             <p className="text-sm sm:text-lg font-light text-orange-500 mt-0.5 group-hover:text-orange-600 transition-colors">{formatCurrency(summary?.pending_total || 0)}</p>
           </button>
           <button onClick={() => setView("reimbursed")} className="py-2 rounded-lg hover:bg-gray-50 transition-all cursor-pointer group text-center">
-            <p className="text-[9px] sm:text-[10px] text-gray-300 tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Reimbursed</p>
+            <p className="text-[9px] sm:text-[10px] text-gray-300 tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Reimburse</p>
             <p className="text-sm sm:text-lg font-light text-blue-600 mt-0.5 group-hover:text-blue-700 transition-colors">{formatCurrency(totalReimbursed)}</p>
           </button>
         </div>
@@ -1128,7 +1128,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
             return (
               <>
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-[10px] tracking-[0.2em] uppercase text-gray-400">Reimbursed</h3>
+                  <h3 className="text-[10px] tracking-[0.2em] uppercase text-gray-400">Reimburse</h3>
                   <span className="text-sm font-light text-blue-600">{formatCurrency(totalPaid)}</span>
                 </div>
                 <div className="space-y-2">
