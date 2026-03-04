@@ -6,7 +6,7 @@ export const brand = {
   socialHandle: process.env.NEXT_PUBLIC_BRAND_SOCIAL_HANDLE || "@riddle",
   location: process.env.NEXT_PUBLIC_BRAND_LOCATION || "Los Angeles · New York City",
   domain: process.env.NEXT_PUBLIC_BRAND_DOMAIN || "riddlellc.biz",
-  logoUrl: process.env.NEXT_PUBLIC_BRAND_LOGO_URL || "/logo.png",
+  logoUrl: process.env.NEXT_PUBLIC_BRAND_LOGO_URL || "/riddle-r-logo.png",
   primaryColor: process.env.NEXT_PUBLIC_BRAND_PRIMARY_COLOR || "#000000",
   showPoweredBy: process.env.NEXT_PUBLIC_SHOW_POWERED_BY !== "false",
   poweredByName: process.env.NEXT_PUBLIC_POWERED_BY_NAME || "DeFaria",
