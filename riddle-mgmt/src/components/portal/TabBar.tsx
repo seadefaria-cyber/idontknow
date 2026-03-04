@@ -2,7 +2,7 @@
 
 import React from "react";
 
-export type Section = "creative" | "legal" | "schedule" | "reimbursements";
+export type Section = "creative" | "legal" | "schedule" | "reimbursements" | "royalties";
 
 interface TabBarProps {
   active: Section;
@@ -14,6 +14,7 @@ const TABS: { key: Section; label: string }[] = [
   { key: "legal", label: "Legal" },
   { key: "schedule", label: "Schedule" },
   { key: "reimbursements", label: "Finances" },
+  { key: "royalties", label: "Royalties" },
 ];
 
 export default function TabBar({ active, onChange }: TabBarProps) {

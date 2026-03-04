@@ -8,6 +8,7 @@ import FilesSection from "@/components/portal/FilesSection";
 import LegalSection from "@/components/portal/LegalSection";
 import ScheduleSection from "@/components/portal/ScheduleSection";
 import ReimbursementsSection from "@/components/portal/ReimbursementsSection";
+import RoyaltiesSection from "@/components/portal/RoyaltiesSection";
 import IntegrationsSection from "@/components/portal/IntegrationsSection";
 import { brand } from "@/lib/brand";
 
@@ -46,7 +47,7 @@ export default function Dashboard() {
       const tag = (e.target as HTMLElement)?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
 
-      const map: Record<string, Section> = { "1": "creative", "2": "legal", "3": "schedule", "4": "reimbursements" };
+      const map: Record<string, Section> = { "1": "creative", "2": "legal", "3": "schedule", "4": "reimbursements", "5": "royalties" };
       const section = map[e.key];
       if (section) setActiveSection(section);
     }
@@ -145,6 +146,9 @@ export default function Dashboard() {
         )}
         {activeSection === "reimbursements" && (
           <ReimbursementsSection role={user?.role || "client"} allUsers={allUsers} refreshSignal={refreshKey} />
+        )}
+        {activeSection === "royalties" && (
+          <RoyaltiesSection role={user?.role || "client"} allUsers={allUsers} refreshSignal={refreshKey} />
         )}
       </div>
 
