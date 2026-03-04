@@ -31,16 +31,6 @@ export default function Portal() {
         return;
       }
 
-      if (data.mfaSetupRequired) {
-        router.push("/portal/mfa-setup");
-        return;
-      }
-
-      if (data.mfaRequired) {
-        router.push("/portal/mfa-verify");
-        return;
-      }
-
       router.push("/portal/dashboard");
     } catch {
       setError("Something went wrong");
