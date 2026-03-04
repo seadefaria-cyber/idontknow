@@ -113,6 +113,7 @@ export default function FilesSection({ role, allUsers, refreshSignal }: FilesSec
   const [uploading, setUploading] = useState(false);
   const [uploadUserId, setUploadUserId] = useState("");
   const [uploadDescription, setUploadDescription] = useState("");
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   function fetchDriveFiles() {
@@ -179,6 +180,18 @@ export default function FilesSection({ role, allUsers, refreshSignal }: FilesSec
       // silent
     } finally {
       setUploading(false);
+    }
+  }
+
+  async function handleDelete(fileId: string) {
+    try {
+      const res = await fetch(`/api/files/${fileId}`, { method: "DELETE" });
+      if (res.ok) {
+        setConfirmDeleteId(null);
+        refresh();
+      }
+    } catch {
+      // silent
     }
   }
 
@@ -380,33 +393,65 @@ export default function FilesSection({ role, allUsers, refreshSignal }: FilesSec
                   </div>
                 </div>
 
-                {/* Action */}
-                {file.source === "drive" ? (
-                  <a
-                    href={file.webViewLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-500 transition-colors shrink-0"
-                  >
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="opacity-50">
-                      <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
-                      <polyline points="15 3 21 3 21 9" />
-                      <line x1="10" y1="14" x2="21" y2="3" />
-                    </svg>
-                    Open
-                  </a>
-                ) : (
-                  <button
-                    onClick={() => { setUnlockingFile(unlockingFile === file.portalId ? null : file.portalId!); setFilePassword(""); setFileError(""); }}
-                    className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-500 transition-colors shrink-0"
-                  >
-                    <svg width="10" height="12" viewBox="0 0 12 14" fill="none" className="opacity-50">
-                      <rect x="0.5" y="6.5" width="11" height="7" rx="1.5" stroke="currentColor" />
-                      <path d="M3 6.5V4C3 2.34 4.34 1 6 1s3 1.34 3 3v2.5" stroke="currentColor" strokeLinecap="round" />
-                    </svg>
-                    Download
-                  </button>
-                )}
+                {/* Actions */}
+                <div className="flex items-center gap-2 shrink-0">
+                  {file.source === "drive" ? (
+                    <a
+                      href={file.webViewLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-500 transition-colors"
+                    >
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="opacity-50">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                      Open
+                    </a>
+                  ) : (
+                    <button
+                      onClick={() => { setUnlockingFile(unlockingFile === file.portalId ? null : file.portalId!); setFilePassword(""); setFileError(""); }}
+                      className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-500 transition-colors"
+                    >
+                      <svg width="10" height="12" viewBox="0 0 12 14" fill="none" className="opacity-50">
+                        <rect x="0.5" y="6.5" width="11" height="7" rx="1.5" stroke="currentColor" />
+                        <path d="M3 6.5V4C3 2.34 4.34 1 6 1s3 1.34 3 3v2.5" stroke="currentColor" strokeLinecap="round" />
+                      </svg>
+                      Download
+                    </button>
+                  )}
+                  {/* Delete */}
+                  {file.source === "portal" && (
+                    confirmDeleteId === file.portalId ? (
+                      <div className="flex items-center gap-1">
+                        <button
+                          onClick={() => handleDelete(file.portalId!)}
+                          className="px-2 py-1.5 rounded-lg text-[10px] tracking-[0.1em] uppercase bg-red-50 text-red-600 hover:bg-red-100 transition-all"
+                        >
+                          Confirm
+                        </button>
+                        <button
+                          onClick={() => setConfirmDeleteId(null)}
+                          className="px-2 py-1.5 rounded-lg text-[10px] tracking-[0.1em] uppercase text-gray-400 hover:text-gray-500 transition-all"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => setConfirmDeleteId(file.portalId!)}
+                        className="p-2 rounded-lg text-gray-300 hover:text-red-500 hover:bg-red-50 transition-all"
+                        title="Delete"
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                          <polyline points="3 6 5 6 21 6" />
+                          <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
+                        </svg>
+                      </button>
+                    )
+                  )}
+                </div>
               </div>
 
               {/* Unlock panel for portal files */}
