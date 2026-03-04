@@ -1147,7 +1147,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                             <div className="min-w-0 flex-1">
                               <div className="flex items-center gap-2 flex-wrap">
                                 <span className="text-base font-light text-blue-600">{formatCurrencyFull(r.amount)}</span>
-                                <span className={`text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full ${statusColor("paid")}`}>Paid</span>
+                                <span className={`text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full ${statusColor(r.status)}`}>{r.status === "paid" ? "Paid" : "Approved"}</span>
                                 {r.category && r.category !== "other" && (
                                   <span className="text-[9px] uppercase tracking-wider text-gray-300">{r.category}</span>
                                 )}
@@ -1182,7 +1182,7 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                                   <p className="text-[10px] tracking-[0.2em] uppercase text-gray-400 mb-1">Reimbursed Expense</p>
                                   <p className="text-lg font-light text-gray-900">{formatCurrencyFull(r.amount)}</p>
                                 </div>
-                                <span className={`text-[9px] uppercase tracking-wider px-3 py-1 rounded-full ${statusColor("paid")}`}>Paid</span>
+                                <span className={`text-[9px] uppercase tracking-wider px-3 py-1 rounded-full ${statusColor(r.status)}`}>{r.status === "paid" ? "Paid" : "Approved"}</span>
                               </div>
 
                               {r.submitter_name && (
@@ -1251,6 +1251,21 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                                   </svg>
                                   View Receipt
                                 </a>
+                              )}
+
+                              {/* Actions */}
+                              {role === "admin" && (
+                                <div className="flex gap-3 pt-3 border-t border-gray-100 mt-3">
+                                  {r.status === "approved" && (
+                                    <>
+                                      <button onClick={() => handleReview(r.id, "submitted")} className="flex-1 py-2 rounded-lg text-xs tracking-[0.15em] uppercase bg-yellow-50 text-yellow-600 hover:bg-yellow-100 transition-all">Undo Approval</button>
+                                      <button onClick={() => handleReview(r.id, "paid")} className="flex-1 py-2 rounded-lg text-xs tracking-[0.15em] uppercase bg-green-50 text-green-600 hover:bg-green-100 transition-all">Mark as Paid</button>
+                                    </>
+                                  )}
+                                  {r.status === "paid" && (
+                                    <button onClick={() => handleReview(r.id, "approved")} className="flex-1 py-2 rounded-lg text-xs tracking-[0.15em] uppercase bg-yellow-50 text-yellow-600 hover:bg-yellow-100 transition-all">Undo Payment</button>
+                                  )}
+                                </div>
                               )}
                             </div>
                           </div>
