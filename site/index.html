@@ -108,11 +108,11 @@
             color: var(--text-muted);
             letter-spacing: 0.05em;
             margin-bottom: 2rem;
-            opacity: 0;
-            animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
         }
 
-        .hero-label span { color: var(--accent); }
+        .hero-label .at-sign { color: var(--accent); opacity: 0; display: inline-block; }
+        .scramble { opacity: 0; display: inline-block; }
+        .hero-accent { color: var(--accent); }
 
         .hero h1 {
             font-family: var(--font);
@@ -121,11 +121,7 @@
             letter-spacing: -0.04em;
             line-height: 0.95;
             color: var(--text);
-            opacity: 0;
-            animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
         }
-
-        .hero h1 span { color: var(--accent); }
 
         .hero-sub {
             font-size: clamp(1rem, 2.5vw, 1.15rem);
@@ -134,7 +130,7 @@
             margin-top: 1.5rem;
             line-height: 1.7;
             opacity: 0;
-            animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+            animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.6s forwards;
         }
 
         .hero-cta {
@@ -151,7 +147,13 @@
             text-decoration: none;
             transition: transform 0.2s, box-shadow 0.2s;
             opacity: 0;
-            animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+            animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.9s forwards;
+        }
+
+        @keyframes accentPulse {
+            0% { text-shadow: 0 0 0px transparent; }
+            50% { text-shadow: 0 0 20px rgba(37, 99, 255, 0.4); }
+            100% { text-shadow: 0 0 0px transparent; }
         }
 
         .hero-cta:hover {
@@ -376,7 +378,7 @@
 
         @media (prefers-reduced-motion: reduce) {
             * { animation-duration: 0.01ms !important; transition-duration: 0.1s !important; }
-            .hero h1, .hero-label, .hero-sub, .hero-cta, .service { opacity: 1 !important; transform: none !important; }
+            .hero-sub, .hero-cta, .service { opacity: 1 !important; transform: none !important; }
         }
     </style>
 </head>
@@ -393,8 +395,8 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
-            <p class="hero-label"><span>@</span>defaria</p>
-            <h1>We Move<br><span>Content.</span></h1>
+            <p class="hero-label"><span class="at-sign">@</span><span class="scramble" data-text="defaria">defaria</span></p>
+            <h1><span class="scramble" data-text="We Move">We Move</span><br><span class="scramble hero-accent" data-text="Content.">Content.</span></h1>
             <p class="hero-sub">Digital seeding and creative distribution<br>for artists, brands, and creators.</p>
             <a href="#contact" class="hero-cta">&gt; start_project</a>
         </div>
@@ -414,17 +416,17 @@
                 <div class="service" data-d="60">
                     <div class="service-index">02</div>
                     <h3>Content Strategy</h3>
-                    <p>We plan what goes where and when. Platform-specific formats, timing, and narrative — built around your goals.</p>
+                    <p>We plan what goes where and when. Platform-specific formats, timing, and narrative built around your goals.</p>
                 </div>
                 <div class="service" data-d="120">
                     <div class="service-index">03</div>
                     <h3>Creative + Live Production</h3>
-                    <p>A team of clippers on standby for short-form content across every platform. We also partner with artists for full live production — Twitch streams, album rollouts, and event coverage.</p>
+                    <p>A team of clippers on standby for short-form content across every platform. We also partner with artists for full live production. Twitch streams, album rollouts, and event coverage.</p>
                 </div>
                 <div class="service" data-d="180">
                     <div class="service-index">04</div>
                     <h3>Seeding Network</h3>
-                    <p>Direct connections to pages, blogs, and accounts across every platform. A deep network built over years — not cold outreach.</p>
+                    <p>Direct connections to pages, blogs, and accounts across every platform. A deep network built over years, not cold outreach.</p>
                 </div>
                 <div class="service" data-d="240">
                     <div class="service-index">05</div>
@@ -459,7 +461,7 @@
         <a href="/" class="footer-logo">dF</a>
         <div class="footer-info">
             &copy; 2026 DeFaria LLC<br>
-            40.7128&deg; N, 74.0060&deg; W
+            New York City
         </div>
     </footer>
 
@@ -474,6 +476,42 @@
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.service').forEach(el => obs.observe(el));
+
+        /* Hero scramble decode */
+        (function() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&!<>';
+            function scramble(el, delay) {
+                const text = el.dataset.text;
+                const len = text.length;
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.textContent = text.replace(/[^ ]/g, () => chars[Math.floor(Math.random() * chars.length)]);
+                    let frame = 0;
+                    const total = 18;
+                    const iv = setInterval(() => {
+                        const resolved = Math.floor((frame / total) * len);
+                        el.textContent = text.split('').map((c, i) => {
+                            if (c === ' ') return ' ';
+                            if (i < resolved) return c;
+                            return chars[Math.floor(Math.random() * chars.length)];
+                        }).join('');
+                        frame++;
+                        if (frame > total) {
+                            clearInterval(iv);
+                            el.textContent = text;
+                            if (el.classList.contains('hero-accent')) {
+                                el.style.animation = 'accentPulse 0.6s ease-out';
+                            }
+                        }
+                    }, 30);
+                }, delay);
+            }
+            const at = document.querySelector('.at-sign');
+            setTimeout(() => { at.style.opacity = '1'; }, 100);
+            document.querySelectorAll('.scramble').forEach((el, i) => {
+                scramble(el, [200, 700, 1000][i] || 200 + i * 300);
+            });
+        })();
     </script>
 
 </body>

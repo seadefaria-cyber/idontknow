@@ -20,12 +20,12 @@ const TABS: { key: Section; label: string }[] = [
 export default function TabBar({ active, onChange }: TabBarProps) {
   return (
     <nav className="w-full overflow-x-auto scrollbar-hide">
-      <div className="flex items-center justify-center gap-0 sm:gap-1">
+      <div className="flex items-center justify-center gap-1 sm:gap-1 min-w-max mx-auto">
         {TABS.map((tab) => (
           <button
             key={tab.key}
             onClick={() => onChange(tab.key)}
-            className={`relative px-3 sm:px-4 py-3 text-xs sm:text-xs tracking-[0.1em] sm:tracking-[0.12em] uppercase transition-all duration-200 whitespace-nowrap ${
+            className={`relative px-2.5 sm:px-4 py-3 text-[10px] sm:text-xs tracking-[0.08em] sm:tracking-[0.12em] uppercase transition-all duration-200 whitespace-nowrap ${
               active === tab.key
                 ? "text-gray-900"
                 : "text-gray-400 hover:text-gray-500"

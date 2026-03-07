@@ -157,19 +157,50 @@ export default function FilesSection({ role, allUsers, refreshSignal }: FilesSec
 
   async function handleUpload(e: React.FormEvent) {
     e.preventDefault();
-    if (!fileInputRef.current?.files?.[0]) return;
+    const file = fileInputRef.current?.files?.[0];
+    if (!file) return;
     if (role === "admin" && !uploadUserId) return;
     setUploading(true);
-    const formData = new FormData();
-    formData.append("file", fileInputRef.current.files[0]);
-    formData.append("filePassword", "creative");
-    if (role === "admin") formData.append("userId", uploadUserId);
-    formData.append("description", uploadDescription);
-    formData.append("folder", "creative");
     try {
+      // Step 1: Get presigned URL
+      const presignRes = await fetch("/api/files/presign", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fileName: file.name,
+          contentType: file.type || "application/octet-stream",
+          userId: role === "admin" ? uploadUserId : undefined,
+          folder: "creative",
+        }),
+      });
+      if (!presignRes.ok) throw new Error("Failed to prepare upload");
+      const { presignedUrl, s3Key, fileId, storedName } = await presignRes.json();
+
+      // Step 2: Upload directly to S3
+      const s3Res = await fetch(presignedUrl, {
+        method: "PUT",
+        headers: { "Content-Type": file.type || "application/octet-stream" },
+        body: file,
+      });
+      if (!s3Res.ok) throw new Error("S3 upload failed");
+
+      // Step 3: Register in database
       const endpoint = role === "admin" ? "/api/files/upload" : "/api/files/upload-own";
-      const res = await fetch(endpoint, { method: "POST", body: formData });
-      if (res.ok) {
+      const registerRes = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fileId, s3Key, storedName,
+          originalName: file.name,
+          fileSize: file.size,
+          mimeType: file.type || "application/octet-stream",
+          filePassword: "creative",
+          userId: role === "admin" ? uploadUserId : undefined,
+          description: uploadDescription,
+          folder: "creative",
+        }),
+      });
+      if (registerRes.ok) {
         setUploadUserId("");
         setUploadDescription("");
         if (fileInputRef.current) fileInputRef.current.value = "";

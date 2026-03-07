@@ -309,10 +309,53 @@ export default function RoyaltiesSection({ role, allUsers, refreshSignal }: Roya
   useEffect(() => { if (refreshSignal) fetchStatements(); }, [refreshSignal]);
 
   async function handleUpload(formData: FormData): Promise<boolean> {
-    const res = await fetch("/api/royalties", { method: "POST", body: formData });
-    if (res.ok) {
-      fetchStatements();
-      return true;
+    const file = formData.get("file") as File | null;
+    if (!file) return false;
+
+    try {
+      // Step 1: Get presigned URL
+      const presignRes = await fetch("/api/royalties/presign", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fileName: file.name,
+          contentType: file.type || "application/octet-stream",
+          userId: formData.get("userId") || undefined,
+        }),
+      });
+      if (!presignRes.ok) return false;
+      const { presignedUrl, s3Key, docId, storedName } = await presignRes.json();
+
+      // Step 2: Upload directly to S3
+      const s3Res = await fetch(presignedUrl, {
+        method: "PUT",
+        headers: { "Content-Type": file.type || "application/octet-stream" },
+        body: file,
+      });
+      if (!s3Res.ok) return false;
+
+      // Step 3: Register in database
+      const registerRes = await fetch("/api/royalties", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          docId, s3Key, storedName,
+          originalName: file.name,
+          fileSize: file.size,
+          mimeType: file.type || "application/octet-stream",
+          title: formData.get("title"),
+          category: formData.get("category"),
+          period: formData.get("period"),
+          amount: formData.get("amount"),
+          userId: formData.get("userId") || undefined,
+        }),
+      });
+      if (registerRes.ok) {
+        fetchStatements();
+        return true;
+      }
+    } catch {
+      // fall through
     }
     return false;
   }
