@@ -3,43 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You — DeFaria</title>
+    <title>Message Received — deFaria</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230a0a0a'/><text x='50%25' y='23' text-anchor='middle' font-family='system-ui,sans-serif' font-size='16' fill='%232563FF' font-weight='bold'>dF</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230039A6'/><text x='50%25' y='23' text-anchor='middle' font-family='Helvetica Neue,sans-serif' font-size='16' fill='white' font-weight='bold'>dF</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/sections.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0a;
+            --accent: #2563FF;
+            --accent-glow: rgba(37, 99, 255, 0.15);
+            --text: #f0f0f0;
+            --text-secondary: #999999;
+            --text-muted: #555555;
+            --font: 'Inter', -apple-system, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .content { max-width: 600px; }
+
+        .label {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+        }
+
+        .label .at-sign { color: var(--accent); opacity: 0; display: inline-block; }
+
+        .scramble { opacity: 0; display: inline-block; }
+
+        h1 {
+            font-family: var(--font);
+            font-weight: 900;
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            letter-spacing: -0.04em;
+            line-height: 0.95;
+            color: var(--text);
+        }
+
+        .hero-accent { color: var(--accent); }
+
+        .sub {
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-top: 1.5rem;
+            line-height: 1.7;
+            opacity: 0;
+            animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.6s forwards;
+        }
+
+        .cta {
+            display: inline-block;
+            margin-top: 2.5rem;
+            padding: 0.85rem 2.25rem;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #fff;
+            background: var(--accent);
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            opacity: 0;
+            animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.9s forwards;
+        }
+
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--accent-glow);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 2rem;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            opacity: 0;
+            animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards;
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes accentPulse {
+            0% { text-shadow: 0 0 0px transparent; }
+            50% { text-shadow: 0 0 20px rgba(37, 99, 255, 0.4); }
+            100% { text-shadow: 0 0 0px transparent; }
+        }
+    </style>
 </head>
 <body>
 
-<nav class="nav" id="nav">
-    <div class="nav__inner container">
-        <a href="/" class="nav__logo">
-            <span class="nav__logo-text"><span class="nav__logo-l">d</span><span class="nav__logo-l">e</span><span class="nav__logo-l">F</span><span class="nav__logo-l">a</span><span class="nav__logo-l">r</span><span class="nav__logo-l">i</span><span class="nav__logo-l">a</span></span>
-        </a>
-    </div>
-</nav>
-
-<section class="hero" id="hero">
-    <div class="container hero__inner" style="text-align: center; max-width: 700px; margin: 0 auto;">
-        <p class="hero__eyebrow">MESSAGE RECEIVED</p>
-        <h1 class="hero__headline">
-            WE'LL BE<br>
-            <span class="text-accent">IN TOUCH.</span>
-        </h1>
-        <p class="hero__sub" style="max-width: 100%;">
-            Thanks for reaching out. We review every inquiry personally and will get back to you within 24 hours.
-        </p>
-        <div class="hero__ctas">
-            <a href="/" class="btn btn--primary">BACK TO HOME</a>
+    <div class="page">
+        <div class="content">
+            <p class="label"><span class="at-sign">//</span> <span class="scramble" data-text="message_received">message_received</span></p>
+            <h1><span class="scramble" data-text="We'll Be">We'll Be</span><br><span class="scramble hero-accent" data-text="In Touch.">In Touch.</span></h1>
+            <p class="sub">We review every inquiry personally and will get back to you within 24 hours.</p>
+            <a href="/" class="cta">&gt; back_to_home</a>
         </div>
+        <div class="footer"><a href="/">dF</a> &middot; New York City</div>
     </div>
-</section>
+
+    <script>
+        (function() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&!<>';
+            function scramble(el, delay) {
+                const text = el.dataset.text;
+                const len = text.length;
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.textContent = text.replace(/[^ ]/g, () => chars[Math.floor(Math.random() * chars.length)]);
+                    let frame = 0;
+                    const total = 18;
+                    const iv = setInterval(() => {
+                        const resolved = Math.floor((frame / total) * len);
+                        el.textContent = text.split('').map((c, i) => {
+                            if (c === ' ') return ' ';
+                            if (i < resolved) return c;
+                            return chars[Math.floor(Math.random() * chars.length)];
+                        }).join('');
+                        frame++;
+                        if (frame > total) {
+                            clearInterval(iv);
+                            el.textContent = text;
+                            if (el.classList.contains('hero-accent')) {
+                                el.style.animation = 'accentPulse 0.6s ease-out';
+                            }
+                        }
+                    }, 30);
+                }, delay);
+            }
+            const at = document.querySelector('.at-sign');
+            setTimeout(() => { at.style.opacity = '1'; }, 100);
+            document.querySelectorAll('.scramble').forEach((el, i) => {
+                scramble(el, [200, 700, 1000][i] || 200 + i * 300);
+            });
+        })();
+    </script>
 
 </body>
 </html>
