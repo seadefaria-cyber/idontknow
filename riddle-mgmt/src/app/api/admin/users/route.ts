@@ -59,6 +59,26 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({ success: true, id });
 }
 
+export async function PATCH(req: NextRequest) {
+  const session = await getSession();
+  if (!session || session.role !== "admin") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { userId, password } = await req.json();
+  if (!userId || !password) {
+    return NextResponse.json({ error: "userId and password required" }, { status: 400 });
+  }
+  if (password.length < 8) {
+    return NextResponse.json({ error: "Password must be at least 8 characters" }, { status: 400 });
+  }
+
+  const passwordHash = bcrypt.hashSync(password, 12);
+  await dbRun("UPDATE users SET password_hash = ? WHERE id = ?", [passwordHash, userId]);
+
+  return NextResponse.json({ success: true });
+}
+
 export async function DELETE(req: NextRequest) {
   const session = await getSession();
   if (!session || session.role !== "admin") {

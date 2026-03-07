@@ -25,7 +25,7 @@ export default function DashboardHeader({ displayName, role, onRefresh }: Dashbo
 
   return (
     <div className="flex flex-col items-center justify-center mb-6 sm:mb-8 text-center">
-      <p className="text-[10px] tracking-[0.3em] uppercase text-gray-300 mb-3 animate-fade-in">{brand.name.toUpperCase()}.</p>
+      {/* Logo removed from header */}
       <div className="flex items-center gap-3">
         <h1 className="text-xl sm:text-2xl font-light tracking-tight animate-fade-in">
           {displayName}

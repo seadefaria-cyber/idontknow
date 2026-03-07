@@ -57,8 +57,8 @@ export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ 
   if (!session) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
 
   const { id } = await params;
-  const item = await dbGet<{ client_id: string; receipt_path: string | null }>(
-    "SELECT client_id, receipt_path FROM reimbursements WHERE id = ?", [id]
+  const item = await dbGet<{ client_id: string; receipt_file_path: string | null }>(
+    "SELECT client_id, receipt_file_path FROM reimbursements WHERE id = ?", [id]
   );
 
   if (!item) return NextResponse.json({ error: "Not found" }, { status: 404 });
@@ -67,8 +67,8 @@ export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ 
   }
 
   // Delete receipt from S3 if exists
-  if (item.receipt_path) {
-    try { await deleteFromS3(item.receipt_path); } catch { /* file may already be gone */ }
+  if (item.receipt_file_path) {
+    try { await deleteFromS3(item.receipt_file_path); } catch { /* file may already be gone */ }
   }
 
   await dbRun("DELETE FROM reimbursements WHERE id = ?", [id]);

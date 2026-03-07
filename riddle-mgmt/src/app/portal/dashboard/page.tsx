@@ -90,7 +90,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center sm:justify-center px-3 sm:px-10 md:px-16 pt-8 sm:pt-32 pb-20 md:pb-20">
+    <div className="min-h-screen flex flex-col items-center sm:justify-center px-5 sm:px-10 md:px-16 pt-8 sm:pt-32 pb-20 md:pb-20">
       <div className="w-full max-w-xl space-y-6 sm:space-y-10">
         <DashboardHeader
           displayName={user?.username || ""}
@@ -99,21 +99,7 @@ export default function Dashboard() {
           onRefresh={handleRefresh}
         />
 
-        <div className="flex items-center gap-2">
-          <div className="flex-1">
-            <TabBar active={activeSection} onChange={setActiveSection} />
-          </div>
-          <button
-            onClick={() => setShowSettings(!showSettings)}
-            className={`p-2 rounded-lg transition-all ${showSettings ? "bg-gray-100 text-gray-500" : "text-gray-300 hover:text-gray-400"}`}
-            title="Linked Accounts"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="3" />
-              <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
-            </svg>
-          </button>
-        </div>
+        <TabBar active={activeSection} onChange={setActiveSection} />
 
         {/* Linked accounts — toggled by gear icon */}
         {showSettings && (
@@ -121,8 +107,6 @@ export default function Dashboard() {
             <IntegrationsSection />
           </div>
         )}
-
-        <div className="w-full h-px bg-gray-50" />
 
         {/* Section content */}
         {activeSection === "creative" && (
@@ -146,37 +130,52 @@ export default function Dashboard() {
         )}
       </div>
 
-      {/* Sign out + Expense — bottom of page */}
-      <div className="mt-16 mb-4 flex flex-col items-center gap-3">
-        <div className="flex items-center gap-5">
-          <a
-            href="/portal/expenses"
-            className="text-xs text-gray-300 hover:text-gray-400 transition-colors tracking-[0.12em] uppercase"
-          >
-            Submit an Expense
-          </a>
-        </div>
-        <button
-          onClick={handleLogout}
-          className="text-[10px] text-gray-200 hover:text-gray-400 transition-colors tracking-[0.15em] uppercase"
+      {/* Footer */}
+      <div className="mt-20 mb-8 flex flex-col items-center gap-4">
+        <a
+          href="/portal/expenses"
+          className="text-[10px] text-gray-300 hover:text-gray-400 transition-colors tracking-[0.15em] uppercase"
         >
-          Sign Out
-        </button>
-      </div>
+          Submit an Expense
+        </a>
 
-      {/* Powered by attribution */}
-      {brand.showPoweredBy && (
-        <div className="mt-8 mb-6 flex flex-col items-center gap-2">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setShowSettings(!showSettings)}
+            className={`text-[10px] tracking-[0.15em] uppercase transition-colors ${showSettings ? "text-gray-500" : "text-gray-200 hover:text-gray-400"}`}
+          >
+            Settings
+          </button>
+          <span className="text-gray-100">|</span>
+          <button
+            onClick={handleLogout}
+            className="text-[10px] text-gray-200 hover:text-gray-400 transition-colors tracking-[0.15em] uppercase"
+          >
+            Sign Out
+          </button>
+        </div>
+
+        {/* Brand logo */}
+        {brand.logoUrl && (
+          <img
+            src={brand.logoUrl}
+            alt={brand.name}
+            className="h-10 sm:h-12 opacity-20 brightness-0 mt-2"
+          />
+        )}
+
+        {/* Powered by */}
+        {brand.showPoweredBy && (
           <a
             href={brand.poweredByUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-gray-300 hover:text-gray-400 transition-colors group"
+            className="text-[9px] tracking-[0.2em] uppercase text-gray-200 hover:text-gray-400 transition-colors"
           >
-            <span className="text-[9px] tracking-[0.2em] uppercase text-gray-300 group-hover:text-gray-400 transition-colors">Powered by {brand.poweredByName}</span>
+            Powered by {brand.poweredByName} Technologies
           </a>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

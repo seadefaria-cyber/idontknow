@@ -135,7 +135,12 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
   const [confirmDeleteExpenseId, setConfirmDeleteExpenseId] = useState<string | null>(null);
 
   async function handleDeleteExpense(id: string) {
-    await fetch(`/api/reimbursements/${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/reimbursements/${id}`, { method: "DELETE" });
+    if (!res.ok) {
+      const text = await res.text();
+      alert(`Delete failed (${res.status}): ${text.slice(0, 200)}`);
+      return;
+    }
     setConfirmDeleteExpenseId(null);
     refresh();
   }
@@ -247,26 +252,26 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
         <p className={`text-3xl sm:text-5xl font-extralight tracking-tight ${netCash >= 0 ? "text-green-600" : "text-red-600"}`}>
           {netCash >= 0 ? "+" : ""}{formatCurrency(netCash)}
         </p>
-        <div className="grid grid-cols-3 sm:grid-cols-5 gap-1 mt-4 sm:mt-5">
-          <button onClick={() => setView("earnings")} className="py-3 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all cursor-pointer group text-center">
-            <p className="text-[10px] sm:text-[10px] text-gray-300 tracking-[0.15em] sm:tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Earned</p>
-            <p className="text-base sm:text-lg font-light text-green-600 mt-0.5 group-hover:text-green-700 transition-colors">{formatCurrency(totalEarnings)}</p>
+        <div className="flex flex-wrap justify-center sm:grid sm:grid-cols-5 gap-1 mt-4 sm:mt-5">
+          <button onClick={() => setView("earnings")} className="w-[31%] sm:w-auto py-3 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all cursor-pointer group text-center">
+            <p className="text-[9px] sm:text-[10px] text-gray-300 tracking-[0.12em] sm:tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Earned</p>
+            <p className="text-sm sm:text-lg font-light text-green-600 mt-0.5 group-hover:text-green-700 transition-colors">{formatCurrency(totalEarnings)}</p>
           </button>
-          <button onClick={() => setView("spending")} className="py-3 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all cursor-pointer group text-center">
-            <p className="text-[10px] sm:text-[10px] text-gray-300 tracking-[0.15em] sm:tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Spent</p>
-            <p className="text-base sm:text-lg font-light text-red-600 mt-0.5 group-hover:text-red-700 transition-colors">{formatCurrency(totalSpending)}</p>
+          <button onClick={() => setView("spending")} className="w-[31%] sm:w-auto py-3 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all cursor-pointer group text-center">
+            <p className="text-[9px] sm:text-[10px] text-gray-300 tracking-[0.12em] sm:tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Spent</p>
+            <p className="text-sm sm:text-lg font-light text-red-600 mt-0.5 group-hover:text-red-700 transition-colors">{formatCurrency(totalSpending)}</p>
           </button>
-          <button onClick={() => setView("owed")} className="py-3 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all cursor-pointer group text-center">
-            <p className="text-[10px] sm:text-[10px] text-gray-300 tracking-[0.15em] sm:tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Owed</p>
-            <p className="text-base sm:text-lg font-light text-yellow-600 mt-0.5 group-hover:text-yellow-700 transition-colors">{formatCurrency(totalOutstanding)}</p>
+          <button onClick={() => setView("owed")} className="w-[31%] sm:w-auto py-3 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all cursor-pointer group text-center">
+            <p className="text-[9px] sm:text-[10px] text-gray-300 tracking-[0.12em] sm:tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Owed</p>
+            <p className="text-sm sm:text-lg font-light text-yellow-600 mt-0.5 group-hover:text-yellow-700 transition-colors">{formatCurrency(totalOutstanding)}</p>
           </button>
-          <button onClick={() => setView("pending")} className="py-3 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all cursor-pointer group text-center">
-            <p className="text-[10px] sm:text-[10px] text-gray-300 tracking-[0.15em] sm:tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Pending</p>
-            <p className="text-base sm:text-lg font-light text-orange-500 mt-0.5 group-hover:text-orange-600 transition-colors">{formatCurrency(summary?.pending_total || 0)}</p>
+          <button onClick={() => setView("pending")} className="w-[31%] sm:w-auto py-3 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all cursor-pointer group text-center">
+            <p className="text-[9px] sm:text-[10px] text-gray-300 tracking-[0.12em] sm:tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Pending</p>
+            <p className="text-sm sm:text-lg font-light text-orange-500 mt-0.5 group-hover:text-orange-600 transition-colors">{formatCurrency(summary?.pending_total || 0)}</p>
           </button>
-          <button onClick={() => setView("reimbursed")} className="py-3 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all cursor-pointer group text-center">
-            <p className="text-[10px] sm:text-[10px] text-gray-300 tracking-[0.15em] sm:tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Reimburse</p>
-            <p className="text-base sm:text-lg font-light text-blue-600 mt-0.5 group-hover:text-blue-700 transition-colors">{formatCurrency(totalReimbursed)}</p>
+          <button onClick={() => setView("reimbursed")} className="w-[31%] sm:w-auto py-3 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all cursor-pointer group text-center">
+            <p className="text-[9px] sm:text-[10px] text-gray-300 tracking-[0.12em] sm:tracking-[0.2em] uppercase group-hover:text-gray-400 transition-colors">Reimburse</p>
+            <p className="text-sm sm:text-lg font-light text-blue-600 mt-0.5 group-hover:text-blue-700 transition-colors">{formatCurrency(totalReimbursed)}</p>
           </button>
         </div>
       </div>
@@ -1143,7 +1148,38 @@ export default function ReimbursementsSection({ role, allUsers, userId, refreshS
                         onClick={() => setExpandedExpense(isExpanded ? null : expKey)}
                       >
                         <div className="p-4 sm:p-5">
-                          <div className="flex items-center justify-between gap-3">
+                          <div className="flex items-center gap-3">
+                            {/* Undo (admin) + Delete (admin or client) buttons */}
+                            {(role === "admin" || role === "client") && (
+                              <div className="flex flex-col gap-1 shrink-0">
+                                {role === "admin" && (
+                                  <button
+                                    onClick={(e) => { e.stopPropagation(); handleReview(r.id, "submitted"); }}
+                                    className="w-8 h-8 rounded-full flex items-center justify-center text-gray-300 hover:text-orange-500 hover:bg-orange-50 transition-all"
+                                    title="Back to Pending"
+                                  >
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                      <polyline points="1 4 1 10 7 10" />
+                                      <path d="M3.51 15a9 9 0 105.64-8.36L1 10" />
+                                    </svg>
+                                  </button>
+                                )}
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    if (window.confirm(`Delete ${r.vendor || r.description} (${formatCurrencyFull(r.amount)})?`)) {
+                                      handleDeleteExpense(r.id);
+                                    }
+                                  }}
+                                  className="w-8 h-8 rounded-full flex items-center justify-center text-gray-300 hover:text-red-500 hover:bg-red-50 transition-all"
+                                  title="Delete"
+                                >
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" /><path d="M10 11v6" /><path d="M14 11v6" /><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2" />
+                                  </svg>
+                                </button>
+                              </div>
+                            )}
                             <div className="min-w-0 flex-1">
                               <div className="flex items-center gap-2 flex-wrap">
                                 <span className="text-base font-light text-blue-600">{formatCurrencyFull(r.amount)}</span>
