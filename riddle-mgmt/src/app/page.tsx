@@ -17,7 +17,7 @@ export default function Home() {
             width={320}
             height={76}
             priority
-            className="opacity-80 w-full h-auto"
+            className="opacity-80 w-full h-auto brightness-0"
           />
         </div>
 
@@ -41,10 +41,20 @@ export default function Home() {
       </div>
 
       {/* Bottom credit */}
-      <div className="absolute bottom-8 text-center animate-fade-in delay-700">
+      <div className="absolute bottom-8 text-center animate-fade-in delay-700 space-y-2">
         <p className="text-[10px] tracking-[0.3em] uppercase text-gray-300 font-light">
           {brand.location}
         </p>
+        {brand.showPoweredBy && (
+          <a
+            href={brand.poweredByUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[9px] tracking-[0.2em] uppercase text-gray-200 hover:text-gray-400 transition-colors block"
+          >
+            Powered by {brand.poweredByName} Technologies
+          </a>
+        )}
       </div>
     </div>
     </SwipeNav>

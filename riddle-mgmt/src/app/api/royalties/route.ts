@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { dbAll, dbRun } from "@/lib/db";
-import { uploadToS3 } from "@/lib/s3";
+import { uploadToS3, downloadFromS3 } from "@/lib/s3";
 import { getConnection, refreshTokenIfNeeded, uploadFileToDrive, getOrCreateFolder } from "@/lib/google-drive";
 import { v4 as uuid } from "uuid";
 import path from "path";
@@ -30,6 +30,64 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+
+  const contentType = req.headers.get("content-type") || "";
+
+  try {
+    if (contentType.includes("application/json")) {
+      return await handlePresignedUpload(req, session);
+    }
+    return await handleFormDataUpload(req, session);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Upload failed";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
+
+async function handlePresignedUpload(
+  req: NextRequest,
+  session: { userId: string; role: string }
+) {
+  const body = await req.json();
+  const { docId, s3Key, storedName, originalName, fileSize, mimeType, title, category, period, amount, userId: requestedUserId } = body;
+
+  if (!docId || !s3Key || !title) {
+    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+  }
+
+  const userId = session.role === "admin" && requestedUserId
+    ? requestedUserId
+    : session.userId;
+
+  const finalCategory = category || "recording";
+  const finalMimeType = mimeType || "application/octet-stream";
+
+  await dbRun(`
+    INSERT INTO royalty_statements (id, user_id, title, category, period, amount, file_name, original_name, file_path, file_size, mime_type)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `, [docId, userId, title, finalCategory, period || null, amount ? parseFloat(amount) : null, storedName, originalName || title, s3Key, fileSize || 0, finalMimeType]);
+
+  // Drive sync (best-effort)
+  try {
+    const driveConn = await getConnection(userId);
+    if (driveConn) {
+      const freshConn = await refreshTokenIfNeeded(driveConn);
+      const driveFolderName = finalCategory === "publishing" ? "Publishing" : "Distribution";
+      const folderId = await getOrCreateFolder(freshConn.access_token, driveFolderName);
+      const buffer = await downloadFromS3(s3Key);
+      await uploadFileToDrive(freshConn.access_token, originalName || title, finalMimeType, buffer, folderId);
+    }
+  } catch {
+    // Drive upload is best-effort
+  }
+
+  return NextResponse.json({ id: docId });
+}
+
+async function handleFormDataUpload(
+  req: NextRequest,
+  session: { userId: string; role: string }
+) {
   const formData = await req.formData();
   const file = formData.get("file") as File | null;
   const title = formData.get("title") as string;
@@ -37,7 +95,6 @@ export async function POST(req: NextRequest) {
   const period = (formData.get("period") as string) || null;
   const amount = formData.get("amount") ? parseFloat(formData.get("amount") as string) : null;
 
-  // Admin can specify a client; clients upload to their own account
   const userId = session.role === "admin"
     ? (formData.get("userId") as string) || session.userId
     : session.userId;
@@ -61,8 +118,7 @@ export async function POST(req: NextRequest) {
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `, [docId, userId, title, category, period, amount, storedName, file.name, s3Key, buffer.length, file.type || "application/octet-stream"]);
 
-  // Two-way sync: upload to client's Google Drive folder based on category
-  // recording → "Distribution" folder, publishing → "Publishing" folder
+  // Drive sync
   try {
     const driveConn = await getConnection(userId);
     if (driveConn) {
