@@ -10,14 +10,14 @@ export default function Home() {
       {/* Main content */}
       <div className="relative z-10 flex flex-col items-center text-center px-6 sm:px-8 max-w-2xl">
         {/* Logo */}
-        <div className="animate-fade-in-slow w-[220px] sm:w-[320px]">
+        <div className="animate-fade-in-slow w-[180px] sm:w-[260px] logo-shine">
           <Image
-            src={brand.logoUrl}
+            src="/logo-r.png"
             alt={brand.name}
-            width={320}
-            height={76}
+            width={800}
+            height={176}
             priority
-            className="opacity-80 w-full h-auto brightness-0"
+            className="w-full h-auto"
           />
         </div>
 
@@ -41,20 +41,10 @@ export default function Home() {
       </div>
 
       {/* Bottom credit */}
-      <div className="absolute bottom-8 text-center animate-fade-in delay-700 space-y-2">
+      <div className="absolute bottom-8 text-center animate-fade-in delay-700">
         <p className="text-[10px] tracking-[0.3em] uppercase text-gray-300 font-light">
           {brand.location}
         </p>
-        {brand.showPoweredBy && (
-          <a
-            href={brand.poweredByUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[9px] tracking-[0.2em] uppercase text-gray-200 hover:text-gray-400 transition-colors block"
-          >
-            Powered by {brand.poweredByName} Technologies
-          </a>
-        )}
       </div>
     </div>
     </SwipeNav>

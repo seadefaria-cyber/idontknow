@@ -9,8 +9,8 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  // Try user's own connection first, then fall back to any company connection
-  const conn = await getConnection(session.userId) || await getConnection();
+  // Only show data for this user's own QuickBooks connection
+  const conn = await getConnection(session.userId);
 
   if (!conn) {
     return NextResponse.json({ connected: false, expenses: [], invoices: [], payments: [], customers: [], bills: [] });

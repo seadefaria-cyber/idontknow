@@ -8,7 +8,7 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const conn = await getConnection(session.userId) || await getConnection();
+  const conn = await getConnection(session.userId);
   if (!conn) {
     return NextResponse.json({ error: "No QB connection found", userId: session.userId });
   }
