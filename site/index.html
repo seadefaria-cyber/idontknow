@@ -1359,15 +1359,43 @@
                 if (!heading) return;
                 var letters = 'How We Seed.'.split('');
 
-                // Target: the actual "How We Seed." heading position
-                // The heading is in the DOM behind the sticky showcase (visible via z-index)
+                // Target: where "How We Seed." heading WILL appear on screen
+                // Problem: on desktop, margin-bottom:-100vh pulls .services behind the sticky
+                // showcase, so getBoundingClientRect() returns coords below the viewport.
+                // Fix: compute heading's offset within .services, then place convergence at
+                // that offset from viewport top (since services slides up to fill the screen).
                 var hRect = heading.getBoundingClientRect();
-                var convergeCX = hRect.left + hRect.width / 2;
-                var convergeCY = hRect.top + hRect.height / 2;
-                // If heading is off-screen (below viewport), fall back to viewport center
-                if (convergeCY > window.innerHeight || convergeCY < 0) {
+                var convergeCX, convergeCY;
+                var inViewport = hRect.top >= 0 && hRect.top < window.innerHeight && hRect.bottom > 0;
+                if (inViewport) {
+                    // Heading is already visible — use its real position
+                    convergeCX = hRect.left + hRect.width / 2;
+                    convergeCY = hRect.top + hRect.height / 2;
+                } else {
+                    // Heading is off-screen (behind showcase or below viewport)
+                    // Calculate where it will appear: its offset within .services from top
+                    var servicesEl = document.getElementById('services');
+                    if (servicesEl) {
+                        // heading.offsetTop is relative to its offsetParent
+                        // Walk up from heading to services to get the true offset within services
+                        var headingTopInServices = 0;
+                        var el = heading;
+                        while (el && el !== servicesEl) {
+                            headingTopInServices += el.offsetTop;
+                            el = el.offsetParent;
+                        }
+                        var headingCenterInServices = headingTopInServices + heading.offsetHeight / 2;
+                        // When services first becomes visible, its top aligns with viewport top
+                        // So heading will appear at this offset from viewport top
+                        convergeCY = headingCenterInServices;
+                        // Clamp to reasonable viewport range (don't let it go too far down)
+                        convergeCY = Math.min(convergeCY, window.innerHeight * 0.65);
+                        convergeCY = Math.max(convergeCY, window.innerHeight * 0.15);
+                    } else {
+                        convergeCY = window.innerHeight * 0.35;
+                    }
+                    // Horizontal: center of viewport (heading is centered in services-inner max-width:700px)
                     convergeCX = window.innerWidth / 2;
-                    convergeCY = window.innerHeight * 0.55;
                 }
 
                 letters.forEach(function(ch, i) {
