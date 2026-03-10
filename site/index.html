@@ -1354,92 +1354,124 @@
                     }, i * 50);
                 });
 
-                // 2. Flying letters burst out then converge to EXACT character positions
+                // 2. Flying letters: burst out, then track heading position in real-time
                 var heading = document.getElementById('seedHeading');
                 if (!heading) return;
                 var charSpans = heading.querySelectorAll('span');
-
-                // Get each character's target position
-                // Heading has opacity:0 + translateY(20px), so positions are shifted 20px down
-                // We subtract 20px to get where they'll be after 'visible' class is added
-                var hRect = heading.getBoundingClientRect();
-                var inViewport = hRect.top >= -200 && hRect.top < window.innerHeight + 200;
-                var yOffset = 0;
-                if (!inViewport) {
-                    // Heading is off-screen — compute where it will appear
-                    var sr = document.getElementById('services');
-                    if (sr) {
-                        var srRect = sr.getBoundingClientRect();
-                        // When services scrolls into view, its top is at viewport top
-                        // So shift all positions up by how far services is below viewport
-                        yOffset = -srRect.top;
-                    }
-                }
-
-                var targets = [];
-                for (var ti = 0; ti < charSpans.length; ti++) {
-                    var sp = charSpans[ti];
-                    if (sp.textContent === ' ') { targets.push(null); continue; }
-                    var r = sp.getBoundingClientRect();
-                    targets.push({
-                        x: r.left + r.width / 2 + yOffset * 0, // x stays same
-                        y: r.top + r.height / 2 + yOffset - 20  // -20 compensates for translateY(20px)
-                    });
-                }
-
                 var isMobile = window.innerWidth < 768;
+
+                // Create flying letter elements
+                var flyingLetters = [];
                 var letterIdx = 0;
                 for (var li = 0; li < charSpans.length; li++) {
-                    if (!targets[li]) continue; // skip spaces
-                    (function(idx, target) {
-                        var ch = charSpans[idx].textContent;
-                        var el = document.createElement('span');
-                        el.textContent = ch;
-                        el.style.cssText = 'position:fixed;pointer-events:none;z-index:201;font-family:Inter,-apple-system,sans-serif;font-weight:800;font-size:' + (isMobile ? '1.75rem' : 'clamp(2rem,6vw,3.25rem)') + ';color:#9146FF;text-shadow:0 0 20px rgba(145,70,255,0.6);opacity:0;white-space:pre;transform:translate(-50%,-50%);';
-                        el.style.left = cx + 'px';
-                        el.style.top = cy + 'px';
-                        document.body.appendChild(el);
-
-                        var burstAngle = (letterIdx / 10) * Math.PI * 2 + Math.random() * 0.5;
-                        var burstDist = isMobile ? (50 + Math.random() * 60) : (80 + Math.random() * 100);
-                        var burstX = cx + Math.cos(burstAngle) * burstDist;
-                        var burstY = cy + Math.sin(burstAngle) * burstDist;
-
-                        // Phase A: burst outward
-                        setTimeout(function() {
-                            el.style.transition = 'left 0.5s cubic-bezier(0.16,1,0.3,1), top 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease';
-                            el.style.left = burstX + 'px';
-                            el.style.top = burstY + 'px';
-                            el.style.opacity = '1';
-                        }, letterIdx * 30 + 100);
-
-                        // Phase B: fly to EXACT character position in heading
-                        setTimeout(function() {
-                            el.style.transition = 'left 0.6s cubic-bezier(0.16,1,0.3,1), top 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease, text-shadow 0.3s ease';
-                            el.style.left = target.x + 'px';
-                            el.style.top = target.y + 'px';
-                            el.style.textShadow = '0 0 40px rgba(145,70,255,0.9), 0 0 80px rgba(145,70,255,0.5)';
-                        }, letterIdx * 30 + 600);
-
-                        // Phase C: fade out
-                        setTimeout(function() {
-                            el.style.transition = 'opacity 0.35s ease';
-                            el.style.opacity = '0';
-                            setTimeout(function() { el.remove(); }, 400);
-                        }, 1500);
-
-                        letterIdx++;
-                    })(li, targets[li]);
+                    if (charSpans[li].textContent === ' ') continue;
+                    var el = document.createElement('span');
+                    el.textContent = charSpans[li].textContent;
+                    el.style.cssText = 'position:fixed;pointer-events:none;z-index:201;font-family:Inter,-apple-system,sans-serif;font-weight:800;font-size:' + (isMobile ? '1.75rem' : 'clamp(2rem,6vw,3.25rem)') + ';color:#9146FF;text-shadow:0 0 20px rgba(145,70,255,0.6);opacity:0;white-space:pre;left:' + cx + 'px;top:' + cy + 'px;';
+                    document.body.appendChild(el);
+                    flyingLetters.push({el: el, spanIdx: li, idx: letterIdx});
+                    letterIdx++;
                 }
 
-                // Real heading appears AFTER letters fade — seamless replacement
-                setTimeout(function() {
-                    heading.classList.add('visible');
+                // Phase A: burst outward (0-500ms)
+                flyingLetters.forEach(function(fl) {
+                    var angle = (fl.idx / flyingLetters.length) * Math.PI * 2 + Math.random() * 0.5;
+                    var dist = isMobile ? (50 + Math.random() * 60) : (80 + Math.random() * 100);
+                    fl.burstX = cx + Math.cos(angle) * dist;
+                    fl.burstY = cy + Math.sin(angle) * dist;
                     setTimeout(function() {
-                        heading.classList.add('settled');
-                        setTimeout(function() { heading.style.transition = 'none'; }, 1400);
-                    }, 1500);
-                }, 1800);
+                        fl.el.style.transition = 'left 0.5s cubic-bezier(0.16,1,0.3,1), top 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease';
+                        fl.el.style.left = fl.burstX + 'px';
+                        fl.el.style.top = fl.burstY + 'px';
+                        fl.el.style.opacity = '1';
+                    }, fl.idx * 25 + 80);
+                });
+
+                // Phase B (600ms+): track heading position with requestAnimationFrame
+                // Letters continuously update to match character positions as user scrolls
+                var trackingStarted = false;
+                var settled = false;
+                var startTime = Date.now();
+
+                setTimeout(function() {
+                    trackingStarted = true;
+                    // Remove CSS transitions — we'll position directly via rAF
+                    flyingLetters.forEach(function(fl) {
+                        fl.el.style.transition = 'none';
+                        fl.el.style.textShadow = '0 0 40px rgba(145,70,255,0.9), 0 0 80px rgba(145,70,255,0.5)';
+                    });
+
+                    function trackFrame() {
+                        if (settled) return;
+                        // Read LIVE positions of heading characters
+                        // heading has opacity:0 + translateY(20px), compensate with -20px
+                        var hasVisible = heading.classList.contains('visible');
+                        var yComp = hasVisible ? 0 : -20;
+
+                        flyingLetters.forEach(function(fl) {
+                            var span = charSpans[fl.spanIdx];
+                            var r = span.getBoundingClientRect();
+                            var tx = r.left + r.width / 2;
+                            var ty = r.top + r.height / 2 + yComp;
+                            // Smooth lerp toward target
+                            var curX = parseFloat(fl.el.style.left) || tx;
+                            var curY = parseFloat(fl.el.style.top) || ty;
+                            var lerpSpeed = 0.15;
+                            var nx = curX + (tx - curX) * lerpSpeed;
+                            var ny = curY + (ty - curY) * lerpSpeed;
+                            fl.el.style.left = nx + 'px';
+                            fl.el.style.top = ny + 'px';
+                        });
+
+                        // Check if heading is in viewport — if so, settle and show
+                        var hRect = heading.getBoundingClientRect();
+                        var elapsed = Date.now() - startTime;
+                        if (hRect.top >= -50 && hRect.top < window.innerHeight && elapsed > 1200) {
+                            // Heading is visible and enough time has passed — settle
+                            settled = true;
+                            // Snap letters to final positions
+                            flyingLetters.forEach(function(fl) {
+                                var span = charSpans[fl.spanIdx];
+                                var r = span.getBoundingClientRect();
+                                fl.el.style.left = (r.left + r.width / 2) + 'px';
+                                fl.el.style.top = (r.top + r.height / 2 - 20) + 'px';
+                            });
+                            // Show real heading, fade letters
+                            setTimeout(function() {
+                                heading.classList.add('visible');
+                                flyingLetters.forEach(function(fl) {
+                                    fl.el.style.transition = 'opacity 0.3s ease';
+                                    fl.el.style.opacity = '0';
+                                    setTimeout(function() { fl.el.remove(); }, 400);
+                                });
+                                setTimeout(function() {
+                                    heading.classList.add('settled');
+                                    setTimeout(function() { heading.style.transition = 'none'; }, 1400);
+                                }, 1500);
+                            }, 200);
+                            return;
+                        }
+
+                        // Safety: if tracking for more than 4s without settling, force show
+                        if (elapsed > 4000) {
+                            settled = true;
+                            heading.classList.add('visible');
+                            flyingLetters.forEach(function(fl) {
+                                fl.el.style.transition = 'opacity 0.3s ease';
+                                fl.el.style.opacity = '0';
+                                setTimeout(function() { fl.el.remove(); }, 400);
+                            });
+                            setTimeout(function() {
+                                heading.classList.add('settled');
+                                setTimeout(function() { heading.style.transition = 'none'; }, 1400);
+                            }, 1500);
+                            return;
+                        }
+
+                        requestAnimationFrame(trackFrame);
+                    }
+                    requestAnimationFrame(trackFrame);
+                }, 600);
 
             }
 
