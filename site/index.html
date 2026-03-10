@@ -110,14 +110,21 @@
         }
 
         .nav-logo {
-            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 25%;
+            background: var(--accent);
+            color: #ffffff;
             font-family: 'Geist', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: -0.03em;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -1px;
+            text-decoration: none;
             line-height: 1;
         }
-        .nav-logo-accent { font-weight: 800; color: var(--accent); }
-        .nav-logo-text { font-weight: 300; color: var(--text-secondary); }
 
         .nav-links {
             display: flex;
@@ -973,7 +980,7 @@
 <body>
 
     <nav>
-        <a href="/" class="nav-logo"><span class="nav-logo-accent">d</span><span class="nav-logo-text">e</span><span class="nav-logo-accent">F</span><span class="nav-logo-text">aria</span></a>
+        <a href="/" class="nav-logo">dF</a>
         <ul class="nav-links">
             <li><a href="#services">services</a></li>
             <li><a href="#clients" id="navClients">clients</a></li>
