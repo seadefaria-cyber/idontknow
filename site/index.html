@@ -1354,13 +1354,54 @@
                     }, i * 50);
                 });
 
-                // 2. Flying letters: burst out, then track heading position in real-time
+                // 2. Flying letters (desktop) or staggered reveal (mobile)
                 var heading = document.getElementById('seedHeading');
                 if (!heading) return;
                 var charSpans = heading.querySelectorAll('span');
                 var isMobile = window.innerWidth < 768;
 
-                // Create flying letter elements
+                // MOBILE: Skip flying letters entirely — use staggered character reveal instead
+                if (isMobile) {
+                    setTimeout(function() {
+                        // Set up stagger on each character span
+                        for (var si = 0; si < charSpans.length; si++) {
+                            charSpans[si].style.display = 'inline-block';
+                            charSpans[si].style.opacity = '0';
+                            charSpans[si].style.transform = 'translateY(25px) scale(0.8)';
+                            charSpans[si].style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                            charSpans[si].style.transitionDelay = (si * 40) + 'ms';
+                        }
+                        // Force heading visible container but chars still hidden
+                        heading.style.opacity = '1';
+                        heading.style.transform = 'translateY(0)';
+                        heading.style.color = 'var(--accent)';
+                        heading.style.textShadow = '0 0 25px rgba(145,70,255,0.6)';
+
+                        // Trigger reveal after a beat
+                        requestAnimationFrame(function() { requestAnimationFrame(function() {
+                            for (var si = 0; si < charSpans.length; si++) {
+                                charSpans[si].style.opacity = '1';
+                                charSpans[si].style.transform = 'translateY(0) scale(1)';
+                            }
+                        }); });
+
+                        // Settle to normal color after glow
+                        setTimeout(function() {
+                            heading.classList.add('visible');
+                            setTimeout(function() {
+                                heading.classList.add('settled');
+                                // Clean up inline styles
+                                for (var si = 0; si < charSpans.length; si++) {
+                                    charSpans[si].style.cssText = '';
+                                }
+                                setTimeout(function() { heading.style.transition = 'none'; }, 1400);
+                            }, 1500);
+                        }, 600);
+                    }, 400);
+                    return;
+                }
+
+                // DESKTOP: Create flying letter elements
                 var flyingLetters = [];
                 var letterIdx = 0;
                 for (var li = 0; li < charSpans.length; li++) {
@@ -1524,8 +1565,8 @@
                     phones.style.opacity = '1';
                     sc.style.opacity = '1';
 
-                    // Scroll velocity for tilt/shake effect
-                    var mobTilt = Math.max(-6, Math.min(6, feedDelta * 400));
+                    // Scroll velocity for tilt/shake effect — amplified for feel
+                    var mobTilt = Math.max(-10, Math.min(10, feedDelta * 600));
 
                     if (exitP > 0) {
                         // Exit phase — shrink, tilt and fade
@@ -1538,15 +1579,15 @@
                         if (exitP > 0.3) spawnPlatformBurst();
                     } else {
                         // Feed phase — phone rocks/tilts with scroll, grows slightly, pulsing glow
-                        var mobGrow = 1 + feedP * 0.06; // 1.0 → 1.06
+                        var mobGrow = 1 + feedP * 0.08; // 1.0 → 1.08
                         var floatY = Math.sin(feedP * Math.PI * 5) * 4;
                         phones.style.transform = 'scale(' + mobGrow.toFixed(3) + ') translateY(' + floatY.toFixed(1) + 'px)';
 
                         // Phone tilts with scroll velocity — feels alive
-                        var rockAngle = mobTilt + Math.sin(feedP * Math.PI * 6) * 2;
+                        var rockAngle = mobTilt + Math.sin(feedP * Math.PI * 8) * 3.5;
                         var pulse = Math.sin(feedP * Math.PI * 3) * 0.5 + 0.5;
-                        var glowStr = Math.round(10 + pulse * 20);
-                        var glowA = (0.12 + pulse * 0.28).toFixed(2);
+                        var glowStr = Math.round(12 + pulse * 28);
+                        var glowA = (0.15 + pulse * 0.35).toFixed(2);
                         var feedShadow = 'inset 0 0 0 2px #333, 0 10px 40px rgba(145,70,255,' + glowA + '), 0 0 ' + glowStr + 'px rgba(145,70,255,' + glowA + ')';
                         if (phoneR) {
                             phoneR.style.transform = 'rotate(' + rockAngle.toFixed(1) + 'deg)';
