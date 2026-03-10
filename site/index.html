@@ -90,8 +90,9 @@
 
         /* ═══ HERO ═══ */
         .hero {
-            min-height: 100vh;
-            min-height: 100dvh;
+            min-height: 80vh;
+            min-height: 80dvh;
+            padding-bottom: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -166,21 +167,59 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ═══ SHOWCASE ═══ */
+        /* ═══ CLIENT MARQUEE ═══ */
+        .client-marquee {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            overflow: hidden;
+            padding: 2.5rem 0 0;
+            opacity: 0;
+            animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards;
+            -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 3.5rem;
+            align-items: center;
+            width: max-content;
+            animation: marqueeScroll 20s linear infinite;
+        }
+
+        .marquee-track img {
+            height: 18px;
+            opacity: 0.25;
+            filter: grayscale(100%) brightness(2);
+            transition: opacity 0.3s;
+            flex-shrink: 0;
+        }
+
+        .marquee-track img:hover {
+            opacity: 0.6;
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ═══ SHOWCASE (scroll-pinned) ═══ */
+        .showcase-wrapper {
+            height: 250vh; /* scroll zone for phone feed */
+            position: relative;
+            margin-top: -38vh;
+        }
+
         .showcase {
-            padding: clamp(2rem, 6vw, 4rem) 2rem clamp(4rem, 8vw, 6rem);
+            position: sticky;
+            top: 0;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .showcase.vis {
-            opacity: 1;
-            transform: translateY(0);
+            justify-content: center;
+            will-change: transform, opacity;
         }
 
         .showcase-phones {
@@ -237,6 +276,7 @@
             inset: 0;
             border-radius: 42px;
             overflow: hidden;
+            -webkit-mask-image: -webkit-radial-gradient(white, black); /* force GPU clip */
         }
 
         .phone-screen::after {
@@ -246,11 +286,143 @@
             background: linear-gradient(180deg,
                 rgba(0,0,0,0.35) 0%,
                 transparent 12%,
-                transparent 75%,
-                rgba(0,0,0,0.5) 100%
+                transparent 70%,
+                rgba(0,0,0,0.55) 100%
             );
             z-index: 4;
             pointer-events: none;
+        }
+
+        /* TikTok/Reel UI overlays */
+        .phone-ui {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* Right side action buttons */
+        .phone-actions {
+            position: absolute;
+            right: 10px;
+            bottom: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .phone-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .phone-action-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .phone-action-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+            filter: drop-shadow(0 1px 3px rgba(0,0,0,0.6));
+        }
+
+        .phone-action-count {
+            font-family: var(--font);
+            font-size: 8px;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+        }
+
+        /* Bottom info (username + caption) */
+        .phone-caption {
+            position: absolute;
+            bottom: 36px;
+            left: 12px;
+            right: 50px;
+        }
+
+        .phone-username {
+            font-family: var(--font);
+            font-size: 9px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+            margin-bottom: 3px;
+        }
+
+        .phone-desc {
+            font-family: var(--font);
+            font-size: 7.5px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.85);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+            line-height: 1.4;
+        }
+
+        /* Music ticker at very bottom */
+        .phone-music {
+            position: absolute;
+            bottom: 18px;
+            left: 12px;
+            right: 50px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .phone-music svg {
+            width: 8px;
+            height: 8px;
+            fill: #fff;
+            flex-shrink: 0;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6));
+        }
+
+        .phone-music-text {
+            font-family: var(--font);
+            font-size: 7px;
+            color: rgba(255,255,255,0.7);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        /* Spinning disc on right bottom */
+        .phone-disc {
+            position: absolute;
+            right: 10px;
+            bottom: 36px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: #222;
+            animation: spin 3s linear infinite;
+        }
+
+        .phone-disc::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #fff;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         .feed-strip {
@@ -258,15 +430,16 @@
             top: 0; left: 0;
             width: 100%;
             will-change: transform;
+            /* no transition — snap is instant, driven by scroll position */
         }
 
         .feed-slide {
             width: 100%;
             height: 520px;
             overflow: hidden;
+            position: relative;
         }
 
-        .feed-slide img,
         .feed-slide video {
             width: 100%;
             height: 100%;
@@ -274,14 +447,65 @@
             display: block;
         }
 
-        .showcase-stat {
-            font-family: var(--mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-align: center;
-            margin-top: 2.5rem;
-            opacity: 0.5;
-            letter-spacing: 0.05em;
+        /* Phone hover expand */
+        .phone {
+            transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        box-shadow 0.35s ease;
+        }
+
+        .phone--tk:hover {
+            transform: rotateY(-5deg) scale(1.06);
+            box-shadow:
+                inset 0 0 0 2px #444,
+                0 0 0 1px rgba(255,255,255,0.1),
+                0 30px 70px rgba(0,0,0,0.7),
+                0 10px 25px rgba(0,0,0,0.5),
+                0 0 40px rgba(37, 99, 255, 0.08);
+        }
+
+        .phone--ig:hover {
+            transform: rotateY(5deg) scale(1.06);
+            box-shadow:
+                inset 0 0 0 2px #444,
+                0 0 0 1px rgba(255,255,255,0.1),
+                0 30px 70px rgba(0,0,0,0.7),
+                0 10px 25px rgba(0,0,0,0.5),
+                0 0 40px rgba(37, 99, 255, 0.08);
+        }
+
+        /* Engagement heart */
+        .engagement-heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 200;
+            width: 20px;
+            height: 20px;
+            opacity: 0;
+            animation: heartPop 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .engagement-heart svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--accent);
+            filter: drop-shadow(0 0 6px rgba(37, 99, 255, 0.4));
+        }
+
+        @keyframes heartPop {
+            0% { opacity: 0; transform: scale(0.3) translateY(0); }
+            30% { opacity: 1; transform: scale(1.1) translateY(-10px); }
+            60% { opacity: 0.8; transform: scale(0.95) translateY(-25px); }
+            100% { opacity: 0; transform: scale(0.7) translateY(-50px); }
+        }
+
+        .exit-heart {
+            animation: exitFloat 1s ease-out forwards;
+        }
+
+        @keyframes exitFloat {
+            0% { opacity: 0; transform: scale(0.2); }
+            20% { opacity: 0.7; transform: scale(0.8); }
+            100% { opacity: 0; transform: scale(0.3) translateY(-60px); }
         }
 
         @media (max-width: 1024px) and (min-width: 769px) {
@@ -291,10 +515,20 @@
 
         @media (max-width: 768px) {
             .phone--ig { display: none; }
-            .phone { width: 220px; height: 476px; }
-            .feed-slide { height: 476px; }
+            .phone { width: 260px; height: 563px; }
+            .feed-slide { height: 563px; }
             .showcase-phones { perspective: none; }
             .phone--tk { transform: none; }
+            .phone--tk:hover { transform: scale(1.04); }
+            .showcase-wrapper { height: 280vh; }
+            .phone-actions { right: 12px; bottom: 100px; gap: 14px; }
+            .phone-action-icon { width: 32px; height: 32px; }
+            .phone-action-icon svg { width: 26px; height: 26px; }
+            .phone-action-count { font-size: 9px; }
+            .phone-caption { bottom: 42px; left: 14px; }
+            .phone-username { font-size: 10px; }
+            .phone-desc { font-size: 8.5px; }
+            .phone-music { bottom: 22px; left: 14px; }
         }
 
         /* ═══ SECTIONS ═══ */
@@ -328,82 +562,114 @@
         /* ═══ SERVICES ═══ */
         .services {
             position: relative;
-            overflow: hidden;
             background: var(--surface);
             border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
         }
 
         .services-inner {
-            max-width: 1100px;
+            max-width: 700px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
-        }
-
-        .service {
-            padding: clamp(2rem, 4vw, 2.5rem);
-            border: 1px solid var(--border);
-            margin: -0.5px;
-            transition: background 0.3s;
+        .service-item {
+            border-bottom: 1px solid var(--border);
             opacity: 0;
-            transform: translateY(16px);
+            transform: translateY(12px);
         }
 
-        .service.vis {
+        .service-item.vis {
             opacity: 1;
             transform: translateY(0);
-            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                        background 0.3s;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .service:hover { background: var(--accent-light); }
+        .service-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.4rem 0;
+            cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
+        }
 
-        .service-index {
+        .service-header:hover .service-title {
+            color: var(--accent);
+        }
+
+        .service-left {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .service-num {
             font-family: var(--mono);
             font-size: 0.6rem;
             font-weight: 500;
             color: var(--text-faint);
-            margin-bottom: 1rem;
+            min-width: 1.5rem;
         }
 
-        .service h3 {
+        .service-title {
             font-family: var(--font);
-            font-weight: 700;
-            font-size: 1rem;
+            font-weight: 600;
+            font-size: 1.05rem;
             color: var(--text);
-            margin-bottom: 0.6rem;
             letter-spacing: -0.01em;
+            transition: color 0.2s;
         }
 
-        .service p {
-            font-size: 0.85rem;
-            font-weight: 400;
-            line-height: 1.65;
-            color: var(--text-secondary);
+        .service-toggle {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            flex-shrink: 0;
         }
 
-        /* Subtle scan lines over services */
-        .services::after {
+        .service-toggle::before,
+        .service-toggle::after {
             content: '';
             position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(255,255,255,0.02) 2px,
-                rgba(255,255,255,0.02) 4px
-            );
-            pointer-events: none;
-            z-index: 2;
+            background: var(--text-muted);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+        }
+
+        .service-toggle::before {
+            width: 12px; height: 1.5px;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .service-toggle::after {
+            width: 1.5px; height: 12px;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .service-item.open .service-toggle::after {
+            transform: translate(-50%, -50%) rotate(90deg);
+            opacity: 0;
+        }
+
+        .service-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .service-item.open .service-body {
+            max-height: 200px;
+        }
+
+        .service-body p {
+            font-size: 0.88rem;
+            font-weight: 400;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            padding: 0 0 1.4rem 2.75rem;
         }
 
         /* ═══ CONTACT ═══ */
@@ -497,7 +763,7 @@
 
         /* ═══ RESPONSIVE ═══ */
         @media (max-width: 768px) {
-            .services-grid { grid-template-columns: 1fr; }
+            .services-inner { padding: 0 0.5rem; }
             .nav-links { gap: 1.25rem; }
             footer {
                 flex-direction: column;
@@ -527,81 +793,202 @@
     <section class="hero">
         <div class="hero-content">
             <p class="hero-label"><span class="at-sign">@</span><span class="scramble" data-text="defaria">defaria</span></p>
-            <h1><span class="scramble" data-text="We Move">We Move</span><br><span class="scramble hero-accent" data-text="Content.">Content.</span></h1>
-            <p class="hero-sub">Digital seeding and creative distribution<br>for artists, brands, and creators.</p>
+            <h1><span class="scramble" data-text="Engineering">Engineering</span><br><span class="scramble hero-accent" data-text="Virality.">Virality.</span></h1>
+            <p class="hero-sub">We build the clips, seed the pages, and force the algorithm.<br>Your content. Every platform. Nonstop.</p>
             <a href="#contact" class="hero-cta">&gt; start_project</a>
+            <div class="client-marquee">
+                <div class="marquee-track">
+                    <img src="img/clients/interscope.svg" alt="Interscope">
+                    <img src="img/clients/atlantic.png" alt="Atlantic">
+                    <img src="img/clients/def-jam.svg" alt="Def Jam">
+                    <img src="img/clients/roc-nation.svg" alt="Roc Nation">
+                    <img src="img/clients/awge.svg" alt="AWGE">
+                    <img src="img/clients/lyrical-lemonade.png" alt="Lyrical Lemonade">
+                    <img src="img/clients/early-life-crisis.svg" alt="Early Life Crisis">
+                    <img src="img/clients/asspizza.svg" alt="Asspizza">
+                    <img src="img/clients/chrisheyn.svg" alt="Chris Heyn Show">
+                    <img src="img/clients/welcomejpeg.svg" alt="Welcome JPEG">
+                    <img src="img/clients/interscope.svg" alt="Interscope">
+                    <img src="img/clients/atlantic.png" alt="Atlantic">
+                    <img src="img/clients/def-jam.svg" alt="Def Jam">
+                    <img src="img/clients/roc-nation.svg" alt="Roc Nation">
+                    <img src="img/clients/awge.svg" alt="AWGE">
+                    <img src="img/clients/lyrical-lemonade.png" alt="Lyrical Lemonade">
+                    <img src="img/clients/early-life-crisis.svg" alt="Early Life Crisis">
+                    <img src="img/clients/asspizza.svg" alt="Asspizza">
+                    <img src="img/clients/chrisheyn.svg" alt="Chris Heyn Show">
+                    <img src="img/clients/welcomejpeg.svg" alt="Welcome JPEG">
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Showcase -->
+    <div class="showcase-wrapper">
     <section class="showcase">
         <div class="showcase-phones">
-            <!-- TikTok Phone -->
+            <!-- Left Phone: EARLY LIFE CRISIS (Nettspend streaming) -->
             <div class="phone phone--tk">
                 <div class="phone-notch"></div>
                 <div class="phone-time">9:41</div>
                 <div class="phone-screen">
                     <div class="feed-strip">
-                        <div class="feed-slide"><video src="img/videos/clips/tk1.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/tk2.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/tk3.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/tk4.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/tk5.mp4" autoplay loop muted playsinline></video></div>
+                        <div class="feed-slide"><video src="img/videos/clips2/left1.mp4" autoplay muted playsinline loop></video></div>
+                        <div class="feed-slide"><video src="img/videos/clips2/left2.mp4" muted playsinline loop></video></div>
+                        <div class="feed-slide"><video src="img/videos/clips2/left3.mp4" muted playsinline loop></video></div>
+                        <div class="feed-slide"><video src="img/videos/clips2/left4.mp4" muted playsinline loop></video></div>
+                        <div class="feed-slide"><video src="img/videos/clips2/left5.mp4" muted playsinline loop></video></div>
+                    </div>
+                    <div class="phone-ui">
+                        <div class="phone-actions">
+                            <div class="phone-action">
+                                <div class="phone-action-icon"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                                <span class="phone-action-count">84.2K</span>
+                            </div>
+                            <div class="phone-action">
+                                <div class="phone-action-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                                <span class="phone-action-count">4,312</span>
+                            </div>
+                            <div class="phone-action">
+                                <div class="phone-action-icon"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></div>
+                                <span class="phone-action-count">12.8K</span>
+                            </div>
+                        </div>
+                        <div class="phone-caption">
+                            <div class="phone-username">EARLY LIFE CRISIS</div>
+                            <div class="phone-desc">Live Production + Clipping</div>
+                        </div>
+                        <div class="phone-music">
+                            <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                            <span class="phone-music-text">original sound - nettspend</span>
+                        </div>
+                        <div class="phone-disc"></div>
                     </div>
                 </div>
             </div>
-            <!-- IG Phone -->
+            <!-- Right Phone: Client Showcase (dynamic labels) -->
             <div class="phone phone--ig">
                 <div class="phone-notch"></div>
                 <div class="phone-time">9:41</div>
                 <div class="phone-screen">
                     <div class="feed-strip">
-                        <div class="feed-slide"><video src="img/videos/clips/ig1.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/ig2.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/ig3.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/ig4.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/ig5.mp4" autoplay loop muted playsinline></video></div>
+                        <div class="feed-slide" data-client="CHRIS HEYN SHOW"><video src="img/videos/clips2/right1.mp4" autoplay muted playsinline loop></video></div>
+                        <div class="feed-slide" data-client="YOUR MULTIMEDIA"><video src="img/videos/clips2/right7.mp4" muted playsinline loop></video></div>
+                        <div class="feed-slide" data-client="ASSPIZZA"><video src="img/videos/clips2/right2.mp4" muted playsinline loop></video></div>
+                        <div class="feed-slide" data-client="WELCOME JPEG"><video src="img/videos/clips2/right5.mp4" muted playsinline loop></video></div>
+                        <div class="feed-slide" data-client="EARLY LIFE CRISIS"><video src="img/videos/clips2/right_ig.mp4" muted playsinline loop></video></div>
+                    </div>
+                    <div class="phone-ui">
+                        <div class="phone-actions">
+                            <div class="phone-action">
+                                <div class="phone-action-icon"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                                <span class="phone-action-count">91.5K</span>
+                            </div>
+                            <div class="phone-action">
+                                <div class="phone-action-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                                <span class="phone-action-count">3,847</span>
+                            </div>
+                            <div class="phone-action">
+                                <div class="phone-action-icon"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></div>
+                                <span class="phone-action-count">8,921</span>
+                            </div>
+                        </div>
+                        <div class="phone-caption">
+                            <div class="phone-username" id="right-client-label">ASSPIZZA</div>
+                            <div class="phone-desc">Clipping + Distribution</div>
+                        </div>
+                        <div class="phone-music">
+                            <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                            <span class="phone-music-text">original sound</span>
+                        </div>
+                        <div class="phone-disc"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <p class="showcase-stat">500M+ Views Generated</p>
     </section>
+    </div>
 
     <!-- Services -->
     <section class="section services" id="services">
         <div class="services-inner">
             <div class="section-label">what_we_do</div>
             <div class="section-heading">How We Seed.</div>
-            <div class="services-grid">
-                <div class="service" data-d="0">
-                    <div class="service-index">01</div>
-                    <h3>Digital Distribution</h3>
+
+            <div class="service-item" data-d="0">
+                <div class="service-header">
+                    <div class="service-left">
+                        <span class="service-num">01</span>
+                        <span class="service-title">Digital Distribution</span>
+                    </div>
+                    <div class="service-toggle"></div>
+                </div>
+                <div class="service-body">
                     <p>Multi-platform content placement across pages, blogs, and accounts. Coordinated rollouts that reach every corner of the internet.</p>
                 </div>
-                <div class="service" data-d="60">
-                    <div class="service-index">02</div>
-                    <h3>Content Strategy</h3>
+            </div>
+
+            <div class="service-item" data-d="60">
+                <div class="service-header">
+                    <div class="service-left">
+                        <span class="service-num">02</span>
+                        <span class="service-title">Content Strategy</span>
+                    </div>
+                    <div class="service-toggle"></div>
+                </div>
+                <div class="service-body">
                     <p>We plan what goes where and when. Platform-specific formats, timing, and narrative built around your goals.</p>
                 </div>
-                <div class="service" data-d="120">
-                    <div class="service-index">03</div>
-                    <h3>Creative + Live Production</h3>
-                    <p>A team of clippers on standby for short-form content across every platform. We also partner with artists for full live production. Twitch streams, album rollouts, and event coverage.</p>
+            </div>
+
+            <div class="service-item" data-d="120">
+                <div class="service-header">
+                    <div class="service-left">
+                        <span class="service-num">03</span>
+                        <span class="service-title">Creative + Live Production</span>
+                    </div>
+                    <div class="service-toggle"></div>
                 </div>
-                <div class="service" data-d="180">
-                    <div class="service-index">04</div>
-                    <h3>Seeding Network</h3>
+                <div class="service-body">
+                    <p>Clippers on standby for short-form content across every platform. Full live production for Twitch streams, album rollouts, and event coverage.</p>
+                </div>
+            </div>
+
+            <div class="service-item" data-d="180">
+                <div class="service-header">
+                    <div class="service-left">
+                        <span class="service-num">04</span>
+                        <span class="service-title">Seeding Network</span>
+                    </div>
+                    <div class="service-toggle"></div>
+                </div>
+                <div class="service-body">
                     <p>Direct connections to pages, blogs, and accounts across every platform. A deep network built over years, not cold outreach.</p>
                 </div>
-                <div class="service" data-d="240">
-                    <div class="service-index">05</div>
-                    <h3>Paid Placement</h3>
-                    <p>Strategic paid placements across high-traffic pages, blogs, and channels. We buy reach through real channels, not ad dashboards.</p>
+            </div>
+
+            <div class="service-item" data-d="240">
+                <div class="service-header">
+                    <div class="service-left">
+                        <span class="service-num">05</span>
+                        <span class="service-title">Paid Placement</span>
+                    </div>
+                    <div class="service-toggle"></div>
                 </div>
-                <div class="service" data-d="300">
-                    <div class="service-index">06</div>
-                    <h3>Influencer Marketing</h3>
+                <div class="service-body">
+                    <p>Strategic paid placements across high-traffic pages and channels. We buy reach through real channels, not ad dashboards.</p>
+                </div>
+            </div>
+
+            <div class="service-item" data-d="300">
+                <div class="service-header">
+                    <div class="service-left">
+                        <span class="service-num">06</span>
+                        <span class="service-title">Influencer Marketing</span>
+                    </div>
+                    <div class="service-toggle"></div>
+                </div>
+                <div class="service-body">
                     <p>We connect with the right creators to amplify reach and drive real engagement.</p>
                 </div>
             </div>
@@ -641,38 +1028,200 @@
                 }
             });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.service').forEach(el => obs.observe(el));
+        document.querySelectorAll('.service-item').forEach(el => obs.observe(el));
 
-        /* Showcase fade-in + scroll-linked feed */
+        /* Service accordion */
+        document.querySelectorAll('.service-header').forEach(function(header) {
+            header.addEventListener('click', function() {
+                var item = header.parentElement;
+                var wasOpen = item.classList.contains('open');
+                // Close all others
+                document.querySelectorAll('.service-item.open').forEach(function(el) {
+                    el.classList.remove('open');
+                });
+                // Toggle clicked
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+
+        /* Showcase pinned scroll: entrance -> feed scroll -> exit with hearts */
         (function() {
+            var wrapper = document.querySelector('.showcase-wrapper');
             var sc = document.querySelector('.showcase');
-            if (!sc) return;
-            new IntersectionObserver(function(e) {
-                if (e[0].isIntersecting) sc.classList.add('vis');
-            }, { threshold: 0.15 }).observe(sc);
+            if (!wrapper || !sc) return;
 
             var strips = sc.querySelectorAll('.feed-strip');
+            var phones = sc.querySelector('.showcase-phones');
+            var phoneL = sc.querySelector('.phone--tk');
+            var phoneR = sc.querySelector('.phone--ig');
             var active = false, raf = false;
+            var heartsSpawned = false;
+            var lastFeedP = 0;
+
+            function spawnExitHearts() {
+                if (heartsSpawned) return;
+                heartsSpawned = true;
+                var rect = phones.getBoundingClientRect();
+                var cx = rect.left + rect.width / 2;
+                var cy = rect.top + rect.height / 2;
+                for (var i = 0; i < 6; i++) {
+                    (function(delay) {
+                        setTimeout(function() {
+                            var h = document.createElement('div');
+                            h.className = 'engagement-heart exit-heart';
+                            h.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+                            h.style.left = (cx + (Math.random() * 160 - 80)) + 'px';
+                            h.style.top = (cy + (Math.random() * 80 - 40)) + 'px';
+                            h.style.width = (8 + Math.random() * 8) + 'px';
+                            h.style.height = h.style.width;
+                            document.body.appendChild(h);
+                            setTimeout(function() { h.remove(); }, 1000);
+                        }, delay);
+                    })(i * 100);
+                }
+            }
+
             function tick() {
-                var r = sc.getBoundingClientRect();
+                var wRect = wrapper.getBoundingClientRect();
                 var vh = window.innerHeight;
-                var total = vh + r.height;
-                var scrolled = vh - r.top;
-                var p = Math.max(0, Math.min(1, scrolled / total));
-                strips.forEach(function(s) {
+                var scrolled = -wRect.top;
+                var totalScroll = wrapper.offsetHeight - vh;
+                if (totalScroll <= 0) return;
+                var p = Math.max(0, Math.min(1, scrolled / totalScroll));
+
+                // Phase 1 (0-0.7): Feed scrolls through clips
+                // Phase 2 (0.7-0.9): Phones shrink, fade, exit hearts
+                // Phase 3 (0.9-1.0): Dead space / transition to services
+                var feedP = Math.min(1, p / 0.7);
+                var exitP = Math.max(0, Math.min(1, (p - 0.7) / 0.2));
+
+                // Feed scrolling
+                var label = document.getElementById('right-client-label');
+                strips.forEach(function(s, si) {
+                    var slides = s.children.length;
                     var h = s.firstElementChild ? s.firstElementChild.offsetHeight : 520;
-                    var max = (s.children.length - 1) * h;
-                    s.style.transform = 'translateY(' + (-p * max) + 'px)';
+                    var rawIndex = feedP * (slides - 1);
+                    var snapIndex = Math.round(rawIndex);
+                    s.style.transform = 'translateY(' + (-snapIndex * h) + 'px)';
+
+                    for (var i = 0; i < slides; i++) {
+                        var vid = s.children[i].querySelector('video');
+                        if (!vid) continue;
+                        if (i === snapIndex && exitP < 0.8) {
+                            if (vid.paused) vid.play().catch(function(){});
+                        } else {
+                            if (!vid.paused) vid.pause();
+                        }
+                    }
+
+                    if (si === 1 && label) {
+                        var slide = s.children[snapIndex];
+                        if (slide && slide.dataset.client) {
+                            label.textContent = slide.dataset.client;
+                        }
+                    }
                 });
+
+                // Scroll-driven expansion: phones grow as you scroll through feed
+                var growScale = 0.88 + feedP * 0.12; // 0.88 → 1.0
+                // Blue glow intensifies with scroll
+                var glowStrength = Math.round(feedP * 25);
+                var glowAlpha = (feedP * 0.3).toFixed(2);
+
+                // Parallax tilt: phones rock based on scroll velocity
+                var feedDelta = feedP - lastFeedP;
+                lastFeedP = feedP;
+                var tilt = Math.max(-4, Math.min(4, feedDelta * 300));
+                // Gentle sine float
+                var floatY = Math.sin(feedP * Math.PI * 4) * 3;
+                // Gap between phones narrows as they grow (pulls them together)
+                var gapShrink = feedP * 8;
+
+                // Exit phase
+                if (exitP > 0) {
+                    var scale = 1 - exitP * 0.4;
+                    var opacity = 1 - exitP * exitP;
+                    phones.style.transform = 'scale(' + scale + ')';
+                    phones.style.opacity = opacity;
+                    phones.style.gap = '';
+                    sc.style.opacity = opacity;
+                    if (phoneL) phoneL.style.transform = 'rotateY(-5deg) rotateZ(' + (-exitP * 8) + 'deg)';
+                    if (phoneR) phoneR.style.transform = 'rotateY(5deg) rotateZ(' + (exitP * 8) + 'deg)';
+                    if (phoneL) phoneL.style.boxShadow = '';
+                    if (phoneR) phoneR.style.boxShadow = '';
+                    if (exitP > 0.4) spawnExitHearts();
+                } else {
+                    phones.style.transform = 'scale(' + growScale + ') translateY(' + floatY + 'px)';
+                    phones.style.opacity = '1';
+                    sc.style.opacity = '1';
+                    // Tilt + float per phone
+                    if (phoneL) {
+                        phoneL.style.transform = 'rotateY(-5deg) rotateX(' + (tilt * 0.5) + 'deg) translateY(' + (-floatY * 0.3) + 'px)';
+                        phoneL.style.boxShadow = 'inset 0 0 0 2px #333, 0 0 0 1px rgba(255,255,255,0.06), 0 25px 60px rgba(0,0,0,0.6), 0 8px 20px rgba(0,0,0,0.4), 0 0 ' + glowStrength + 'px rgba(37,99,255,' + glowAlpha + ')';
+                    }
+                    if (phoneR) {
+                        phoneR.style.transform = 'rotateY(5deg) rotateX(' + (-tilt * 0.5) + 'deg) translateY(' + (floatY * 0.5) + 'px)';
+                        phoneR.style.boxShadow = 'inset 0 0 0 2px #333, 0 0 0 1px rgba(255,255,255,0.06), 0 25px 60px rgba(0,0,0,0.6), 0 8px 20px rgba(0,0,0,0.4), 0 0 ' + glowStrength + 'px rgba(37,99,255,' + glowAlpha + ')';
+                    }
+                    heartsSpawned = false;
+                }
+
                 raf = false;
             }
+
             new IntersectionObserver(function(e) {
                 active = e[0].isIntersecting;
-            }, { threshold: 0 }).observe(sc);
+                if (!active) {
+                    strips.forEach(function(s) {
+                        for (var i = 0; i < s.children.length; i++) {
+                            var vid = s.children[i].querySelector('video');
+                            if (vid && !vid.paused) vid.pause();
+                        }
+                    });
+                }
+            }, { threshold: 0 }).observe(wrapper);
+
             window.addEventListener('scroll', function() {
                 if (active && !raf) { raf = true; requestAnimationFrame(tick); }
             }, { passive: true });
             tick();
+        })();
+
+        /* Live clock on phones */
+        (function() {
+            var times = document.querySelectorAll('.phone-time');
+            function updateTime() {
+                var now = new Date();
+                var h = now.getHours();
+                var m = now.getMinutes();
+                var str = (h > 12 ? h - 12 : h || 12) + ':' + (m < 10 ? '0' : '') + m;
+                times.forEach(function(t) { t.textContent = str; });
+            }
+            updateTime();
+            setInterval(updateTime, 10000); // update every 10s
+        })();
+
+        /* Single heart on phone hover */
+        (function() {
+            var phones = document.querySelectorAll('.phone');
+            var active = false;
+
+            phones.forEach(function(phone) {
+                phone.addEventListener('mouseenter', function(e) {
+                    if (active) return;
+                    active = true;
+
+                    var heart = document.createElement('div');
+                    heart.className = 'engagement-heart';
+                    heart.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+                    var rect = phone.getBoundingClientRect();
+                    heart.style.left = (rect.left + rect.width / 2 - 10) + 'px';
+                    heart.style.top = (rect.top + rect.height / 2) + 'px';
+                    document.body.appendChild(heart);
+
+                    setTimeout(function() { heart.remove(); active = false; }, 800);
+                });
+            });
         })();
 
         /* Hero scramble decode */
