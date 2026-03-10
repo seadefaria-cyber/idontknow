@@ -563,21 +563,24 @@
         }
 
         @media (max-width: 768px) {
-            .phone--ig { display: none; }
-            .phone { width: 260px; height: 563px; }
-            .feed-slide { height: 563px; }
-            .showcase-phones { perspective: none; }
-            .phone--tk { transform: none; }
-            .phone--tk:hover { transform: scale(1.04); }
+            .phone { width: 44vw; max-width: 180px; height: auto; aspect-ratio: 9/19.5; }
+            .feed-slide { height: 100%; }
+            .showcase-phones { perspective: none; gap: 8px !important; }
+            .phone--tk, .phone--ig { transform: none; }
             .showcase-wrapper { height: 280vh; }
-            .phone-actions { right: 12px; bottom: 100px; gap: 14px; }
-            .phone-action-icon { width: 32px; height: 32px; }
-            .phone-action-icon svg { width: 26px; height: 26px; }
-            .phone-action-count { font-size: 9px; }
-            .phone-caption { bottom: 42px; left: 14px; }
-            .phone-username { font-size: 10px; }
-            .phone-desc { font-size: 8.5px; }
-            .phone-music { bottom: 22px; left: 14px; }
+            .phone-actions { right: 8px; bottom: 70px; gap: 10px; }
+            .phone-action-icon { width: 24px; height: 24px; }
+            .phone-action-icon svg { width: 18px; height: 18px; }
+            .phone-action-count { font-size: 7px; }
+            .phone-caption { bottom: 32px; left: 10px; right: 40px; }
+            .phone-username { font-size: 8px; }
+            .phone-desc { font-size: 7px; }
+            .phone-music { bottom: 16px; left: 10px; }
+            .phone-music svg { width: 8px; height: 8px; }
+            .phone-music-text { font-size: 7px; }
+            .phone-notch { width: 60px; height: 18px; border-radius: 0 0 12px 12px; }
+            .phone-time { font-size: 9px; top: 4px; left: 14px; }
+            .phone-disc { width: 28px; height: 28px; }
         }
 
         /* ═══ SECTIONS ═══ */
@@ -888,7 +891,7 @@
             .service-header { padding: 1.2rem 0; }
             .service-title { font-size: 0.95rem; }
             .service-left { gap: 0.75rem; }
-            .service-body { padding: 0 0 1rem 2.25rem; }
+            .service-body p { font-size: 0.8rem; padding: 0 0.5rem 1.2rem 2.25rem; line-height: 1.6; }
 
             .clients-trigger { padding: 1.25rem clamp(1.25rem, 4vw, 2rem); }
             .clients-panel-inner { padding: 0.5rem clamp(1.25rem, 4vw, 2rem) 1.5rem; gap: 0 1.5rem; }
