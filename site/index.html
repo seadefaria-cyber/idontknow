@@ -109,50 +109,15 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .nav-logo { text-decoration: none; }
-        .df-lockup {
-            display: inline-flex;
-            align-items: center;
-            gap: 14px;
-            user-select: none;
-        }
-        .df-lockup__mark {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 11px;
+        .nav-logo {
+            text-decoration: none;
             font-family: 'Geist', sans-serif;
-            font-weight: 700;
-            font-size: 20px;
-            letter-spacing: -1.5px;
+            font-size: 1.5rem;
+            letter-spacing: -0.03em;
             line-height: 1;
-            flex-shrink: 0;
         }
-        .df-lockup__wordmark {
-            font-family: 'Geist', sans-serif;
-            font-size: 28px;
-            line-height: 1;
-            letter-spacing: -0.5px;
-        }
-        .df-lockup__wordmark-bold { font-weight: 800; }
-        .df-lockup__wordmark-light { font-weight: 300; opacity: 0.7; }
-        .df-lockup--sm .df-lockup__mark { width: 32px; height: 32px; font-size: 14px; border-radius: 8px; letter-spacing: -1px; }
-        .df-lockup--sm .df-lockup__wordmark { font-size: 20px; }
-        .df-lockup--sm { gap: 8px; }
-        .nav-logo .df-lockup__mark {
-            background: var(--accent);
-            color: #ffffff;
-        }
-        .nav-logo .df-lockup__wordmark {
-            color: var(--text);
-        }
-        @media (max-width: 768px) {
-            .nav-logo .df-lockup__mark { width: 28px; height: 28px; font-size: 12px; border-radius: 7px; }
-            .nav-logo .df-lockup__wordmark { font-size: 16px; }
-            .nav-logo .df-lockup--sm { gap: 6px; }
-        }
+        .nav-logo-accent { font-weight: 800; color: var(--accent); }
+        .nav-logo-text { font-weight: 300; color: var(--text-secondary); }
 
         .nav-links {
             display: flex;
@@ -1008,7 +973,7 @@
 <body>
 
     <nav>
-        <a href="/" class="nav-logo"><div class="df-lockup df-lockup--sm"><div class="df-lockup__mark">dF</div><div class="df-lockup__wordmark"><span class="df-lockup__wordmark-bold">d</span><span class="df-lockup__wordmark-light">e</span><span class="df-lockup__wordmark-bold">F</span><span class="df-lockup__wordmark-light">aria</span></div></div></a>
+        <a href="/" class="nav-logo"><span class="nav-logo-accent">d</span><span class="nav-logo-text">e</span><span class="nav-logo-accent">F</span><span class="nav-logo-text">aria</span></a>
         <ul class="nav-links">
             <li><a href="#services">services</a></li>
             <li><a href="#clients" id="navClients">clients</a></li>
