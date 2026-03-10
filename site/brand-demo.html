@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>deFaria Brand System</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@200;300;400;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/logo.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Geist', sans-serif; }
+
+  .section { padding: 60px 80px; }
+  .section--dark { background: #0A0A0A; color: #FFFFFF; }
+  .section--light { background: #F0F0F0; color: #111111; }
+
+  .section h2 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 32px;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin-bottom: 8px;
+  }
+
+  .group { display: flex; flex-direction: column; align-items: flex-start; }
+
+  /* Colored background demo */
+  .color-bg {
+    background: linear-gradient(135deg, #2563FF, #7C3AED);
+    padding: 40px;
+    border-radius: 16px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+  .img-bg {
+    background: url('https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800') center/cover;
+    padding: 40px;
+    border-radius: 16px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- DARK BACKGROUND -->
+<div class="section section--dark">
+  <h2>Logo Mark — Dark Mode</h2>
+  <div class="row">
+    <div class="group"><div class="label">SM</div><div class="df-mark df-mark--dark df-mark--sm">dF</div></div>
+    <div class="group"><div class="label">MD</div><div class="df-mark df-mark--dark df-mark--md">dF</div></div>
+    <div class="group"><div class="label">Default</div><div class="df-mark df-mark--dark">dF</div></div>
+    <div class="group"><div class="label">LG</div><div class="df-mark df-mark--dark df-mark--lg">dF</div></div>
+    <div class="group"><div class="label">XL</div><div class="df-mark df-mark--dark df-mark--xl">dF</div></div>
+  </div>
+
+  <h2>Logo Outline — Dark Mode</h2>
+  <div class="row">
+    <div class="group"><div class="label">SM</div><div class="df-outline df-outline--dark df-outline--sm">dF</div></div>
+    <div class="group"><div class="label">MD</div><div class="df-outline df-outline--dark df-outline--md">dF</div></div>
+    <div class="group"><div class="label">Default</div><div class="df-outline df-outline--dark">dF</div></div>
+    <div class="group"><div class="label">LG</div><div class="df-outline df-outline--dark df-outline--lg">dF</div></div>
+    <div class="group"><div class="label">XL</div><div class="df-outline df-outline--dark df-outline--xl">dF</div></div>
+  </div>
+
+  <h2>Logo Lockup — Dark Mode</h2>
+  <div class="row">
+    <div class="group">
+      <div class="label">SM</div>
+      <div class="df-lockup df-lockup--dark df-lockup--sm">
+        <div class="df-lockup__mark">dF</div>
+        <div class="df-lockup__wordmark"><span class="df-lockup__wordmark-bold">d</span><span class="df-lockup__wordmark-light">e</span><span class="df-lockup__wordmark-bold">F</span><span class="df-lockup__wordmark-light">aria</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="group">
+      <div class="label">Default</div>
+      <div class="df-lockup df-lockup--dark">
+        <div class="df-lockup__mark">dF</div>
+        <div class="df-lockup__wordmark"><span class="df-lockup__wordmark-bold">d</span><span class="df-lockup__wordmark-light">e</span><span class="df-lockup__wordmark-bold">F</span><span class="df-lockup__wordmark-light">aria</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="group">
+      <div class="label">LG</div>
+      <div class="df-lockup df-lockup--dark df-lockup--lg">
+        <div class="df-lockup__mark">dF</div>
+        <div class="df-lockup__wordmark"><span class="df-lockup__wordmark-bold">d</span><span class="df-lockup__wordmark-light">e</span><span class="df-lockup__wordmark-bold">F</span><span class="df-lockup__wordmark-light">aria</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="group">
+      <div class="label">XL</div>
+      <div class="df-lockup df-lockup--dark df-lockup--xl">
+        <div class="df-lockup__mark">dF</div>
+        <div class="df-lockup__wordmark"><span class="df-lockup__wordmark-bold">d</span><span class="df-lockup__wordmark-light">e</span><span class="df-lockup__wordmark-bold">F</span><span class="df-lockup__wordmark-light">aria</span></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Outline on Color Backgrounds</h2>
+  <div class="color-bg">
+    <div class="df-outline df-outline--dark">dF</div>
+    <div class="df-outline df-outline--dark df-outline--lg">dF</div>
+    <div class="df-lockup df-lockup--dark">
+      <div class="df-lockup__mark">dF</div>
+      <div class="df-lockup__wordmark"><span class="df-lockup__wordmark-bold">d</span><span class="df-lockup__wordmark-light">e</span><span class="df-lockup__wordmark-bold">F</span><span class="df-lockup__wordmark-light">aria</span></div>
+    </div>
+  </div>
+  <div class="img-bg">
+    <div class="df-outline df-outline--dark">dF</div>
+    <div class="df-outline df-outline--dark df-outline--lg">dF</div>
+    <div class="df-mark df-mark--dark df-mark--lg">dF</div>
+  </div>
+</div>
+
+<!-- LIGHT BACKGROUND -->
+<div class="section section--light">
+  <h2>Logo Mark — Light Mode</h2>
+  <div class="row">
+    <div class="group"><div class="label">SM</div><div class="df-mark df-mark--light df-mark--sm">dF</div></div>
+    <div class="group"><div class="label">MD</div><div class="df-mark df-mark--light df-mark--md">dF</div></div>
+    <div class="group"><div class="label">Default</div><div class="df-mark df-mark--light">dF</div></div>
+    <div class="group"><div class="label">LG</div><div class="df-mark df-mark--light df-mark--lg">dF</div></div>
+    <div class="group"><div class="label">XL</div><div class="df-mark df-mark--light df-mark--xl">dF</div></div>
+  </div>
+
+  <h2>Logo Outline — Light Mode</h2>
+  <div class="row">
+    <div class="df-outline df-outline--light df-outline--sm">dF</div>
+    <div class="df-outline df-outline--light df-outline--md">dF</div>
+    <div class="df-outline df-outline--light">dF</div>
+    <div class="df-outline df-outline--light df-outline--lg">dF</div>
+    <div class="df-outline df-outline--light df-outline--xl">dF</div>
+  </div>
+
+  <h2>Logo Lockup — Light Mode</h2>
+  <div class="row">
+    <div class="df-lockup df-lockup--light">
+      <div class="df-lockup__mark">dF</div>
+      <div class="df-lockup__wordmark"><span class="df-lockup__wordmark-bold">d</span><span class="df-lockup__wordmark-light">e</span><span class="df-lockup__wordmark-bold">F</span><span class="df-lockup__wordmark-light">aria</span></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="df-lockup df-lockup--light df-lockup--lg">
+      <div class="df-lockup__mark">dF</div>
+      <div class="df-lockup__wordmark"><span class="df-lockup__wordmark-bold">d</span><span class="df-lockup__wordmark-light">e</span><span class="df-lockup__wordmark-bold">F</span><span class="df-lockup__wordmark-light">aria</span></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="df-lockup df-lockup--light df-lockup--xl">
+      <div class="df-lockup__mark">dF</div>
+      <div class="df-lockup__wordmark"><span class="df-lockup__wordmark-bold">d</span><span class="df-lockup__wordmark-light">e</span><span class="df-lockup__wordmark-bold">F</span><span class="df-lockup__wordmark-light">aria</span></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
