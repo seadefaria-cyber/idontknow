@@ -1,0 +1,147 @@
+/* deFaria Brand Logo System */
+
+/* ========================
+   1. LOGO MARK (Lettermark)
+   ======================== */
+.df-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 25%;
+  font-family: 'Geist', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: -2px;
+  line-height: 1;
+  user-select: none;
+}
+
+.df-mark--dark {
+  background: #111111;
+  color: #FFFFFF;
+}
+
+.df-mark--light {
+  background: #FFFFFF;
+  color: #111111;
+}
+
+/* Size variants */
+.df-mark--sm { width: 36px; height: 36px; font-size: 16px; letter-spacing: -1px; }
+.df-mark--md { width: 48px; height: 48px; font-size: 22px; }
+.df-mark--lg { width: 80px; height: 80px; font-size: 36px; }
+.df-mark--xl { width: 120px; height: 120px; font-size: 52px; letter-spacing: -3px; }
+
+
+/* ========================
+   2. LOGO OUTLINE (O4)
+   ======================== */
+.df-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 22px;
+  border: 2.5px solid;
+  background: transparent;
+  font-family: 'Geist', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: -2px;
+  line-height: 1;
+  user-select: none;
+}
+
+.df-outline--dark {
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+}
+
+.df-outline--light {
+  border-color: #111111;
+  color: #111111;
+}
+
+/* Size variants */
+.df-outline--sm { width: 36px; height: 36px; font-size: 16px; letter-spacing: -1px; border-radius: 12px; border-width: 1.5px; }
+.df-outline--md { width: 48px; height: 48px; font-size: 22px; border-radius: 16px; border-width: 2px; }
+.df-outline--lg { width: 80px; height: 80px; font-size: 36px; border-radius: 28px; border-width: 3px; }
+.df-outline--xl { width: 120px; height: 120px; font-size: 52px; letter-spacing: -3px; border-radius: 34px; border-width: 3.5px; }
+
+
+/* ========================
+   3. LOGO LOCKUP (W2)
+   ======================== */
+.df-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  user-select: none;
+}
+
+.df-lockup__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  font-family: 'Geist', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.df-lockup__wordmark {
+  font-family: 'Geist', sans-serif;
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.df-lockup__wordmark-bold {
+  font-weight: 800;
+}
+
+.df-lockup__wordmark-light {
+  font-weight: 300;
+  opacity: 0.7;
+}
+
+/* Dark lockup */
+.df-lockup--dark .df-lockup__mark {
+  background: #FFFFFF;
+  color: #111111;
+}
+
+.df-lockup--dark .df-lockup__wordmark {
+  color: #FFFFFF;
+}
+
+/* Light lockup */
+.df-lockup--light .df-lockup__mark {
+  background: #111111;
+  color: #FFFFFF;
+}
+
+.df-lockup--light .df-lockup__wordmark {
+  color: #111111;
+}
+
+/* Lockup size variants */
+.df-lockup--sm .df-lockup__mark { width: 32px; height: 32px; font-size: 14px; border-radius: 8px; letter-spacing: -1px; }
+.df-lockup--sm .df-lockup__wordmark { font-size: 20px; }
+.df-lockup--sm { gap: 10px; }
+
+.df-lockup--lg .df-lockup__mark { width: 56px; height: 56px; font-size: 26px; border-radius: 14px; }
+.df-lockup--lg .df-lockup__wordmark { font-size: 36px; }
+.df-lockup--lg { gap: 18px; }
+
+.df-lockup--xl .df-lockup__mark { width: 72px; height: 72px; font-size: 32px; border-radius: 18px; letter-spacing: -2px; }
+.df-lockup--xl .df-lockup__wordmark { font-size: 48px; letter-spacing: -1px; }
+.df-lockup--xl { gap: 22px; }

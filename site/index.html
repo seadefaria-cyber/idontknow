@@ -11,25 +11,26 @@
     <meta property="og:url" content="https://defaria.nyc">
     <meta property="og:image" content="https://defaria.nyc/img/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230a0a0a'/><text x='50%25' y='23' text-anchor='middle' font-family='system-ui,sans-serif' font-size='16' fill='%232563FF' font-weight='bold'>dF</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%239146FF'/><text x='50%25' y='22' text-anchor='middle' font-family='system-ui,sans-serif' font-size='15' fill='%23ffffff' font-weight='bold'>dF</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@200;300;400;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg: #0a0a0a;
-            --surface: #111111;
-            --border: #222222;
-            --accent: #2563FF;
-            --accent-light: rgba(37, 99, 255, 0.08);
-            --accent-glow: rgba(37, 99, 255, 0.15);
-            --text: #f0f0f0;
-            --text-secondary: #999999;
-            --text-muted: #666666;
-            --text-faint: #333333;
+            --bg: #ffffff;
+            --surface: #f5f5f5;
+            --border: #e5e5e5;
+            --accent: #9146FF;
+            --accent-end: #9146FF;
+            --accent-light: rgba(145, 70, 255, 0.06);
+            --accent-glow: rgba(145, 70, 255, 0.12);
+            --text: #111111;
+            --text-secondary: #555555;
+            --text-muted: #888888;
+            --text-faint: #cccccc;
             --mono: 'JetBrains Mono', monospace;
             --font: 'Inter', -apple-system, system-ui, sans-serif;
             --font-display: 'Space Grotesk', 'Inter', sans-serif;
@@ -55,19 +56,27 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 clamp(1.5rem, 5vw, 4rem);
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
         }
 
         .nav-logo {
-            font-family: var(--font-display);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 25%;
+            background: var(--accent);
+            color: #ffffff;
+            font-family: 'Geist', sans-serif;
             font-weight: 700;
-            font-size: 1.4rem;
-            color: var(--accent);
+            font-size: 18px;
+            letter-spacing: -1px;
             text-decoration: none;
-            letter-spacing: -0.04em;
+            line-height: 1;
         }
 
         .nav-links {
@@ -81,25 +90,53 @@
             font-family: var(--mono);
             font-size: 0.7rem;
             font-weight: 500;
-            color: var(--text-muted);
+            color: var(--accent);
             text-decoration: none;
-            transition: color 0.2s;
+            transition: opacity 0.2s;
         }
 
-        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover { opacity: 0.7; }
 
         /* ═══ HERO ═══ */
         .hero {
-            min-height: 100vh;
-            min-height: 100dvh;
+            min-height: 80vh;
+            min-height: 80dvh;
+            padding-bottom: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             padding: 0 2rem;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
         }
 
-        .hero-content { max-width: 800px; }
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: heroReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero-word:first-child { animation-delay: 0.15s; }
+        .hero-word.hero-accent { animation-delay: 0.35s; }
+
+        @keyframes heroReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes accentGlow {
+            0% { text-shadow: 0 0 0px transparent; }
+            50% { text-shadow: 0 0 40px rgba(145, 70, 255, 0.5); }
+            100% { text-shadow: 0 0 0px transparent; }
+        }
 
         .hero-label {
             font-family: var(--mono);
@@ -107,54 +144,56 @@
             font-weight: 500;
             color: var(--text-muted);
             letter-spacing: 0.05em;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
         }
 
-        .hero-label .at-sign { color: var(--accent); opacity: 0; display: inline-block; }
-        .scramble { opacity: 0; display: inline-block; }
-        .hero-accent { color: var(--accent); }
+        .hero-label .at-sign-visible { color: var(--accent); }
+        .hero-accent {
+            color: var(--accent);
+            color: #9146FF;
+        }
 
         .hero h1 {
-            font-family: var(--font);
+            font-family: 'Geist', var(--font);
             font-weight: 900;
-            font-size: clamp(3rem, 10vw, 6.5rem);
-            letter-spacing: -0.04em;
-            line-height: 0.95;
+            font-size: clamp(3.5rem, 11vw, 7.5rem);
+            letter-spacing: -0.05em;
+            line-height: 0.9;
             color: var(--text);
         }
 
         .hero-sub {
-            font-size: clamp(1rem, 2.5vw, 1.15rem);
+            font-family: var(--font);
+            font-size: clamp(0.95rem, 2.2vw, 1.1rem);
             font-weight: 400;
-            color: var(--text-secondary);
-            margin-top: 1.5rem;
+            color: #9146FF;
+            text-shadow: 0 0 30px rgba(145, 70, 255, 0.6);
+            margin-top: 2rem;
             line-height: 1.7;
             opacity: 0;
-            animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.6s forwards;
+            animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
         }
 
         .hero-cta {
             display: inline-block;
             margin-top: 2.5rem;
-            padding: 0.85rem 2.25rem;
+            padding: 0.9rem 2.5rem;
             font-family: var(--mono);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
             color: #fff;
             background: var(--accent);
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(145, 70, 255, 0.25);
             text-decoration: none;
             transition: transform 0.2s, box-shadow 0.2s;
             opacity: 0;
-            animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.9s forwards;
+            animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards;
         }
 
-        @keyframes accentPulse {
-            0% { text-shadow: 0 0 0px transparent; }
-            50% { text-shadow: 0 0 20px rgba(37, 99, 255, 0.4); }
-            100% { text-shadow: 0 0 0px transparent; }
-        }
 
         .hero-cta:hover {
             transform: translateY(-2px);
@@ -166,21 +205,107 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ═══ SHOWCASE ═══ */
+
+        /* ═══ CLIENTS LIST ═══ */
+        .clients-dropdown {
+            background: var(--surface);
+        }
+
+        .clients-trigger {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem clamp(1.5rem, 5vw, 4rem);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .clients-trigger:hover {
+            background: rgba(0,0,0,0.02);
+        }
+
+        .clients-trigger-label {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .clients-trigger-icon {
+            font-family: var(--mono);
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--text);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            line-height: 1;
+        }
+
+        .clients-dropdown.open .clients-trigger-icon {
+            transform: rotate(45deg);
+        }
+
+        .clients-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .clients-dropdown.open .clients-panel {
+            max-height: 500px;
+        }
+
+        .clients-panel-inner {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0 2rem;
+            padding: 0.5rem clamp(1.5rem, 5vw, 4rem) 2rem;
+        }
+
+        .clients-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .clients-col span {
+            font-family: var(--font);
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            line-height: 2;
+            transition: color 0.25s, text-shadow 0.25s;
+            cursor: default;
+        }
+
+        .clients-col span:hover {
+            color: var(--accent);
+            text-shadow: 0 0 12px rgba(145, 70, 255, 0.25);
+        }
+
+        @media (max-width: 768px) {
+            .clients-panel-inner { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ═══ SHOWCASE (scroll-pinned) ═══ */
+        .showcase-wrapper {
+            height: 180vh; /* scroll zone for phone feed */
+            position: relative;
+            margin-top: -38vh;
+        }
+
         .showcase {
-            padding: clamp(2rem, 6vw, 4rem) 2rem clamp(4rem, 8vw, 6rem);
+            position: sticky;
+            top: 0;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .showcase.vis {
-            opacity: 1;
-            transform: translateY(0);
+            justify-content: center;
+            will-change: transform, opacity;
         }
 
         .showcase-phones {
@@ -189,6 +314,7 @@
             justify-content: center;
             align-items: center;
             perspective: 1200px;
+            position: relative;
         }
 
         .phone {
@@ -201,9 +327,8 @@
             flex-shrink: 0;
             box-shadow:
                 inset 0 0 0 2px #333,
-                0 0 0 1px rgba(255,255,255,0.06),
-                0 25px 60px rgba(0,0,0,0.6),
-                0 8px 20px rgba(0,0,0,0.4);
+                0 20px 50px rgba(145, 70, 255, 0.15),
+                0 8px 20px rgba(145, 70, 255, 0.08);
         }
 
         .phone--tk { transform: rotateY(-5deg); }
@@ -237,6 +362,7 @@
             inset: 0;
             border-radius: 42px;
             overflow: hidden;
+            -webkit-mask-image: -webkit-radial-gradient(white, black); /* force GPU clip */
         }
 
         .phone-screen::after {
@@ -246,27 +372,161 @@
             background: linear-gradient(180deg,
                 rgba(0,0,0,0.35) 0%,
                 transparent 12%,
-                transparent 75%,
-                rgba(0,0,0,0.5) 100%
+                transparent 70%,
+                rgba(0,0,0,0.55) 100%
             );
             z-index: 4;
             pointer-events: none;
         }
+
+        /* TikTok/Reel UI overlays */
+        .phone-ui {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* Right side action buttons */
+        .phone-actions {
+            position: absolute;
+            right: 10px;
+            bottom: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .phone-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .phone-action-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .phone-action-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+            filter: drop-shadow(0 1px 3px rgba(0,0,0,0.6));
+        }
+
+        .phone-action-count {
+            font-family: var(--font);
+            font-size: 8px;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+        }
+
+        /* Bottom info (username + caption) */
+        .phone-caption {
+            position: absolute;
+            bottom: 36px;
+            left: 12px;
+            right: 50px;
+        }
+
+        .phone-username {
+            font-family: var(--font);
+            font-size: 9px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+            margin-bottom: 3px;
+        }
+
+        .phone-desc {
+            font-family: var(--font);
+            font-size: 7.5px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.85);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+            line-height: 1.4;
+        }
+
+        /* Music ticker at very bottom */
+        .phone-music {
+            position: absolute;
+            bottom: 18px;
+            left: 12px;
+            right: 50px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .phone-music svg {
+            width: 8px;
+            height: 8px;
+            fill: #fff;
+            flex-shrink: 0;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6));
+        }
+
+        .phone-music-text {
+            font-family: var(--font);
+            font-size: 7px;
+            color: rgba(255,255,255,0.7);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        /* Spinning disc on right bottom */
+        .phone-disc {
+            position: absolute;
+            right: 10px;
+            bottom: 36px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: #222;
+            animation: spin 3s linear infinite;
+        }
+
+        .phone-disc::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #fff;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
 
         .feed-strip {
             position: absolute;
             top: 0; left: 0;
             width: 100%;
             will-change: transform;
+            /* no transition — snap is instant, driven by scroll position */
         }
 
         .feed-slide {
             width: 100%;
             height: 520px;
             overflow: hidden;
+            position: relative;
         }
 
-        .feed-slide img,
         .feed-slide video {
             width: 100%;
             height: 100%;
@@ -274,14 +534,28 @@
             display: block;
         }
 
-        .showcase-stat {
-            font-family: var(--mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-align: center;
-            margin-top: 2.5rem;
-            opacity: 0.5;
-            letter-spacing: 0.05em;
+        /* Phone hover expand */
+        .phone {
+            transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        box-shadow 0.35s ease;
+        }
+
+        .phone--tk:hover {
+            transform: rotateY(-5deg) scale(1.06);
+            box-shadow:
+                inset 0 0 0 2px #444,
+                0 30px 70px rgba(145, 70, 255, 0.2),
+                0 10px 25px rgba(145, 70, 255, 0.12),
+                0 0 50px rgba(145, 70, 255, 0.15);
+        }
+
+        .phone--ig:hover {
+            transform: rotateY(5deg) scale(1.06);
+            box-shadow:
+                inset 0 0 0 2px #444,
+                0 30px 70px rgba(145, 70, 255, 0.2),
+                0 10px 25px rgba(145, 70, 255, 0.12),
+                0 0 50px rgba(145, 70, 255, 0.15);
         }
 
         @media (max-width: 1024px) and (min-width: 769px) {
@@ -291,10 +565,20 @@
 
         @media (max-width: 768px) {
             .phone--ig { display: none; }
-            .phone { width: 220px; height: 476px; }
-            .feed-slide { height: 476px; }
+            .phone { width: 260px; height: 563px; }
+            .feed-slide { height: 563px; }
             .showcase-phones { perspective: none; }
             .phone--tk { transform: none; }
+            .phone--tk:hover { transform: scale(1.04); }
+            .showcase-wrapper { height: 280vh; }
+            .phone-actions { right: 12px; bottom: 100px; gap: 14px; }
+            .phone-action-icon { width: 32px; height: 32px; }
+            .phone-action-icon svg { width: 26px; height: 26px; }
+            .phone-action-count { font-size: 9px; }
+            .phone-caption { bottom: 42px; left: 14px; }
+            .phone-username { font-size: 10px; }
+            .phone-desc { font-size: 8.5px; }
+            .phone-music { bottom: 22px; left: 14px; }
         }
 
         /* ═══ SECTIONS ═══ */
@@ -328,82 +612,140 @@
         /* ═══ SERVICES ═══ */
         .services {
             position: relative;
-            overflow: hidden;
             background: var(--surface);
             border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+            padding-top: clamp(2rem, 5vw, 3rem);
         }
 
         .services-inner {
-            max-width: 1100px;
+            max-width: 700px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
-        }
-
-        .service {
-            padding: clamp(2rem, 4vw, 2.5rem);
-            border: 1px solid var(--border);
-            margin: -0.5px;
-            transition: background 0.3s;
+        .service-item {
+            border-bottom: 1px solid var(--border);
             opacity: 0;
-            transform: translateY(16px);
+            transform: translateY(12px);
         }
 
-        .service.vis {
+        .service-item.vis {
             opacity: 1;
             transform: translateY(0);
-            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                        background 0.3s;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .service:hover { background: var(--accent-light); }
+        .service-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.4rem 0;
+            cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
+        }
 
-        .service-index {
+        .service-header:hover .service-title {
+            color: var(--accent);
+        }
+
+        .service-left {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .service-num {
             font-family: var(--mono);
             font-size: 0.6rem;
             font-weight: 500;
             color: var(--text-faint);
-            margin-bottom: 1rem;
+            min-width: 1.5rem;
         }
 
-        .service h3 {
+        .service-title {
             font-family: var(--font);
-            font-weight: 700;
-            font-size: 1rem;
+            font-weight: 600;
+            font-size: 1.05rem;
             color: var(--text);
-            margin-bottom: 0.6rem;
             letter-spacing: -0.01em;
+            transition: color 0.2s;
         }
 
-        .service p {
-            font-size: 0.85rem;
-            font-weight: 400;
-            line-height: 1.65;
-            color: var(--text-secondary);
+        .service-toggle {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            flex-shrink: 0;
         }
 
-        /* Subtle scan lines over services */
-        .services::after {
+        .service-toggle::before,
+        .service-toggle::after {
             content: '';
             position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(255,255,255,0.02) 2px,
-                rgba(255,255,255,0.02) 4px
-            );
-            pointer-events: none;
-            z-index: 2;
+            background: var(--text-muted);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+        }
+
+        .service-toggle::before {
+            width: 12px; height: 1.5px;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .service-toggle::after {
+            width: 1.5px; height: 12px;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .service-item.open .service-toggle::after {
+            transform: translate(-50%, -50%) rotate(90deg);
+            opacity: 0;
+        }
+
+        .service-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .service-item.open .service-body {
+            max-height: 200px;
+        }
+
+        .service-body p {
+            font-size: 0.88rem;
+            font-weight: 400;
+            line-height: 1.7;
+            color: var(--accent);
+            padding: 0 0 1.4rem 2.75rem;
+        }
+
+        .section-heading-letter {
+            display: inline-block;
+            opacity: 0;
+        }
+
+        .section-heading-letter.space {
+            width: 0.3em;
+        }
+
+        .section-heading-letter.space.landed {
+            text-shadow: none;
+        }
+
+        .section-heading-letter.landed {
+            opacity: 1;
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(145, 70, 255, 0.6);
+            transition: color 1.2s ease 0.5s, text-shadow 1.2s ease 0.5s;
+        }
+
+        .section-heading-letter.settled {
+            color: var(--text);
+            text-shadow: none;
         }
 
         /* ═══ CONTACT ═══ */
@@ -411,6 +753,7 @@
             max-width: 500px;
             margin: 0 auto;
             text-align: center;
+            padding-bottom: 3rem !important;
         }
 
         .contact h2 {
@@ -420,6 +763,20 @@
             letter-spacing: -0.03em;
             color: var(--text);
             margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .contact h2::before {
+            content: '';
+            position: absolute;
+            top: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+            box-shadow: 0 0 12px var(--accent), 0 0 24px rgba(145, 70, 255, 0.2);
         }
 
         .contact-form {
@@ -478,14 +835,40 @@
             justify-content: space-between;
         }
 
-        .footer-logo {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1.15rem;
-            color: var(--accent);
+        .footer-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
             text-decoration: none;
-            letter-spacing: -0.04em;
+            line-height: 1;
         }
+
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 25%;
+            background: var(--accent);
+            color: #ffffff;
+            font-family: 'Geist', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: -1px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .footer-wordmark {
+            font-family: 'Geist', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-wordmark-bold { font-weight: 800; color: var(--text); }
+        .footer-wordmark-light { font-weight: 300; color: var(--text-secondary); }
 
         .footer-info {
             font-family: var(--mono);
@@ -497,7 +880,7 @@
 
         /* ═══ RESPONSIVE ═══ */
         @media (max-width: 768px) {
-            .services-grid { grid-template-columns: 1fr; }
+            .services-inner { padding: 0 0.5rem; }
             .nav-links { gap: 1.25rem; }
             footer {
                 flex-direction: column;
@@ -519,6 +902,7 @@
         <a href="/" class="nav-logo">dF</a>
         <ul class="nav-links">
             <li><a href="#services">services</a></li>
+            <li><a href="#clients" id="navClients">clients</a></li>
             <li><a href="#contact">contact</a></li>
         </ul>
     </nav>
@@ -526,82 +910,179 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
-            <p class="hero-label"><span class="at-sign">@</span><span class="scramble" data-text="defaria">defaria</span></p>
-            <h1><span class="scramble" data-text="We Move">We Move</span><br><span class="scramble hero-accent" data-text="Content.">Content.</span></h1>
-            <p class="hero-sub">Digital seeding and creative distribution<br>for artists, brands, and creators.</p>
+            <p class="hero-label"><span class="at-sign-visible">@</span>defaria</p>
+            <h1 class="hero-h1"><span class="hero-word">Go</span><br><span class="hero-word hero-accent">Viral.</span></h1>
+            <p class="hero-sub">We know how it works.</p>
             <a href="#contact" class="hero-cta">&gt; start_project</a>
         </div>
     </section>
 
     <!-- Showcase -->
+    <div class="showcase-wrapper">
     <section class="showcase">
         <div class="showcase-phones">
-            <!-- TikTok Phone -->
+            <!-- Left Phone: EARLY LIFE CRISIS (Nettspend streaming) -->
             <div class="phone phone--tk">
                 <div class="phone-notch"></div>
                 <div class="phone-time">9:41</div>
                 <div class="phone-screen">
                     <div class="feed-strip">
-                        <div class="feed-slide"><video src="img/videos/clips/tk1.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/tk2.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/tk3.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/tk4.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/tk5.mp4" autoplay loop muted playsinline></video></div>
+                        <div class="feed-slide"><video src="img/videos/clips2/left1.mp4" autoplay muted playsinline loop></video></div>
+                        <div class="feed-slide"><video src="img/videos/clips2/left2.mp4" muted playsinline loop></video></div>
+                        <div class="feed-slide"><video src="img/videos/clips2/left3.mp4" muted playsinline loop></video></div>
+                        <div class="feed-slide"><video src="img/videos/clips2/left4.mp4" muted playsinline loop></video></div>
+                        <div class="feed-slide"><video src="img/videos/clips2/left5.mp4" muted playsinline loop></video></div>
+                    </div>
+                    <div class="phone-ui">
+                        <div class="phone-actions">
+                            <div class="phone-action">
+                                <div class="phone-action-icon"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                                <span class="phone-action-count">84.2K</span>
+                            </div>
+                            <div class="phone-action">
+                                <div class="phone-action-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                                <span class="phone-action-count">4,312</span>
+                            </div>
+                            <div class="phone-action">
+                                <div class="phone-action-icon"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></div>
+                                <span class="phone-action-count">12.8K</span>
+                            </div>
+                        </div>
+                        <div class="phone-caption">
+                            <div class="phone-username">EARLY LIFE CRISIS</div>
+                            <div class="phone-desc">Live Production + Clipping</div>
+                        </div>
+                        <div class="phone-music">
+                            <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                            <span class="phone-music-text">original sound - nettspend</span>
+                        </div>
+                        <div class="phone-disc"></div>
                     </div>
                 </div>
             </div>
-            <!-- IG Phone -->
+            <!-- Right Phone: Client Showcase (dynamic labels) -->
             <div class="phone phone--ig">
                 <div class="phone-notch"></div>
                 <div class="phone-time">9:41</div>
                 <div class="phone-screen">
                     <div class="feed-strip">
-                        <div class="feed-slide"><video src="img/videos/clips/ig1.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/ig2.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/ig3.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/ig4.mp4" autoplay loop muted playsinline></video></div>
-                        <div class="feed-slide"><video src="img/videos/clips/ig5.mp4" autoplay loop muted playsinline></video></div>
+                        <div class="feed-slide" data-client="CHRIS HEYN SHOW"><video src="img/videos/clips2/right1.mp4" autoplay muted playsinline loop></video></div>
+                        <div class="feed-slide" data-client="YOUR MULTIMEDIA"><video src="img/videos/clips2/right7.mp4" muted playsinline loop></video></div>
+                        <div class="feed-slide" data-client="ASSPIZZA"><video src="img/videos/clips2/right2.mp4" muted playsinline loop></video></div>
+                        <div class="feed-slide" data-client="WELCOME JPEG"><video src="img/videos/clips2/right5.mp4" muted playsinline loop></video></div>
+                        <div class="feed-slide" data-client="EARLY LIFE CRISIS"><video src="img/videos/clips2/right_ig.mp4" muted playsinline loop></video></div>
+                    </div>
+                    <div class="phone-ui">
+                        <div class="phone-actions">
+                            <div class="phone-action">
+                                <div class="phone-action-icon"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                                <span class="phone-action-count">91.5K</span>
+                            </div>
+                            <div class="phone-action">
+                                <div class="phone-action-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                                <span class="phone-action-count">3,847</span>
+                            </div>
+                            <div class="phone-action">
+                                <div class="phone-action-icon"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></div>
+                                <span class="phone-action-count">8,921</span>
+                            </div>
+                        </div>
+                        <div class="phone-caption">
+                            <div class="phone-username" id="right-client-label">ASSPIZZA</div>
+                            <div class="phone-desc">Clipping + Distribution</div>
+                        </div>
+                        <div class="phone-music">
+                            <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                            <span class="phone-music-text">original sound</span>
+                        </div>
+                        <div class="phone-disc"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <p class="showcase-stat">500M+ Views Generated</p>
     </section>
+    </div>
 
     <!-- Services -->
     <section class="section services" id="services">
         <div class="services-inner">
             <div class="section-label">what_we_do</div>
-            <div class="section-heading">How We Seed.</div>
-            <div class="services-grid">
-                <div class="service" data-d="0">
-                    <div class="service-index">01</div>
-                    <h3>Digital Distribution</h3>
+            <div class="section-heading" id="seedHeading"><span class="section-heading-letter">H</span><span class="section-heading-letter">o</span><span class="section-heading-letter">w</span><span class="section-heading-letter space">&nbsp;</span><span class="section-heading-letter">W</span><span class="section-heading-letter">e</span><span class="section-heading-letter space">&nbsp;</span><span class="section-heading-letter">S</span><span class="section-heading-letter">e</span><span class="section-heading-letter">e</span><span class="section-heading-letter">d</span><span class="section-heading-letter">.</span></div>
+
+            <div class="service-item" data-d="0">
+                <div class="service-header">
+                    <div class="service-left">
+                        <span class="service-num">01</span>
+                        <span class="service-title">Digital Distribution</span>
+                    </div>
+                    <div class="service-toggle"></div>
+                </div>
+                <div class="service-body">
                     <p>Multi-platform content placement across pages, blogs, and accounts. Coordinated rollouts that reach every corner of the internet.</p>
                 </div>
-                <div class="service" data-d="60">
-                    <div class="service-index">02</div>
-                    <h3>Content Strategy</h3>
+            </div>
+
+            <div class="service-item" data-d="60">
+                <div class="service-header">
+                    <div class="service-left">
+                        <span class="service-num">02</span>
+                        <span class="service-title">Content Strategy</span>
+                    </div>
+                    <div class="service-toggle"></div>
+                </div>
+                <div class="service-body">
                     <p>We plan what goes where and when. Platform-specific formats, timing, and narrative built around your goals.</p>
                 </div>
-                <div class="service" data-d="120">
-                    <div class="service-index">03</div>
-                    <h3>Creative + Live Production</h3>
-                    <p>A team of clippers on standby for short-form content across every platform. We also partner with artists for full live production. Twitch streams, album rollouts, and event coverage.</p>
+            </div>
+
+            <div class="service-item" data-d="120">
+                <div class="service-header">
+                    <div class="service-left">
+                        <span class="service-num">03</span>
+                        <span class="service-title">Creative + Live Production</span>
+                    </div>
+                    <div class="service-toggle"></div>
                 </div>
-                <div class="service" data-d="180">
-                    <div class="service-index">04</div>
-                    <h3>Seeding Network</h3>
+                <div class="service-body">
+                    <p>Clippers on standby for short-form content across every platform. Full live production for Twitch streams, album rollouts, and event coverage.</p>
+                </div>
+            </div>
+
+            <div class="service-item" data-d="180">
+                <div class="service-header">
+                    <div class="service-left">
+                        <span class="service-num">04</span>
+                        <span class="service-title">Seeding Network</span>
+                    </div>
+                    <div class="service-toggle"></div>
+                </div>
+                <div class="service-body">
                     <p>Direct connections to pages, blogs, and accounts across every platform. A deep network built over years, not cold outreach.</p>
                 </div>
-                <div class="service" data-d="240">
-                    <div class="service-index">05</div>
-                    <h3>Paid Placement</h3>
-                    <p>Strategic paid placements across high-traffic pages, blogs, and channels. We buy reach through real channels, not ad dashboards.</p>
+            </div>
+
+            <div class="service-item" data-d="240">
+                <div class="service-header">
+                    <div class="service-left">
+                        <span class="service-num">05</span>
+                        <span class="service-title">Paid Placement</span>
+                    </div>
+                    <div class="service-toggle"></div>
                 </div>
-                <div class="service" data-d="300">
-                    <div class="service-index">06</div>
-                    <h3>Influencer Marketing</h3>
+                <div class="service-body">
+                    <p>Strategic paid placements across high-traffic pages and channels. We buy reach through real channels, not ad dashboards.</p>
+                </div>
+            </div>
+
+            <div class="service-item" data-d="300">
+                <div class="service-header">
+                    <div class="service-left">
+                        <span class="service-num">06</span>
+                        <span class="service-title">Influencer Marketing</span>
+                    </div>
+                    <div class="service-toggle"></div>
+                </div>
+                <div class="service-body">
                     <p>We connect with the right creators to amplify reach and drive real engagement.</p>
                 </div>
             </div>
@@ -623,8 +1104,61 @@
         </form>
     </section>
 
+    <!-- Clients -->
+    <section class="clients-dropdown" id="clients">
+        <button class="clients-trigger" id="clientsTrigger">
+            <span class="clients-trigger-label">Selected Clients</span>
+            <span class="clients-trigger-icon">+</span>
+        </button>
+        <div class="clients-panel" id="clientsPanel">
+            <div class="clients-panel-inner">
+                <div class="clients-col">
+                    <span>730 Printing</span>
+                    <span>Allgorithim</span>
+                    <span>Arcade Edit</span>
+                    <span>asspizza</span>
+                    <span>Babbitt</span>
+                    <span>Came Up In The Drought</span>
+                    <span>Cart Dept</span>
+                    <span>Chris Heyn Jr.</span>
+                    <span>Clover New York</span>
+                    <span>Complex</span>
+                    <span>Dogma Studios</span>
+                </div>
+                <div class="clients-col">
+                    <span>Father Steve</span>
+                    <span>Field Trip Records</span>
+                    <span>Fugazi</span>
+                    <span>Hamptons New York</span>
+                    <span>Holiday Brand</span>
+                    <span>Interscope Records</span>
+                    <span>Kentucky Boy Tyler</span>
+                    <span>Larry Walsh</span>
+                    <span>Living Product</span>
+                    <span>Lyrical Lemonade Summer Smash</span>
+                    <span>Marcel Zago</span>
+                </div>
+                <div class="clients-col">
+                    <span>Mike the Ruler</span>
+                    <span>NBStudios Inc.</span>
+                    <span>Riddle Mgmt</span>
+
+                    <span>Tryps</span>
+                    <span>Twitch</span>
+                    <span>VFiles</span>
+                    <span>Warren Lotas</span>
+                    <span>Welcome JPEG</span>
+                    <span>Your Multimedia</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
-        <a href="/" class="footer-logo">dF</a>
+        <a href="/" class="footer-brand">
+            <span class="footer-logo">dF</span>
+            <span class="footer-wordmark"><span class="footer-wordmark-bold">d</span><span class="footer-wordmark-light">e</span><span class="footer-wordmark-bold">F</span><span class="footer-wordmark-light">aria</span></span>
+        </a>
         <div class="footer-info">
             &copy; 2026 DeFaria LLC<br>
             New York City
@@ -641,75 +1175,349 @@
                 }
             });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.service').forEach(el => obs.observe(el));
+        document.querySelectorAll('.service-item').forEach(el => obs.observe(el));
 
-        /* Showcase fade-in + scroll-linked feed */
+
+        /* Clients dropdown */
+        document.getElementById('clientsTrigger').addEventListener('click', function() {
+            this.closest('.clients-dropdown').classList.toggle('open');
+        });
+        document.getElementById('navClients').addEventListener('click', function(e) {
+            e.preventDefault();
+            var dd = document.getElementById('clients');
+            dd.classList.add('open');
+            dd.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        /* Service accordion */
+        document.querySelectorAll('.service-header').forEach(function(header) {
+            header.addEventListener('click', function() {
+                var item = header.parentElement;
+                var wasOpen = item.classList.contains('open');
+                // Close all others
+                document.querySelectorAll('.service-item.open').forEach(function(el) {
+                    el.classList.remove('open');
+                });
+                // Toggle clicked
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+
+        /* Showcase pinned scroll: entrance -> feed scroll -> exit with hearts */
         (function() {
+            var wrapper = document.querySelector('.showcase-wrapper');
             var sc = document.querySelector('.showcase');
-            if (!sc) return;
-            new IntersectionObserver(function(e) {
-                if (e[0].isIntersecting) sc.classList.add('vis');
-            }, { threshold: 0.15 }).observe(sc);
+            if (!wrapper || !sc) return;
 
             var strips = sc.querySelectorAll('.feed-strip');
+            var phones = sc.querySelector('.showcase-phones');
+            var phoneL = sc.querySelector('.phone--tk');
+            var phoneR = sc.querySelector('.phone--ig');
             var active = false, raf = false;
-            function tick() {
-                var r = sc.getBoundingClientRect();
-                var vh = window.innerHeight;
-                var total = vh + r.height;
-                var scrolled = vh - r.top;
-                var p = Math.max(0, Math.min(1, scrolled / total));
-                strips.forEach(function(s) {
-                    var h = s.firstElementChild ? s.firstElementChild.offsetHeight : 520;
-                    var max = (s.children.length - 1) * h;
-                    s.style.transform = 'translateY(' + (-p * max) + 'px)';
+            var heartsSpawned = false;
+            var lastFeedP = 0;
+
+            var platformSVGs = [
+                '<svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>',
+                '<svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>',
+                '<svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',
+                '<svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>',
+                '<svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>',
+                '<svg viewBox="0 0 24 24"><path d="M1.333 0v24h5.338V14.677L12 20.006h7.334l-6.89-6.89 6.89-6.784H12L6.67 12.11V0z"/></svg>',
+                '<svg viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12.017 24c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641 0 12.017 0z"/></svg>',
+                '<svg viewBox="0 0 24 24"><path d="M12 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 01-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 01.042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 014.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 01.14-.197.35.35 0 01.238-.042l2.906.617a1.214 1.214 0 011.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 00-.231.094.33.33 0 000 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 000-.462.342.342 0 00-.462 0c-.545.533-1.684.73-2.512.73-.828 0-1.967-.197-2.512-.73a.326.326 0 00-.205-.095z"/></svg>',
+                '<svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>',
+                '<svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>',
+                '<svg viewBox="0 0 24 24"><path d="M12.206.793c.99 0 4.347.276 5.93 3.821.529 1.193.403 3.219.299 4.847l-.003.06c-.012.18-.022.345-.03.51.075.045.203.09.401.09.3-.016.659-.12.959-.289.161-.09.315-.075.45-.015.165.09.285.225.315.405.03.195-.045.39-.21.54-.225.195-.57.345-.885.465-.166.06-.345.105-.465.135-.09.03-.195.045-.255.06-.21.075-.435.39-.48.66-.045.255-.015.51.09.72.75 1.185 1.815 2.04 3.075 2.46.12.044.24.074.345.104.21.06.39.12.495.255.12.15.105.375-.015.555-.12.18-.33.3-.585.36-.3.09-.66.105-.975.15l-.135.015c-.315.045-.645.09-.855.21-.255.15-.39.3-.39.51 0 .06.015.12.045.165.285.585 1.064.855 1.769 1.11.105.045.195.075.285.105.36.135.705.27.855.585.12.255.06.555-.15.75-.39.36-1.2.495-2.025.555-.21.015-.42.03-.615.06-.24.03-.42.12-.585.45-.195.39-.45.66-.77.855-.59.375-1.365.435-2.07.435-.195 0-.39-.015-.585-.03-.735-.045-1.5-.09-2.25.465a4.47 4.47 0 01-2.67.885c-.03 0-.06 0-.075-.015h-.105a4.47 4.47 0 01-2.655-.885c-.75-.555-1.5-.51-2.25-.465-.195.015-.39.03-.585.03-.69 0-1.5-.075-2.07-.435-.33-.195-.585-.465-.78-.855-.165-.33-.345-.42-.585-.45-.195-.03-.405-.045-.615-.06-.825-.06-1.635-.195-2.025-.555-.21-.195-.27-.495-.15-.75.15-.315.495-.45.855-.585.09-.03.18-.06.285-.105.705-.255 1.485-.525 1.77-1.11a.48.48 0 00.044-.165c0-.21-.135-.36-.39-.51-.21-.12-.54-.165-.855-.21l-.135-.015c-.315-.045-.675-.06-.975-.15-.255-.06-.465-.18-.585-.36-.12-.18-.135-.405-.015-.555.105-.135.285-.195.495-.255.105-.03.225-.06.345-.104 1.26-.42 2.325-1.275 3.075-2.46.105-.21.135-.465.09-.72-.045-.27-.27-.585-.48-.66-.06-.015-.165-.03-.255-.06-.12-.03-.3-.075-.465-.135-.315-.12-.66-.27-.885-.465-.165-.15-.24-.345-.21-.54.03-.18.15-.315.315-.405.135-.06.3-.075.45.015.3.165.66.273.96.289.198 0 .33-.045.405-.09-.015-.18-.03-.36-.045-.555l-.003-.045c-.104-1.635-.225-3.66.304-4.852C7.86 1.07 11.216.793 12.206.793z"/></svg>',
+                '<svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>',
+                '<svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>'
+            ];
+
+            function spawnPlatformBurst() {
+                if (heartsSpawned) return;
+                heartsSpawned = true;
+                var rect = phones.getBoundingClientRect();
+                var cx = rect.left + rect.width / 2;
+                var cy = rect.top + rect.height / 2;
+
+                // 1. Platform icons burst outward
+                platformSVGs.forEach(function(svg, i) {
+                    setTimeout(function() {
+                        var el = document.createElement('div');
+                        el.innerHTML = svg;
+                        var size = 22 + Math.random() * 14;
+                        el.style.cssText = 'position:fixed;pointer-events:none;z-index:200;width:' + size + 'px;height:' + size + 'px;opacity:0;';
+                        el.querySelector('svg').style.cssText = 'width:100%;height:100%;fill:#9146FF;filter:drop-shadow(0 0 6px rgba(145,70,255,0.4));';
+                        var angle = (i / platformSVGs.length) * Math.PI * 2 + (Math.random() - 0.5) * 0.3;
+                        el.style.left = (cx - size / 2) + 'px';
+                        el.style.top = (cy - size / 2) + 'px';
+                        var dist = 140 + Math.random() * 120;
+                        var dx = Math.cos(angle) * dist;
+                        var dy = Math.sin(angle) * dist;
+                        el.style.transition = 'all 0.9s cubic-bezier(0.16, 1, 0.3, 1)';
+                        document.body.appendChild(el);
+                        requestAnimationFrame(function() { requestAnimationFrame(function() {
+                            el.style.opacity = '0.85';
+                            el.style.transform = 'translate(' + dx + 'px,' + dy + 'px) rotate(' + (Math.random() * 30 - 15) + 'deg)';
+                        }); });
+                        setTimeout(function() {
+                            el.style.opacity = '0';
+                            el.style.transform = 'translate(' + (dx * 1.4) + 'px,' + (dy * 1.4) + 'px) scale(0.5)';
+                        }, 600);
+                        setTimeout(function() { el.remove(); }, 1400);
+                    }, i * 50);
                 });
+
+                // 2. "How We Seed." letters burst then land in exact heading position
+                var heading = document.getElementById('seedHeading');
+                var letters = heading ? heading.querySelectorAll('.section-heading-letter') : [];
+                if (!letters.length) return;
+
+                // Get the heading's exact page position (not viewport — page)
+                var headingPageTop = heading.getBoundingClientRect().top + window.scrollY;
+                var headingPageLeft = heading.getBoundingClientRect().left + window.scrollX;
+
+                // Measure each letter's offset within the heading
+                letters.forEach(function(l) { l.style.opacity = '0.001'; });
+                var targets = [];
+                letters.forEach(function(letter) {
+                    var r = letter.getBoundingClientRect();
+                    targets.push({
+                        // Absolute page coordinates for this letter
+                        pageX: r.left + window.scrollX,
+                        pageY: r.top + window.scrollY
+                    });
+                    letter.style.opacity = '0';
+                });
+
+                letters.forEach(function(letter, i) {
+                    if (letter.classList.contains('space')) return;
+
+                    var clone = document.createElement('span');
+                    clone.textContent = letter.textContent;
+                    var fontSize = window.getComputedStyle(letter).fontSize;
+
+                    // Start at phone center using absolute (page) positioning
+                    var startPageX = cx + window.scrollX;
+                    var startPageY = cy + window.scrollY;
+                    clone.style.cssText = 'position:absolute;pointer-events:none;z-index:300;font-family:Inter,-apple-system,system-ui,sans-serif;font-weight:800;font-size:' + fontSize + ';color:#9146FF;text-shadow:0 0 20px rgba(145,70,255,0.8);left:' + startPageX + 'px;top:' + startPageY + 'px;opacity:0;letter-spacing:-0.03em;transition:all 0.6s cubic-bezier(0.16, 1, 0.3, 1);';
+                    document.body.appendChild(clone);
+
+                    // Phase 1: Burst outward
+                    var burstAngle = Math.random() * Math.PI * 2;
+                    var burstDist = 80 + Math.random() * 120;
+                    var bx = Math.cos(burstAngle) * burstDist;
+                    var by = Math.sin(burstAngle) * burstDist;
+
+                    setTimeout(function() {
+                        clone.style.opacity = '1';
+                        clone.style.transform = 'translate(' + bx + 'px,' + by + 'px) scale(1.3) rotate(' + (Math.random() * 20 - 10) + 'deg)';
+                    }, 30 + i * 25);
+
+                    // Phase 2: Fly to exact letter position in heading
+                    setTimeout(function() {
+                        var dx = targets[i].pageX - startPageX;
+                        var dy = targets[i].pageY - startPageY;
+                        clone.style.transition = 'all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                        clone.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(1) rotate(0deg)';
+                    }, 400 + i * 25);
+
+                    // Phase 3: Freeze — show real letter, kill clone
+                    setTimeout(function() {
+                        letter.classList.add('landed');
+                        clone.style.opacity = '0';
+                        setTimeout(function() { clone.remove(); }, 400);
+                    }, 1100 + i * 25);
+                });
+
+                // Spaces don't fly but need to appear with the rest
+                setTimeout(function() {
+                    letters.forEach(function(letter) {
+                        if (letter.classList.contains('space')) letter.classList.add('landed');
+                    });
+                }, 1100);
+
+                // Phase 4: Medusa curse — letters fade to black
+                setTimeout(function() {
+                    letters.forEach(function(letter) {
+                        letter.classList.add('settled');
+                    });
+                    // After fade completes, kill all transitions — frozen forever
+                    setTimeout(function() {
+                        letters.forEach(function(letter) {
+                            letter.style.transition = 'none';
+                        });
+                    }, 1400);
+                }, 1600);
+            }
+
+            function tick() {
+                var wRect = wrapper.getBoundingClientRect();
+                var vh = window.innerHeight;
+                var scrolled = -wRect.top;
+                var totalScroll = wrapper.offsetHeight - vh;
+                if (totalScroll <= 0) return;
+                var p = Math.max(0, Math.min(1, scrolled / totalScroll));
+
+                // Phase 1 (0-0.7): Feed scrolls through clips
+                // Phase 2 (0.7-0.9): Phones shrink, fade, exit hearts
+                // Phase 3 (0.9-1.0): Dead space / transition to services
+                var feedP = Math.min(1, p / 0.7);
+                var exitP = Math.max(0, Math.min(1, (p - 0.7) / 0.2));
+
+                // Feed scrolling
+                var label = document.getElementById('right-client-label');
+                strips.forEach(function(s, si) {
+                    var slides = s.children.length;
+                    var h = s.firstElementChild ? s.firstElementChild.offsetHeight : 520;
+                    var rawIndex = feedP * (slides - 1);
+                    var snapIndex = Math.round(rawIndex);
+                    s.style.transform = 'translateY(' + (-snapIndex * h) + 'px)';
+
+                    for (var i = 0; i < slides; i++) {
+                        var vid = s.children[i].querySelector('video');
+                        if (!vid) continue;
+                        if (i === snapIndex && exitP < 0.8) {
+                            if (vid.paused) vid.play().catch(function(){});
+                        } else {
+                            if (!vid.paused) vid.pause();
+                        }
+                    }
+
+                    if (si === 1 && label) {
+                        var slide = s.children[snapIndex];
+                        if (slide && slide.dataset.client) {
+                            label.textContent = slide.dataset.client;
+                        }
+                    }
+                });
+
+                // Scroll-driven expansion: phones grow as you scroll through feed
+                var growScale = 0.88 + feedP * 0.12; // 0.88 → 1.0
+                // Blue glow intensifies with scroll
+                var glowStrength = Math.round(feedP * 25);
+                var glowAlpha = (feedP * 0.3).toFixed(2);
+
+                // Parallax tilt: phones rock based on scroll velocity
+                var feedDelta = feedP - lastFeedP;
+                lastFeedP = feedP;
+                var tilt = Math.max(-4, Math.min(4, feedDelta * 300));
+                // Gentle sine float
+                var floatY = Math.sin(feedP * Math.PI * 4) * 3;
+                // Gap between phones narrows as they grow (pulls them together)
+                var gapShrink = feedP * 8;
+
+                // Exit phase
+                if (exitP > 0) {
+                    var scale = 1 - exitP * 0.4;
+                    var opacity = 1 - exitP * exitP;
+                    phones.style.transform = 'scale(' + scale + ')';
+                    phones.style.opacity = opacity;
+                    phones.style.gap = '';
+                    sc.style.opacity = opacity;
+                    if (phoneL) phoneL.style.transform = 'rotateY(-5deg) rotateZ(' + (-exitP * 8) + 'deg)';
+                    if (phoneR) phoneR.style.transform = 'rotateY(5deg) rotateZ(' + (exitP * 8) + 'deg)';
+                    if (phoneL) phoneL.style.boxShadow = '';
+                    if (phoneR) phoneR.style.boxShadow = '';
+                    if (exitP > 0.4) spawnPlatformBurst();
+                } else {
+                    phones.style.transform = 'scale(' + growScale + ') translateY(' + floatY + 'px)';
+                    phones.style.opacity = '1';
+                    sc.style.opacity = '1';
+                    // Tilt + float per phone
+                    if (phoneL) {
+                        phoneL.style.transform = 'rotateY(-5deg) rotateX(' + (tilt * 0.5) + 'deg) translateY(' + (-floatY * 0.3) + 'px)';
+                        phoneL.style.boxShadow = 'inset 0 0 0 2px #333, 0 20px 50px rgba(145,70,255,0.15), 0 8px 20px rgba(145,70,255,0.08), 0 0 ' + glowStrength + 'px rgba(145,70,255,' + glowAlpha + ')';
+                    }
+                    if (phoneR) {
+                        phoneR.style.transform = 'rotateY(5deg) rotateX(' + (-tilt * 0.5) + 'deg) translateY(' + (floatY * 0.5) + 'px)';
+                        phoneR.style.boxShadow = 'inset 0 0 0 2px #333, 0 20px 50px rgba(145,70,255,0.15), 0 8px 20px rgba(145,70,255,0.08), 0 0 ' + glowStrength + 'px rgba(145,70,255,' + glowAlpha + ')';
+                    }
+                    heartsSpawned = false;
+                }
+
                 raf = false;
             }
+
             new IntersectionObserver(function(e) {
                 active = e[0].isIntersecting;
-            }, { threshold: 0 }).observe(sc);
+                if (!active) {
+                    strips.forEach(function(s) {
+                        for (var i = 0; i < s.children.length; i++) {
+                            var vid = s.children[i].querySelector('video');
+                            if (vid && !vid.paused) vid.pause();
+                        }
+                    });
+                }
+            }, { threshold: 0 }).observe(wrapper);
+
             window.addEventListener('scroll', function() {
                 if (active && !raf) { raf = true; requestAnimationFrame(tick); }
             }, { passive: true });
             tick();
         })();
 
-        /* Hero scramble decode */
+        /* "How We Seed." fallback — guarantees letters become visible */
         (function() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&!<>';
-            function scramble(el, delay) {
-                const text = el.dataset.text;
-                const len = text.length;
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                    el.textContent = text.replace(/[^ ]/g, () => chars[Math.floor(Math.random() * chars.length)]);
-                    let frame = 0;
-                    const total = 18;
-                    const iv = setInterval(() => {
-                        const resolved = Math.floor((frame / total) * len);
-                        el.textContent = text.split('').map((c, i) => {
-                            if (c === ' ') return ' ';
-                            if (i < resolved) return c;
-                            return chars[Math.floor(Math.random() * chars.length)];
-                        }).join('');
-                        frame++;
-                        if (frame > total) {
-                            clearInterval(iv);
-                            el.textContent = text;
-                            if (el.classList.contains('hero-accent')) {
-                                el.style.animation = 'accentPulse 0.6s ease-out';
-                            }
+            var seedHeading = document.getElementById('seedHeading');
+            if (!seedHeading) return;
+            new IntersectionObserver(function(entries, observer) {
+                if (entries[0].isIntersecting) {
+                    var allLetters = seedHeading.querySelectorAll('.section-heading-letter');
+                    allLetters.forEach(function(letter) {
+                        if (!letter.classList.contains('landed')) {
+                            letter.classList.add('landed');
                         }
-                    }, 30);
-                }, delay);
-            }
-            const at = document.querySelector('.at-sign');
-            setTimeout(() => { at.style.opacity = '1'; }, 100);
-            document.querySelectorAll('.scramble').forEach((el, i) => {
-                scramble(el, [200, 700, 1000][i] || 200 + i * 300);
-            });
+                    });
+                    setTimeout(function() {
+                        allLetters.forEach(function(letter) {
+                            letter.classList.add('settled');
+                        });
+                        setTimeout(function() {
+                            allLetters.forEach(function(letter) {
+                                letter.style.transition = 'none';
+                            });
+                        }, 1400);
+                    }, 1800);
+                    observer.disconnect();
+                }
+            }, { threshold: 0.1 }).observe(seedHeading);
         })();
+
+        /* Live clock on phones */
+        (function() {
+            var times = document.querySelectorAll('.phone-time');
+            function updateTime() {
+                var now = new Date();
+                var h = now.getHours();
+                var m = now.getMinutes();
+                var str = (h > 12 ? h - 12 : h || 12) + ':' + (m < 10 ? '0' : '') + m;
+                times.forEach(function(t) { t.textContent = str; });
+            }
+            updateTime();
+            setInterval(updateTime, 10000); // update every 10s
+        })();
+
+
+        /* Lock hero elements visible after their reveal animations complete */
+        setTimeout(function() {
+            document.querySelectorAll('.hero-word, .hero-label, .hero-sub, .hero-cta').forEach(function(el) {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+
+            /* Glow pulse on "Viral." */
+            var accent = document.querySelector('.hero-accent');
+            if (accent) accent.style.animation = 'heroReveal 0.7s forwards, accentGlow 1s ease-out 0s';
+
+            /* "We know how it works." fades from purple glow to normal */
+            var sub = document.querySelector('.hero-sub');
+            if (sub) {
+                sub.style.transition = 'color 1.2s ease, text-shadow 1.2s ease';
+                sub.style.color = '#111111';
+                sub.style.textShadow = 'none';
+            }
+        }, 1600);
     </script>
 
 </body>
