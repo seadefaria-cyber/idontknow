@@ -619,10 +619,10 @@
             .phone--tk { display: none; }
             .phone--ig { transform: none; }
             .phone--ig:hover { transform: none; box-shadow: inset 0 0 0 2px #333, 0 20px 50px rgba(145,70,255,0.15); }
-            .showcase-wrapper { height: 250vh; margin-top: -25vh; margin-bottom: 0; }
-            .showcase { padding-top: 4vh; }
-            .showcase-phones { opacity: 0; transform: scale(0.3) translateY(60px); justify-content: center; }
-            .phone { width: 55vw; max-width: 240px; }
+            .showcase-wrapper { height: 250vh; margin-top: -45vh; margin-bottom: 0; }
+            .showcase { padding-top: 35vh; }
+            .showcase-phones { opacity: 1; transform: none; justify-content: center; }
+            .phone { width: 44vw; max-width: 200px; }
             .phone-actions { right: 6px; bottom: 55px; gap: 8px; }
             .phone-action-icon { width: 22px; height: 22px; }
             .phone-action-icon svg { width: 16px; height: 16px; }
@@ -1520,15 +1520,9 @@
                 lastFeedP = feedP;
 
                 if (mob) {
-                    // ═══ MOBILE: Dramatic pop-in animation ═══
-                    // Phase A (0→0.15): Phones burst in from nothing — scale 0.3→1.08 overshoot
-                    // Phase B (0.15→0.25): Settle from 1.08→1.0 (spring bounce)
-                    // Phase C (0.25→0.7): Feed scrolls, gentle pulse glow
-                    // Phase D (0.7→1.0): Exit shrink + burst
-
-                    var enterP = Math.min(1, p / 0.15); // 0→1 during entrance
-                    var settleP = Math.max(0, Math.min(1, (p - 0.15) / 0.1)); // settle 0.15→0.25
-                    var showP = Math.max(0, Math.min(1, (p - 0.25) / 0.45)); // feed phase 0.25→0.7
+                    // ═══ MOBILE: Phone always visible, scrolls feed, exits with burst ═══
+                    phones.style.opacity = '1';
+                    sc.style.opacity = '1';
 
                     if (exitP > 0) {
                         // Exit phase — shrink and fade
@@ -1536,51 +1530,17 @@
                         var opacity = 1 - exitP * exitP;
                         phones.style.transform = 'scale(' + scale + ')';
                         phones.style.opacity = opacity;
-                        phones.style.gap = '';
                         sc.style.opacity = opacity;
-                        if (phoneL) { phoneL.style.transform = 'translateX(-8px) rotate(' + (-exitP * 6) + 'deg)'; phoneL.style.boxShadow = ''; }
-                        if (phoneR) { phoneR.style.transform = 'translateX(8px) rotate(' + (exitP * 6) + 'deg)'; phoneR.style.boxShadow = ''; }
+                        if (phoneR) { phoneR.style.transform = 'rotate(' + (exitP * 6) + 'deg)'; phoneR.style.boxShadow = ''; }
                         if (exitP > 0.3) spawnPlatformBurst();
-                    } else if (p < 0.25) {
-                        // Entrance: dramatic pop-in
-                        // Ease-out cubic for snappy entrance
-                        var easeOut = 1 - Math.pow(1 - enterP, 3);
-                        // Overshoot: scale goes 0.3→1.08 then settles to 1.0
-                        var popScale;
-                        if (p < 0.15) {
-                            popScale = 0.3 + easeOut * 0.78; // 0.3 → 1.08
-                        } else {
-                            popScale = 1.08 - settleP * 0.08; // 1.08 → 1.0
-                        }
-                        var popOpacity = Math.min(1, easeOut * 1.5); // fade in fast
-                        var popY = (1 - easeOut) * 60; // slide up from 60px below
-
-                        phones.style.transform = 'scale(' + popScale.toFixed(3) + ') translateY(' + popY.toFixed(1) + 'px)';
-                        phones.style.opacity = popOpacity.toFixed(2);
-                        sc.style.opacity = popOpacity.toFixed(2);
-
-                        // Glow intensifies during pop
-                        var popGlow = Math.round(easeOut * 20);
-                        var popGlowAlpha = (easeOut * 0.35).toFixed(2);
-                        var popShadow = 'inset 0 0 0 2px #333, 0 10px 40px rgba(145,70,255,' + popGlowAlpha + '), 0 0 ' + popGlow + 'px rgba(145,70,255,' + popGlowAlpha + ')';
-                        // Phones spread apart as they enter
-                        var spreadX = easeOut * 4;
-                        if (phoneL) { phoneL.style.transform = 'translateX(' + (-spreadX) + 'px)'; phoneL.style.boxShadow = popShadow; }
-                        if (phoneR) { phoneR.style.transform = 'translateX(' + spreadX + 'px)'; phoneR.style.boxShadow = popShadow; }
-                        heartsSpawned = false;
                     } else {
-                        // Feed phase: phones at full size, pulsing glow
+                        // Feed phase — phone at full size, subtle glow pulse
                         phones.style.transform = 'scale(1)';
-                        phones.style.opacity = '1';
-                        sc.style.opacity = '1';
-
-                        // Pulsing glow during feed scroll
-                        var pulse = Math.sin(showP * Math.PI * 3) * 0.5 + 0.5;
-                        var glowStr = Math.round(12 + pulse * 18);
-                        var glowA = (0.15 + pulse * 0.25).toFixed(2);
-                        var feedShadow = 'inset 0 0 0 2px #333, 0 10px 40px rgba(145,70,255,' + glowA + '), 0 0 ' + glowStr + 'px rgba(145,70,255,' + glowA + ')';
-                        if (phoneL) { phoneL.style.transform = 'translateX(-4px)'; phoneL.style.boxShadow = feedShadow; }
-                        if (phoneR) { phoneR.style.transform = 'translateX(4px)'; phoneR.style.boxShadow = feedShadow; }
+                        var pulse = Math.sin(feedP * Math.PI * 3) * 0.5 + 0.5;
+                        var glowStr = Math.round(8 + pulse * 12);
+                        var glowA = (0.1 + pulse * 0.2).toFixed(2);
+                        var feedShadow = 'inset 0 0 0 2px #333, 0 10px 30px rgba(145,70,255,' + glowA + '), 0 0 ' + glowStr + 'px rgba(145,70,255,' + glowA + ')';
+                        if (phoneR) { phoneR.style.transform = 'none'; phoneR.style.boxShadow = feedShadow; }
                         heartsSpawned = false;
                     }
 
