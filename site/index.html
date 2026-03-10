@@ -109,18 +109,45 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .nav-logo {
+        .nav-logo { text-decoration: none; }
+        .df-lockup {
             display: inline-flex;
             align-items: center;
+            gap: 14px;
+            user-select: none;
+        }
+        .df-lockup__mark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 11px;
             font-family: 'Geist', sans-serif;
-            font-size: 1.25rem;
-            letter-spacing: -0.02em;
-            text-decoration: none;
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: -1.5px;
             line-height: 1;
+            flex-shrink: 0;
+        }
+        .df-lockup__wordmark {
+            font-family: 'Geist', sans-serif;
+            font-size: 28px;
+            line-height: 1;
+            letter-spacing: -0.5px;
+        }
+        .df-lockup__wordmark-bold { font-weight: 800; }
+        .df-lockup__wordmark-light { font-weight: 300; opacity: 0.7; }
+        .df-lockup--sm .df-lockup__mark { width: 32px; height: 32px; font-size: 14px; border-radius: 8px; letter-spacing: -1px; }
+        .df-lockup--sm .df-lockup__wordmark { font-size: 20px; }
+        .df-lockup--sm { gap: 8px; }
+        .nav-logo .df-lockup__mark {
+            background: var(--text);
+            color: var(--bg);
+        }
+        .nav-logo .df-lockup__wordmark {
             color: var(--text);
         }
-        .nav-logo-bold { font-weight: 800; }
-        .nav-logo-light { font-weight: 300; color: var(--text-secondary); }
 
         .nav-links {
             display: flex;
@@ -976,7 +1003,7 @@
 <body>
 
     <nav>
-        <a href="/" class="nav-logo"><span class="nav-logo-bold">d</span><span class="nav-logo-light">e</span><span class="nav-logo-bold">F</span><span class="nav-logo-light">aria</span></a>
+        <a href="/" class="nav-logo"><div class="df-lockup df-lockup--sm"><div class="df-lockup__mark">dF</div><div class="df-lockup__wordmark"><span class="df-lockup__wordmark-bold">d</span><span class="df-lockup__wordmark-light">e</span><span class="df-lockup__wordmark-bold">F</span><span class="df-lockup__wordmark-light">aria</span></div></div></a>
         <ul class="nav-links">
             <li><a href="#services">services</a></li>
             <li><a href="#clients" id="navClients">clients</a></li>
