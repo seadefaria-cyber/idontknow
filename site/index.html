@@ -622,7 +622,7 @@
             .showcase-wrapper { height: 250vh; margin-top: -45vh; margin-bottom: 0; }
             .showcase { padding-top: 35vh; }
             .showcase-phones { opacity: 1; transform: none; justify-content: center; }
-            .phone { width: 44vw; max-width: 200px; }
+            .phone { width: 48vw; max-width: 210px; }
             .phone-actions { right: 6px; bottom: 55px; gap: 8px; }
             .phone-action-icon { width: 22px; height: 22px; }
             .phone-action-icon svg { width: 16px; height: 16px; }
@@ -1367,7 +1367,7 @@
                     if (charSpans[li].textContent === ' ') continue;
                     var el = document.createElement('span');
                     el.textContent = charSpans[li].textContent;
-                    el.style.cssText = 'position:fixed;pointer-events:none;z-index:201;font-family:Inter,-apple-system,sans-serif;font-weight:800;font-size:' + (isMobile ? '1.75rem' : 'clamp(2rem,6vw,3.25rem)') + ';color:#9146FF;text-shadow:0 0 20px rgba(145,70,255,0.6);opacity:0;white-space:pre;left:' + cx + 'px;top:' + cy + 'px;';
+                    el.style.cssText = 'position:fixed;pointer-events:none;z-index:201;font-family:Inter,-apple-system,sans-serif;font-weight:800;font-size:' + (isMobile ? 'clamp(1.6rem,7vw,2.25rem)' : 'clamp(2rem,6vw,3.25rem)') + ';letter-spacing:-0.03em;line-height:1.1;color:#9146FF;text-shadow:0 0 20px rgba(145,70,255,0.6);opacity:0;white-space:pre;left:' + cx + 'px;top:' + cy + 'px;';
                     document.body.appendChild(el);
                     flyingLetters.push({el: el, spanIdx: li, idx: letterIdx});
                     letterIdx++;
@@ -1416,7 +1416,7 @@
                             // Smooth lerp toward target
                             var curX = parseFloat(fl.el.style.left) || tx;
                             var curY = parseFloat(fl.el.style.top) || ty;
-                            var lerpSpeed = 0.15;
+                            var lerpSpeed = 0.25;
                             var nx = curX + (tx - curX) * lerpSpeed;
                             var ny = curY + (ty - curY) * lerpSpeed;
                             fl.el.style.left = nx + 'px';
@@ -1426,7 +1426,7 @@
                         // Check if heading is in viewport — if so, settle and show
                         var hRect = heading.getBoundingClientRect();
                         var elapsed = Date.now() - startTime;
-                        if (hRect.top >= -50 && hRect.top < window.innerHeight && elapsed > 1200) {
+                        if (hRect.top >= -50 && hRect.top < window.innerHeight && elapsed > 800) {
                             // Heading is visible and enough time has passed — settle
                             settled = true;
                             // Snap letters to final positions
@@ -1520,27 +1520,38 @@
                 lastFeedP = feedP;
 
                 if (mob) {
-                    // ═══ MOBILE: Phone always visible, scrolls feed, exits with burst ═══
+                    // ═══ MOBILE: Phone visible from hero, animated on scroll ═══
                     phones.style.opacity = '1';
                     sc.style.opacity = '1';
 
+                    // Scroll velocity for tilt/shake effect
+                    var mobTilt = Math.max(-6, Math.min(6, feedDelta * 400));
+
                     if (exitP > 0) {
-                        // Exit phase — shrink and fade
-                        var scale = 1 - exitP * 0.4;
+                        // Exit phase — shrink, tilt and fade
+                        var scale = 1 - exitP * 0.5;
                         var opacity = 1 - exitP * exitP;
-                        phones.style.transform = 'scale(' + scale + ')';
+                        phones.style.transform = 'scale(' + scale + ') rotate(' + (exitP * 10) + 'deg)';
                         phones.style.opacity = opacity;
                         sc.style.opacity = opacity;
-                        if (phoneR) { phoneR.style.transform = 'rotate(' + (exitP * 6) + 'deg)'; phoneR.style.boxShadow = ''; }
+                        if (phoneR) { phoneR.style.boxShadow = ''; }
                         if (exitP > 0.3) spawnPlatformBurst();
                     } else {
-                        // Feed phase — phone at full size, subtle glow pulse
-                        phones.style.transform = 'scale(1)';
+                        // Feed phase — phone rocks/tilts with scroll, grows slightly, pulsing glow
+                        var mobGrow = 1 + feedP * 0.06; // 1.0 → 1.06
+                        var floatY = Math.sin(feedP * Math.PI * 5) * 4;
+                        phones.style.transform = 'scale(' + mobGrow.toFixed(3) + ') translateY(' + floatY.toFixed(1) + 'px)';
+
+                        // Phone tilts with scroll velocity — feels alive
+                        var rockAngle = mobTilt + Math.sin(feedP * Math.PI * 6) * 2;
                         var pulse = Math.sin(feedP * Math.PI * 3) * 0.5 + 0.5;
-                        var glowStr = Math.round(8 + pulse * 12);
-                        var glowA = (0.1 + pulse * 0.2).toFixed(2);
-                        var feedShadow = 'inset 0 0 0 2px #333, 0 10px 30px rgba(145,70,255,' + glowA + '), 0 0 ' + glowStr + 'px rgba(145,70,255,' + glowA + ')';
-                        if (phoneR) { phoneR.style.transform = 'none'; phoneR.style.boxShadow = feedShadow; }
+                        var glowStr = Math.round(10 + pulse * 20);
+                        var glowA = (0.12 + pulse * 0.28).toFixed(2);
+                        var feedShadow = 'inset 0 0 0 2px #333, 0 10px 40px rgba(145,70,255,' + glowA + '), 0 0 ' + glowStr + 'px rgba(145,70,255,' + glowA + ')';
+                        if (phoneR) {
+                            phoneR.style.transform = 'rotate(' + rockAngle.toFixed(1) + 'deg)';
+                            phoneR.style.boxShadow = feedShadow;
+                        }
                         heartsSpawned = false;
                     }
 
