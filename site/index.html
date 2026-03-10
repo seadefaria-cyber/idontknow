@@ -1088,7 +1088,7 @@
     <section class="section services" id="services">
         <div class="services-inner">
             <div class="section-label">what_we_do</div>
-            <div class="section-heading" id="seedHeading">How We Seed.</div>
+            <div class="section-heading" id="seedHeading"><span>H</span><span>o</span><span>w</span><span> </span><span>W</span><span>e</span><span> </span><span>S</span><span>e</span><span>e</span><span>d</span><span>.</span></div>
 
             <div class="service-item" data-d="0">
                 <div class="service-header">
@@ -1354,94 +1354,85 @@
                     }, i * 50);
                 });
 
-                // 2. Flying letters burst out then converge to heading center
+                // 2. Flying letters burst out then converge to EXACT character positions
                 var heading = document.getElementById('seedHeading');
                 if (!heading) return;
-                var letters = 'How We Seed.'.split('');
+                var charSpans = heading.querySelectorAll('span');
 
-                // Target: where "How We Seed." heading WILL appear on screen
-                // Problem: on desktop, margin-bottom:-100vh pulls .services behind the sticky
-                // showcase, so getBoundingClientRect() returns coords below the viewport.
-                // Fix: compute heading's offset within .services, then place convergence at
-                // that offset from viewport top (since services slides up to fill the screen).
+                // Get each character's target position
+                // Heading has opacity:0 + translateY(20px), so positions are shifted 20px down
+                // We subtract 20px to get where they'll be after 'visible' class is added
                 var hRect = heading.getBoundingClientRect();
-                var convergeCX, convergeCY;
-                var inViewport = hRect.top >= 0 && hRect.top < window.innerHeight && hRect.bottom > 0;
-                if (inViewport) {
-                    // Heading is already visible — use its real position
-                    convergeCX = hRect.left + hRect.width / 2;
-                    convergeCY = hRect.top + hRect.height / 2;
-                } else {
-                    // Heading is off-screen (behind showcase or below viewport)
-                    // Calculate where it will appear: its offset within .services from top
-                    var servicesEl = document.getElementById('services');
-                    if (servicesEl) {
-                        // heading.offsetTop is relative to its offsetParent
-                        // Walk up from heading to services to get the true offset within services
-                        var headingTopInServices = 0;
-                        var el = heading;
-                        while (el && el !== servicesEl) {
-                            headingTopInServices += el.offsetTop;
-                            el = el.offsetParent;
-                        }
-                        var headingCenterInServices = headingTopInServices + heading.offsetHeight / 2;
-                        // When services first becomes visible, its top aligns with viewport top
-                        // So heading will appear at this offset from viewport top
-                        convergeCY = headingCenterInServices;
-                        // Clamp to reasonable viewport range (don't let it go too far down)
-                        convergeCY = Math.min(convergeCY, window.innerHeight * 0.65);
-                        convergeCY = Math.max(convergeCY, window.innerHeight * 0.15);
-                    } else {
-                        convergeCY = window.innerHeight * 0.35;
+                var inViewport = hRect.top >= -200 && hRect.top < window.innerHeight + 200;
+                var yOffset = 0;
+                if (!inViewport) {
+                    // Heading is off-screen — compute where it will appear
+                    var sr = document.getElementById('services');
+                    if (sr) {
+                        var srRect = sr.getBoundingClientRect();
+                        // When services scrolls into view, its top is at viewport top
+                        // So shift all positions up by how far services is below viewport
+                        yOffset = -srRect.top;
                     }
-                    // Horizontal: center of viewport (heading is centered in services-inner max-width:700px)
-                    convergeCX = window.innerWidth / 2;
                 }
 
-                letters.forEach(function(ch, i) {
-                    if (ch === ' ') return; // skip spaces
-                    var el = document.createElement('span');
-                    el.textContent = ch;
-                    el.style.cssText = 'position:fixed;pointer-events:none;z-index:201;font-family:Inter,-apple-system,sans-serif;font-weight:800;font-size:' + (window.innerWidth < 768 ? '1.75rem' : 'clamp(2rem,6vw,3.25rem)') + ';color:#9146FF;text-shadow:0 0 20px rgba(145,70,255,0.6);opacity:0;white-space:pre;';
-                    // Start at phone center (viewport coords since position:fixed)
-                    el.style.left = cx + 'px';
-                    el.style.top = cy + 'px';
-                    document.body.appendChild(el);
+                var targets = [];
+                for (var ti = 0; ti < charSpans.length; ti++) {
+                    var sp = charSpans[ti];
+                    if (sp.textContent === ' ') { targets.push(null); continue; }
+                    var r = sp.getBoundingClientRect();
+                    targets.push({
+                        x: r.left + r.width / 2 + yOffset * 0, // x stays same
+                        y: r.top + r.height / 2 + yOffset - 20  // -20 compensates for translateY(20px)
+                    });
+                }
 
-                    // Phase A: burst outward from center
-                    var burstAngle = (i / letters.length) * Math.PI * 2 + Math.random() * 0.5;
-                    var isMobile = window.innerWidth < 768;
-                    var burstDist = isMobile ? (50 + Math.random() * 60) : (80 + Math.random() * 100);
-                    var burstX = cx + Math.cos(burstAngle) * burstDist;
-                    var burstY = cy + Math.sin(burstAngle) * burstDist;
+                var isMobile = window.innerWidth < 768;
+                var letterIdx = 0;
+                for (var li = 0; li < charSpans.length; li++) {
+                    if (!targets[li]) continue; // skip spaces
+                    (function(idx, target) {
+                        var ch = charSpans[idx].textContent;
+                        var el = document.createElement('span');
+                        el.textContent = ch;
+                        el.style.cssText = 'position:fixed;pointer-events:none;z-index:201;font-family:Inter,-apple-system,sans-serif;font-weight:800;font-size:' + (isMobile ? '1.75rem' : 'clamp(2rem,6vw,3.25rem)') + ';color:#9146FF;text-shadow:0 0 20px rgba(145,70,255,0.6);opacity:0;white-space:pre;transform:translate(-50%,-50%);';
+                        el.style.left = cx + 'px';
+                        el.style.top = cy + 'px';
+                        document.body.appendChild(el);
 
-                    // Burst out
-                    setTimeout(function() {
-                        el.style.transition = 'left 0.5s cubic-bezier(0.16,1,0.3,1), top 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease';
-                        el.style.left = burstX + 'px';
-                        el.style.top = burstY + 'px';
-                        el.style.opacity = '1';
-                    }, i * 30 + 100);
+                        var burstAngle = (letterIdx / 10) * Math.PI * 2 + Math.random() * 0.5;
+                        var burstDist = isMobile ? (50 + Math.random() * 60) : (80 + Math.random() * 100);
+                        var burstX = cx + Math.cos(burstAngle) * burstDist;
+                        var burstY = cy + Math.sin(burstAngle) * burstDist;
 
-                    // Phase B: converge to single center point
-                    setTimeout(function() {
-                        el.style.transition = 'left 0.6s cubic-bezier(0.16,1,0.3,1), top 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease, text-shadow 0.3s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1)';
-                        el.style.left = convergeCX + 'px';
-                        el.style.top = convergeCY + 'px';
-                        el.style.transform = 'scale(1.2)';
-                        el.style.textShadow = '0 0 40px rgba(145,70,255,0.9), 0 0 80px rgba(145,70,255,0.5)';
-                    }, i * 30 + 600);
+                        // Phase A: burst outward
+                        setTimeout(function() {
+                            el.style.transition = 'left 0.5s cubic-bezier(0.16,1,0.3,1), top 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease';
+                            el.style.left = burstX + 'px';
+                            el.style.top = burstY + 'px';
+                            el.style.opacity = '1';
+                        }, letterIdx * 30 + 100);
 
-                    // Phase C: hold glow briefly, then fade out
-                    setTimeout(function() {
-                        el.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-                        el.style.opacity = '0';
-                        el.style.transform = 'scale(0.3)';
-                        setTimeout(function() { el.remove(); }, 400);
-                    }, 1500);
-                });
+                        // Phase B: fly to EXACT character position in heading
+                        setTimeout(function() {
+                            el.style.transition = 'left 0.6s cubic-bezier(0.16,1,0.3,1), top 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease, text-shadow 0.3s ease';
+                            el.style.left = target.x + 'px';
+                            el.style.top = target.y + 'px';
+                            el.style.textShadow = '0 0 40px rgba(145,70,255,0.9), 0 0 80px rgba(145,70,255,0.5)';
+                        }, letterIdx * 30 + 600);
 
-                // Trigger the real heading ONLY after all letters have fully faded
+                        // Phase C: fade out
+                        setTimeout(function() {
+                            el.style.transition = 'opacity 0.35s ease';
+                            el.style.opacity = '0';
+                            setTimeout(function() { el.remove(); }, 400);
+                        }, 1500);
+
+                        letterIdx++;
+                    })(li, targets[li]);
+                }
+
+                // Real heading appears AFTER letters fade — seamless replacement
                 setTimeout(function() {
                     heading.classList.add('visible');
                     setTimeout(function() {
