@@ -99,9 +99,8 @@
 
         /* ═══ HERO ═══ */
         .hero {
-            min-height: 80vh;
-            min-height: 80dvh;
-            padding-bottom: 0;
+            height: 100vh;
+            height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -291,9 +290,10 @@
 
         /* ═══ SHOWCASE (scroll-pinned) ═══ */
         .showcase-wrapper {
-            height: 180vh; /* scroll zone for phone feed */
+            height: 200vh; /* scroll zone for phone feed */
             position: relative;
-            margin-top: -38vh;
+            margin-top: -30vh; /* overlap hero so phones appear immediately on scroll */
+            margin-bottom: -100vh; /* pull services up behind the sticky showcase */
         }
 
         .showcase {
@@ -303,7 +303,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            padding-top: 12vh;
             will-change: transform, opacity;
         }
 
@@ -567,7 +568,7 @@
             .feed-slide { height: 100%; }
             .showcase-phones { perspective: none; gap: 8px !important; }
             .phone--tk, .phone--ig { transform: none; }
-            .showcase-wrapper { height: 280vh; }
+            .showcase-wrapper { height: 250vh; margin-top: -10vh; margin-bottom: 0; }
             .phone-actions { right: 8px; bottom: 70px; gap: 10px; }
             .phone-action-icon { width: 24px; height: 24px; }
             .phone-action-icon svg { width: 18px; height: 18px; }
@@ -614,6 +615,7 @@
         /* ═══ SERVICES ═══ */
         .services {
             position: relative;
+            z-index: 10;
             background: var(--surface);
             border-top: 1px solid var(--border);
             padding-top: clamp(2rem, 5vw, 3rem);
@@ -879,7 +881,7 @@
             .nav-links { gap: 1.25rem; }
             .nav-links a { font-size: 0.65rem; }
 
-            .hero { min-height: 70vh; min-height: 70dvh; padding: 0 1.25rem; }
+            .hero { height: 100vh; height: 100dvh; padding: 0 1.25rem; }
             .hero h1 { font-size: clamp(3rem, 14vw, 5rem); }
             .hero-label { margin-bottom: 1.5rem; }
             .hero-sub { margin-top: 1.5rem; font-size: 0.95rem; }
@@ -1223,6 +1225,9 @@
             });
         });
 
+        /* Global flag: burst controls heading reveal */
+        var burstTriggered = false;
+
         /* Showcase pinned scroll: entrance -> feed scroll -> exit with hearts */
         (function() {
             var wrapper = document.querySelector('.showcase-wrapper');
@@ -1256,6 +1261,7 @@
             function spawnPlatformBurst() {
                 if (heartsSpawned) return;
                 heartsSpawned = true;
+                burstTriggered = true;
                 var rect = phones.getBoundingClientRect();
                 var cx = rect.left + rect.width / 2;
                 var cy = rect.top + rect.height / 2;
@@ -1288,6 +1294,67 @@
                     }, i * 50);
                 });
 
+                // 2. Flying letters burst out then converge to heading center
+                var heading = document.getElementById('seedHeading');
+                if (!heading) return;
+                var letters = 'How We Seed.'.split('');
+
+                // Target: converge all letters to viewport center (where the eye is)
+                // The heading will appear here after letters fade
+                var convergeCX = window.innerWidth / 2;
+                var convergeCY = window.innerHeight * 0.45;
+
+                letters.forEach(function(ch, i) {
+                    if (ch === ' ') return; // skip spaces
+                    var el = document.createElement('span');
+                    el.textContent = ch;
+                    el.style.cssText = 'position:fixed;pointer-events:none;z-index:201;font-family:Inter,-apple-system,sans-serif;font-weight:800;font-size:' + (window.innerWidth < 768 ? '1.75rem' : 'clamp(2rem,6vw,3.25rem)') + ';color:#9146FF;text-shadow:0 0 20px rgba(145,70,255,0.6);opacity:0;white-space:pre;';
+                    // Start at phone center (viewport coords since position:fixed)
+                    el.style.left = cx + 'px';
+                    el.style.top = cy + 'px';
+                    document.body.appendChild(el);
+
+                    // Phase A: burst outward from center
+                    var burstAngle = (i / letters.length) * Math.PI * 2 + Math.random() * 0.5;
+                    var burstDist = 80 + Math.random() * 100;
+                    var burstX = cx + Math.cos(burstAngle) * burstDist;
+                    var burstY = cy + Math.sin(burstAngle) * burstDist;
+
+                    // Burst out
+                    setTimeout(function() {
+                        el.style.transition = 'left 0.5s cubic-bezier(0.16,1,0.3,1), top 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease';
+                        el.style.left = burstX + 'px';
+                        el.style.top = burstY + 'px';
+                        el.style.opacity = '1';
+                    }, i * 30 + 100);
+
+                    // Phase B: converge to single center point
+                    setTimeout(function() {
+                        el.style.transition = 'left 0.6s cubic-bezier(0.16,1,0.3,1), top 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease, text-shadow 0.3s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1)';
+                        el.style.left = convergeCX + 'px';
+                        el.style.top = convergeCY + 'px';
+                        el.style.transform = 'scale(1.2)';
+                        el.style.textShadow = '0 0 40px rgba(145,70,255,0.9), 0 0 80px rgba(145,70,255,0.5)';
+                    }, i * 30 + 600);
+
+                    // Phase C: hold glow briefly, then fade out
+                    setTimeout(function() {
+                        el.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+                        el.style.opacity = '0';
+                        el.style.transform = 'scale(0.3)';
+                        setTimeout(function() { el.remove(); }, 400);
+                    }, 1500);
+                });
+
+                // Trigger the real heading ONLY after all letters have fully faded
+                setTimeout(function() {
+                    heading.classList.add('visible');
+                    setTimeout(function() {
+                        heading.classList.add('settled');
+                        setTimeout(function() { heading.style.transition = 'none'; }, 1400);
+                    }, 1500);
+                }, 1800);
+
             }
 
             function tick() {
@@ -1299,10 +1366,9 @@
                 var p = Math.max(0, Math.min(1, scrolled / totalScroll));
 
                 // Phase 1 (0-0.7): Feed scrolls through clips
-                // Phase 2 (0.7-0.9): Phones shrink, fade, exit hearts
-                // Phase 3 (0.9-1.0): Dead space / transition to services
+                // Phase 2 (0.7-1.0): Phones shrink, fade, exit with burst
                 var feedP = Math.min(1, p / 0.7);
-                var exitP = Math.max(0, Math.min(1, (p - 0.7) / 0.2));
+                var exitP = Math.max(0, Math.min(1, (p - 0.7) / 0.3));
 
                 // Feed scrolling
                 var label = document.getElementById('right-client-label');
@@ -1358,7 +1424,7 @@
                     if (phoneR) phoneR.style.transform = 'rotateY(5deg) rotateZ(' + (exitP * 8) + 'deg)';
                     if (phoneL) phoneL.style.boxShadow = '';
                     if (phoneR) phoneR.style.boxShadow = '';
-                    if (exitP > 0.4) spawnPlatformBurst();
+                    if (exitP > 0.3) spawnPlatformBurst();
                 } else {
                     phones.style.transform = 'scale(' + growScale + ') translateY(' + floatY + 'px)';
                     phones.style.opacity = '1';
@@ -1396,18 +1462,24 @@
             tick();
         })();
 
-        /* "How We Seed." — glows purple on scroll, freezes to black */
+        /* "How We Seed." — fallback: waits for burst, only fires if burst never happens */
         (function() {
             var h = document.getElementById('seedHeading');
             if (!h) return;
             new IntersectionObserver(function(entries, obs) {
                 if (entries[0].isIntersecting) {
-                    h.classList.add('visible');
-                    setTimeout(function() {
-                        h.classList.add('settled');
-                        setTimeout(function() { h.style.transition = 'none'; }, 1400);
-                    }, 1500);
                     obs.disconnect();
+                    // Wait 2.5s to let burst fire and handle the heading
+                    // If burst never fires (user jumped past), this fallback takes over
+                    setTimeout(function() {
+                        if (!h.classList.contains('visible')) {
+                            h.classList.add('visible');
+                            setTimeout(function() {
+                                h.classList.add('settled');
+                                setTimeout(function() { h.style.transition = 'none'; }, 1400);
+                            }, 1500);
+                        }
+                    }, 2500);
                 }
             }, { threshold: 0.1 }).observe(h);
         })();
