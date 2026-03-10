@@ -142,11 +142,16 @@
         .df-lockup--sm .df-lockup__wordmark { font-size: 20px; }
         .df-lockup--sm { gap: 8px; }
         .nav-logo .df-lockup__mark {
-            background: var(--text);
-            color: var(--bg);
+            background: var(--accent);
+            color: #ffffff;
         }
         .nav-logo .df-lockup__wordmark {
             color: var(--text);
+        }
+        @media (max-width: 768px) {
+            .nav-logo .df-lockup__mark { width: 28px; height: 28px; font-size: 12px; border-radius: 7px; }
+            .nav-logo .df-lockup__wordmark { font-size: 16px; }
+            .nav-logo .df-lockup--sm { gap: 6px; }
         }
 
         .nav-links {
