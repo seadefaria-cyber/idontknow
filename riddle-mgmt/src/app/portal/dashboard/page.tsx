@@ -9,6 +9,7 @@ import LegalSection from "@/components/portal/LegalSection";
 import ScheduleSection from "@/components/portal/ScheduleSection";
 import ReimbursementsSection from "@/components/portal/ReimbursementsSection";
 import RoyaltiesSection from "@/components/portal/RoyaltiesSection";
+import CommissionsSection from "@/components/portal/CommissionsSection";
 import IntegrationsSection from "@/components/portal/IntegrationsSection";
 import { brand } from "@/lib/brand";
 
@@ -40,7 +41,7 @@ export default function Dashboard() {
 
       const map: Record<string, Section> = {
         "1": "creative", "2": "legal", "3": "schedule",
-        "4": "reimbursements", "5": "royalties",
+        "4": "reimbursements", "5": "royalties", "6": "commissions",
       };
       const section = map[e.key];
       if (section) setActiveSection(section);
@@ -128,16 +129,28 @@ export default function Dashboard() {
         {activeSection === "royalties" && (
           <RoyaltiesSection role={user?.role || "client"} allUsers={allUsers} refreshSignal={refreshKey} />
         )}
+        {activeSection === "commissions" && (
+          <CommissionsSection role={user?.role || "client"} allUsers={allUsers} refreshSignal={refreshKey} />
+        )}
       </div>
 
       {/* Footer */}
       <div className="mt-20 mb-8 flex flex-col items-center gap-4">
-        <a
-          href="/portal/expenses"
-          className="text-[10px] text-gray-300 hover:text-gray-400 transition-colors tracking-[0.15em] uppercase"
-        >
-          Submit an Expense
-        </a>
+        <div className="flex items-center gap-4">
+          <a
+            href="/portal/expenses"
+            className="text-[10px] text-gray-300 hover:text-gray-400 transition-colors tracking-[0.15em] uppercase"
+          >
+            Submit an Expense
+          </a>
+          <span className="text-gray-100">|</span>
+          <a
+            href="/portal/commissions"
+            className="text-[10px] text-gray-300 hover:text-gray-400 transition-colors tracking-[0.15em] uppercase"
+          >
+            Upload a Commission
+          </a>
+        </div>
 
         <div className="flex items-center gap-4">
           <button
