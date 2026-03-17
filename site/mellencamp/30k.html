@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeFaria — John Mellencamp Digital Activation</title>
+<style>
+  @import url('fonts/fonts.css');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0a;
+    --card: rgba(0, 0, 0, 0.75);
+    --accent: #F5C518;
+    --text: #ffffff;
+    --text-secondary: #e0e0e0;
+    --text-muted: #999999;
+    --mono: 'JetBrains Mono', monospace;
+    --font: 'Inter', -apple-system, system-ui, sans-serif;
+    --font-display: 'Anton', sans-serif;
+  }
+
+  body { font-family: var(--font); background: #000; color: var(--text); -webkit-font-smoothing: antialiased; }
+
+  .page {
+    width: 11in; height: 8.5in; position: relative; overflow: hidden;
+    background: var(--bg); display: flex; flex-direction: column;
+    justify-content: center; margin: 0 auto; page-break-after: always;
+    padding: 80px 96px;
+  }
+  .page.centered { align-items: center; text-align: center; }
+  .page:last-child { page-break-after: avoid; }
+
+  .page-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover; background-position: center; z-index: 0;
+  }
+  .page-bg::after {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(180deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.85) 100%);
+  }
+  .page > *:not(.page-bg) { position: relative; z-index: 1; }
+
+  @media screen { .page { margin: 24px auto; border-radius: 6px; } }
+  @page { size: 11in 8.5in landscape; margin: 0; }
+  @media print { body { background: #000; margin: 0; } .page { margin: 0; width: 100vw; height: 100vh; border-radius: 0; } }
+
+  .page-logo { position: absolute !important; top: 32px; left: 40px; display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; background: var(--accent); color: #fff; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: -1px; line-height: 1; z-index: 10; }
+  .page-logo-text { position: absolute !important; top: 42px; left: 88px; font-family: var(--mono); font-size: 9px; font-weight: 400; letter-spacing: 0.1em; color: var(--text-muted); z-index: 10; }
+  .page-footer { position: absolute !important; bottom: 22px; left: 0; right: 0; font-family: var(--mono); font-size: 7px; font-weight: 400; letter-spacing: 0.15em; color: rgba(255,255,255,0.25); text-align: center; text-transform: uppercase; z-index: 10; }
+  .page-meta { position: absolute !important; top: 36px; right: 48px; text-align: right; z-index: 10; }
+  .page-meta .line1 { font-family: var(--font); font-size: 11px; font-weight: 600; color: var(--text); letter-spacing: 0.08em; text-transform: uppercase; }
+  .page-meta .line2 { font-family: var(--mono); font-size: 9px; font-weight: 400; color: var(--text-muted); margin-top: 2px; }
+
+  .hero-title { font-family: var(--font-display); font-size: 108px; font-weight: 400; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; }
+  .hero-title .accent { color: var(--accent); }
+
+  .section-title { font-family: var(--font-display); font-size: 80px; font-weight: 400; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 28px; }
+  .section-title .accent { color: var(--accent); }
+
+  .hero-sub { font-family: var(--font); font-size: 16px; font-weight: 500; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 24px; }
+
+  .body-text { font-size: 16px; font-weight: 400; color: var(--text-secondary); line-height: 1.75; max-width: 540px; }
+
+  .card-grid { display: grid; gap: 14px; width: 100%; margin-top: 20px; }
+  .card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 24px; text-align: left; }
+  .card-num { font-family: var(--font-display); font-size: 40px; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+  .card h3 { font-family: var(--font); font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .card li { font-size: 12.5px; font-weight: 400; line-height: 1.55; color: var(--text-secondary); margin-bottom: 3px; }
+  .card ul { list-style: disc; padding-left: 16px; margin-top: 6px; }
+
+  .split { display: flex; align-items: flex-start; gap: 64px; width: 100%; }
+  .split-left { flex-shrink: 0; width: 340px; }
+  .split-right { flex: 1; }
+
+  .budget-item { padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: baseline; }
+  .budget-item .budget-phase { font-family: var(--font); font-size: 14px; font-weight: 600; color: var(--accent); }
+  .budget-item .budget-desc { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+  .budget-item .budget-amount { font-family: var(--font); font-size: 17px; font-weight: 700; color: var(--text); flex-shrink: 0; margin-left: 24px; }
+  .budget-total { padding-top: 24px; margin-top: 8px; border-top: 2px solid var(--accent); display: flex; justify-content: space-between; align-items: baseline; }
+  .budget-total .label { font-family: var(--font-display); font-size: 24px; color: var(--accent); text-transform: uppercase; }
+  .budget-total .amount { font-family: var(--font-display); font-size: 40px; color: var(--accent); text-transform: uppercase; }
+
+  .contact-block { text-align: left; }
+  .contact-block .contact-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .contact-block .contact-value { font-size: 17px; color: var(--text); font-weight: 400; margin-bottom: 18px; }
+  .contact-block .contact-value.red { color: var(--accent); font-weight: 500; }
+
+  /* TikTok phone mockup - realistic */
+  .phone {
+    flex-shrink: 0; width: 210px; height: 420px;
+    background: #000; border-radius: 30px;
+    border: 2px solid #333; position: relative;
+    overflow: hidden; box-shadow: 0 16px 56px rgba(0,0,0,0.9);
+  }
+  .phone-island { width: 64px; height: 16px; background: #000; border-radius: 10px; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); z-index: 10; }
+  /* Full-bleed video */
+  .phone-video-wrap { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; }
+  .phone-video { width: 100%; height: 100%; background-size: cover; background-position: center; }
+  /* Gradient overlay at bottom for text readability */
+  .phone-video-wrap::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 55%; background: linear-gradient(transparent, rgba(0,0,0,0.85)); z-index: 1; }
+  /* Status bar overlaid on video */
+  .phone-status { position: absolute; top: 0; left: 0; right: 0; height: 28px; display: flex; justify-content: space-between; align-items: center; padding: 8px 16px 0; z-index: 5; }
+  .phone-status-time { font-family: var(--font); font-size: 8px; font-weight: 600; color: #fff; }
+  .phone-status-icons { display: flex; gap: 3px; align-items: center; }
+  .phone-status-icons svg { width: 10px; height: 10px; fill: #fff; }
+  /* Top tabs overlaid */
+  .phone-tabs { position: absolute; top: 28px; left: 0; right: 0; height: 28px; display: flex; justify-content: center; gap: 16px; align-items: center; z-index: 5; }
+  .phone-tab { font-family: var(--font); font-size: 8px; color: rgba(255,255,255,0.5); font-weight: 500; }
+  .phone-tab.active { color: #fff; font-weight: 700; border-bottom: 2px solid #fff; padding-bottom: 2px; }
+  /* Right sidebar - TikTok action buttons */
+  .phone-sidebar { position: absolute; right: 8px; bottom: 80px; display: flex; flex-direction: column; gap: 14px; align-items: center; z-index: 5; }
+  .phone-sidebar-item { text-align: center; }
+  .phone-sidebar-item svg { width: 22px; height: 22px; fill: #fff; display: block; margin: 0 auto 2px; }
+  .phone-sidebar-num { font-family: var(--font); font-size: 7px; color: #fff; font-weight: 600; }
+  /* Profile pic in sidebar */
+  .phone-sidebar-avatar { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid #fff; background: url('images/mellencamp-1.jpg') center/cover; margin-bottom: 10px; position: relative; }
+  .phone-sidebar-avatar::after { content: '+'; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); width: 12px; height: 12px; background: #FE2C55; border-radius: 50%; font-size: 9px; color: #fff; display: flex; align-items: center; justify-content: center; line-height: 1; }
+  /* Caption area - overlaid on video at bottom */
+  .phone-caption-area { position: absolute; bottom: 42px; left: 0; right: 40px; padding: 0 14px; z-index: 5; }
+  .phone-handle { font-family: var(--font); font-size: 8.5px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .phone-desc { font-family: var(--font); font-size: 7.5px; color: #eee; line-height: 1.4; margin-bottom: 6px; }
+  .phone-sound { font-family: var(--font); font-size: 7px; color: #fff; display: flex; align-items: center; gap: 4px; }
+  .phone-sound svg { width: 8px; height: 8px; fill: #fff; flex-shrink: 0; }
+  /* Sound disc */
+  .phone-disc { position: absolute; right: 8px; bottom: 50px; width: 24px; height: 24px; border-radius: 50%; background: #222; border: 6px solid #333; z-index: 5; animation: spin 3s linear infinite; }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  /* Bottom nav */
+  .phone-nav { position: absolute; bottom: 0; left: 0; right: 0; height: 38px; background: rgba(0,0,0,0.95); display: flex; justify-content: space-around; align-items: center; padding: 0 8px; z-index: 6; }
+  .phone-nav-item { text-align: center; }
+  .phone-nav-item svg { width: 16px; height: 16px; fill: #888; display: block; margin: 0 auto 1px; }
+  .phone-nav-item.active svg { fill: #fff; }
+  .phone-nav-label { font-family: var(--font); font-size: 6px; color: #888; }
+  .phone-nav-item.active .phone-nav-label { color: #fff; }
+  .phone-nav-plus-btn { width: 28px; height: 18px; position: relative; }
+  .phone-nav-plus-btn .bg-left { position: absolute; left: 0; top: 0; width: 22px; height: 18px; background: #25F4EE; border-radius: 4px; }
+  .phone-nav-plus-btn .bg-right { position: absolute; right: 0; top: 0; width: 22px; height: 18px; background: #FE2C55; border-radius: 4px; }
+  .phone-nav-plus-btn .bg-center { position: absolute; left: 3px; right: 3px; top: 0; width: 22px; height: 18px; background: #fff; border-radius: 4px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+  .phone-nav-plus-btn .bg-center svg { width: 12px; height: 12px; fill: #000; }
+  .phone-homebar { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 56px; height: 3px; background: #fff; border-radius: 2px; z-index: 7; }
+
+  /* Notification badge */
+  .phone-badge {
+    position: absolute; top: -3px; right: -6px; min-width: 12px; height: 12px;
+    background: #FE2C55; border-radius: 6px; font-family: var(--font);
+    font-size: 6px; font-weight: 700; color: #fff; display: flex;
+    align-items: center; justify-content: center; padding: 0 3px;
+  }
+
+  /* Phase card week label */
+  .card-week { font-family: var(--mono); font-size: 9px; font-weight: 400; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+
+  /* Geo-fence animations */
+  @keyframes geoPulse {
+    0% { transform: scale(0.85); opacity: 1; }
+    100% { transform: scale(1.15); opacity: 0; }
+  }
+  @keyframes deviceBlink {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.8; }
+  }
+</style>
+</head>
+<body>
+
+
+<!-- 1: COVER -->
+<div class="page centered">
+  <div class="page-bg" style="background-image: url('images/mellencamp-1.jpg');"></div>
+  <div class="page-logo">dF</div>
+  <div class="page-logo-text">defaria.nyc</div>
+  <div class="page-meta">
+    <div class="line1">John Mellencamp x DeFaria</div>
+    <div class="line2">March 2026</div>
+  </div>
+
+  <div class="hero-title">Digital<br><span class="accent">Activation.</span></div>
+  <div class="hero-sub">John Mellencamp &nbsp;|&nbsp; Full Campaign</div>
+
+  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 1 / 10</div>
+</div>
+
+
+<!-- 2: THE PROBLEM (splash) -->
+<div class="page centered">
+  <div class="page-bg" style="background-image: url('images/mellencamp-3.jpg');"></div>
+  <div class="page-logo">dF</div>
+  <div class="hero-title">The <span class="accent">Problem.</span></div>
+  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 2 / 10</div>
+</div>
+
+
+<!-- 3: THE PROBLEM (detail) -->
+<div class="page centered">
+  <div class="page-bg" style="background-image: url('images/mellencamp-2.jpg');"></div>
+  <div class="page-logo">dF</div>
+
+  <div class="hero-title" style="font-size: 86px;">40 Years Of Catalog.<br><span class="accent">Ready For The Internet.</span></div>
+
+  <p class="body-text" style="margin-top: 32px; max-width: 520px; text-align: center;">If you're under 35, you haven't seen Mellencamp on your feed.</p>
+
+  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 3 / 10</div>
+</div>
+
+
+<!-- 4: CLIPPING -->
+<div class="page">
+  <div class="page-bg" style="background-image: url('images/mellencamp-4.jpg');"></div>
+  <div class="page-logo">dF</div>
+
+  <div style="display: flex; align-items: flex-start; gap: 32px; width: 100%;">
+    <!-- Left: Title + description -->
+    <div style="flex: 1; min-width: 280px;">
+      <div class="section-title" style="font-size: 72px; color: #ffffff;">Clipping.</div>
+      <p class="body-text" style="max-width: 380px; font-size: 14px;">We pull the full catalog, concerts, interviews, behind-the-scenes footage, and cut it into short-form clips built to perform on TikTok, Reels, and Shorts. Our editors cut and post every day across dedicated fan pages we build from scratch.</p>
+    </div>
+
+    <!-- Center: TikTok phone mockup -->
+    <div class="phone" style="width: 180px; height: 360px;">
+      <div class="phone-island"></div>
+      <div class="phone-video-wrap">
+        <div class="phone-video" style="background-image: url('images/mellencamp-10.jpg');"></div>
+      </div>
+      <div class="phone-status">
+        <div class="phone-status-time">9:41</div>
+        <div class="phone-status-icons">
+          <svg viewBox="0 0 16 16"><path d="M1 5.5L3.5 3H5l-3 3 3 3H3.5L1 6.5v-1z M6 5h1.5v2H6V5zm2.5 0H10v2H8.5V5zm2.5 0h1.5v2H11V5z"/></svg>
+          <svg viewBox="0 0 16 16"><path d="M2 11h2V5H2v6zm3-4h2v4H5V7zm3-2h2v6H8V5zm3-2h2v8h-2V3z"/></svg>
+          <svg viewBox="0 0 20 12"><rect x="0" y="1" width="16" height="10" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="2" y="3" width="11" height="6" rx="1" fill="#fff"/><path d="M18 4.5v3a1.5 1.5 0 000-3z" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div class="phone-tabs">
+        <div class="phone-tab">Explore</div>
+        <div class="phone-tab">Following</div>
+        <div class="phone-tab active">For You</div>
+      </div>
+      <div class="phone-sidebar" style="right: 6px; bottom: 62px; gap: 16px;">
+        <div class="phone-sidebar-avatar" style="width: 22px; height: 22px;"></div>
+        <div class="phone-sidebar-item">
+          <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <div class="phone-sidebar-num">84.2K</div>
+        </div>
+        <div class="phone-sidebar-item">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/></svg>
+          <div class="phone-sidebar-num">1,203</div>
+        </div>
+        <div class="phone-sidebar-item">
+          <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
+          <div class="phone-sidebar-num">8,491</div>
+        </div>
+        <div class="phone-sidebar-item">
+          <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+          <div class="phone-sidebar-num">490</div>
+        </div>
+      </div>
+      <div class="phone-disc" style="right: 6px; bottom: 42px; width: 20px; height: 20px;"></div>
+      <div class="phone-caption-area" style="bottom: 36px;">
+        <div class="phone-handle" style="font-size: 7.5px;">@mellencamp.archive</div>
+        <div class="phone-desc" style="font-size: 6.5px;">Farm Aid, 1985. Your dad knew. #mellencamp #classicrock</div>
+        <div class="phone-sound" style="font-size: 6px;">
+          <svg viewBox="0 0 16 16"><path d="M12.5 1a.5.5 0 01.5.5v2.03a4.5 4.5 0 01-3 4.24V13.5a2.5 2.5 0 11-5 0 2.5 2.5 0 012.5-2.5c.53 0 1.03.13 1.47.36V1.5a.5.5 0 01.53-.5z"/></svg>
+          Small Town - John Mellencamp
+        </div>
+      </div>
+      <div class="phone-nav" style="height: 32px;">
+        <div class="phone-nav-item active">
+          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px;"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        </div>
+        <div class="phone-nav-item">
+          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px;"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3z"/></svg>
+        </div>
+        <div class="phone-nav-plus-btn" style="width: 24px; height: 16px;">
+          <div class="bg-left" style="width: 18px; height: 16px;"></div>
+          <div class="bg-right" style="width: 18px; height: 16px;"></div>
+          <div class="bg-center" style="width: 18px; height: 16px;"><svg viewBox="0 0 24 24" style="width: 10px; height: 10px;"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></div>
+        </div>
+        <div class="phone-nav-item">
+          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/></svg>
+        </div>
+        <div class="phone-nav-item">
+          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px;"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        </div>
+      </div>
+      <div class="phone-homebar"></div>
+    </div>
+
+    <!-- Right: Fan page profile mockup -->
+    <div style="flex-shrink: 0; width: 190px; background: #000; border-radius: 18px; padding: 12px; border: 2px solid #222; box-shadow: 0 12px 48px rgba(0,0,0,0.8);">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #222;">
+        <div style="width: 30px; height: 30px; border-radius: 50%; background: url('images/mellencamp-1.jpg') center/cover; flex-shrink: 0;"></div>
+        <div>
+          <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff;">mellencamp.archive</div>
+          <div style="font-family: var(--font); font-size: 7px; color: #888; margin-top: 1px;">Fan Page &middot; Est. 2026</div>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-around; text-align: center; margin-bottom: 10px;">
+        <div>
+          <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff;">127</div>
+          <div style="font-family: var(--font); font-size: 6px; color: #888;">Posts</div>
+        </div>
+        <div>
+          <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff;">48.2K</div>
+          <div style="font-family: var(--font); font-size: 6px; color: #888;">Followers</div>
+        </div>
+        <div>
+          <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff;">2.1M</div>
+          <div style="font-family: var(--font); font-size: 6px; color: #888;">Likes</div>
+        </div>
+      </div>
+      <div style="font-family: var(--font); font-size: 7px; color: #ccc; line-height: 1.4; margin-bottom: 10px;">The archive John Mellencamp deserves.</div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border-radius: 4px; overflow: hidden;">
+        <div style="aspect-ratio: 1; background: url('images/mellencamp-4.jpg') center/cover; position: relative;">
+          <div style="position: absolute; bottom: 2px; left: 3px; font-family: var(--font); font-size: 6px; font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">&#9654; 2.4M</div>
+        </div>
+        <div style="aspect-ratio: 1; background: url('images/mellencamp-7.jpg') center/cover; position: relative;">
+          <div style="position: absolute; bottom: 2px; left: 3px; font-family: var(--font); font-size: 6px; font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">&#9654; 1.8M</div>
+        </div>
+        <div style="aspect-ratio: 1; background: url('images/mellencamp-3.jpg') center/cover; position: relative;">
+          <div style="position: absolute; bottom: 2px; left: 3px; font-family: var(--font); font-size: 6px; font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">&#9654; 947K</div>
+        </div>
+        <div style="aspect-ratio: 1; background: url('images/mellencamp-6.jpg') center/cover; position: relative;">
+          <div style="position: absolute; bottom: 2px; left: 3px; font-family: var(--font); font-size: 6px; font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">&#9654; 612K</div>
+        </div>
+        <div style="aspect-ratio: 1; background: url('images/mellencamp-9.jpg') center/cover; position: relative;">
+          <div style="position: absolute; bottom: 2px; left: 3px; font-family: var(--font); font-size: 6px; font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">&#9654; 483K</div>
+        </div>
+        <div style="aspect-ratio: 1; background: url('images/mellencamp-2.jpg') center/cover; position: relative;">
+          <div style="position: absolute; bottom: 2px; left: 3px; font-family: var(--font); font-size: 6px; font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">&#9654; 291K</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 4 / 10</div>
+</div>
+
+
+<!-- 5: SOUND STRATEGY -->
+<div class="page">
+  <div class="page-bg" style="background-image: url('images/mellencamp-7.jpg');"></div>
+  <div class="page-logo">dF</div>
+
+  <div style="display: flex; align-items: flex-start; gap: 48px; width: 100%;">
+    <div style="flex: 1;">
+      <div class="section-title" style="font-size: 64px;">Sound<br><span class="accent">Strategy.</span></div>
+      <p class="body-text" style="max-width: 420px;">We seed Mellencamp's catalog across TikTok by getting creators to use his songs as sounds in their videos. The same playbook that sent Fleetwood Mac's "Dreams" back to the charts 43 years after release.</p>
+      <p class="body-text" style="max-width: 420px; margin-top: 16px; font-size: 14px; color: var(--text-muted);">Jack and Diane. Small Town. Hurts So Good. These hooks were built for short-form.</p>
+    </div>
+
+    <!-- Charli D'Amelio TikTok mockup -->
+    <div class="phone" style="width: 180px; height: 360px; flex-shrink: 0;">
+      <div class="phone-island"></div>
+      <div class="phone-video-wrap">
+        <div class="phone-video" style="background-image: url('images/charli-dancing.jpg'); background-color: #e8d5b8;"></div>
+      </div>
+      <div class="phone-status">
+        <div class="phone-status-time">9:41</div>
+        <div class="phone-status-icons">
+          <svg viewBox="0 0 16 16"><path d="M1 5.5L3.5 3H5l-3 3 3 3H3.5L1 6.5v-1z M6 5h1.5v2H6V5zm2.5 0H10v2H8.5V5zm2.5 0h1.5v2H11V5z"/></svg>
+          <svg viewBox="0 0 16 16"><path d="M2 11h2V5H2v6zm3-4h2v4H5V7zm3-2h2v6H8V5zm3-2h2v8h-2V3z"/></svg>
+          <svg viewBox="0 0 20 12"><rect x="0" y="1" width="16" height="10" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="2" y="3" width="11" height="6" rx="1" fill="#fff"/><path d="M18 4.5v3a1.5 1.5 0 000-3z" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div class="phone-tabs">
+        <div class="phone-tab">Explore</div>
+        <div class="phone-tab">Following</div>
+        <div class="phone-tab active">For You</div>
+        <svg viewBox="0 0 24 24" style="width: 12px; height: 12px; fill: rgba(255,255,255,0.5);"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5z"/></svg>
+      </div>
+      <div class="phone-sidebar" style="right: 6px; bottom: 62px; gap: 14px;">
+        <div class="phone-sidebar-avatar" style="width: 22px; height: 22px; background-image: url('images/mellencamp-1.jpg');"></div>
+        <div class="phone-sidebar-item">
+          <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <div class="phone-sidebar-num">2.1M</div>
+        </div>
+        <div class="phone-sidebar-item">
+          <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/></svg>
+          <div class="phone-sidebar-num">48.3K</div>
+        </div>
+        <div class="phone-sidebar-item">
+          <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
+          <div class="phone-sidebar-num">89.1K</div>
+        </div>
+        <div class="phone-sidebar-item">
+          <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+          <div class="phone-sidebar-num">12.4K</div>
+        </div>
+      </div>
+      <div class="phone-disc" style="right: 6px; bottom: 42px; width: 20px; height: 20px;"></div>
+      <div class="phone-caption-area" style="bottom: 36px;">
+        <div class="phone-handle" style="font-size: 7.5px;">@charlidamelio</div>
+        <div class="phone-desc" style="font-size: 6.5px;">this song is everything #jackanddiane #mellencamp #dance #throwback</div>
+        <div class="phone-sound" style="font-size: 6px;">
+          <svg viewBox="0 0 16 16"><path d="M12.5 1a.5.5 0 01.5.5v2.03a4.5 4.5 0 01-3 4.24V13.5a2.5 2.5 0 11-5 0 2.5 2.5 0 012.5-2.5c.53 0 1.03.13 1.47.36V1.5a.5.5 0 01.53-.5z"/></svg>
+          Jack &amp; Diane - John Mellencamp
+        </div>
+      </div>
+      <div class="phone-nav" style="height: 32px;">
+        <div class="phone-nav-item active">
+          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px;"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        </div>
+        <div class="phone-nav-item" style="position: relative;">
+          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px;"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3z"/></svg>
+        </div>
+        <div class="phone-nav-plus-btn" style="width: 24px; height: 16px;">
+          <div class="bg-left" style="width: 18px; height: 16px;"></div>
+          <div class="bg-right" style="width: 18px; height: 16px;"></div>
+          <div class="bg-center" style="width: 18px; height: 16px;"><svg viewBox="0 0 24 24" style="width: 10px; height: 10px;"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></div>
+        </div>
+        <div class="phone-nav-item">
+          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/></svg>
+        </div>
+        <div class="phone-nav-item">
+          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px;"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        </div>
+      </div>
+      <div class="phone-homebar"></div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 5 / 10</div>
+</div>
+
+
+<!-- 6: GEO-FENCING -->
+<div class="page">
+  <div class="page-bg" style="background-image: url('images/mellencamp-3.jpg');"></div>
+  <div class="page-logo">dF</div>
+
+  <div style="display: flex; align-items: flex-start; gap: 48px; width: 100%;">
+    <div style="flex: 1;">
+      <div class="section-title" style="font-size: 64px;">Geo-<span class="accent">Fencing.</span></div>
+      <div class="card-grid" style="grid-template-columns: 1fr; max-width: 420px;">
+        <div class="card">
+          <h3 style="font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px;">Tour Venues</h3>
+          <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.65;">We draw a precise digital perimeter around every venue on the tour. Anyone who enters that zone in the weeks before a show starts seeing Mellencamp on their phone across 600,000+ apps, automatically.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px;">Activates With The Tour</h3>
+          <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.65;">Geo-fencing goes live as tour dates approach. Every device that enters a venue zone gets retargeted for 30 days across mobile, video, and connected TV.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Geo-fence illustration -->
+    <div style="flex-shrink: 0; width: 280px; height: 280px; position: relative; display: flex; align-items: center; justify-content: center; margin-top: 40px;">
+      <!-- Outer pulse ring -->
+      <div style="position: absolute; width: 260px; height: 260px; border-radius: 50%; border: 1px solid rgba(245,197,24,0.1); animation: geoPulse 3s ease-out infinite;"></div>
+      <!-- Middle pulse ring -->
+      <div style="position: absolute; width: 200px; height: 200px; border-radius: 50%; border: 1px solid rgba(245,197,24,0.15); animation: geoPulse 3s ease-out 0.6s infinite;"></div>
+      <!-- Fence perimeter -->
+      <div style="position: absolute; width: 150px; height: 150px; border-radius: 50%; border: 2px solid rgba(245,197,24,0.35); background: radial-gradient(circle, rgba(245,197,24,0.08) 0%, transparent 70%);"></div>
+      <!-- Inner zone -->
+      <div style="position: absolute; width: 80px; height: 80px; border-radius: 50%; border: 1.5px dashed rgba(245,197,24,0.5); background: radial-gradient(circle, rgba(245,197,24,0.12) 0%, transparent 70%);"></div>
+      <!-- Center pin -->
+      <div style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center;">
+        <svg width="28" height="36" viewBox="0 0 28 36" fill="none" style="filter: drop-shadow(0 2px 8px rgba(245,197,24,0.4));">
+          <path d="M14 0C6.268 0 0 6.268 0 14c0 10.5 14 22 14 22s14-11.5 14-22C28 6.268 21.732 0 14 0z" fill="#F5C518"/>
+          <circle cx="14" cy="14" r="6" fill="#0a0a0a"/>
+        </svg>
+        <div style="font-family: var(--mono); font-size: 8px; color: var(--accent); letter-spacing: 0.1em; margin-top: 8px; text-transform: uppercase;">Venue</div>
+      </div>
+      <!-- Device dots -->
+      <div style="position: absolute; top: 55px; right: 50px; width: 6px; height: 6px; border-radius: 50%; background: #fff; opacity: 0.6; animation: deviceBlink 2s ease-in-out infinite;"></div>
+      <div style="position: absolute; bottom: 70px; left: 45px; width: 5px; height: 5px; border-radius: 50%; background: #fff; opacity: 0.4; animation: deviceBlink 2s ease-in-out 0.8s infinite;"></div>
+      <div style="position: absolute; top: 80px; left: 70px; width: 5px; height: 5px; border-radius: 50%; background: #fff; opacity: 0.5; animation: deviceBlink 2s ease-in-out 1.4s infinite;"></div>
+      <div style="position: absolute; bottom: 85px; right: 65px; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); opacity: 0.7; animation: deviceBlink 2s ease-in-out 0.4s infinite;"></div>
+      <!-- Radius label -->
+      <div style="position: absolute; bottom: 20px; right: 10px; font-family: var(--mono); font-size: 8px; color: var(--text-muted); letter-spacing: 0.08em;">2 mi radius</div>
+    </div>
+  </div>
+
+  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 6 / 10</div>
+</div>
+
+
+<!-- 7: THE FOUR PHASES -->
+
+<div class="page">
+  <div class="page-bg" style="background-image: url('images/mellencamp-6.jpg');"></div>
+  <div class="page-logo">dF</div>
+
+  <div class="section-title">The <span class="accent">Rollout.</span></div>
+
+  <div class="card-grid cols-2">
+    <div class="card">
+      <div class="card-week">Month 1</div>
+      <div class="card-num">1</div>
+      <h3>Archive + Build + Seed</h3>
+      <ul>
+        <li>Pull the full catalog. Concerts, interviews, music videos, Farm Aid footage, behind-the-scenes moments.</li>
+        <li>Launch fan pages across TikTok, Instagram, YouTube, and Facebook.</li>
+        <li>First creator outreach begins. Identify and lock in influencers for sound seeding campaigns.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-week">Month 2</div>
+      <div class="card-num">2</div>
+      <h3>Ignite + Amplify</h3>
+      <ul>
+        <li>Clips going out daily. Nostalgia hooks, concert footage, storytelling clips, catalog deep cuts.</li>
+        <li>Creators start posting with Mellencamp sounds. Jack and Diane, Small Town, Hurts So Good.</li>
+        <li>First numbers delivered. Double down on what's hitting.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-week">Month 3</div>
+      <div class="card-num">3</div>
+      <h3>Scale + Target</h3>
+      <ul>
+        <li>Content engine at full speed. Fan pages growing, creator sounds spreading organically.</li>
+        <li>Geo-fencing infrastructure goes live across all 18 tour markets. Venue perimeters drawn, retargeting armed.</li>
+        <li>Pre-tour ads start hitting phones near every venue city.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-week">Month 4 — Tour</div>
+      <div class="card-num">4</div>
+      <h3>Tour Mode</h3>
+      <ul>
+        <li>Geo-fencing fully active. Every venue, every market, every device captured and retargeted for 30 days.</li>
+        <li>Content shifts to real-time tour coverage. Live clips, crowd reactions, city-by-city storytelling.</li>
+        <li>Full reporting: impressions, clicks, foot traffic by city. Every dollar trackable.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p style="margin-top: 18px; font-family: var(--mono); font-size: 10px; color: var(--text-muted); letter-spacing: 0.06em; text-align: center;">Start now. By the time the tour hits, the digital world is already built and the audience is already watching.</p>
+
+  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 7 / 10</div>
+</div>
+
+
+<!-- 7: BUDGET BREAKDOWN -->
+<div class="page">
+  <div class="page-bg" style="background-image: url('images/mellencamp-10.jpg');"></div>
+  <div class="page-logo">dF</div>
+
+  <div class="split" style="align-items: flex-start;">
+    <div class="split-left">
+      <div class="section-title" style="font-size: 64px;">Monthly<br><span class="accent">Retainer.</span></div>
+    </div>
+    <div class="split-right" style="padding-top: 8px;">
+      <div class="budget-item">
+        <div>
+          <div class="budget-phase">Content Production</div>
+          <div class="budget-desc">Daily clip editing and posting across TikTok, Reels, Shorts. Full catalog intake and content pipeline.</div>
+        </div>
+        <div class="budget-amount">$10,000</div>
+      </div>
+      <div class="budget-item">
+        <div>
+          <div class="budget-phase">Conversation Control</div>
+          <div class="budget-desc">Fan page management, engagement strategy across all platforms.</div>
+        </div>
+        <div class="budget-amount">$4,000</div>
+      </div>
+      <div class="budget-item">
+        <div>
+          <div class="budget-phase">Influencer Sound Seeding</div>
+          <div class="budget-desc">Creator partnerships to seed Mellencamp audio across TikTok. Americana, nostalgia, and lifestyle verticals.</div>
+        </div>
+        <div class="budget-amount">$5,000</div>
+      </div>
+      <div class="budget-item">
+        <div>
+          <div class="budget-phase">Geo-Fencing</div>
+          <div class="budget-desc">Location-targeted ads across all 18 tour markets. Venue perimeters, 30-day retargeting, OTT/CTV.</div>
+        </div>
+        <div class="budget-amount">$5,000</div>
+      </div>
+      <div class="budget-item">
+        <div>
+          <div class="budget-phase">Crisis Insurance</div>
+          <div class="budget-desc">Included with this tier. If something goes sideways on tour, we protect the narrative across every comment section and platform.</div>
+        </div>
+        <div class="budget-amount">Included</div>
+      </div>
+      <div class="budget-item">
+        <div>
+          <div class="budget-phase">Intelligence + Strategy</div>
+          <div class="budget-desc">Weekly reports, strategy calls, market-by-market performance tracking.</div>
+        </div>
+        <div class="budget-amount">$6,000</div>
+      </div>
+      <div class="budget-total">
+        <div class="label">Monthly:</div>
+        <div class="amount">$30,000</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 8 / 10</div>
+</div>
+
+
+<!-- 8: START NOW -->
+<div class="page centered">
+  <div class="page-bg" style="background-image: url('images/mellencamp-9.jpg');"></div>
+  <div class="page-logo">dF</div>
+
+  <div class="hero-title" style="font-size: 86px;">Start Now.<br><span class="accent">Tour Ready By July.</span></div>
+
+  <p class="body-text" style="margin-top: 28px; max-width: 520px; text-align: center;">We start within a week of signing. Content engine runs immediately. Geo-fencing activates as tour dates approach. First numbers in 14 days. All content cleared with your team before going live.</p>
+
+  <p style="font-size: 13px; color: var(--text-muted); margin-top: 24px;">Tour starts July 10. That gives us four months to build the machine before it matters most.</p>
+
+  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 9 / 10</div>
+</div>
+
+
+<!-- 9: THANK YOU -->
+<div class="page">
+  <div class="page-bg" style="background-image: url('images/mellencamp-5.jpg');"></div>
+  <div class="page-logo">dF</div>
+  <div class="page-meta">
+    <div class="line1" style="color: var(--text-muted); text-transform: none;">defaria.nyc</div>
+  </div>
+
+  <div class="split" style="align-items: center;">
+    <div class="split-left">
+      <div class="hero-title" style="font-size: 96px;"><span class="accent">Thank<br>You.</span></div>
+    </div>
+    <div class="split-right">
+      <div class="contact-block">
+        <div class="contact-label" style="border-top: none; padding-top: 0;">Name</div>
+        <div class="contact-value">Sean DeFaria</div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value red">sean@defaria.nyc</div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-value">310 625 4899</div>
+        <div class="contact-label">Website</div>
+        <div class="contact-value">defaria.nyc</div>
+        <div class="contact-label">Location</div>
+        <div class="contact-value">New York</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 10 / 10</div>
+</div>
+
+
+</body>
+</html>
