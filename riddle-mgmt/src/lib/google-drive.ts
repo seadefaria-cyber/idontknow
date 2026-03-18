@@ -188,6 +188,8 @@ export async function listFilesWithFolders(accessToken: string): Promise<DriveFi
       folderCategory[id] = "royalties";
     } else if (lower === "publishing") {
       folderCategory[id] = "royalties";
+    } else if (lower === "commissions" || lower === "commission") {
+      folderCategory[id] = "commissions";
     }
   }
 

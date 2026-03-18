@@ -307,6 +307,27 @@ async function initSchema() {
       uploaded_at TEXT DEFAULT (datetime('now')),
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     );
+
+    CREATE TABLE IF NOT EXISTS commissions (
+      id TEXT PRIMARY KEY,
+      client_id TEXT NOT NULL,
+      title TEXT NOT NULL,
+      description TEXT,
+      amount REAL,
+      status TEXT DEFAULT 'submitted',
+      admin_notes TEXT,
+      file_name TEXT,
+      original_name TEXT,
+      file_path TEXT,
+      file_size INTEGER,
+      mime_type TEXT,
+      submitter_name TEXT,
+      submitter_email TEXT,
+      submitter_google_id TEXT,
+      submitted_at TEXT DEFAULT (datetime('now')),
+      reviewed_at TEXT,
+      FOREIGN KEY (client_id) REFERENCES users(id) ON DELETE CASCADE
+    );
   `);
 
   // Migrations
