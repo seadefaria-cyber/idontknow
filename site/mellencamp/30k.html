@@ -40,7 +40,7 @@
   .page.centered { align-items: center; text-align: center; }
   .page:last-child { page-break-after: avoid; }
   .page::before {
-    content: ''; position: absolute; top: 12px; left: 12px; right: 12px; bottom: 12px;
+    content: ''; position: absolute; top: 1.2vh; left: 0.8vw; right: 0.8vw; bottom: 1.2vh;
     border: 1px solid rgba(245,197,24,0.15); border-radius: 4px; z-index: 1; pointer-events: none;
   }
 
@@ -61,9 +61,9 @@
     display: none;
   }
   .page-footer { position: absolute !important; bottom: 2vh; left: 0; right: 0; font-family: var(--mono); font-size: clamp(6px, 0.7vw, 8px); font-weight: 400; letter-spacing: 0.15em; color: rgba(255,255,255,0.2); text-align: center; text-transform: uppercase; z-index: 10; }
-  .page-meta { position: absolute !important; top: 36px; right: 48px; text-align: right; z-index: 10; }
-  .page-meta .line1 { font-family: var(--font); font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: 0.08em; text-transform: uppercase; }
-  .page-meta .line2 { font-family: var(--mono); font-size: 11px; font-weight: 400; color: var(--text-muted); margin-top: 2px; }
+  .page-meta { position: absolute !important; top: 3.5vh; right: 3vw; text-align: right; z-index: 10; }
+  .page-meta .line1 { font-family: var(--font); font-size: clamp(10px, 1.2vw, 13px); font-weight: 600; color: var(--text); letter-spacing: 0.08em; text-transform: uppercase; }
+  .page-meta .line2 { font-family: var(--mono); font-size: clamp(9px, 1vw, 11px); font-weight: 400; color: var(--text-muted); margin-top: 0.2vh; }
 
   .hero-title { font-family: var(--font-display); font-size: clamp(48px, 8vw, 108px); font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; }
   .hero-title .accent { color: var(--accent); }
@@ -75,13 +75,13 @@
 
   .body-text { font-size: clamp(14px, 1.6vw, 20px); font-weight: 500; color: var(--text-secondary); line-height: 1.8; max-width: 540px; margin-left: auto; margin-right: auto; }
 
-  .card-grid { display: grid; gap: 16px; width: 100%; margin-top: 20px; margin-left: auto; margin-right: auto; max-width: 700px; }
+  .card-grid { display: grid; gap: clamp(8px, 1.5vh, 16px); width: 100%; margin-top: 1.5vh; margin-left: auto; margin-right: auto; max-width: 700px; }
   .card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px; text-align: left; }
-  .card-num { font-family: var(--font-display); font-size: 42px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 8px; }
-  .card h3 { font-family: var(--font); font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-  .card li { font-size: 15px; font-weight: 500; line-height: 1.55; color: #e8e8e8; margin-bottom: 3px; }
-  .card ul { list-style: disc; padding-left: 16px; margin-top: 6px; }
+  .card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); border-radius: clamp(8px, 1.2vw, 16px); padding: clamp(12px, 2.5vh, 28px); text-align: left; }
+  .card-num { font-family: var(--font-display); font-size: clamp(24px, 4vw, 42px); font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 0.8vh; }
+  .card h3 { font-family: var(--font); font-size: clamp(12px, 1.3vw, 15px); font-weight: 600; color: var(--text); margin-bottom: 0.5vh; }
+  .card li { font-size: clamp(12px, 1.3vw, 15px); font-weight: 500; line-height: 1.55; color: #e8e8e8; margin-bottom: 0.3vh; }
+  .card ul { list-style: disc; padding-left: 1.2vw; margin-top: 0.5vh; }
 
   .split { display: flex; align-items: center; justify-content: center; gap: 4vw; width: 100%; }
   .split-left { flex-shrink: 0; width: 30%; text-align: left; }
@@ -96,14 +96,14 @@
   .budget-total .amount { font-family: var(--font-display); font-size: clamp(28px, 3vw, 40px); font-weight: 700; color: var(--accent); text-transform: uppercase; }
 
   .contact-block { text-align: left; }
-  .contact-block .contact-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); }
-  .contact-block .contact-value { font-size: 20px; color: var(--text); font-weight: 400; margin-bottom: 20px; }
+  .contact-block .contact-label { font-family: var(--mono); font-size: clamp(8px, 1vw, 11px); letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4vh; padding-top: 1.5vh; border-top: 1px solid rgba(255,255,255,0.08); }
+  .contact-block .contact-value { font-size: clamp(14px, 1.8vw, 20px); color: var(--text); font-weight: 400; margin-bottom: 1.5vh; }
   .contact-block .contact-value.accent { color: var(--accent); font-weight: 500; }
 
   /* TikTok phone mockup */
   .phone {
-    flex-shrink: 0; width: 210px; height: 420px;
-    background: #000; border-radius: 30px;
+    flex-shrink: 0; width: clamp(140px, 14vw, 210px); height: clamp(280px, 28vw, 420px);
+    background: #000; border-radius: clamp(16px, 2vw, 30px);
     border: 2px solid #333; position: relative;
     overflow: hidden; box-shadow: 0 16px 56px rgba(0,0,0,0.9);
   }
@@ -151,7 +151,7 @@
     align-items: center; justify-content: center; padding: 0 3px;
   }
 
-  .card-week { font-family: var(--mono); font-size: 12px; font-weight: 400; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+  .card-week { font-family: var(--mono); font-size: clamp(9px, 1.1vw, 12px); font-weight: 400; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.4vh; }
 
   /* Geo-fence animations */
   @keyframes geoPulse {
@@ -165,9 +165,9 @@
 
   /* Objective slide mono label */
   .obj-label {
-    font-family: var(--font-display); font-size: 48px; font-weight: 700;
+    font-family: var(--font-display); font-size: clamp(32px, 5vw, 48px); font-weight: 700;
     letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase;
-    margin-bottom: 28px;
+    margin-bottom: 2.5vh;
   }
 
   /* Phone bold caption overlay */
@@ -202,7 +202,7 @@
   .phase-note { font-family: var(--mono); font-size: clamp(9px, 1vw, 12px); color: #999; letter-spacing: 0.06em; text-align: center; margin-top: 1vh; }
 
   /* Month 1: Archive grid animation */
-  .archive-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 200px; }
+  .archive-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(3px, 0.5vw, 6px); width: clamp(140px, 15vw, 200px); }
   .archive-tile {
     width: 100%; aspect-ratio: 1; border: 1px solid rgba(245,197,24,0.3);
     background: rgba(245,197,24,0.06); border-radius: 3px;
@@ -233,7 +233,7 @@
   }
 
   /* Month 2: Ignition shockwave */
-  .ignition-wrap { position: relative; width: 240px; height: 240px; display: flex; align-items: center; justify-content: center; }
+  .ignition-wrap { position: relative; width: clamp(160px, 18vw, 240px); height: clamp(160px, 18vw, 240px); display: flex; align-items: center; justify-content: center; }
   .ignition-core {
     width: 16px; height: 16px; border-radius: 50%;
     background: var(--accent);
@@ -280,7 +280,7 @@
   }
 
   /* Month 3: Radar sweep */
-  .radar-wrap { position: relative; width: 220px; height: 220px; }
+  .radar-wrap { position: relative; width: clamp(150px, 16vw, 220px); height: clamp(150px, 16vw, 220px); }
   .radar-circle {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     border-radius: 50%; border: 1px solid rgba(245,197,24,0.15);
@@ -327,7 +327,7 @@
   .radar-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px rgba(245,197,24,0.5); }
 
   /* Month 4: EKG pulse line */
-  .ekg-wrap { position: relative; width: 260px; height: 120px; overflow: hidden; }
+  .ekg-wrap { position: relative; width: clamp(180px, 18vw, 260px); height: clamp(80px, 10vh, 120px); overflow: hidden; }
   .ekg-line {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
   }
@@ -358,10 +358,10 @@
     45% { left: 45%; top: 50%; }
     100% { left: 100%; top: 50%; }
   }
-  .ekg-label { font-family: var(--mono); font-size: 8px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 12px; text-align: center; opacity: 0.6; }
+  .ekg-label { font-family: var(--mono); font-size: clamp(6px, 0.8vw, 8px); color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 1vh; text-align: center; opacity: 0.6; }
 
   /* Month 4: Tour route map */
-  .tour-route { position: relative; width: 260px; height: 220px; }
+  .tour-route { position: relative; width: clamp(180px, 18vw, 260px); height: clamp(150px, 18vh, 220px); }
   .tour-route svg polyline { stroke-dasharray: 500; stroke-dashoffset: 500; animation: tourLineDraw 6s ease-in-out infinite; }
   @keyframes tourLineDraw { 0% { stroke-dashoffset: 500; } 30%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 500; } }
   .tour-dot {
@@ -403,7 +403,7 @@
   </div>
 
   <div class="hero-title">Digital<br>Amplification</div>
-  <div class="hero-title" style="font-size: 96px;"><span class="accent v2-shine">V2</span></div>
+  <div class="hero-title" style="font-size: clamp(48px, 8vw, 96px);"><span class="accent v2-shine">V2</span></div>
   <div class="hero-sub">John Mellencamp 2026 Tour</div>
 
   <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 1 / 13</div>
@@ -416,7 +416,7 @@
 
 
   <div class="obj-label">Objective</div>
-  <p class="body-text" style="max-width: 620px; text-align: center; font-size: 20px; line-height: 1.85;">Drive a sustained surge in cultural relevance and tour demand for John Mellencamp by strategically amplifying digital content, maximizing reach, engagement, and share of internet attention across platforms in the lead-up to the tour.</p>
+  <p class="body-text" style="max-width: 620px; text-align: center; font-size: clamp(14px, 1.6vw, 20px); line-height: 1.85;">Drive a sustained surge in cultural relevance and tour demand for John Mellencamp by strategically amplifying digital content, maximizing reach, engagement, and share of internet attention across platforms in the lead-up to the tour.</p>
 
   <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 2 / 13</div>
 </div>
@@ -427,15 +427,15 @@
   <div class="page-bg" style="background-image: url('images/mellencamp-4.jpg');"></div>
 
 
-  <div style="display: flex; align-items: flex-start; justify-content: center; gap: 32px; width: 100%;">
+  <div style="display: flex; align-items: flex-start; justify-content: center; gap: 2vw; width: 100%;">
     <!-- Left: Title + description -->
-    <div style="flex: 1; min-width: 260px; text-align: left;">
-      <div class="section-title" style="font-size: 72px; color: #ffffff;">Clipping<span class="accent">.</span></div>
-      <p class="body-text" style="max-width: 380px; font-size: 17px; line-height: 1.7;">We source and repackage archival and contemporary footage, spanning performances, interviews, and behind-the-scenes moments, into high-performing short-form content optimized for TikTok, Instagram Reels, and YouTube Shorts. Our team manages a consistent daily publishing cadence across a network of strategically developed fan-facing channels to expand reach and drive sustained audience engagement.</p>
+    <div style="flex: 1; min-width: 20vw; text-align: left;">
+      <div class="section-title" style="font-size: clamp(36px, 5.5vw, 72px); color: #ffffff;">Clipping<span class="accent">.</span></div>
+      <p class="body-text" style="max-width: 380px; font-size: clamp(12px, 1.3vw, 17px); line-height: 1.6;">We source and repackage archival and contemporary footage, spanning performances, interviews, and behind-the-scenes moments, into high-performing short-form content optimized for TikTok, Instagram Reels, and YouTube Shorts. Our team manages a consistent daily publishing cadence across a network of strategically developed fan-facing channels to expand reach and drive sustained audience engagement.</p>
     </div>
 
     <!-- Center: TikTok phone mockup -->
-    <div class="phone" style="width: 180px; height: 360px;">
+    <div class="phone" style="width: clamp(130px, 13vw, 180px); height: clamp(260px, 26vw, 360px);">
       <div class="phone-island"></div>
       <div class="phone-video-wrap">
         <div class="phone-video" style="background-image: url('images/mellencamp-4.jpg');"></div>
@@ -507,29 +507,29 @@
     </div>
 
     <!-- Right: Fan page profile mockup -->
-    <div style="flex-shrink: 0; width: 190px; background: #000; border-radius: 18px; padding: 14px; border: 2px solid #222; box-shadow: 0 12px 48px rgba(0,0,0,0.8);">
-      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #1a1a1a;">
-        <div style="width: 30px; height: 30px; border-radius: 50%; background: url('images/mellencamp-1.jpg') center/cover; flex-shrink: 0;"></div>
+    <div style="flex-shrink: 0; width: clamp(130px, 13vw, 190px); background: #000; border-radius: clamp(10px, 1.2vw, 18px); padding: clamp(8px, 1vw, 14px); border: 2px solid #222; box-shadow: 0 12px 48px rgba(0,0,0,0.8);">
+      <div style="display: flex; align-items: center; gap: 0.5vw; margin-bottom: 1.2vh; padding-bottom: 0.8vh; border-bottom: 1px solid #1a1a1a;">
+        <div style="width: clamp(20px, 2.2vw, 30px); height: clamp(20px, 2.2vw, 30px); border-radius: 50%; background: url('images/mellencamp-1.jpg') center/cover; flex-shrink: 0;"></div>
         <div>
-          <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff;">mellencamp.archive</div>
-          <div style="font-family: var(--font); font-size: 7px; color: #666; margin-top: 1px;">Fan Page &middot; Est. 2026</div>
+          <div style="font-family: var(--font); font-size: clamp(7px, 0.8vw, 9px); font-weight: 700; color: #fff;">mellencamp.archive</div>
+          <div style="font-family: var(--font); font-size: clamp(5px, 0.6vw, 7px); color: #666; margin-top: 1px;">Fan Page &middot; Est. 2026</div>
         </div>
       </div>
-      <div style="display: flex; justify-content: space-around; text-align: center; margin-bottom: 12px;">
+      <div style="display: flex; justify-content: space-around; text-align: center; margin-bottom: 1vh;">
         <div>
-          <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff;">127</div>
-          <div style="font-family: var(--font); font-size: 6px; color: #666;">Posts</div>
+          <div style="font-family: var(--font); font-size: clamp(8px, 0.9vw, 11px); font-weight: 700; color: #fff;">127</div>
+          <div style="font-family: var(--font); font-size: clamp(5px, 0.5vw, 6px); color: #666;">Posts</div>
         </div>
         <div>
-          <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff;">48.2K</div>
-          <div style="font-family: var(--font); font-size: 6px; color: #666;">Followers</div>
+          <div style="font-family: var(--font); font-size: clamp(8px, 0.9vw, 11px); font-weight: 700; color: #fff;">48.2K</div>
+          <div style="font-family: var(--font); font-size: clamp(5px, 0.5vw, 6px); color: #666;">Followers</div>
         </div>
         <div>
-          <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff;">2.1M</div>
-          <div style="font-family: var(--font); font-size: 6px; color: #666;">Likes</div>
+          <div style="font-family: var(--font); font-size: clamp(8px, 0.9vw, 11px); font-weight: 700; color: #fff;">2.1M</div>
+          <div style="font-family: var(--font); font-size: clamp(5px, 0.5vw, 6px); color: #666;">Likes</div>
         </div>
       </div>
-      <div style="font-family: var(--font); font-size: 7px; color: #aaa; line-height: 1.4; margin-bottom: 12px;">The archive John Mellencamp deserves.</div>
+      <div style="font-family: var(--font); font-size: clamp(5px, 0.6vw, 7px); color: #aaa; line-height: 1.4; margin-bottom: 1vh;">The archive John Mellencamp deserves.</div>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border-radius: 4px; overflow: hidden;">
         <div style="aspect-ratio: 1; background: url('images/mellencamp-4.jpg') center/cover; position: relative;">
           <div style="position: absolute; bottom: 2px; left: 3px; font-family: var(--font); font-size: 6px; font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">&#9654; 2.4M</div>
@@ -562,14 +562,14 @@
   <div class="page-bg" style="background-image: url('images/mellencamp-7.jpg');"></div>
 
 
-  <div style="display: flex; align-items: flex-start; justify-content: center; gap: 56px; width: 100%;">
+  <div style="display: flex; align-items: flex-start; justify-content: center; gap: 3vw; width: 100%;">
     <div style="flex: 1; text-align: left;">
-      <div class="section-title" style="font-size: 64px;">Sound<br><span class="accent">Strategy.</span></div>
-      <p class="body-text" style="max-width: 420px; font-size: 17px; line-height: 1.7;">We activate John Mellencamp's catalog natively within TikTok, leveraging a proven resurgence model to reintroduce key tracks into short-form ecosystems. Through coordinated deployment across a network of fan-facing and seeding accounts, we drive early engagement signals that inform platform distribution. As momentum builds, audio is surfaced within discovery layers, triggering organic propagation and broader creator adoption without reliance on paid amplification.</p>
+      <div class="section-title" style="font-size: clamp(36px, 5vw, 64px);">Sound<br><span class="accent">Strategy.</span></div>
+      <p class="body-text" style="max-width: 420px; font-size: clamp(12px, 1.3vw, 17px); line-height: 1.6;">We activate John Mellencamp's catalog natively within TikTok, leveraging a proven resurgence model to reintroduce key tracks into short-form ecosystems. Through coordinated deployment across a network of fan-facing and seeding accounts, we drive early engagement signals that inform platform distribution. As momentum builds, audio is surfaced within discovery layers, triggering organic propagation and broader creator adoption without reliance on paid amplification.</p>
     </div>
 
     <!-- Generic creator TikTok mockup -->
-    <div class="phone" style="width: 180px; height: 360px; flex-shrink: 0;">
+    <div class="phone" style="width: clamp(130px, 13vw, 180px); height: clamp(260px, 26vw, 360px); flex-shrink: 0;">
       <div class="phone-island"></div>
       <div class="phone-video-wrap">
         <div class="phone-video" style="background-image: url('images/sound-creator.jpg'); background-color: #1a1a1a;"></div>
