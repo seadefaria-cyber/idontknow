@@ -3,34 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DeFaria — John Mellencamp Digital Activation</title>
+<title>WLDFR — Digital Amplification V2</title>
 <style>
   @import url('fonts/fonts.css');
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
     --bg: #0a0a0a;
-    --card: rgba(0, 0, 0, 0.75);
+    --card: rgba(0, 0, 0, 0.8);
     --accent: #F5C518;
+    --accent-secondary: #3D7A5A;
     --text: #ffffff;
-    --text-secondary: #e0e0e0;
-    --text-muted: #999999;
+    --text-secondary: #f0f0f0;
+    --text-muted: #888888;
     --mono: 'JetBrains Mono', monospace;
     --font: 'Inter', -apple-system, system-ui, sans-serif;
-    --font-display: 'Anton', sans-serif;
+    --font-display: 'Bebas Neue', 'Oswald', sans-serif;
+    --charcoal: #1C1C1C;
+    --deep-charcoal: #2B2B2B;
+    --warm-stone: #F4F3F1;
   }
 
-  body { font-family: var(--font); background: #000; color: var(--text); -webkit-font-smoothing: antialiased; }
+  body { font-family: var(--font); background: #000; color: var(--text); -webkit-font-smoothing: antialiased; min-width: 1056px; }
 
   .page {
     width: 11in; height: 8.5in; position: relative; overflow: hidden;
     background: var(--bg); display: flex; flex-direction: column;
     justify-content: center; margin: 0 auto; page-break-after: always;
-    padding: 80px 96px;
+    padding: 72px 96px;
   }
   .page.centered { align-items: center; text-align: center; }
   .page:last-child { page-break-after: avoid; }
+  .page::before {
+    content: ''; position: absolute; top: 12px; left: 12px; right: 12px; bottom: 12px;
+    border: 1px solid rgba(245,197,24,0.15); border-radius: 4px; z-index: 1; pointer-events: none;
+  }
 
   .page-bg {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -38,7 +47,7 @@
   }
   .page-bg::after {
     content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(180deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.85) 100%);
+    background: linear-gradient(180deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.72) 50%, rgba(0,0,0,0.9) 100%);
   }
   .page > *:not(.page-bg) { position: relative; z-index: 1; }
 
@@ -46,49 +55,52 @@
   @page { size: 11in 8.5in landscape; margin: 0; }
   @media print { body { background: #000; margin: 0; } .page { margin: 0; width: 100vw; height: 100vh; border-radius: 0; } }
 
-  .page-logo { position: absolute !important; top: 32px; left: 40px; display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; background: var(--accent); color: #fff; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: -1px; line-height: 1; z-index: 10; }
-  .page-logo-text { position: absolute !important; top: 42px; left: 88px; font-family: var(--mono); font-size: 9px; font-weight: 400; letter-spacing: 0.1em; color: var(--text-muted); z-index: 10; }
-  .page-footer { position: absolute !important; bottom: 22px; left: 0; right: 0; font-family: var(--mono); font-size: 7px; font-weight: 400; letter-spacing: 0.15em; color: rgba(255,255,255,0.25); text-align: center; text-transform: uppercase; z-index: 10; }
+  .page-logo {
+    position: absolute !important; top: 20px; left: 32px;
+    width: 36px; height: auto; z-index: 10; opacity: 0.4;
+    text-transform: uppercase;
+  }
+  .page-footer { position: absolute !important; bottom: 24px; left: 0; right: 0; font-family: var(--mono); font-size: 7px; font-weight: 400; letter-spacing: 0.15em; color: rgba(255,255,255,0.2); text-align: center; text-transform: uppercase; z-index: 10; }
   .page-meta { position: absolute !important; top: 36px; right: 48px; text-align: right; z-index: 10; }
-  .page-meta .line1 { font-family: var(--font); font-size: 11px; font-weight: 600; color: var(--text); letter-spacing: 0.08em; text-transform: uppercase; }
-  .page-meta .line2 { font-family: var(--mono); font-size: 9px; font-weight: 400; color: var(--text-muted); margin-top: 2px; }
+  .page-meta .line1 { font-family: var(--font); font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: 0.08em; text-transform: uppercase; }
+  .page-meta .line2 { font-family: var(--mono); font-size: 11px; font-weight: 400; color: var(--text-muted); margin-top: 2px; }
 
-  .hero-title { font-family: var(--font-display); font-size: 108px; font-weight: 400; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; }
+  .hero-title { font-family: var(--font-display); font-size: 108px; font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; }
   .hero-title .accent { color: var(--accent); }
 
-  .section-title { font-family: var(--font-display); font-size: 80px; font-weight: 400; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 28px; }
+  .section-title { font-family: var(--font-display); font-size: 80px; font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 28px; }
   .section-title .accent { color: var(--accent); }
 
-  .hero-sub { font-family: var(--font); font-size: 16px; font-weight: 500; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 24px; }
+  .hero-sub { font-family: var(--font); font-size: 19px; font-weight: 500; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 28px; }
 
-  .body-text { font-size: 16px; font-weight: 400; color: var(--text-secondary); line-height: 1.75; max-width: 540px; }
+  .body-text { font-size: 20px; font-weight: 500; color: var(--text-secondary); line-height: 1.8; max-width: 540px; }
 
-  .card-grid { display: grid; gap: 14px; width: 100%; margin-top: 20px; }
+  .card-grid { display: grid; gap: 16px; width: 100%; margin-top: 20px; }
   .card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 24px; text-align: left; }
-  .card-num { font-family: var(--font-display); font-size: 40px; color: var(--accent); line-height: 1; margin-bottom: 8px; }
-  .card h3 { font-family: var(--font); font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-  .card li { font-size: 12.5px; font-weight: 400; line-height: 1.55; color: var(--text-secondary); margin-bottom: 3px; }
+  .card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px; text-align: left; }
+  .card-num { font-family: var(--font-display); font-size: 42px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+  .card h3 { font-family: var(--font); font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .card li { font-size: 15px; font-weight: 500; line-height: 1.55; color: #e8e8e8; margin-bottom: 3px; }
   .card ul { list-style: disc; padding-left: 16px; margin-top: 6px; }
 
-  .split { display: flex; align-items: flex-start; gap: 64px; width: 100%; }
+  .split { display: flex; align-items: flex-start; gap: 72px; width: 100%; }
   .split-left { flex-shrink: 0; width: 340px; }
   .split-right { flex: 1; }
 
-  .budget-item { padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: baseline; }
-  .budget-item .budget-phase { font-family: var(--font); font-size: 14px; font-weight: 600; color: var(--accent); }
-  .budget-item .budget-desc { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+  .budget-item { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: baseline; }
+  .budget-item .budget-phase { font-family: var(--font); font-size: 16px; font-weight: 600; color: var(--accent); }
+  .budget-item .budget-desc { font-size: 15px; color: #e0e0e0; font-weight: 500; margin-top: 4px; }
   .budget-item .budget-amount { font-family: var(--font); font-size: 17px; font-weight: 700; color: var(--text); flex-shrink: 0; margin-left: 24px; }
-  .budget-total { padding-top: 24px; margin-top: 8px; border-top: 2px solid var(--accent); display: flex; justify-content: space-between; align-items: baseline; }
-  .budget-total .label { font-family: var(--font-display); font-size: 24px; color: var(--accent); text-transform: uppercase; }
-  .budget-total .amount { font-family: var(--font-display); font-size: 40px; color: var(--accent); text-transform: uppercase; }
+  .budget-total { padding-top: 28px; margin-top: 8px; border-top: 2px solid var(--accent); display: flex; justify-content: space-between; align-items: baseline; }
+  .budget-total .label { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--accent); text-transform: uppercase; }
+  .budget-total .amount { font-family: var(--font-display); font-size: 40px; font-weight: 700; color: var(--accent); text-transform: uppercase; }
 
   .contact-block { text-align: left; }
-  .contact-block .contact-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.1); }
-  .contact-block .contact-value { font-size: 17px; color: var(--text); font-weight: 400; margin-bottom: 18px; }
-  .contact-block .contact-value.red { color: var(--accent); font-weight: 500; }
+  .contact-block .contact-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .contact-block .contact-value { font-size: 20px; color: var(--text); font-weight: 400; margin-bottom: 20px; }
+  .contact-block .contact-value.accent { color: var(--accent); font-weight: 500; }
 
-  /* TikTok phone mockup - realistic */
+  /* TikTok phone mockup */
   .phone {
     flex-shrink: 0; width: 210px; height: 420px;
     background: #000; border-radius: 30px;
@@ -96,38 +108,29 @@
     overflow: hidden; box-shadow: 0 16px 56px rgba(0,0,0,0.9);
   }
   .phone-island { width: 64px; height: 16px; background: #000; border-radius: 10px; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); z-index: 10; }
-  /* Full-bleed video */
   .phone-video-wrap { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; }
   .phone-video { width: 100%; height: 100%; background-size: cover; background-position: center; }
-  /* Gradient overlay at bottom for text readability */
   .phone-video-wrap::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 55%; background: linear-gradient(transparent, rgba(0,0,0,0.85)); z-index: 1; }
-  /* Status bar overlaid on video */
   .phone-status { position: absolute; top: 0; left: 0; right: 0; height: 28px; display: flex; justify-content: space-between; align-items: center; padding: 8px 16px 0; z-index: 5; }
   .phone-status-time { font-family: var(--font); font-size: 8px; font-weight: 600; color: #fff; }
   .phone-status-icons { display: flex; gap: 3px; align-items: center; }
   .phone-status-icons svg { width: 10px; height: 10px; fill: #fff; }
-  /* Top tabs overlaid */
   .phone-tabs { position: absolute; top: 28px; left: 0; right: 0; height: 28px; display: flex; justify-content: center; gap: 16px; align-items: center; z-index: 5; }
   .phone-tab { font-family: var(--font); font-size: 8px; color: rgba(255,255,255,0.5); font-weight: 500; }
   .phone-tab.active { color: #fff; font-weight: 700; border-bottom: 2px solid #fff; padding-bottom: 2px; }
-  /* Right sidebar - TikTok action buttons */
   .phone-sidebar { position: absolute; right: 8px; bottom: 80px; display: flex; flex-direction: column; gap: 14px; align-items: center; z-index: 5; }
   .phone-sidebar-item { text-align: center; }
   .phone-sidebar-item svg { width: 22px; height: 22px; fill: #fff; display: block; margin: 0 auto 2px; }
   .phone-sidebar-num { font-family: var(--font); font-size: 7px; color: #fff; font-weight: 600; }
-  /* Profile pic in sidebar */
   .phone-sidebar-avatar { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid #fff; background: url('images/mellencamp-1.jpg') center/cover; margin-bottom: 10px; position: relative; }
   .phone-sidebar-avatar::after { content: '+'; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); width: 12px; height: 12px; background: #FE2C55; border-radius: 50%; font-size: 9px; color: #fff; display: flex; align-items: center; justify-content: center; line-height: 1; }
-  /* Caption area - overlaid on video at bottom */
   .phone-caption-area { position: absolute; bottom: 42px; left: 0; right: 40px; padding: 0 14px; z-index: 5; }
   .phone-handle { font-family: var(--font); font-size: 8.5px; font-weight: 700; color: #fff; margin-bottom: 4px; }
   .phone-desc { font-family: var(--font); font-size: 7.5px; color: #eee; line-height: 1.4; margin-bottom: 6px; }
   .phone-sound { font-family: var(--font); font-size: 7px; color: #fff; display: flex; align-items: center; gap: 4px; }
   .phone-sound svg { width: 8px; height: 8px; fill: #fff; flex-shrink: 0; }
-  /* Sound disc */
   .phone-disc { position: absolute; right: 8px; bottom: 50px; width: 24px; height: 24px; border-radius: 50%; background: #222; border: 6px solid #333; z-index: 5; animation: spin 3s linear infinite; }
   @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  /* Bottom nav */
   .phone-nav { position: absolute; bottom: 0; left: 0; right: 0; height: 38px; background: rgba(0,0,0,0.95); display: flex; justify-content: space-around; align-items: center; padding: 0 8px; z-index: 6; }
   .phone-nav-item { text-align: center; }
   .phone-nav-item svg { width: 16px; height: 16px; fill: #888; display: block; margin: 0 auto 1px; }
@@ -141,7 +144,6 @@
   .phone-nav-plus-btn .bg-center svg { width: 12px; height: 12px; fill: #000; }
   .phone-homebar { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 56px; height: 3px; background: #fff; border-radius: 2px; z-index: 7; }
 
-  /* Notification badge */
   .phone-badge {
     position: absolute; top: -3px; right: -6px; min-width: 12px; height: 12px;
     background: #FE2C55; border-radius: 6px; font-family: var(--font);
@@ -149,8 +151,7 @@
     align-items: center; justify-content: center; padding: 0 3px;
   }
 
-  /* Phase card week label */
-  .card-week { font-family: var(--mono); font-size: 9px; font-weight: 400; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+  .card-week { font-family: var(--mono); font-size: 12px; font-weight: 400; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
 
   /* Geo-fence animations */
   @keyframes geoPulse {
@@ -161,6 +162,232 @@
     0%, 100% { opacity: 0.2; }
     50% { opacity: 0.8; }
   }
+
+  /* Objective slide mono label */
+  .obj-label {
+    font-family: var(--font-display); font-size: 48px; font-weight: 700;
+    letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  /* Phone bold caption overlay */
+  .phone-bold-caption {
+    position: absolute; bottom: 88px; left: 0; right: 40px; z-index: 5;
+    text-align: center; padding: 0 12px;
+  }
+  .phone-bold-caption span {
+    font-family: var(--font); font-size: 11px; font-weight: 900; color: #ffffff;
+    text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.3; display: block;
+    -webkit-text-stroke: 1px #000; paint-order: stroke fill;
+    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 0 2px 4px rgba(0,0,0,0.8);
+  }
+
+  /* Phase slide layout */
+  .phase-slide { display: flex; align-items: flex-start; gap: 40px; width: 100%; }
+  .phase-left { flex: 1; min-width: 0; max-width: 55%; }
+  .phase-right { flex-shrink: 0; width: 40%; display: flex; align-items: center; justify-content: center; min-height: 340px; }
+  .phase-watermark {
+    position: absolute; top: 50%; right: 80px; transform: translateY(-50%);
+    font-family: var(--font-display); font-size: 280px; font-weight: 700;
+    color: var(--accent); opacity: 0.08; line-height: 1; z-index: 0;
+    pointer-events: none; user-select: none;
+  }
+  .phase-month { font-family: var(--font-display); font-size: 28px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+  .phase-title { font-family: var(--font-display); font-size: 64px; font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .phase-title .accent { color: var(--accent); }
+  .phase-card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; }
+  .phase-card ul { list-style: disc; padding-left: 16px; margin: 0; }
+  .phase-card li { font-size: 15px; font-weight: 500; line-height: 1.55; color: #e8e8e8; margin-bottom: 8px; }
+  .phase-card li:last-child { margin-bottom: 0; }
+  .phase-note { font-family: var(--mono); font-size: 12px; color: #999; letter-spacing: 0.06em; text-align: center; margin-top: 16px; }
+
+  /* Month 1: Archive grid animation */
+  .archive-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 200px; }
+  .archive-tile {
+    width: 100%; aspect-ratio: 1; border: 1px solid rgba(245,197,24,0.3);
+    background: rgba(245,197,24,0.06); border-radius: 3px;
+    opacity: 0; animation: archiveFadeIn 0.6s ease forwards;
+  }
+  .archive-tile:nth-child(1)  { animation-delay: 0s; }
+  .archive-tile:nth-child(2)  { animation-delay: 0.15s; }
+  .archive-tile:nth-child(3)  { animation-delay: 0.3s; }
+  .archive-tile:nth-child(4)  { animation-delay: 0.45s; }
+  .archive-tile:nth-child(5)  { animation-delay: 0.6s; }
+  .archive-tile:nth-child(6)  { animation-delay: 0.75s; }
+  .archive-tile:nth-child(7)  { animation-delay: 0.9s; }
+  .archive-tile:nth-child(8)  { animation-delay: 1.05s; }
+  .archive-tile:nth-child(9)  { animation-delay: 1.2s; }
+  .archive-tile:nth-child(10) { animation-delay: 1.35s; }
+  .archive-tile:nth-child(11) { animation-delay: 1.5s; }
+  .archive-tile:nth-child(12) { animation-delay: 1.65s; }
+  @keyframes archiveFadeIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  /* Re-trigger loop with wrapper */
+  .archive-grid-wrap { animation: archiveLoop 4s ease infinite; }
+  @keyframes archiveLoop {
+    0%, 5% { opacity: 0; }
+    15%, 85% { opacity: 1; }
+    95%, 100% { opacity: 0; }
+  }
+
+  /* Month 2: Ignition shockwave */
+  .ignition-wrap { position: relative; width: 240px; height: 240px; display: flex; align-items: center; justify-content: center; }
+  .ignition-core {
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 20px rgba(245,197,24,0.8), 0 0 40px rgba(245,197,24,0.4);
+    animation: corePulse 3s ease-in-out infinite;
+  }
+  @keyframes corePulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(245,197,24,0.8), 0 0 40px rgba(245,197,24,0.4); }
+    50% { transform: scale(1.3); box-shadow: 0 0 30px rgba(245,197,24,1), 0 0 60px rgba(245,197,24,0.6), 0 0 80px rgba(245,197,24,0.2); }
+  }
+  .shockwave {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    border-radius: 50%; border: 2px solid rgba(245,197,24,0.7);
+    animation: shockExpand 3s ease-out infinite;
+  }
+  .shockwave:nth-child(2) { animation-delay: 0s; }
+  .shockwave:nth-child(3) { animation-delay: 0.6s; }
+  .shockwave:nth-child(4) { animation-delay: 1.2s; }
+  .shockwave:nth-child(5) { animation-delay: 1.8s; border-color: rgba(255,255,255,0.4); }
+  @keyframes shockExpand {
+    0% { width: 16px; height: 16px; opacity: 0.9; border-width: 2px; }
+    70% { opacity: 0.3; border-width: 1px; }
+    100% { width: 220px; height: 220px; opacity: 0; border-width: 0.5px; }
+  }
+  .spark-line {
+    position: absolute; top: 50%; left: 50%;
+    width: 2px; height: 30px; transform-origin: bottom center;
+    background: linear-gradient(to top, var(--accent), transparent);
+    opacity: 0; animation: sparkShoot 3s ease-out infinite;
+  }
+  .spark-line:nth-child(6)  { transform: rotate(0deg) translateY(-30px); animation-delay: 0.1s; }
+  .spark-line:nth-child(7)  { transform: rotate(45deg) translateY(-30px); animation-delay: 0.2s; }
+  .spark-line:nth-child(8)  { transform: rotate(90deg) translateY(-30px); animation-delay: 0.05s; }
+  .spark-line:nth-child(9)  { transform: rotate(135deg) translateY(-30px); animation-delay: 0.25s; }
+  .spark-line:nth-child(10) { transform: rotate(180deg) translateY(-30px); animation-delay: 0.15s; }
+  .spark-line:nth-child(11) { transform: rotate(225deg) translateY(-30px); animation-delay: 0.3s; }
+  .spark-line:nth-child(12) { transform: rotate(270deg) translateY(-30px); animation-delay: 0.08s; }
+  .spark-line:nth-child(13) { transform: rotate(315deg) translateY(-30px); animation-delay: 0.22s; }
+  @keyframes sparkShoot {
+    0% { opacity: 0; height: 0; }
+    10% { opacity: 0.9; height: 30px; }
+    40% { opacity: 0.5; height: 50px; }
+    100% { opacity: 0; height: 60px; }
+  }
+
+  /* Month 3: Radar sweep */
+  .radar-wrap { position: relative; width: 220px; height: 220px; }
+  .radar-circle {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    border-radius: 50%; border: 1px solid rgba(245,197,24,0.15);
+  }
+  .radar-circle.outer { width: 200px; height: 200px; }
+  .radar-circle.mid { width: 140px; height: 140px; }
+  .radar-circle.inner { width: 80px; height: 80px; }
+  .radar-crosshair-h, .radar-crosshair-v {
+    position: absolute; top: 50%; left: 50%;
+    background: rgba(245,197,24,0.08);
+  }
+  .radar-crosshair-h { width: 200px; height: 1px; transform: translate(-50%, -50%); }
+  .radar-crosshair-v { width: 1px; height: 200px; transform: translate(-50%, -50%); }
+  .radar-sweep {
+    position: absolute; top: 50%; left: 50%; width: 100px; height: 2px;
+    transform-origin: 0 50%; background: linear-gradient(90deg, rgba(245,197,24,0.6), transparent);
+    animation: radarSweep 4s linear infinite;
+  }
+  @keyframes radarSweep {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .radar-sweep::before {
+    content: ''; position: absolute; top: -40px; left: 0; width: 100px; height: 80px;
+    transform-origin: 0 50%;
+    background: conic-gradient(from -20deg, rgba(245,197,24,0.12) 0deg, transparent 40deg);
+    border-radius: 0 100px 100px 0;
+  }
+  .radar-dot {
+    position: absolute; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent); opacity: 0;
+    animation: radarDotBlink 4s ease-in-out infinite;
+  }
+  .radar-dot:nth-child(8) { top: 30px; left: 70px; animation-delay: 0.5s; }
+  .radar-dot:nth-child(9) { top: 60px; right: 30px; animation-delay: 1.5s; }
+  .radar-dot:nth-child(10) { bottom: 50px; left: 50px; animation-delay: 2.5s; background: var(--accent-secondary); }
+  .radar-dot:nth-child(11) { bottom: 40px; right: 50px; animation-delay: 3s; }
+  .radar-dot:nth-child(12) { top: 80px; left: 40px; animation-delay: 0.8s; background: #fff; width: 4px; height: 4px; }
+  @keyframes radarDotBlink {
+    0%, 20% { opacity: 0; }
+    30%, 70% { opacity: 0.8; }
+    80%, 100% { opacity: 0; }
+  }
+  .radar-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px rgba(245,197,24,0.5); }
+
+  /* Month 4: EKG pulse line */
+  .ekg-wrap { position: relative; width: 260px; height: 120px; overflow: hidden; }
+  .ekg-line {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  }
+  .ekg-line svg { width: 520px; height: 120px; }
+  .ekg-line svg path {
+    fill: none; stroke: var(--accent); stroke-width: 1.5;
+    stroke-dasharray: 600; stroke-dashoffset: 600;
+    animation: ekgDraw 3s linear infinite;
+  }
+  @keyframes ekgDraw {
+    0% { stroke-dashoffset: 600; }
+    100% { stroke-dashoffset: 0; }
+  }
+  .ekg-glow {
+    position: absolute; top: 50%; left: 0; width: 8px; height: 8px;
+    border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 12px rgba(245,197,24,0.6), 0 0 24px rgba(245,197,24,0.3);
+    transform: translateY(-50%);
+    animation: ekgGlowMove 3s linear infinite;
+  }
+  @keyframes ekgGlowMove {
+    0% { left: 0; top: 50%; }
+    20% { left: 20%; top: 50%; }
+    25% { left: 25%; top: 30%; }
+    30% { left: 30%; top: 70%; }
+    35% { left: 35%; top: 20%; }
+    40% { left: 40%; top: 80%; }
+    45% { left: 45%; top: 50%; }
+    100% { left: 100%; top: 50%; }
+  }
+  .ekg-label { font-family: var(--mono); font-size: 8px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 12px; text-align: center; opacity: 0.6; }
+
+  /* Month 4: Tour route map */
+  .tour-route { position: relative; width: 260px; height: 220px; }
+  .tour-route svg polyline { stroke-dasharray: 500; stroke-dashoffset: 500; animation: tourLineDraw 6s ease-in-out infinite; }
+  @keyframes tourLineDraw { 0% { stroke-dashoffset: 500; } 30%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 500; } }
+  .tour-dot {
+    position: absolute; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent); opacity: 0.2;
+    animation: tourDotLight 6s ease-in-out infinite;
+  }
+  .tour-dot-label {
+    position: absolute; font-family: var(--mono); font-size: 7px;
+    color: rgba(255,255,255,0.4); letter-spacing: 0.08em;
+    transform: translateX(-50%); white-space: nowrap;
+  }
+  @keyframes tourDotLight {
+    0%, 10% { opacity: 0.2; transform: scale(1); box-shadow: none; }
+    15%, 30% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 12px rgba(245,197,24,0.6); }
+    40%, 100% { opacity: 0.2; transform: scale(1); box-shadow: none; }
+  }
+
+  /* V2 logo glow */
+  .v2-shine {
+    animation: v2Glow 3s ease-in-out 0.6s infinite;
+  }
+  @keyframes v2Glow {
+    0%, 100% { text-shadow: 0 0 8px rgba(245,197,24,0.3), 0 0 20px rgba(245,197,24,0.15); }
+    50% { text-shadow: 0 0 16px rgba(245,197,24,0.6), 0 0 40px rgba(245,197,24,0.3), 0 0 60px rgba(245,197,24,0.1); }
+  }
 </style>
 </head>
 <body>
@@ -169,59 +396,49 @@
 <!-- 1: COVER -->
 <div class="page centered">
   <div class="page-bg" style="background-image: url('images/mellencamp-1.jpg');"></div>
-  <div class="page-logo">dF</div>
-  <div class="page-logo-text">defaria.nyc</div>
+
   <div class="page-meta">
-    <div class="line1">John Mellencamp x DeFaria</div>
+    <div class="line1">John Mellencamp x WLDFR</div>
     <div class="line2">March 2026</div>
   </div>
 
-  <div class="hero-title">Digital<br><span class="accent">Activation.</span></div>
-  <div class="hero-sub">John Mellencamp &nbsp;|&nbsp; Full Campaign</div>
+  <div class="hero-title">Digital<br>Amplification</div>
+  <div class="hero-title" style="font-size: 96px;"><span class="accent v2-shine">V2</span></div>
+  <div class="hero-sub">John Mellencamp 2026 Tour</div>
 
-  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 1 / 10</div>
+  <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 1 / 13</div>
 </div>
 
 
-<!-- 2: THE PROBLEM (splash) -->
+<!-- 2: OBJECTIVE -->
 <div class="page centered">
   <div class="page-bg" style="background-image: url('images/mellencamp-3.jpg');"></div>
-  <div class="page-logo">dF</div>
-  <div class="hero-title">The <span class="accent">Problem.</span></div>
-  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 2 / 10</div>
+
+
+  <div class="obj-label">Objective</div>
+  <p class="body-text" style="max-width: 620px; text-align: center; font-size: 20px; line-height: 1.85;">Drive a sustained surge in cultural relevance and tour demand for John Mellencamp by strategically amplifying digital content, maximizing reach, engagement, and share of internet attention across platforms in the lead-up to the tour.</p>
+
+  <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 2 / 13</div>
 </div>
 
 
-<!-- 3: THE PROBLEM (detail) -->
-<div class="page centered">
-  <div class="page-bg" style="background-image: url('images/mellencamp-2.jpg');"></div>
-  <div class="page-logo">dF</div>
-
-  <div class="hero-title" style="font-size: 86px;">40 Years Of Catalog.<br><span class="accent">Ready For The Internet.</span></div>
-
-  <p class="body-text" style="margin-top: 32px; max-width: 520px; text-align: center;">If you're under 35, you haven't seen Mellencamp on your feed.</p>
-
-  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 3 / 10</div>
-</div>
-
-
-<!-- 4: CLIPPING -->
+<!-- 3: CLIPPING -->
 <div class="page">
   <div class="page-bg" style="background-image: url('images/mellencamp-4.jpg');"></div>
-  <div class="page-logo">dF</div>
+
 
   <div style="display: flex; align-items: flex-start; gap: 32px; width: 100%;">
     <!-- Left: Title + description -->
-    <div style="flex: 1; min-width: 280px;">
-      <div class="section-title" style="font-size: 72px; color: #ffffff;">Clipping.</div>
-      <p class="body-text" style="max-width: 380px; font-size: 14px;">We pull the full catalog, concerts, interviews, behind-the-scenes footage, and cut it into short-form clips built to perform on TikTok, Reels, and Shorts. Our editors cut and post every day across dedicated fan pages we build from scratch.</p>
+    <div style="flex: 1; min-width: 260px;">
+      <div class="section-title" style="font-size: 72px; color: #ffffff;">Clipping<span class="accent">.</span></div>
+      <p class="body-text" style="max-width: 380px; font-size: 17px; line-height: 1.7;">We source and repackage archival and contemporary footage, spanning performances, interviews, and behind-the-scenes moments, into high-performing short-form content optimized for TikTok, Instagram Reels, and YouTube Shorts. Our team manages a consistent daily publishing cadence across a network of strategically developed fan-facing channels to expand reach and drive sustained audience engagement.</p>
     </div>
 
     <!-- Center: TikTok phone mockup -->
     <div class="phone" style="width: 180px; height: 360px;">
       <div class="phone-island"></div>
       <div class="phone-video-wrap">
-        <div class="phone-video" style="background-image: url('images/mellencamp-10.jpg');"></div>
+        <div class="phone-video" style="background-image: url('images/mellencamp-4.jpg');"></div>
       </div>
       <div class="phone-status">
         <div class="phone-status-time">9:41</div>
@@ -235,6 +452,9 @@
         <div class="phone-tab">Explore</div>
         <div class="phone-tab">Following</div>
         <div class="phone-tab active">For You</div>
+      </div>
+      <div class="phone-bold-caption">
+        <span>POV: IT'S 1985 AND NOTHING MATTERS YET.</span>
       </div>
       <div class="phone-sidebar" style="right: 6px; bottom: 62px; gap: 16px;">
         <div class="phone-sidebar-avatar" style="width: 22px; height: 22px;"></div>
@@ -258,7 +478,7 @@
       <div class="phone-disc" style="right: 6px; bottom: 42px; width: 20px; height: 20px;"></div>
       <div class="phone-caption-area" style="bottom: 36px;">
         <div class="phone-handle" style="font-size: 7.5px;">@mellencamp.archive</div>
-        <div class="phone-desc" style="font-size: 6.5px;">Farm Aid, 1985. Your dad knew. #mellencamp #classicrock</div>
+        <div class="phone-desc" style="font-size: 6.5px; font-weight: 700;">POV: It's 1985 and nothing matters yet.</div>
         <div class="phone-sound" style="font-size: 6px;">
           <svg viewBox="0 0 16 16"><path d="M12.5 1a.5.5 0 01.5.5v2.03a4.5 4.5 0 01-3 4.24V13.5a2.5 2.5 0 11-5 0 2.5 2.5 0 012.5-2.5c.53 0 1.03.13 1.47.36V1.5a.5.5 0 01.53-.5z"/></svg>
           Small Town - John Mellencamp
@@ -287,29 +507,29 @@
     </div>
 
     <!-- Right: Fan page profile mockup -->
-    <div style="flex-shrink: 0; width: 190px; background: #000; border-radius: 18px; padding: 12px; border: 2px solid #222; box-shadow: 0 12px 48px rgba(0,0,0,0.8);">
-      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #222;">
+    <div style="flex-shrink: 0; width: 190px; background: #000; border-radius: 18px; padding: 14px; border: 2px solid #222; box-shadow: 0 12px 48px rgba(0,0,0,0.8);">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #1a1a1a;">
         <div style="width: 30px; height: 30px; border-radius: 50%; background: url('images/mellencamp-1.jpg') center/cover; flex-shrink: 0;"></div>
         <div>
           <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff;">mellencamp.archive</div>
-          <div style="font-family: var(--font); font-size: 7px; color: #888; margin-top: 1px;">Fan Page &middot; Est. 2026</div>
+          <div style="font-family: var(--font); font-size: 7px; color: #666; margin-top: 1px;">Fan Page &middot; Est. 2026</div>
         </div>
       </div>
-      <div style="display: flex; justify-content: space-around; text-align: center; margin-bottom: 10px;">
+      <div style="display: flex; justify-content: space-around; text-align: center; margin-bottom: 12px;">
         <div>
           <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff;">127</div>
-          <div style="font-family: var(--font); font-size: 6px; color: #888;">Posts</div>
+          <div style="font-family: var(--font); font-size: 6px; color: #666;">Posts</div>
         </div>
         <div>
           <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff;">48.2K</div>
-          <div style="font-family: var(--font); font-size: 6px; color: #888;">Followers</div>
+          <div style="font-family: var(--font); font-size: 6px; color: #666;">Followers</div>
         </div>
         <div>
           <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff;">2.1M</div>
-          <div style="font-family: var(--font); font-size: 6px; color: #888;">Likes</div>
+          <div style="font-family: var(--font); font-size: 6px; color: #666;">Likes</div>
         </div>
       </div>
-      <div style="font-family: var(--font); font-size: 7px; color: #ccc; line-height: 1.4; margin-bottom: 10px;">The archive John Mellencamp deserves.</div>
+      <div style="font-family: var(--font); font-size: 7px; color: #aaa; line-height: 1.4; margin-bottom: 12px;">The archive John Mellencamp deserves.</div>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border-radius: 4px; overflow: hidden;">
         <div style="aspect-ratio: 1; background: url('images/mellencamp-4.jpg') center/cover; position: relative;">
           <div style="position: absolute; bottom: 2px; left: 3px; font-family: var(--font); font-size: 6px; font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">&#9654; 2.4M</div>
@@ -320,40 +540,39 @@
         <div style="aspect-ratio: 1; background: url('images/mellencamp-3.jpg') center/cover; position: relative;">
           <div style="position: absolute; bottom: 2px; left: 3px; font-family: var(--font); font-size: 6px; font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">&#9654; 947K</div>
         </div>
-        <div style="aspect-ratio: 1; background: url('images/mellencamp-6.jpg') center/cover; position: relative;">
+        <div style="aspect-ratio: 1; background: url('images/mellencamp-5.jpg') center/cover; position: relative;">
           <div style="position: absolute; bottom: 2px; left: 3px; font-family: var(--font); font-size: 6px; font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">&#9654; 612K</div>
         </div>
-        <div style="aspect-ratio: 1; background: url('images/mellencamp-9.jpg') center/cover; position: relative;">
+        <div style="aspect-ratio: 1; background: url('images/mellencamp-7.jpg') center/cover; position: relative;">
           <div style="position: absolute; bottom: 2px; left: 3px; font-family: var(--font); font-size: 6px; font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">&#9654; 483K</div>
         </div>
-        <div style="aspect-ratio: 1; background: url('images/mellencamp-2.jpg') center/cover; position: relative;">
+        <div style="aspect-ratio: 1; background: url('images/mellencamp-1.jpg') center/cover; position: relative;">
           <div style="position: absolute; bottom: 2px; left: 3px; font-family: var(--font); font-size: 6px; font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">&#9654; 291K</div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 4 / 10</div>
+  <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 3 / 13</div>
 </div>
 
 
-<!-- 5: SOUND STRATEGY -->
+<!-- 4: SOUND STRATEGY -->
 <div class="page">
   <div class="page-bg" style="background-image: url('images/mellencamp-7.jpg');"></div>
-  <div class="page-logo">dF</div>
 
-  <div style="display: flex; align-items: flex-start; gap: 48px; width: 100%;">
+
+  <div style="display: flex; align-items: flex-start; gap: 56px; width: 100%;">
     <div style="flex: 1;">
       <div class="section-title" style="font-size: 64px;">Sound<br><span class="accent">Strategy.</span></div>
-      <p class="body-text" style="max-width: 420px;">We seed Mellencamp's catalog across TikTok by getting creators to use his songs as sounds in their videos. The same playbook that sent Fleetwood Mac's "Dreams" back to the charts 43 years after release.</p>
-      <p class="body-text" style="max-width: 420px; margin-top: 16px; font-size: 14px; color: var(--text-muted);">Jack and Diane. Small Town. Hurts So Good. These hooks were built for short-form.</p>
+      <p class="body-text" style="max-width: 420px; font-size: 17px; line-height: 1.7;">We activate John Mellencamp's catalog natively within TikTok, leveraging a proven resurgence model to reintroduce key tracks into short-form ecosystems. Through coordinated deployment across a network of fan-facing and seeding accounts, we drive early engagement signals that inform platform distribution. As momentum builds, audio is surfaced within discovery layers, triggering organic propagation and broader creator adoption without reliance on paid amplification.</p>
     </div>
 
-    <!-- Charli D'Amelio TikTok mockup -->
+    <!-- Generic creator TikTok mockup -->
     <div class="phone" style="width: 180px; height: 360px; flex-shrink: 0;">
       <div class="phone-island"></div>
       <div class="phone-video-wrap">
-        <div class="phone-video" style="background-image: url('images/charli-dancing.jpg'); background-color: #e8d5b8;"></div>
+        <div class="phone-video" style="background-image: url('images/sound-creator.jpg'); background-color: #1a1a1a;"></div>
       </div>
       <div class="phone-status">
         <div class="phone-status-time">9:41</div>
@@ -390,8 +609,8 @@
       </div>
       <div class="phone-disc" style="right: 6px; bottom: 42px; width: 20px; height: 20px;"></div>
       <div class="phone-caption-area" style="bottom: 36px;">
-        <div class="phone-handle" style="font-size: 7.5px;">@charlidamelio</div>
-        <div class="phone-desc" style="font-size: 6.5px;">this song is everything #jackanddiane #mellencamp #dance #throwback</div>
+        <div class="phone-handle" style="font-size: 7.5px;">@chrisheynjr</div>
+        <div class="phone-desc" style="font-size: 6.5px;">80's is back #mellencamp #jackanddiane #classicrock #throwback</div>
         <div class="phone-sound" style="font-size: 6px;">
           <svg viewBox="0 0 16 16"><path d="M12.5 1a.5.5 0 01.5.5v2.03a4.5 4.5 0 01-3 4.24V13.5a2.5 2.5 0 11-5 0 2.5 2.5 0 012.5-2.5c.53 0 1.03.13 1.47.36V1.5a.5.5 0 01.53-.5z"/></svg>
           Jack &amp; Diane - John Mellencamp
@@ -421,40 +640,40 @@
 
   </div>
 
-  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 5 / 10</div>
+  <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 4 / 13</div>
 </div>
 
 
-<!-- 6: GEO-FENCING -->
+<!-- 5: CITY PRIMING -->
 <div class="page">
-  <div class="page-bg" style="background-image: url('images/mellencamp-3.jpg');"></div>
-  <div class="page-logo">dF</div>
+  <div class="page-bg" style="background-image: url('images/mellencamp-scarecrow.jpg');"></div>
+
 
   <div style="display: flex; align-items: flex-start; gap: 48px; width: 100%;">
     <div style="flex: 1;">
-      <div class="section-title" style="font-size: 64px;">Geo-<span class="accent">Fencing.</span></div>
+      <div class="section-title" style="font-size: 64px;">City<br><span class="accent">Priming.</span></div>
       <div class="card-grid" style="grid-template-columns: 1fr; max-width: 420px;">
         <div class="card">
-          <h3 style="font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px;">Tour Venues</h3>
-          <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.65;">We draw a precise digital perimeter around every venue on the tour. Anyone who enters that zone in the weeks before a show starts seeing Mellencamp on their phone across 600,000+ apps, automatically.</p>
+          <h3 style="font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--accent-secondary); text-transform: uppercase; margin-bottom: 10px;">Localized Distribution</h3>
+          <p style="font-size: 17px; font-weight: 500; color: var(--text-secondary); line-height: 1.65;">Social platforms distribute content in part through localized signals. By aligning content with city-specific metadata, location tagging, regional hashtags, and engagement with local audiences, we influence how content is surfaced within a given market.</p>
         </div>
         <div class="card">
-          <h3 style="font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px;">Activates With The Tour</h3>
-          <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.65;">Geo-fencing goes live as tour dates approach. Every device that enters a venue zone gets retargeted for 30 days across mobile, video, and connected TV.</p>
+          <h3 style="font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--accent-secondary); text-transform: uppercase; margin-bottom: 10px;">Tour Market Activation</h3>
+          <p style="font-size: 17px; font-weight: 500; color: var(--text-secondary); line-height: 1.65;">In the weeks leading up to each tour stop, we deploy a coordinated wave of city-relevant Mellencamp content, localized messaging, past performance moments, and regional nostalgia, driving concentrated visibility and building anticipation within priority markets.</p>
         </div>
       </div>
     </div>
 
-    <!-- Geo-fence illustration -->
+    <!-- Geo-fence illustration (Burnt Orange) -->
     <div style="flex-shrink: 0; width: 280px; height: 280px; position: relative; display: flex; align-items: center; justify-content: center; margin-top: 40px;">
       <!-- Outer pulse ring -->
-      <div style="position: absolute; width: 260px; height: 260px; border-radius: 50%; border: 1px solid rgba(245,197,24,0.1); animation: geoPulse 3s ease-out infinite;"></div>
+      <div style="position: absolute; width: 260px; height: 260px; border-radius: 50%; border: 1px solid rgba(245,197,24,0.12); animation: geoPulse 3s ease-out infinite;"></div>
       <!-- Middle pulse ring -->
-      <div style="position: absolute; width: 200px; height: 200px; border-radius: 50%; border: 1px solid rgba(245,197,24,0.15); animation: geoPulse 3s ease-out 0.6s infinite;"></div>
+      <div style="position: absolute; width: 200px; height: 200px; border-radius: 50%; border: 1px solid rgba(245,197,24,0.18); animation: geoPulse 3s ease-out 0.6s infinite;"></div>
       <!-- Fence perimeter -->
-      <div style="position: absolute; width: 150px; height: 150px; border-radius: 50%; border: 2px solid rgba(245,197,24,0.35); background: radial-gradient(circle, rgba(245,197,24,0.08) 0%, transparent 70%);"></div>
+      <div style="position: absolute; width: 150px; height: 150px; border-radius: 50%; border: 2px solid rgba(245,197,24,0.4); background: radial-gradient(circle, rgba(245,197,24,0.1) 0%, transparent 70%);"></div>
       <!-- Inner zone -->
-      <div style="position: absolute; width: 80px; height: 80px; border-radius: 50%; border: 1.5px dashed rgba(245,197,24,0.5); background: radial-gradient(circle, rgba(245,197,24,0.12) 0%, transparent 70%);"></div>
+      <div style="position: absolute; width: 80px; height: 80px; border-radius: 50%; border: 1.5px dashed rgba(245,197,24,0.55); background: radial-gradient(circle, rgba(245,197,24,0.14) 0%, transparent 70%);"></div>
       <!-- Center pin -->
       <div style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center;">
         <svg width="28" height="36" viewBox="0 0 28 36" fill="none" style="filter: drop-shadow(0 2px 8px rgba(245,197,24,0.4));">
@@ -473,71 +692,237 @@
     </div>
   </div>
 
-  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 6 / 10</div>
+  <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 5 / 13</div>
 </div>
 
 
-<!-- 7: THE FOUR PHASES -->
+<!-- 6: TIMELINE OVERVIEW — THE ROLLOUT -->
+<div class="page centered">
+  <div class="page-bg" style="background-image: url('images/mellencamp-uhhuh.jpg');"></div>
 
-<div class="page">
-  <div class="page-bg" style="background-image: url('images/mellencamp-6.jpg');"></div>
-  <div class="page-logo">dF</div>
+  <div class="section-title" style="font-size: 72px; margin-bottom: 48px;">The <span class="accent">Rollout.</span></div>
 
-  <div class="section-title">The <span class="accent">Rollout.</span></div>
+  <div style="display: flex; align-items: flex-start; width: 80%; max-width: 720px; position: relative;">
+    <!-- Horizontal line connecting all dots -->
+    <div style="position: absolute; top: 7px; left: 12.5%; right: 12.5%; height: 3px; background: var(--accent);"></div>
 
-  <div class="card-grid cols-2">
-    <div class="card">
-      <div class="card-week">Month 1</div>
-      <div class="card-num">1</div>
-      <h3>Archive + Build + Seed</h3>
-      <ul>
-        <li>Pull the full catalog. Concerts, interviews, music videos, Farm Aid footage, behind-the-scenes moments.</li>
-        <li>Launch fan pages across TikTok, Instagram, YouTube, and Facebook.</li>
-        <li>First creator outreach begins. Identify and lock in influencers for sound seeding campaigns.</li>
-      </ul>
+    <!-- Phase 01 -->
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; position: relative;">
+      <div style="width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); z-index: 2;"></div>
+      <div style="font-family: var(--mono); font-size: 8px; font-weight: 400; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-top: 18px;">Phase 01</div>
+      <div style="font-family: var(--font); font-size: 12px; font-weight: 600; color: var(--text); margin-top: 4px;">Archive + Build</div>
+      <div style="font-family: var(--font-display); font-size: 64px; color: var(--accent); line-height: 1; margin-top: 12px; opacity: 0.85;">01</div>
     </div>
-    <div class="card">
-      <div class="card-week">Month 2</div>
-      <div class="card-num">2</div>
-      <h3>Ignite + Amplify</h3>
-      <ul>
-        <li>Clips going out daily. Nostalgia hooks, concert footage, storytelling clips, catalog deep cuts.</li>
-        <li>Creators start posting with Mellencamp sounds. Jack and Diane, Small Town, Hurts So Good.</li>
-        <li>First numbers delivered. Double down on what's hitting.</li>
-      </ul>
+
+    <!-- Phase 02 -->
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; position: relative;">
+      <div style="width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); z-index: 2;"></div>
+      <div style="font-family: var(--mono); font-size: 8px; font-weight: 400; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-top: 18px;">Phase 02</div>
+      <div style="font-family: var(--font); font-size: 12px; font-weight: 600; color: var(--text); margin-top: 4px;">Ignite + Amplify</div>
+      <div style="font-family: var(--font-display); font-size: 64px; color: var(--accent); line-height: 1; margin-top: 12px; opacity: 0.85;">02</div>
     </div>
-    <div class="card">
-      <div class="card-week">Month 3</div>
-      <div class="card-num">3</div>
-      <h3>Scale + Target</h3>
-      <ul>
-        <li>Content engine at full speed. Fan pages growing, creator sounds spreading organically.</li>
-        <li>Geo-fencing infrastructure goes live across all 18 tour markets. Venue perimeters drawn, retargeting armed.</li>
-        <li>Pre-tour ads start hitting phones near every venue city.</li>
-      </ul>
+
+    <!-- Phase 03 -->
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; position: relative;">
+      <div style="width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); z-index: 2;"></div>
+      <div style="font-family: var(--mono); font-size: 8px; font-weight: 400; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-top: 18px;">Phase 03</div>
+      <div style="font-family: var(--font); font-size: 12px; font-weight: 600; color: var(--text); margin-top: 4px;">Scale + Target</div>
+      <div style="font-family: var(--font-display); font-size: 64px; color: var(--accent); line-height: 1; margin-top: 12px; opacity: 0.85;">03</div>
     </div>
-    <div class="card">
-      <div class="card-week">Month 4 — Tour</div>
-      <div class="card-num">4</div>
-      <h3>Tour Mode</h3>
-      <ul>
-        <li>Geo-fencing fully active. Every venue, every market, every device captured and retargeted for 30 days.</li>
-        <li>Content shifts to real-time tour coverage. Live clips, crowd reactions, city-by-city storytelling.</li>
-        <li>Full reporting: impressions, clicks, foot traffic by city. Every dollar trackable.</li>
-      </ul>
+
+    <!-- Phase 04 -->
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; position: relative;">
+      <div style="width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); z-index: 2;"></div>
+      <div style="font-family: var(--mono); font-size: 8px; font-weight: 400; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-top: 18px;">Phase 04</div>
+      <div style="font-family: var(--font); font-size: 12px; font-weight: 600; color: var(--text); margin-top: 4px;">Tour Mode</div>
+      <div style="font-family: var(--font-display); font-size: 64px; color: var(--accent); line-height: 1; margin-top: 12px; opacity: 0.85;">04</div>
     </div>
   </div>
 
-  <p style="margin-top: 18px; font-family: var(--mono); font-size: 10px; color: var(--text-muted); letter-spacing: 0.06em; text-align: center;">Start now. By the time the tour hits, the digital world is already built and the audience is already watching.</p>
-
-  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 7 / 10</div>
+  <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 6 / 13</div>
 </div>
 
 
-<!-- 7: BUDGET BREAKDOWN -->
+<!-- 7: MONTH 1 — ARCHIVE + BUILD -->
+<div class="page">
+  <div class="page-bg" style="background-image: url('images/mellencamp-9.jpg');"></div>
+
+  <div class="phase-watermark">01</div>
+
+  <div class="phase-slide">
+    <div class="phase-left">
+      <div class="phase-month">Month 1</div>
+      <div class="phase-title">Archive +<br><span class="accent">Build.</span></div>
+      <div class="phase-card">
+        <ul>
+          <li>Source and structure John Mellencamp's archival catalog, live performances, interviews, music videos, Farm Aid footage, and behind-the-scenes moments, into a centralized library from which narrative-driven content is developed.</li>
+          <li>In parallel, establish and activate a network of fan-facing channels across TikTok, Instagram, YouTube, and Facebook to support distribution and scale.</li>
+        </ul>
+      </div>
+      <div style="margin-top: 14px;">
+        <div style="font-family: var(--mono); font-size: 8px; font-weight: 500; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px;">Example Narratives</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"Just discovered and I'm obsessed"</div>
+          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"This needs a comeback"</div>
+          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"This song STILL holds up"</div>
+          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"80s style was PEAK"</div>
+          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"Stage presence is a lost art"</div>
+          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"Pure aura maestro"</div>
+        </div>
+      </div>
+    </div>
+    <div class="phase-right">
+      <div class="archive-grid-wrap">
+        <div class="archive-grid">
+          <div class="archive-tile"></div>
+          <div class="archive-tile"></div>
+          <div class="archive-tile"></div>
+          <div class="archive-tile"></div>
+          <div class="archive-tile"></div>
+          <div class="archive-tile"></div>
+          <div class="archive-tile"></div>
+          <div class="archive-tile"></div>
+          <div class="archive-tile"></div>
+          <div class="archive-tile"></div>
+          <div class="archive-tile"></div>
+          <div class="archive-tile"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 7 / 13</div>
+</div>
+
+
+<!-- 8: MONTH 2 — IGNITE + AMPLIFY -->
+<div class="page">
+  <div class="page-bg" style="background-image: url('images/mellencamp-american-fool.jpg');"></div>
+
+  <div class="phase-watermark">02</div>
+
+  <div class="phase-slide">
+    <div class="phase-left">
+      <div class="phase-month">Month 2</div>
+      <div class="phase-title">Ignite +<br><span class="accent">Amplify.</span></div>
+      <div class="phase-card">
+        <ul>
+          <li>Daily content distribution is activated across channels, spanning nostalgia-led hooks, live performance moments, storytelling edits, and deeper catalog highlights.</li>
+          <li>Audio seeding is deployed across key tracks, driving early usage and platform signals. Initial performance data informs rapid optimization, with top-performing narratives scaled to maximize reach and engagement.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="phase-right">
+      <div class="radar-wrap">
+        <div class="radar-circle outer"></div>
+        <div class="radar-circle mid"></div>
+        <div class="radar-circle inner"></div>
+        <div class="radar-crosshair-h"></div>
+        <div class="radar-crosshair-v"></div>
+        <div class="radar-sweep"></div>
+        <div class="radar-center"></div>
+        <div class="radar-dot"></div>
+        <div class="radar-dot"></div>
+        <div class="radar-dot"></div>
+        <div class="radar-dot"></div>
+        <div class="radar-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 8 / 13</div>
+</div>
+
+
+<!-- 9: MONTH 3 — SCALE + TARGET -->
+<div class="page">
+  <div class="page-bg" style="background-image: url('images/mellencamp-lonesome.jpg');"></div>
+
+  <div class="phase-watermark">03</div>
+
+  <div class="phase-slide">
+    <div class="phase-left">
+      <div class="phase-month">Month 3</div>
+      <div class="phase-title">Scale +<br><span class="accent">Target.</span></div>
+      <div class="phase-card">
+        <ul>
+          <li>The content engine operates at full velocity, with expanding fan channels and increasing organic audio adoption across creators.</li>
+          <li>Location-based targeting infrastructure is activated across all tour markets, enabling precise audience concentration around key venues.</li>
+          <li>In parallel, city priming initiatives roll out on a phased timeline aligned to tour stops, building localized momentum and anticipation ahead of each date.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="phase-right">
+      <div class="radar-wrap">
+        <div class="radar-circle outer"></div>
+        <div class="radar-circle mid"></div>
+        <div class="radar-circle inner"></div>
+        <div class="radar-crosshair-h"></div>
+        <div class="radar-crosshair-v"></div>
+        <div class="radar-sweep"></div>
+        <div class="radar-center"></div>
+        <div class="radar-dot"></div>
+        <div class="radar-dot"></div>
+        <div class="radar-dot"></div>
+        <div class="radar-dot"></div>
+        <div class="radar-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 9 / 13</div>
+</div>
+
+
+<!-- 10: MONTH 4 — TOUR MODE -->
+<div class="page">
+  <div class="page-bg" style="background-image: url('images/mellencamp-human-wheels.jpg');"></div>
+
+  <div class="phase-watermark">04</div>
+
+  <div class="phase-slide">
+    <div class="phase-left">
+      <div class="phase-month">Month 4</div>
+      <div class="phase-title">Tour<br><span class="accent">Mode.</span></div>
+      <div class="phase-card">
+        <ul>
+          <li>City priming is fully active across all tour markets, concentrating visibility and audience engagement at the city level.</li>
+          <li>Content shifts to real-time tour coverage, live performance moments, crowd reactions, and city-by-city storytelling. Comprehensive reporting tracks performance across key metrics, including impressions, engagement rates, and content velocity by market.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="phase-right">
+      <div class="tour-route">
+        <svg width="260" height="220" viewBox="0 0 260 220" fill="none">
+          <polyline points="19,104 59,144 119,159 174,134 219,64 249,49"
+            stroke="rgba(245,197,24,0.2)" stroke-width="1" fill="none" />
+        </svg>
+        <div class="tour-dot" style="left: 15px; top: 100px; animation-delay: 0s;"></div>
+        <div class="tour-dot" style="left: 55px; top: 140px; animation-delay: 0.8s;"></div>
+        <div class="tour-dot" style="left: 115px; top: 155px; animation-delay: 1.6s;"></div>
+        <div class="tour-dot" style="left: 170px; top: 130px; animation-delay: 2.4s;"></div>
+        <div class="tour-dot" style="left: 215px; top: 60px; animation-delay: 3.2s;"></div>
+        <div class="tour-dot" style="left: 245px; top: 45px; animation-delay: 4s;"></div>
+        <div class="tour-dot-label" style="left: 19px; top: 118px;">LA</div>
+        <div class="tour-dot-label" style="left: 59px; top: 158px;">PHX</div>
+        <div class="tour-dot-label" style="left: 119px; top: 173px;">HOU</div>
+        <div class="tour-dot-label" style="left: 174px; top: 148px;">ATL</div>
+        <div class="tour-dot-label" style="left: 219px; top: 78px;">NYC</div>
+        <div class="tour-dot-label" style="left: 249px; top: 63px;">BOS</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="phase-note" style="position: absolute; bottom: 48px; left: 0; right: 0;">Start now. By the time the tour hits, the digital world is already built and the audience is already watching.</p>
+
+  <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 10 / 13</div>
+</div>
+
+
+<!-- 11: BUDGET BREAKDOWN -->
 <div class="page">
   <div class="page-bg" style="background-image: url('images/mellencamp-10.jpg');"></div>
-  <div class="page-logo">dF</div>
+
 
   <div class="split" style="align-items: flex-start;">
     <div class="split-left">
@@ -574,14 +959,14 @@
       </div>
       <div class="budget-item">
         <div>
-          <div class="budget-phase">Crisis Insurance</div>
-          <div class="budget-desc">Included with this tier. If something goes sideways on tour, we protect the narrative across every comment section and platform.</div>
+          <div class="budget-phase">Narrative Control &amp; Moderation</div>
+          <div class="budget-desc">Active oversight of platform conversations, managing sentiment and maintaining a consistent, positive narrative across all digital touchpoints.</div>
         </div>
         <div class="budget-amount">Included</div>
       </div>
       <div class="budget-item">
         <div>
-          <div class="budget-phase">Intelligence + Strategy</div>
+          <div class="budget-phase">Metrics + Reporting</div>
           <div class="budget-desc">Weekly reports, strategy calls, market-by-market performance tracking.</div>
         </div>
         <div class="budget-amount">$6,000</div>
@@ -593,31 +978,32 @@
     </div>
   </div>
 
-  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 8 / 10</div>
+  <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 11 / 13</div>
 </div>
 
 
-<!-- 8: START NOW -->
+<!-- 12: START NOW -->
 <div class="page centered">
-  <div class="page-bg" style="background-image: url('images/mellencamp-9.jpg');"></div>
-  <div class="page-logo">dF</div>
+  <div class="page-bg" style="background-image: url('images/mellencamp-8.jpg');"></div>
+
 
   <div class="hero-title" style="font-size: 86px;">Start Now.<br><span class="accent">Tour Ready By July.</span></div>
 
-  <p class="body-text" style="margin-top: 28px; max-width: 520px; text-align: center;">We start within a week of signing. Content engine runs immediately. Geo-fencing activates as tour dates approach. First numbers in 14 days. All content cleared with your team before going live.</p>
+  <p class="body-text" style="margin-top: 32px; max-width: 540px; text-align: center;">We start within a week of signing. Content engine runs immediately. City priming activates as tour dates approach. First numbers in 14 days. All content cleared with your team before going live.</p>
 
-  <p style="font-size: 13px; color: var(--text-muted); margin-top: 24px;">Tour starts July 10. That gives us four months to build the machine before it matters most.</p>
+  <p style="font-size: 15px; color: var(--text-muted); margin-top: 28px;">Tour starts July 10. That gives us four months to build the machine before it matters most.</p>
 
-  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 9 / 10</div>
+  <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 12 / 13</div>
 </div>
 
 
-<!-- 9: THANK YOU -->
+<!-- 13: THANK YOU -->
 <div class="page">
   <div class="page-bg" style="background-image: url('images/mellencamp-5.jpg');"></div>
-  <div class="page-logo">dF</div>
+  <img class="page-logo" src="images/wldfr-white.png" alt="WLDFR">
+
   <div class="page-meta">
-    <div class="line1" style="color: var(--text-muted); text-transform: none;">defaria.nyc</div>
+    <div class="line1" style="color: var(--text-muted); text-transform: none;">wldfr.co</div>
   </div>
 
   <div class="split" style="align-items: center;">
@@ -629,20 +1015,31 @@
         <div class="contact-label" style="border-top: none; padding-top: 0;">Name</div>
         <div class="contact-value">Sean DeFaria</div>
         <div class="contact-label">Email</div>
-        <div class="contact-value red">sean@defaria.nyc</div>
+        <div class="contact-value accent">sean@defaria.nyc</div>
         <div class="contact-label">Phone</div>
         <div class="contact-value">310 625 4899</div>
-        <div class="contact-label">Website</div>
-        <div class="contact-value">defaria.nyc</div>
+        <div class="contact-label">Company</div>
+        <div class="contact-value">WLDFR</div>
         <div class="contact-label">Location</div>
         <div class="contact-value">New York</div>
       </div>
     </div>
   </div>
 
-  <div class="page-footer">Confidential &middot; DeFaria &nbsp;&nbsp;&nbsp; 10 / 10</div>
+  <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 13 / 13</div>
 </div>
 
 
+<script>
+document.querySelectorAll('.page').forEach(function(page) {
+  if (!page.querySelector('.page-logo')) {
+    var img = document.createElement('img');
+    img.className = 'page-logo';
+    img.src = 'images/wldfr-white.png';
+    img.alt = 'WLDFR';
+    page.appendChild(img);
+  }
+});
+</script>
 </body>
 </html>
