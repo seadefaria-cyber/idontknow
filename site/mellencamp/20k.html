@@ -30,7 +30,8 @@
   .page {
     width: 11in; height: 8.5in; position: relative; overflow: hidden;
     background: var(--bg); display: flex; flex-direction: column;
-    justify-content: center; margin: 0 auto; page-break-after: always;
+    justify-content: center; align-items: center; text-align: center;
+    margin: 0 auto; page-break-after: always;
     padding: 80px 96px;
   }
   .page.centered { align-items: center; text-align: center; }
@@ -55,8 +56,7 @@
   @media print { body { background: #000; margin: 0; } .page { margin: 0; width: 100vw; height: 100vh; border-radius: 0; } }
 
   .page-logo {
-    position: absolute !important; top: 20px; left: 32px;
-    width: 36px; height: auto; z-index: 10; opacity: 0.4;
+    display: none;
   }
   .page-footer { position: absolute !important; bottom: 22px; left: 0; right: 0; font-family: var(--mono); font-size: 7px; font-weight: 400; letter-spacing: 0.15em; color: rgba(255,255,255,0.25); text-align: center; text-transform: uppercase; z-index: 10; }
   .page-meta { position: absolute !important; top: 36px; right: 48px; text-align: right; z-index: 10; }
@@ -71,11 +71,11 @@
 
   .hero-sub { font-family: var(--font); font-size: 19px; font-weight: 500; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 24px; }
 
-  .body-text { font-size: 20px; font-weight: 500; color: var(--text-secondary); line-height: 1.75; max-width: 540px; }
+  .body-text { font-size: 20px; font-weight: 500; color: var(--text-secondary); line-height: 1.75; max-width: 540px; margin-left: auto; margin-right: auto; }
 
   .label-mono { font-family: var(--font-display); font-size: 48px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 24px; }
 
-  .card-grid { display: grid; gap: 14px; width: 100%; margin-top: 20px; }
+  .card-grid { display: grid; gap: 14px; width: 100%; margin-top: 20px; margin-left: auto; margin-right: auto; max-width: 700px; }
   .card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
   .card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 24px; text-align: left; }
   .card-num { font-family: var(--font-display); font-size: 40px; color: var(--accent); line-height: 1; margin-bottom: 8px; }
@@ -84,15 +84,15 @@
   .card ul { list-style: disc; padding-left: 16px; margin-top: 6px; }
   .card li { font-size: 15px; font-weight: 500; line-height: 1.55; color: #f0f0f0; margin-bottom: 3px; }
 
-  .split { display: flex; align-items: flex-start; gap: 64px; width: 100%; }
-  .split-left { flex-shrink: 0; width: 340px; }
-  .split-right { flex: 1; }
+  .split { display: flex; align-items: center; justify-content: center; gap: 64px; width: 100%; }
+  .split-left { flex-shrink: 0; width: 340px; text-align: left; }
+  .split-right { flex: 1; text-align: left; }
 
-  .budget-item { padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: baseline; }
+  .budget-item { padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: baseline; text-align: left; }
   .budget-item .budget-phase { font-family: var(--font); font-size: 16px; font-weight: 600; color: var(--accent); }
   .budget-item .budget-desc { font-size: 15px; color: #e8e8e8; font-weight: 500; margin-top: 4px; }
   .budget-item .budget-amount { font-family: var(--font); font-size: 17px; font-weight: 700; color: var(--text); flex-shrink: 0; margin-left: 24px; }
-  .budget-total { padding-top: 24px; margin-top: 8px; border-top: 2px solid var(--accent); display: flex; justify-content: space-between; align-items: baseline; }
+  .budget-total { padding-top: 24px; margin-top: 8px; border-top: 2px solid var(--accent); display: flex; justify-content: space-between; align-items: baseline; text-align: left; }
   .budget-total .label { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--accent); text-transform: uppercase; }
   .budget-total .amount { font-family: var(--font-display); font-size: 40px; font-weight: 700; color: var(--accent); text-transform: uppercase; }
 
@@ -167,16 +167,16 @@
   .timeline-label-title { font-family: var(--font); font-size: 15px; font-weight: 600; color: var(--text); margin-top: 4px; }
 
   /* Narrative tags/chips */
-  .narrative-section { margin-top: 20px; }
+  .narrative-section { margin-top: 20px; text-align: left; }
   .narrative-label { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
   .tag-grid { display: flex; flex-wrap: wrap; gap: 8px; }
   .tag { font-family: var(--font); font-size: 14px; font-weight: 700; color: #fff; background: rgba(196,92,38,0.18); border: 1.5px solid rgba(196,92,38,0.35); border-radius: 24px; padding: 7px 16px; white-space: nowrap; }
 
   /* Phase individual slides */
-  .phase-slide { display: flex; align-items: center; gap: 48px; width: 100%; }
-  .phase-left { flex: 0 0 55%; }
+  .phase-slide { display: flex; align-items: center; justify-content: center; gap: 48px; width: 100%; max-width: 860px; margin: 0 auto; }
+  .phase-left { flex: 0 0 50%; text-align: left; }
   .phase-right { flex: 1; display: flex; align-items: center; justify-content: center; }
-  .phase-number { position: absolute; font-family: var(--font-display); font-size: 220px; font-weight: 700; color: var(--accent); opacity: 0.12; line-height: 1; z-index: 0; top: 50%; left: 40px; transform: translateY(-50%); }
+  .phase-number { position: absolute; font-family: var(--font-display); font-size: 220px; font-weight: 700; color: var(--accent); opacity: 0.12; line-height: 1; z-index: 0; top: 50%; left: 50%; transform: translate(-50%, -50%); }
   .phase-label { font-family: var(--font-display); font-size: 32px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
   .phase-title { font-family: var(--font-display); font-size: 64px; font-weight: 700; color: var(--text); text-transform: uppercase; line-height: 0.95; margin-bottom: 24px; }
   .phase-body { font-size: 17px; font-weight: 500; color: var(--text-secondary); line-height: 1.7; max-width: 460px; }
@@ -290,7 +290,7 @@
   <div class="page-bg" style="background-image: url('images/mellencamp-4.jpg');"></div>
 
 
-  <div style="display: flex; align-items: flex-start; gap: 32px; width: 100%;">
+  <div style="display: flex; align-items: flex-start; gap: 32px; width: 100%; justify-content: center;">
     <!-- Left: Title + description -->
     <div style="flex: 1; min-width: 280px;">
       <div class="section-title" style="font-size: 72px; color: #ffffff;">Clipping<span class="accent">.</span></div>
@@ -589,7 +589,7 @@
   <div class="page-bg" style="background-image: url('images/mellencamp-lonesome.jpg');"></div>
 
 
-  <div class="split" style="align-items: flex-start;">
+  <div class="split" style="align-items: center;">
     <div class="split-left">
       <div class="section-title" style="font-size: 64px;">Budget<br><span class="accent">Breakdown.</span></div>
     </div>
@@ -681,6 +681,73 @@ document.querySelectorAll('.page').forEach(function(page) {
     page.appendChild(img);
   }
 });
+</script>
+
+<style>
+  .present-btn {
+    position: fixed; top: 16px; right: 16px; z-index: 9999;
+    background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;
+    padding: 8px 18px; font-family: var(--font); font-size: 13px;
+    font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; backdrop-filter: blur(8px);
+    transition: all 0.2s;
+  }
+  .present-btn:hover { background: rgba(255,255,255,0.25); color: #fff; }
+  body.presenting .present-btn { display: none; }
+  body.presenting .page { display: none; margin: 0; border-radius: 0; width: 100vw; height: 100vh; }
+  body.presenting .page.active-slide { display: flex; }
+  .slide-counter {
+    display: none; position: fixed; bottom: 24px; right: 32px; z-index: 9999;
+    font-family: var(--mono); font-size: 12px; color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+  }
+  body.presenting .slide-counter { display: block; }
+</style>
+
+<button class="present-btn" onclick="startPresentation()">Present</button>
+<div class="slide-counter" id="slideCounter"></div>
+
+<script>
+(function() {
+  var currentSlide = 0;
+  var pages = [];
+  var counter = document.getElementById('slideCounter');
+
+  function showSlide(n) {
+    pages.forEach(function(p) { p.classList.remove('active-slide'); });
+    currentSlide = Math.max(0, Math.min(n, pages.length - 1));
+    pages[currentSlide].classList.add('active-slide');
+    counter.textContent = (currentSlide + 1) + ' / ' + pages.length;
+  }
+
+  window.startPresentation = function() {
+    pages = Array.from(document.querySelectorAll('.page'));
+    document.body.classList.add('presenting');
+    document.documentElement.requestFullscreen().catch(function(){});
+    showSlide(0);
+  };
+
+  document.addEventListener('keydown', function(e) {
+    if (!document.body.classList.contains('presenting')) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault(); showSlide(currentSlide + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault(); showSlide(currentSlide - 1);
+    } else if (e.key === 'Escape') {
+      document.body.classList.remove('presenting');
+      pages.forEach(function(p) { p.classList.remove('active-slide'); });
+      if (document.fullscreenElement) document.exitFullscreen();
+    }
+  });
+
+  document.addEventListener('fullscreenchange', function() {
+    if (!document.fullscreenElement && document.body.classList.contains('presenting')) {
+      document.body.classList.remove('presenting');
+      pages.forEach(function(p) { p.classList.remove('active-slide'); });
+    }
+  });
+})();
 </script>
 </body>
 </html>
