@@ -73,7 +73,7 @@
 
   .hero-sub { font-family: var(--font); font-size: clamp(12px, 1.5vw, 19px); font-weight: 500; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2vh; }
 
-  .body-text { font-size: clamp(14px, 1.6vw, 20px); font-weight: 500; color: var(--text-secondary); line-height: 1.8; max-width: 540px; margin-left: auto; margin-right: auto; }
+  .body-text { font-size: clamp(14px, 1.6vw, 20px); font-weight: 500; color: var(--text-secondary); line-height: 1.8; max-width: min(540px, 45vw); margin-left: auto; margin-right: auto; }
 
   .card-grid { display: grid; gap: clamp(8px, 1.5vh, 16px); width: 100%; margin-top: 1.5vh; margin-left: auto; margin-right: auto; max-width: 700px; }
   .card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
@@ -87,11 +87,11 @@
   .split-left { flex-shrink: 0; width: 30%; text-align: left; }
   .split-right { flex: 1; text-align: left; }
 
-  .budget-item { padding: 1vh 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: baseline; text-align: left; }
+  .budget-item { padding: 0.7vh 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: baseline; text-align: left; }
   .budget-item .budget-phase { font-family: var(--font); font-size: clamp(12px, 1.3vw, 16px); font-weight: 600; color: var(--accent); }
   .budget-item .budget-desc { font-size: clamp(11px, 1.1vw, 15px); color: #e0e0e0; font-weight: 500; margin-top: 2px; }
   .budget-item .budget-amount { font-family: var(--font); font-size: clamp(13px, 1.3vw, 17px); font-weight: 700; color: var(--text); flex-shrink: 0; margin-left: 2vw; }
-  .budget-total { padding-top: 1.5vh; margin-top: 0.5vh; border-top: 2px solid var(--accent); display: flex; justify-content: space-between; align-items: baseline; text-align: left; }
+  .budget-total { padding-top: 1vh; margin-top: 0.5vh; border-top: 2px solid var(--accent); display: flex; justify-content: space-between; align-items: baseline; text-align: left; }
   .budget-total .label { font-family: var(--font-display); font-size: clamp(18px, 2vw, 24px); font-weight: 700; color: var(--accent); text-transform: uppercase; }
   .budget-total .amount { font-family: var(--font-display); font-size: clamp(28px, 3vw, 40px); font-weight: 700; color: var(--accent); text-transform: uppercase; }
 
@@ -196,7 +196,7 @@
   .phase-title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 1.5vh; }
   .phase-title .accent { color: var(--accent); }
   .phase-card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 1.5vh 1.5vw; text-align: left; }
-  .phase-card ul { list-style: disc; padding-left: 16px; margin: 0; }
+  .phase-card ul { list-style: disc; padding-left: 1.2vw; margin: 0; }
   .phase-card li { font-size: clamp(11px, 1.2vw, 15px); font-weight: 500; line-height: 1.5; color: #e8e8e8; margin-bottom: 0.5vh; }
   .phase-card li:last-child { margin-bottom: 0; }
   .phase-note { font-family: var(--mono); font-size: clamp(9px, 1vw, 12px); color: #999; letter-spacing: 0.06em; text-align: center; margin-top: 1vh; }
@@ -285,15 +285,15 @@
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     border-radius: 50%; border: 1px solid rgba(245,197,24,0.15);
   }
-  .radar-circle.outer { width: 200px; height: 200px; }
-  .radar-circle.mid { width: 140px; height: 140px; }
-  .radar-circle.inner { width: 80px; height: 80px; }
+  .radar-circle.outer { width: 91%; height: 91%; }
+  .radar-circle.mid { width: 64%; height: 64%; }
+  .radar-circle.inner { width: 36%; height: 36%; }
   .radar-crosshair-h, .radar-crosshair-v {
     position: absolute; top: 50%; left: 50%;
     background: rgba(245,197,24,0.08);
   }
-  .radar-crosshair-h { width: 200px; height: 1px; transform: translate(-50%, -50%); }
-  .radar-crosshair-v { width: 1px; height: 200px; transform: translate(-50%, -50%); }
+  .radar-crosshair-h { width: 91%; height: 1px; transform: translate(-50%, -50%); }
+  .radar-crosshair-v { width: 1px; height: 91%; transform: translate(-50%, -50%); }
   .radar-sweep {
     position: absolute; top: 50%; left: 50%; width: 100px; height: 2px;
     transform-origin: 0 50%; background: linear-gradient(90deg, rgba(245,197,24,0.6), transparent);
@@ -331,7 +331,7 @@
   .ekg-line {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
   }
-  .ekg-line svg { width: 520px; height: 120px; }
+  .ekg-line svg { width: 200%; height: 100%; }
   .ekg-line svg path {
     fill: none; stroke: var(--accent); stroke-width: 1.5;
     stroke-dasharray: 600; stroke-dashoffset: 600;
@@ -649,38 +649,38 @@
   <div class="page-bg" style="background-image: url('images/mellencamp-scarecrow.jpg');"></div>
 
 
-  <div style="display: flex; align-items: flex-start; justify-content: center; gap: 48px; width: 100%;">
+  <div style="display: flex; align-items: flex-start; justify-content: center; gap: 3vw; width: 100%;">
     <div style="flex: 1; text-align: left;">
-      <div class="section-title" style="font-size: 64px;">City<br><span class="accent">Priming.</span></div>
+      <div class="section-title" style="font-size: clamp(36px, 5vw, 64px);">City<br><span class="accent">Priming.</span></div>
       <div class="card-grid" style="grid-template-columns: 1fr; max-width: 420px;">
         <div class="card">
-          <h3 style="font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--accent-secondary); text-transform: uppercase; margin-bottom: 10px;">Localized Distribution</h3>
-          <p style="font-size: 17px; font-weight: 500; color: var(--text-secondary); line-height: 1.65;">Social platforms distribute content in part through localized signals. By aligning content with city-specific metadata, location tagging, regional hashtags, and engagement with local audiences, we influence how content is surfaced within a given market.</p>
+          <h3 style="font-family: var(--mono); font-size: clamp(7px, 0.9vw, 10px); font-weight: 500; letter-spacing: 0.12em; color: var(--accent-secondary); text-transform: uppercase; margin-bottom: 0.8vh;">Localized Distribution</h3>
+          <p style="font-size: clamp(12px, 1.3vw, 17px); font-weight: 500; color: var(--text-secondary); line-height: 1.55;">Social platforms distribute content in part through localized signals. By aligning content with city-specific metadata, location tagging, regional hashtags, and engagement with local audiences, we influence how content is surfaced within a given market.</p>
         </div>
         <div class="card">
-          <h3 style="font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--accent-secondary); text-transform: uppercase; margin-bottom: 10px;">Tour Market Activation</h3>
-          <p style="font-size: 17px; font-weight: 500; color: var(--text-secondary); line-height: 1.65;">In the weeks leading up to each tour stop, we deploy a coordinated wave of city-relevant Mellencamp content, localized messaging, past performance moments, and regional nostalgia, driving concentrated visibility and building anticipation within priority markets.</p>
+          <h3 style="font-family: var(--mono); font-size: clamp(7px, 0.9vw, 10px); font-weight: 500; letter-spacing: 0.12em; color: var(--accent-secondary); text-transform: uppercase; margin-bottom: 0.8vh;">Tour Market Activation</h3>
+          <p style="font-size: clamp(12px, 1.3vw, 17px); font-weight: 500; color: var(--text-secondary); line-height: 1.55;">In the weeks leading up to each tour stop, we deploy a coordinated wave of city-relevant Mellencamp content, localized messaging, past performance moments, and regional nostalgia, driving concentrated visibility and building anticipation within priority markets.</p>
         </div>
       </div>
     </div>
 
     <!-- Geo-fence illustration (Burnt Orange) -->
-    <div style="flex-shrink: 0; width: 280px; height: 280px; position: relative; display: flex; align-items: center; justify-content: center; margin-top: 40px;">
+    <div style="flex-shrink: 0; width: clamp(180px, 20vw, 280px); height: clamp(180px, 20vw, 280px); position: relative; display: flex; align-items: center; justify-content: center; margin-top: 3vh;">
       <!-- Outer pulse ring -->
-      <div style="position: absolute; width: 260px; height: 260px; border-radius: 50%; border: 1px solid rgba(245,197,24,0.12); animation: geoPulse 3s ease-out infinite;"></div>
+      <div style="position: absolute; width: 93%; height: 93%; border-radius: 50%; border: 1px solid rgba(245,197,24,0.12); animation: geoPulse 3s ease-out infinite;"></div>
       <!-- Middle pulse ring -->
-      <div style="position: absolute; width: 200px; height: 200px; border-radius: 50%; border: 1px solid rgba(245,197,24,0.18); animation: geoPulse 3s ease-out 0.6s infinite;"></div>
+      <div style="position: absolute; width: 71%; height: 71%; border-radius: 50%; border: 1px solid rgba(245,197,24,0.18); animation: geoPulse 3s ease-out 0.6s infinite;"></div>
       <!-- Fence perimeter -->
-      <div style="position: absolute; width: 150px; height: 150px; border-radius: 50%; border: 2px solid rgba(245,197,24,0.4); background: radial-gradient(circle, rgba(245,197,24,0.1) 0%, transparent 70%);"></div>
+      <div style="position: absolute; width: 54%; height: 54%; border-radius: 50%; border: 2px solid rgba(245,197,24,0.4); background: radial-gradient(circle, rgba(245,197,24,0.1) 0%, transparent 70%);"></div>
       <!-- Inner zone -->
-      <div style="position: absolute; width: 80px; height: 80px; border-radius: 50%; border: 1.5px dashed rgba(245,197,24,0.55); background: radial-gradient(circle, rgba(245,197,24,0.14) 0%, transparent 70%);"></div>
+      <div style="position: absolute; width: 29%; height: 29%; border-radius: 50%; border: 1.5px dashed rgba(245,197,24,0.55); background: radial-gradient(circle, rgba(245,197,24,0.14) 0%, transparent 70%);"></div>
       <!-- Center pin -->
       <div style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center;">
         <svg width="28" height="36" viewBox="0 0 28 36" fill="none" style="filter: drop-shadow(0 2px 8px rgba(245,197,24,0.4));">
           <path d="M14 0C6.268 0 0 6.268 0 14c0 10.5 14 22 14 22s14-11.5 14-22C28 6.268 21.732 0 14 0z" fill="#F5C518"/>
           <circle cx="14" cy="14" r="6" fill="#0a0a0a"/>
         </svg>
-        <div style="font-family: var(--mono); font-size: 8px; color: var(--accent); letter-spacing: 0.1em; margin-top: 8px; text-transform: uppercase;">Venue</div>
+        <div style="font-family: var(--mono); font-size: clamp(6px, 0.7vw, 8px); color: var(--accent); letter-spacing: 0.1em; margin-top: 0.6vh; text-transform: uppercase;">Venue</div>
       </div>
       <!-- Device dots -->
       <div style="position: absolute; top: 55px; right: 50px; width: 6px; height: 6px; border-radius: 50%; background: #fff; opacity: 0.6; animation: deviceBlink 2s ease-in-out infinite;"></div>
@@ -688,7 +688,7 @@
       <div style="position: absolute; top: 80px; left: 70px; width: 5px; height: 5px; border-radius: 50%; background: #fff; opacity: 0.5; animation: deviceBlink 2s ease-in-out 1.4s infinite;"></div>
       <div style="position: absolute; bottom: 85px; right: 65px; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); opacity: 0.7; animation: deviceBlink 2s ease-in-out 0.4s infinite;"></div>
       <!-- Radius label -->
-      <div style="position: absolute; bottom: 20px; right: 10px; font-family: var(--mono); font-size: 8px; color: var(--text-muted); letter-spacing: 0.08em;">2 mi radius</div>
+      <div style="position: absolute; bottom: 7%; right: 4%; font-family: var(--mono); font-size: clamp(6px, 0.7vw, 8px); color: var(--text-muted); letter-spacing: 0.08em;">2 mi radius</div>
     </div>
   </div>
 
@@ -700,42 +700,42 @@
 <div class="page centered">
   <div class="page-bg" style="background-image: url('images/mellencamp-uhhuh.jpg');"></div>
 
-  <div class="section-title" style="font-size: 72px; margin-bottom: 48px;">The <span class="accent">Rollout.</span></div>
+  <div class="section-title" style="font-size: clamp(40px, 6vw, 72px); margin-bottom: 4vh;">The <span class="accent">Rollout.</span></div>
 
   <div style="display: flex; align-items: flex-start; justify-content: center; width: 80%; max-width: 720px; position: relative;">
     <!-- Horizontal line connecting all dots -->
-    <div style="position: absolute; top: 7px; left: 12.5%; right: 12.5%; height: 3px; background: var(--accent);"></div>
+    <div style="position: absolute; top: 0.6vw; left: 12.5%; right: 12.5%; height: 3px; background: var(--accent);"></div>
 
     <!-- Phase 01 -->
     <div style="flex: 1; display: flex; flex-direction: column; align-items: center; position: relative;">
-      <div style="width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); z-index: 2;"></div>
-      <div style="font-family: var(--mono); font-size: 8px; font-weight: 400; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-top: 18px;">Phase 01</div>
-      <div style="font-family: var(--font); font-size: 12px; font-weight: 600; color: var(--text); margin-top: 4px;">Archive + Build</div>
-      <div style="font-family: var(--font-display); font-size: 64px; color: var(--accent); line-height: 1; margin-top: 12px; opacity: 0.85;">01</div>
+      <div style="width: clamp(10px, 1.2vw, 14px); height: clamp(10px, 1.2vw, 14px); border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); z-index: 2;"></div>
+      <div style="font-family: var(--mono); font-size: clamp(6px, 0.7vw, 8px); font-weight: 400; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-top: 1.5vh;">Phase 01</div>
+      <div style="font-family: var(--font); font-size: clamp(9px, 1.1vw, 12px); font-weight: 600; color: var(--text); margin-top: 0.4vh;">Archive + Build</div>
+      <div style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); color: var(--accent); line-height: 1; margin-top: 1vh; opacity: 0.85;">01</div>
     </div>
 
     <!-- Phase 02 -->
     <div style="flex: 1; display: flex; flex-direction: column; align-items: center; position: relative;">
-      <div style="width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); z-index: 2;"></div>
-      <div style="font-family: var(--mono); font-size: 8px; font-weight: 400; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-top: 18px;">Phase 02</div>
-      <div style="font-family: var(--font); font-size: 12px; font-weight: 600; color: var(--text); margin-top: 4px;">Ignite + Amplify</div>
-      <div style="font-family: var(--font-display); font-size: 64px; color: var(--accent); line-height: 1; margin-top: 12px; opacity: 0.85;">02</div>
+      <div style="width: clamp(10px, 1.2vw, 14px); height: clamp(10px, 1.2vw, 14px); border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); z-index: 2;"></div>
+      <div style="font-family: var(--mono); font-size: clamp(6px, 0.7vw, 8px); font-weight: 400; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-top: 1.5vh;">Phase 02</div>
+      <div style="font-family: var(--font); font-size: clamp(9px, 1.1vw, 12px); font-weight: 600; color: var(--text); margin-top: 0.4vh;">Ignite + Amplify</div>
+      <div style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); color: var(--accent); line-height: 1; margin-top: 1vh; opacity: 0.85;">02</div>
     </div>
 
     <!-- Phase 03 -->
     <div style="flex: 1; display: flex; flex-direction: column; align-items: center; position: relative;">
-      <div style="width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); z-index: 2;"></div>
-      <div style="font-family: var(--mono); font-size: 8px; font-weight: 400; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-top: 18px;">Phase 03</div>
-      <div style="font-family: var(--font); font-size: 12px; font-weight: 600; color: var(--text); margin-top: 4px;">Scale + Target</div>
-      <div style="font-family: var(--font-display); font-size: 64px; color: var(--accent); line-height: 1; margin-top: 12px; opacity: 0.85;">03</div>
+      <div style="width: clamp(10px, 1.2vw, 14px); height: clamp(10px, 1.2vw, 14px); border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); z-index: 2;"></div>
+      <div style="font-family: var(--mono); font-size: clamp(6px, 0.7vw, 8px); font-weight: 400; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-top: 1.5vh;">Phase 03</div>
+      <div style="font-family: var(--font); font-size: clamp(9px, 1.1vw, 12px); font-weight: 600; color: var(--text); margin-top: 0.4vh;">Scale + Target</div>
+      <div style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); color: var(--accent); line-height: 1; margin-top: 1vh; opacity: 0.85;">03</div>
     </div>
 
     <!-- Phase 04 -->
     <div style="flex: 1; display: flex; flex-direction: column; align-items: center; position: relative;">
-      <div style="width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); z-index: 2;"></div>
-      <div style="font-family: var(--mono); font-size: 8px; font-weight: 400; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-top: 18px;">Phase 04</div>
-      <div style="font-family: var(--font); font-size: 12px; font-weight: 600; color: var(--text); margin-top: 4px;">Tour Mode</div>
-      <div style="font-family: var(--font-display); font-size: 64px; color: var(--accent); line-height: 1; margin-top: 12px; opacity: 0.85;">04</div>
+      <div style="width: clamp(10px, 1.2vw, 14px); height: clamp(10px, 1.2vw, 14px); border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); z-index: 2;"></div>
+      <div style="font-family: var(--mono); font-size: clamp(6px, 0.7vw, 8px); font-weight: 400; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-top: 1.5vh;">Phase 04</div>
+      <div style="font-family: var(--font); font-size: clamp(9px, 1.1vw, 12px); font-weight: 600; color: var(--text); margin-top: 0.4vh;">Tour Mode</div>
+      <div style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); color: var(--accent); line-height: 1; margin-top: 1vh; opacity: 0.85;">04</div>
     </div>
   </div>
 
@@ -759,15 +759,15 @@
           <li>In parallel, establish and activate a network of fan-facing channels across TikTok, Instagram, YouTube, and Facebook to support distribution and scale.</li>
         </ul>
       </div>
-      <div style="margin-top: 10px;">
-        <div style="font-family: var(--mono); font-size: 7px; font-weight: 500; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 6px;">Example Narratives</div>
-        <div style="display: flex; flex-wrap: wrap; gap: 4px;">
-          <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 4px 10px; white-space: nowrap;">"Just discovered and I'm obsessed"</div>
-          <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 4px 10px; white-space: nowrap;">"This needs a comeback"</div>
-          <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 4px 10px; white-space: nowrap;">"This song STILL holds up"</div>
-          <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 4px 10px; white-space: nowrap;">"80s style was PEAK"</div>
-          <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 4px 10px; white-space: nowrap;">"Stage presence is a lost art"</div>
-          <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 4px 10px; white-space: nowrap;">"Pure aura maestro"</div>
+      <div style="margin-top: 0.8vh;">
+        <div style="font-family: var(--mono); font-size: clamp(5px, 0.6vw, 7px); font-weight: 500; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.5vh;">Example Narratives</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.4vh 0.3vw;">
+          <div style="font-family: var(--font); font-size: clamp(7px, 0.8vw, 9px); font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 0.3vh 0.7vw; white-space: nowrap;">"Just discovered and I'm obsessed"</div>
+          <div style="font-family: var(--font); font-size: clamp(7px, 0.8vw, 9px); font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 0.3vh 0.7vw; white-space: nowrap;">"This needs a comeback"</div>
+          <div style="font-family: var(--font); font-size: clamp(7px, 0.8vw, 9px); font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 0.3vh 0.7vw; white-space: nowrap;">"This song STILL holds up"</div>
+          <div style="font-family: var(--font); font-size: clamp(7px, 0.8vw, 9px); font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 0.3vh 0.7vw; white-space: nowrap;">"80s style was PEAK"</div>
+          <div style="font-family: var(--font); font-size: clamp(7px, 0.8vw, 9px); font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 0.3vh 0.7vw; white-space: nowrap;">"Stage presence is a lost art"</div>
+          <div style="font-family: var(--font); font-size: clamp(7px, 0.8vw, 9px); font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 0.3vh 0.7vw; white-space: nowrap;">"Pure aura maestro"</div>
         </div>
       </div>
     </div>
@@ -893,7 +893,7 @@
     </div>
     <div class="phase-right">
       <div class="tour-route">
-        <svg width="260" height="220" viewBox="0 0 260 220" fill="none">
+        <svg width="100%" height="100%" viewBox="0 0 260 220" fill="none">
           <polyline points="19,104 59,144 119,159 174,134 219,64 249,49"
             stroke="rgba(245,197,24,0.2)" stroke-width="1" fill="none" />
         </svg>
@@ -913,7 +913,7 @@
     </div>
   </div>
 
-  <p class="phase-note" style="position: absolute; bottom: 48px; left: 0; right: 0;">Start now. By the time the tour hits, the digital world is already built and the audience is already watching.</p>
+  <p class="phase-note" style="position: absolute; bottom: 4vh; left: 0; right: 0;">Start now. By the time the tour hits, the digital world is already built and the audience is already watching.</p>
 
   <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 10 / 13</div>
 </div>
@@ -926,9 +926,9 @@
 
   <div class="split" style="align-items: flex-start;">
     <div class="split-left">
-      <div class="section-title" style="font-size: 64px;">Monthly<br><span class="accent">Retainer.</span></div>
+      <div class="section-title" style="font-size: clamp(36px, 5vw, 64px);">Monthly<br><span class="accent">Retainer.</span></div>
     </div>
-    <div class="split-right" style="padding-top: 8px;">
+    <div class="split-right" style="padding-top: 0.5vh;">
       <div class="budget-item">
         <div>
           <div class="budget-phase">Content Production</div>
@@ -987,11 +987,11 @@
   <div class="page-bg" style="background-image: url('images/mellencamp-8.jpg');"></div>
 
 
-  <div class="hero-title" style="font-size: 86px;">Start Now.<br><span class="accent">Tour Ready By July.</span></div>
+  <div class="hero-title" style="font-size: clamp(44px, 7vw, 86px);">Start Now.<br><span class="accent">Tour Ready By July.</span></div>
 
-  <p class="body-text" style="margin-top: 32px; max-width: 540px; text-align: center;">We start within a week of signing. Content engine runs immediately. City priming activates as tour dates approach. First numbers in 14 days. All content cleared with your team before going live.</p>
+  <p class="body-text" style="margin-top: 3vh; max-width: 540px; text-align: center;">We start within a week of signing. Content engine runs immediately. City priming activates as tour dates approach. First numbers in 14 days. All content cleared with your team before going live.</p>
 
-  <p style="font-size: 15px; color: var(--text-muted); margin-top: 28px;">Tour starts July 10. That gives us four months to build the machine before it matters most.</p>
+  <p style="font-size: clamp(12px, 1.3vw, 15px); color: var(--text-muted); margin-top: 2.5vh;">Tour starts July 10. That gives us four months to build the machine before it matters most.</p>
 
   <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 12 / 13</div>
 </div>
@@ -1007,7 +1007,7 @@
 
   <div class="split" style="align-items: center;">
     <div class="split-left">
-      <div class="hero-title" style="font-size: 96px;"><span class="accent">Thank<br>You.</span></div>
+      <div class="hero-title" style="font-size: clamp(48px, 8vw, 96px);"><span class="accent">Thank<br>You.</span></div>
     </div>
     <div class="split-right">
       <div class="contact-block">
