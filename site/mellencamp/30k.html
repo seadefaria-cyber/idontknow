@@ -999,7 +999,6 @@
 <!-- 13: THANK YOU -->
 <div class="page">
   <div class="page-bg" style="background-image: url('images/mellencamp-5.jpg');"></div>
-  <img class="page-logo" src="images/wldfr-white.png" alt="WLDFR">
 
   <div class="page-meta">
     <div class="line1" style="color: var(--text-muted); text-transform: none;">wldfr.co</div>
@@ -1029,23 +1028,13 @@
 </div>
 
 
-<script>
-document.querySelectorAll('.page').forEach(function(page) {
-  if (!page.querySelector('.page-logo')) {
-    var img = document.createElement('img');
-    img.className = 'page-logo';
-    img.src = 'images/wldfr-white.png';
-    img.alt = 'WLDFR';
-    page.appendChild(img);
-  }
-});
-</script>
+<!-- logos removed -->
 
 <style>
   .present-btn {
     position: fixed; top: 16px; right: 16px; z-index: 9999;
-    background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.6);
-    border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;
+    background: rgba(255,255,255,0.25); color: rgba(255,255,255,0.9);
+    border: 1px solid rgba(255,255,255,0.4); border-radius: 6px;
     padding: 8px 18px; font-family: var(--font); font-size: 13px;
     font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
     cursor: pointer; backdrop-filter: blur(8px);
