@@ -733,7 +733,9 @@
     });
   }
 
-  fitToScreen();
+  // Run after layout is computed
+  requestAnimationFrame(function() { fitToScreen(); });
+  window.addEventListener('load', fitToScreen);
 
   function showSlide(n) {
     pages.forEach(function(p) { p.classList.remove('active-slide'); });
