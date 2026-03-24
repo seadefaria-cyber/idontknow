@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>deFaria</title>
+    <meta name="description" content="deFaria">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><text x='50%25' y='22' text-anchor='middle' font-family='Helvetica,sans-serif' font-size='14' fill='%23fff' font-weight='bold'>dF</text></svg>">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #fff;
+            color: #0a0a0a;
+            font-family: Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        /* Noise */
+        .noise {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 6000;
+            opacity: 0.03;
+            mix-blend-mode: hard-light;
+        }
+        .noise canvas { width: 100%; height: 100%; display: block; }
+
+        /* ======= NAV ======= */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 28px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            color: #0a0a0a;
+        }
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            color: #0a0a0a;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+        .nav-links a:hover { opacity: 1; }
+
+        /* ======= HERO ======= */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .hero-canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: fadeIn 2s ease forwards;
+            transition: opacity 0.4s ease;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* No separate hover text — handled in canvas */
+
+        /* Hidden text for accessibility */
+        .hero h1 {
+            position: absolute;
+            color: transparent;
+            font-size: 0;
+        }
+
+        .scanline { display: none; }
+
+
+        /* ======= CONTACT FORM ======= */
+        .contact {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 24px;
+            gap: 40px;
+        }
+        .contact h2 {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            line-height: 0.9;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 400px;
+        }
+        .form input,
+        .form textarea {
+            background: transparent;
+            border: 1px solid rgba(0,0,0,0.12);
+            color: #0a0a0a;
+            font-family: Helvetica, -apple-system, sans-serif;
+            font-size: 13px;
+            padding: 14px 16px;
+            outline: none;
+            transition: border-color 0.3s;
+            -webkit-appearance: none;
+            border-radius: 0;
+        }
+        .form input::placeholder,
+        .form textarea::placeholder {
+            color: rgba(0,0,0,0.25);
+        }
+        .form input:focus,
+        .form textarea:focus {
+            border-color: rgba(0,0,0,0.4);
+        }
+        .form textarea {
+            resize: none;
+            height: 100px;
+        }
+        .form button {
+            background: #0a0a0a;
+            color: #fff;
+            border: none;
+            font-family: Helvetica, -apple-system, sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 16px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .form button:hover { opacity: 0.8; }
+
+        /* ======= FOOTER ======= */
+        footer {
+            padding: 28px 40px;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: rgba(0,0,0,0.15);
+        }
+        footer .links { display: flex; gap: 24px; }
+        footer a { transition: color 0.3s; }
+        footer a:hover { color: rgba(0,0,0,0.5); }
+
+        /* ======= RESPONSIVE ======= */
+        @media (max-width: 768px) {
+            nav { padding: 20px 20px; }
+            .nav-links { display: none; }
+            .contact h2 { letter-spacing: -3px; }
+            .form { max-width: 100%; }
+            footer { padding: 20px; flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="noise"><canvas id="noise"></canvas></div>
+<div class="scanline"></div>
+
+<nav>
+    <a href="#" class="logo">deFaria</a>
+    <ul class="nav-links">
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Hero — film reel plays inside the "deFaria" text -->
+<section class="hero" id="hero">
+    <canvas id="heroCanvas" class="hero-canvas"></canvas>
+    <h1>deFaria</h1>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+    <h2>Let's work.</h2>
+    <form class="form" action="https://formsubmit.co/sean@defaria.nyc" method="POST">
+        <input type="hidden" name="_subject" value="New inquiry from defaria.digital">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://defaria.digital/thanks.html">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="project" placeholder="Project">
+        <textarea name="message" placeholder="Tell us about it"></textarea>
+        <button type="submit">Send</button>
+    </form>
+</section>
+
+<footer>
+    <span>&copy; 2026 DeFaria</span>
+    <div class="links">
+        <a href="https://instagram.com/defaria" target="_blank">Instagram</a>
+        <a href="https://tiktok.com/@defaria" target="_blank">TikTok</a>
+        <a href="https://x.com/defaria" target="_blank">X</a>
+    </div>
+</footer>
+
+<script>
+// ======= NOISE =======
+const nc = document.getElementById('noise');
+const nx = nc.getContext('2d');
+function szN() { nc.width = window.innerWidth; nc.height = window.innerHeight; }
+szN(); window.addEventListener('resize', szN);
+let nf = 0;
+function grain() {
+    if (++nf % 3 !== 0) { requestAnimationFrame(grain); return; }
+    const w = nc.width, h = nc.height;
+    const img = nx.createImageData(w, h);
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+        const v = Math.random() * 255;
+        d[i] = d[i+1] = d[i+2] = v;
+        d[i+3] = 255;
+    }
+    nx.putImageData(img, 0, 0);
+    requestAnimationFrame(grain);
+}
+grain();
+
+// ======= FILM REEL INSIDE TEXT (Canvas) =======
+const canvas = document.getElementById('heroCanvas');
+const ctx = canvas.getContext('2d');
+
+// VIDEO LOOPS — each plays as a looping clip inside the text
+const videoSrcs = [
+    // Spaced out — no two Chris Heyn clips back to back
+    'vid/loop-sd-3.mp4',       // A$AP Rocky PUMA (LEAD)
+    'vid/loop-sd-1.mp4',       // Urban Wyatt at 6:57
+    'vid/loop-heyn-1.mp4',     // Heyn: IAN ep
+    'vid/loop-ap-1.mp4',       // Asspizza: Lukas Sabbat
+    'vid/loop-heyn-3.mp4',     // Heyn: THE HELLP ep
+    'vid/loop-sd-2.mp4',       // Robin's Jean
+    'vid/loop-heyn-5.mp4',     // Heyn: WISDOM KAYE ep
+    'vid/loop-new-1.mp4',      // Ian - I Ain't Coming Back
+    'vid/loop-heyn-7.mp4',     // Heyn: FENG ep
+    'vid/loop-ap-2.mp4',       // Asspizza: SLAWN
+    'vid/loop-heyn-2.mp4',     // Heyn: IAN ep pt2
+    'vid/loop-new-2.mp4',      // Joy Talks
+    'vid/loop-heyn-4.mp4',     // Heyn: THE HELLP pt2
+    'vid/loop-ap-3.mp4',       // Asspizza: Ian highlight
+    'vid/loop-heyn-6.mp4',     // Heyn: WISDOM KAYE pt2
+    'vid/loop-new-3.mp4',      // SWEETCIAN
+    'vid/loop-heyn-8.mp4',     // Heyn: FENG pt2
+    'vid/loop-ap-4.mp4',       // Asspizza highlight
+    'vid/loop-add-1.mp4',     // Tomorrows Gone Asspizza
+    'vid/loop-mural.mp4',      // Mural stream
+    'vid/loop-add-2.mp4',     // Gm2D-RYME5k
+    'vid/loop-desktop.mp4',    // Desktop clip
+    'vid/loop-add-3.mp4',     // W-h36CGqJ_w at 6:51 (5 sec)
+];
+
+const media = []; // array of {el, w, h} — works for both video and image elements
+let mediaReady = 0;
+
+videoSrcs.forEach(src => {
+    const vid = document.createElement('video');
+    vid.src = src;
+    vid.loop = true;
+    vid.muted = true;
+    vid.playsInline = true;
+    vid.autoplay = true;
+    vid.style.display = 'none';
+    document.body.appendChild(vid);
+    vid.addEventListener('loadeddata', () => {
+        mediaReady++;
+        vid.play().catch(() => {});
+    });
+    media.push({ el: vid, get w() { return vid.videoWidth || 320; }, get h() { return vid.videoHeight || 180; } });
+});
+
+const TEXT = 'deFaria';
+let scrollX = 0;
+let SPEED = 1.2;
+let isHovering = false;
+let hoverOpacity = 0; // 0 = full video, 1 = full black text
+
+document.getElementById('hero').addEventListener('mouseenter', () => { isHovering = true; });
+document.getElementById('hero').addEventListener('mouseleave', () => { isHovering = false; });
+
+function sizeCanvas() {
+    const dpr = window.devicePixelRatio || 1;
+    const hero = document.getElementById('hero');
+    const w = hero.clientWidth;
+    const h = hero.clientHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+sizeCanvas();
+window.addEventListener('resize', sizeCanvas);
+
+// Intro animation state
+const INTRO_DURATION = 2000; // 2 seconds
+const introStart = performance.now();
+let introDone = false;
+
+// Click hero to scroll to contact
+document.getElementById('hero').addEventListener('click', () => {
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+});
+
+function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+function drawHero(now) {
+    const w = canvas.width / (window.devicePixelRatio || 1);
+    const h = canvas.height / (window.devicePixelRatio || 1);
+    ctx.clearRect(0, 0, w, h);
+
+    let fontSize = Math.min(280, Math.max(100, w * 0.18));
+
+    ctx.save();
+
+    // Small grid of videos tiled inside the text
+    const cellH = fontSize * 0.52;
+    const rows = Math.ceil((fontSize * 1.1) / cellH);
+    const totalGridH = rows * cellH;
+    const gridStartY = (h - totalGridH) / 2;
+
+    if (mediaReady > 0) {
+        for (let row = 0; row < rows; row++) {
+            const rowY = gridStartY + row * cellH;
+            let totalRowW = 0;
+            for (const m of media) {
+                if (m.w > 0) totalRowW += cellH * (m.w / m.h);
+            }
+            if (totalRowW <= 0) continue;
+
+            const rowScroll = (scrollX + row * 120) % totalRowW;
+            let drawX = -rowScroll;
+
+            let safety = 0;
+            while (drawX < w + 400 && safety < 100) {
+                for (let i = 0; i < media.length; i++) {
+                    if (media[i].w <= 0) continue;
+                    const aspect = media[i].w / media[i].h;
+                    const cellW = cellH * aspect;
+                    try { ctx.drawImage(media[i].el, drawX, rowY, cellW, cellH); } catch(e) {}
+                    drawX += cellW;
+                    if (drawX > w + 400) break;
+                }
+                safety++;
+            }
+        }
+    }
+
+    // Scan lines overlay — inside the letters only
+    ctx.fillStyle = 'rgba(0,0,0,0.06)';
+    for (let y = 0; y < h; y += 4) {
+        ctx.fillRect(0, y, w, 1);
+    }
+
+    // Mask to text shape
+    ctx.globalCompositeOperation = 'destination-in';
+    ctx.font = `900 ${fontSize}px 'Helvetica Neue', Helvetica, Arial, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    if (ctx.letterSpacing !== undefined) ctx.letterSpacing = '-8px';
+    ctx.fillStyle = '#fff';
+    ctx.fillText(TEXT, w / 2, h / 2);
+    ctx.globalCompositeOperation = 'source-over';
+
+    ctx.restore();
+
+    // Advance — constant speed
+    scrollX += 0.6;
+
+
+    requestAnimationFrame(drawHero);
+}
+requestAnimationFrame(drawHero);
+
+</script>
+</body>
+</html>
