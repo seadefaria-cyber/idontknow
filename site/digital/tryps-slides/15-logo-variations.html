@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Logo Variations</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #FFFFFF; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.slide { width: 1920px; height: 1080px; overflow: hidden; position: relative; background: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; }
+.logo { position: absolute; top: 48px; right: 80px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800; color: #D9071C; }
+.section-label { position: absolute; top: 48px; left: 80px; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 500; color: #8C8279; letter-spacing: 3px; text-transform: uppercase; }
+.title { position: absolute; top: 90px; left: 80px; font-size: 64px; font-weight: 800; color: #3D3530; }
+.subtitle { position: absolute; top: 170px; left: 80px; font-size: 18px; font-weight: 400; color: #8C8279; max-width: 1200px; line-height: 1.5; }
+.grid { position: absolute; top: 220px; left: 80px; display: flex; flex-wrap: wrap; gap: 24px; width: 1784px; }
+.card { width: 568px; height: 376px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+.card-logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 48px; font-weight: 800; }
+.card-label { font-family: 'Space Mono', monospace; font-size: 13px; color: #8C8279; letter-spacing: 1px; margin-top: 20px; }
+.card-light { background: #F5F5F5; }
+.card-dark { background: #3D3530; }
+.card-brand { background: #D9071C; }
+.card-darkmode { background: #1E1B19; }
+.card-dark .card-label, .card-brand .card-label, .card-darkmode .card-label { color: rgba(255,255,255,0.5); }
+.icon-card { background: #F5F5F5; }
+.icon-box { width: 80px; height: 80px; background: #D9071C; border-radius: 18px; display: flex; align-items: center; justify-content: center; }
+.icon-letter { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 40px; font-weight: 800; color: #FFFFFF; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">15 Logo</div>
+  <div class="logo">tryps</div>
+  <div class="title">Logo Variations</div>
+  <div class="subtitle">Approved logo versions for different applications and contexts.</div>
+  <div class="grid">
+    <div class="card card-light">
+      <div class="card-logo" style="color: #D9071C;">tryps</div>
+      <div class="card-label">Full Color</div>
+    </div>
+    <div class="card card-dark">
+      <div class="card-logo" style="color: #FFFFFF;">tryps</div>
+      <div class="card-label">White on Dark</div>
+    </div>
+    <div class="card card-brand">
+      <div class="card-logo" style="color: #FFFFFF;">tryps</div>
+      <div class="card-label">White on Brand</div>
+    </div>
+    <div class="card card-darkmode">
+      <div class="card-logo" style="color: #E84040;">tryps</div>
+      <div class="card-label">Dark Mode</div>
+    </div>
+    <div class="card card-light">
+      <div class="card-logo" style="color: #3D3530;">tryps</div>
+      <div class="card-label">Monochrome</div>
+    </div>
+    <div class="card icon-card">
+      <div class="icon-box">
+        <span class="icon-letter">t</span>
+      </div>
+      <div class="card-label">Small Icon</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

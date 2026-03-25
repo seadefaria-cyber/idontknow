@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>07c — Before &amp; After Tryps</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1920px; height: 1080px; overflow: hidden;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    display: flex;
+  }
+
+  /* — Section label — */
+  .section-label {
+    position: absolute; top: 40px; left: 60px;
+    font-weight: 500; color: #8C8279; font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase;
+    z-index: 10;
+  }
+  /* — Logo — */
+  .logo {
+    position: absolute; top: 40px; right: 40px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800; font-size: 28px; color: #D9071C;
+    z-index: 10;
+  }
+
+  /* — Split layout — */
+  .left-half {
+    width: 960px; height: 1080px;
+    background: #F7F5F2;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 0 100px;
+    position: relative;
+  }
+  .right-half {
+    width: 960px; height: 1080px;
+    background: #FFFFFF;
+    display: flex; flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* — Left: Before — */
+  .before-title {
+    font-size: 48px; font-weight: 800; color: #8C8279;
+    margin-bottom: 12px;
+  }
+  .before-subtitle {
+    font-size: 18px; color: #8C8279; margin-bottom: 40px;
+  }
+  .before-list { list-style: none; }
+  .before-list li {
+    font-size: 28px; font-weight: 600; color: #8C8279;
+    padding: 10px 0;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .before-list li::before {
+    content: '';
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #c5c0ba; flex-shrink: 0;
+  }
+  .before-summary {
+    font-size: 20px; font-style: italic; color: #a8a19a;
+    margin-top: 40px; line-height: 1.5;
+    border-top: 1px solid #ddd8d2;
+    padding-top: 24px;
+  }
+
+  /* — Right: After — */
+  .after-title {
+    font-size: 48px; font-weight: 800; color: #D9071C;
+    margin-bottom: 32px;
+  }
+
+  /* — iPhone mockup — */
+  .iphone {
+    width: 360px; height: 680px;
+    background: #fff;
+    border-radius: 48px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #e0ddd9;
+  }
+  .dynamic-island {
+    width: 120px; height: 34px; background: #000;
+    border-radius: 20px; position: absolute;
+    top: 10px; left: 50%; transform: translateX(-50%);
+    z-index: 2;
+  }
+  .status-bar {
+    height: 54px; padding: 14px 24px 0;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 15px; font-weight: 600; color: #000;
+    position: relative; z-index: 1;
+  }
+  .status-icons { display: flex; gap: 6px; align-items: center; }
+  .status-icons svg { width: 18px; height: 18px; }
+
+  /* — iMessage screen — */
+  .imessage-screen { display: flex; flex-direction: column; height: calc(100% - 54px); }
+  .imessage-header {
+    padding: 8px 16px 12px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 0.5px solid #e5e5e5;
+  }
+  .imessage-back { color: #007AFF; font-size: 22px; font-weight: 300; }
+  .imessage-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, #D9071C, #ff4d4d);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 16px; font-weight: 700;
+  }
+  .imessage-header-text { display: flex; flex-direction: column; }
+  .imessage-header-title { font-size: 16px; font-weight: 600; color: #000; }
+  .imessage-header-sub { font-size: 11px; color: #8e8e93; }
+
+  .imessage-body { flex: 1; padding: 14px 16px; overflow: hidden; display: flex; flex-direction: column; gap: 6px; }
+
+  .msg-row { display: flex; align-items: flex-end; gap: 6px; }
+  .msg-row.sent { justify-content: flex-end; }
+  .msg-row.received { justify-content: flex-start; }
+
+  .msg-avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: #fff;
+    flex-shrink: 0;
+  }
+
+  .msg-bubble {
+    max-width: 250px; padding: 10px 14px;
+    border-radius: 18px; font-size: 15px; line-height: 1.35;
+    word-wrap: break-word;
+  }
+  .msg-row.sent .msg-bubble {
+    background: #007AFF; color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+  .msg-row.received .msg-bubble {
+    background: #E5E5EA; color: #000;
+    border-bottom-left-radius: 4px;
+  }
+
+  .msg-sender {
+    font-size: 11px; color: #8e8e93; font-weight: 500;
+    margin-left: 36px; margin-bottom: -2px;
+  }
+  .msg-read {
+    font-size: 10px; color: #8e8e93; text-align: right;
+    margin-top: -2px; padding-right: 4px;
+  }
+  .msg-time {
+    text-align: center; font-size: 11px; color: #8e8e93;
+    margin: 6px 0;
+  }
+
+  /* — Bottom tagline — */
+  .after-tagline {
+    font-size: 28px; font-weight: 800; color: #D9071C;
+    margin-top: 32px; text-align: center;
+  }
+</style>
+</head>
+<body>
+  <div class="section-label">07 &mdash; HOW IT WORKS</div>
+  <div class="logo">tryps</div>
+
+  <!-- ===== LEFT: Before Tryps ===== -->
+  <div class="left-half">
+    <div class="before-title">Before Tryps</div>
+    <div class="before-subtitle">Planning a group trip looks like this:</div>
+    <ul class="before-list">
+      <li>Google Docs for the itinerary</li>
+      <li>Splitwise for expenses</li>
+      <li>Group chat for votes (that get buried)</li>
+      <li>Kayak for flights (alone)</li>
+      <li>Airbnb DMs (one person does all the work)</li>
+    </ul>
+    <div class="before-summary">5 apps. 3 weeks. One person carrying the burden.</div>
+  </div>
+
+  <!-- ===== RIGHT: After Tryps ===== -->
+  <div class="right-half">
+    <div class="after-title">After Tryps</div>
+    <div class="iphone">
+      <div class="dynamic-island"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <div class="status-icons">
+          <svg viewBox="0 0 18 18"><path d="M1 11h2v5H1zM5 8h2v8H5zM9 5h2v11H9zM13 2h2v14h-2z" fill="#000"/></svg>
+          <svg viewBox="0 0 18 18"><path d="M9 3C5.7 3 2.7 4.3 0.5 6.5l1.4 1.4C3.6 6.2 6.2 5 9 5s5.4 1.2 7.1 2.9l1.4-1.4C15.3 4.3 12.3 3 9 3zm0 4c-2.2 0-4.2.9-5.7 2.3l1.4 1.4C5.8 9.6 7.3 9 9 9s3.2.6 4.3 1.7l1.4-1.4C13.2 7.9 11.2 7 9 7zm0 4c-1.1 0-2.1.4-2.8 1.2l2.8 3 2.8-3C11.1 11.4 10.1 11 9 11z" fill="#000"/></svg>
+          <svg viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2" ry="2" fill="none" stroke="#000" stroke-width="1.2"/><rect x="22" y="3.5" width="2" height="5" rx="1" fill="#000"/><rect x="1.5" y="2.5" width="18" height="7" rx="1" fill="#000"/></svg>
+        </div>
+      </div>
+      <div class="imessage-screen">
+        <div class="imessage-header">
+          <span class="imessage-back">&lsaquo;</span>
+          <div class="imessage-avatar">M</div>
+          <div class="imessage-header-text">
+            <span class="imessage-header-title">Martin from Tryps</span>
+            <span class="imessage-header-sub">iMessage</span>
+          </div>
+        </div>
+        <div class="imessage-body">
+          <div class="msg-time">Today 3:08 PM</div>
+
+          <div class="msg-row sent">
+            <div class="msg-bubble">tulum, spring break, under 2k each</div>
+          </div>
+          <div class="msg-read">Read 3:08 PM</div>
+
+          <div style="height:10px"></div>
+          <div class="msg-sender">Martin from Tryps</div>
+          <div class="msg-row received">
+            <div class="msg-avatar" style="background:#D9071C;">M</div>
+            <div class="msg-bubble">on it. let me get back to you.</div>
+          </div>
+
+          <div style="height:10px"></div>
+          <div class="msg-sender">Martin from Tryps</div>
+          <div class="msg-row received">
+            <div class="msg-avatar" style="background:#D9071C;">M</div>
+            <div class="msg-bubble">got everything. flights, villa for 6, sunset boat tour. $1,850/person. want me to book?</div>
+          </div>
+
+          <div style="height:10px"></div>
+          <div class="msg-row sent">
+            <div class="msg-bubble">done.</div>
+          </div>
+          <div class="msg-read">Read 3:12 PM</div>
+        </div>
+      </div>
+    </div>
+    <div class="after-tagline">One text. Five minutes. Trip booked.</div>
+  </div>
+</body>
+</html>

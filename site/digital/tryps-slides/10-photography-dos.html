@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Tryps Brand Book — Photography Do's</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #F7F5F2;
+    position: relative;
+  }
+
+  .logo {
+    position: absolute;
+    top: 40px;
+    right: 56px;
+    font-weight: 800;
+    font-size: 28px;
+    color: #D9071C;
+    letter-spacing: -0.5px;
+  }
+
+  .section-label {
+    position: absolute;
+    top: 44px;
+    left: 56px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #8C8279;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .title-area {
+    position: absolute;
+    top: 90px;
+    left: 56px;
+    width: 1200px;
+  }
+  .title-area h1 {
+    font-size: 48px;
+    font-weight: 800;
+    color: #3D3530;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .title-area p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #8C8279;
+    line-height: 1.5;
+    max-width: 900px;
+  }
+
+  .grid {
+    position: absolute;
+    top: 260px;
+    left: 56px;
+    right: 56px;
+    display: grid;
+    grid-template-columns: repeat(3, 560px);
+    grid-template-rows: repeat(2, 360px);
+    gap: 24px;
+    justify-content: center;
+  }
+
+  .photo-card {
+    background: #F5F5F5;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    height: 280px;
+    position: relative;
+  }
+
+  /* Warm gradient variations */
+  .warm-1 { background: linear-gradient(135deg, #F5EADB 0%, #E8913A 100%); }
+  .warm-2 { background: linear-gradient(145deg, #F5EADB 0%, #D4A574 60%, #E8913A 100%); }
+  .warm-3 { background: linear-gradient(120deg, #E8913A 0%, #F5EADB 50%, #D4A574 100%); }
+  .warm-4 { background: linear-gradient(160deg, #D4A574 0%, #F5EADB 40%, #E8913A 100%); }
+  .warm-5 { background: linear-gradient(135deg, #E8913A 0%, #D4A574 50%, #F5EADB 100%); }
+  .warm-6 { background: linear-gradient(150deg, #F5EADB 20%, #E8913A 80%); }
+
+  /* Film grain overlay */
+  .photo-placeholder::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+    background-size: 150px 150px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .photo-label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 24px;
+  }
+
+  .check-icon {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2D6B4F;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: rgba(45, 107, 79, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .photo-label span {
+    font-size: 18px;
+    font-weight: 600;
+    color: #3D3530;
+  }
+</style>
+</head>
+<body>
+
+<div class="section-label">10 &mdash; PHOTOGRAPHY</div>
+<div class="logo">tryps</div>
+
+<div class="title-area">
+  <h1>Photography Do's</h1>
+  <p>Imagery should feel warm, authentic, and full of life — real moments with real people.</p>
+</div>
+
+<div class="grid">
+  <!-- Row 1 -->
+  <div class="photo-card">
+    <div class="photo-placeholder warm-1"></div>
+    <div class="photo-label">
+      <div class="check-icon">&#10003;</div>
+      <span>Natural light, golden hour</span>
+    </div>
+  </div>
+
+  <div class="photo-card">
+    <div class="photo-placeholder warm-2"></div>
+    <div class="photo-label">
+      <div class="check-icon">&#10003;</div>
+      <span>Real friends laughing</span>
+    </div>
+  </div>
+
+  <div class="photo-card">
+    <div class="photo-placeholder warm-3"></div>
+    <div class="photo-label">
+      <div class="check-icon">&#10003;</div>
+      <span>Motion blur, candid action</span>
+    </div>
+  </div>
+
+  <!-- Row 2 -->
+  <div class="photo-card">
+    <div class="photo-placeholder warm-4"></div>
+    <div class="photo-label">
+      <div class="check-icon">&#10003;</div>
+      <span>Local spots, not landmarks</span>
+    </div>
+  </div>
+
+  <div class="photo-card">
+    <div class="photo-placeholder warm-5"></div>
+    <div class="photo-label">
+      <div class="check-icon">&#10003;</div>
+      <span>Imperfect framing</span>
+    </div>
+  </div>
+
+  <div class="photo-card">
+    <div class="photo-placeholder warm-6"></div>
+    <div class="photo-label">
+      <div class="check-icon">&#10003;</div>
+      <span>Film grain warmth</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

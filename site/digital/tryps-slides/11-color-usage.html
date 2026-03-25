@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Color Usage</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;500;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.slide {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  position: relative;
+  background: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.logo {
+  position: absolute;
+  right: 40px;
+  top: 36px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #D9071C;
+}
+
+.section-label {
+  position: absolute;
+  left: 80px;
+  top: 48px;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: #8C8279;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.title {
+  position: absolute;
+  left: 80px;
+  top: 100px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 64px;
+  font-weight: 800;
+  color: #3D3530;
+}
+
+.subtitle {
+  position: absolute;
+  left: 80px;
+  top: 185px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #8C8279;
+}
+
+.cards-row {
+  position: absolute;
+  left: 80px;
+  top: 230px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.card {
+  width: 560px;
+  height: 780px;
+  background: #F5F5F5;
+  border-radius: 16px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: #8C8279;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.card-heading {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #3D3530;
+  margin-bottom: 32px;
+}
+
+/* Card 1 - Usage Ratios */
+.ratio-bar-container {
+  display: flex;
+  flex-direction: row;
+  width: 480px;
+  height: 48px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.ratio-segment-white { width: 60%; background: #FFFFFF; border: 1px solid #E5E5E5; }
+.ratio-segment-slate { width: 25%; background: #3D3530; }
+.ratio-segment-red { width: 10%; background: #D9071C; }
+.ratio-segment-accent { width: 5%; background: #8C8279; }
+
+.ratio-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ratio-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.ratio-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.ratio-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3D3530;
+  width: 80px;
+}
+
+.ratio-desc {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #8C8279;
+}
+
+/* Card 2 - Hierarchy */
+.hierarchy-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.hierarchy-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.hierarchy-item:last-child { border-bottom: none; }
+
+.hierarchy-role {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: #8C8279;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Card 3 - Contrast */
+.contrast-pairs {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contrast-pair {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contrast-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.contrast-label.do { color: #2D6B4F; }
+.contrast-label.dont { color: #D14343; }
+
+.contrast-box {
+  width: 480px;
+  height: 80px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.contrast-check {
+  margin-left: auto;
+  font-size: 20px;
+  font-weight: 700;
+}
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">COLOR SYSTEM</div>
+  <div class="logo">tryps</div>
+  <div class="title">Color Usage</div>
+  <div class="subtitle">Practical examples of how brand and UI colors are applied.</div>
+
+  <div class="cards-row">
+    <!-- Card 1: Do (Ratios) -->
+    <div class="card">
+      <div class="card-title">Proportions</div>
+      <div class="card-heading">Do</div>
+      <div class="ratio-bar-container">
+        <div class="ratio-segment-white"></div>
+        <div class="ratio-segment-slate"></div>
+        <div class="ratio-segment-red"></div>
+        <div class="ratio-segment-accent"></div>
+      </div>
+      <div class="ratio-legend">
+        <div class="ratio-item">
+          <div class="ratio-dot" style="background: #FFFFFF; border: 1px solid #E5E5E5;"></div>
+          <div class="ratio-label">60%</div>
+          <div class="ratio-desc">White for backgrounds and open space</div>
+        </div>
+        <div class="ratio-item">
+          <div class="ratio-dot" style="background: #3D3530;"></div>
+          <div class="ratio-label">25%</div>
+          <div class="ratio-desc">Deep Slate for text and structure</div>
+        </div>
+        <div class="ratio-item">
+          <div class="ratio-dot" style="background: #D9071C;"></div>
+          <div class="ratio-label">10%</div>
+          <div class="ratio-desc">Tryps Red for CTAs and key accents</div>
+        </div>
+        <div class="ratio-item">
+          <div class="ratio-dot" style="background: #8C8279;"></div>
+          <div class="ratio-label">5%</div>
+          <div class="ratio-desc">Accent for secondary elements</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Hierarchy -->
+    <div class="card">
+      <div class="card-title">Text</div>
+      <div class="card-heading">Hierarchy</div>
+      <div class="hierarchy-list">
+        <div class="hierarchy-item">
+          <div class="hierarchy-role">Heading</div>
+          <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 32px; font-weight: 800; color: #3D3530;">Plan Your Next Trip</div>
+        </div>
+        <div class="hierarchy-item">
+          <div class="hierarchy-role">Body</div>
+          <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 400; color: #8C8279;">Share your travel plans with friends and explore together in real time.</div>
+        </div>
+        <div class="hierarchy-item">
+          <div class="hierarchy-role">Link</div>
+          <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 600; color: #D9071C; text-decoration: underline;">View all destinations</div>
+        </div>
+        <div class="hierarchy-item">
+          <div class="hierarchy-role">Caption</div>
+          <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 400; color: #B5ADA5;">Last updated 2 hours ago</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Contrast -->
+    <div class="card">
+      <div class="card-title">Accessibility</div>
+      <div class="card-heading">Contrast</div>
+      <div class="contrast-pairs">
+        <div class="contrast-pair">
+          <div class="contrast-label do">DO</div>
+          <div class="contrast-box" style="background: #F7F5F2; color: #3D3530;">
+            Dark text on light background
+            <span class="contrast-check" style="color: #2D6B4F;">&#10003;</span>
+          </div>
+        </div>
+        <div class="contrast-pair">
+          <div class="contrast-label do">DO</div>
+          <div class="contrast-box" style="background: #3D3530; color: #F7F5F2;">
+            Light text on dark background
+            <span class="contrast-check" style="color: #2D6B4F;">&#10003;</span>
+          </div>
+        </div>
+        <div class="contrast-pair">
+          <div class="contrast-label do">DO</div>
+          <div class="contrast-box" style="background: #D9071C; color: #FFFFFF;">
+            White text on Tryps Red
+            <span class="contrast-check" style="color: #FFFFFF;">&#10003;</span>
+          </div>
+        </div>
+        <div class="contrast-pair">
+          <div class="contrast-label dont">DON'T</div>
+          <div class="contrast-box" style="background: #F7F5F2; color: #E8E5E0;">
+            Light text on light background
+            <span class="contrast-check" style="color: #D14343;">&#10005;</span>
+          </div>
+        </div>
+        <div class="contrast-pair">
+          <div class="contrast-label dont">DON'T</div>
+          <div class="contrast-box" style="background: #8C8279; color: #3D3530;">
+            Dark text on medium gray
+            <span class="contrast-check" style="color: #D14343;">&#10005;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

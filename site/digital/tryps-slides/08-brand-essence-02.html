@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>08 — Brand Essence: iMessage + App</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1920px; height: 1080px; overflow: hidden;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #FFFFFF;
+    display: flex;
+    position: relative;
+  }
+
+  .section-label {
+    position: absolute; top: 40px; left: 60px;
+    font-weight: 500; color: #8C8279; font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase;
+    z-index: 10;
+  }
+  .logo {
+    position: absolute; top: 40px; right: 40px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800; font-size: 28px; color: #D9071C;
+    z-index: 10;
+  }
+
+  .col {
+    width: 960px; height: 1080px;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 0 100px;
+  }
+  .col-left { border-right: 1px solid #f0eeeb; }
+
+  .big-text {
+    font-size: 96px; font-weight: 800;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .big-text.red { color: #D9071C; }
+  .big-text.gray { color: #C5C3C0; }
+
+  .subtitle {
+    font-size: 40px; font-weight: 700; color: #3D3530;
+    line-height: 1.15;
+    margin-bottom: 28px;
+  }
+
+  .body {
+    font-size: 20px; font-weight: 400; color: #666;
+    line-height: 2;
+    max-width: 680px;
+  }
+</style>
+</head>
+<body>
+  <div class="section-label">08 &mdash; BRAND ESSENCE</div>
+  <div class="logo">tryps</div>
+
+  <div class="col col-left">
+    <div class="big-text red">iMessage</div>
+    <div class="subtitle">Martin Lives in Your Group Chat</div>
+    <div class="body">You add Martin to your group chat like a friend. You text him where you want to go, when, and your budget. He handles everything. No app to download. No dashboard to learn. Just text.</div>
+  </div>
+
+  <div class="col">
+    <div class="big-text gray">App</div>
+    <div class="subtitle">Trip Cards Power the Details</div>
+    <div class="body">The Tryps app is where the trip comes to life. Vote on activities, track expenses, see your itinerary. Everything Martin books shows up in one place. Simple, visual, no friction.</div>
+  </div>
+</body>
+</html>

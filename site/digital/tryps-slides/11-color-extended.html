@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Extended Palette</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;500;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.slide {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  position: relative;
+  background: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.logo {
+  position: absolute;
+  right: 40px;
+  top: 36px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #D9071C;
+}
+
+.section-label {
+  position: absolute;
+  left: 80px;
+  top: 48px;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: #8C8279;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.title {
+  position: absolute;
+  left: 80px;
+  top: 100px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 64px;
+  font-weight: 800;
+  color: #3D3530;
+}
+
+.subtitle {
+  position: absolute;
+  left: 80px;
+  top: 185px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #8C8279;
+  max-width: 800px;
+}
+
+.row-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: #8C8279;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.row {
+  position: absolute;
+  left: 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+.row-1 { top: 250px; }
+.row-2 { top: 620px; }
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+.color-card {
+  width: 420px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #FFFFFF;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.color-swatch {
+  width: 420px;
+  height: 200px;
+}
+
+.color-info {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.color-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #3D3530;
+}
+
+.color-hex {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 400;
+  color: #8C8279;
+}
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">COLOR SYSTEM</div>
+  <div class="logo">tryps</div>
+  <div class="title">Extended Palette</div>
+  <div class="subtitle">Full spectrum of brand and UI colors for consistent application across all touchpoints.</div>
+
+  <div class="row row-1">
+    <div class="row-label">Semantic Colors</div>
+    <div class="cards">
+      <div class="color-card">
+        <div class="color-swatch" style="background: #2D6B4F;"></div>
+        <div class="color-info">
+          <div class="color-name">Success Green</div>
+          <div class="color-hex">#2D6B4F</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #D4A843;"></div>
+        <div class="color-info">
+          <div class="color-name">Warning Gold</div>
+          <div class="color-hex">#D4A843</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #D14343;"></div>
+        <div class="color-info">
+          <div class="color-name">Error Red</div>
+          <div class="color-hex">#D14343</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #007AFF;"></div>
+        <div class="color-info">
+          <div class="color-name">Ocean Blue</div>
+          <div class="color-hex">#007AFF</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-2">
+    <div class="row-label">Neutrals</div>
+    <div class="cards">
+      <div class="color-card">
+        <div class="color-swatch" style="background: #F5EADB;"></div>
+        <div class="color-info">
+          <div class="color-name">Warm Cream</div>
+          <div class="color-hex">#F5EADB</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #F7F5F2;"></div>
+        <div class="color-info">
+          <div class="color-name">Light</div>
+          <div class="color-hex">#F7F5F2</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #E8E5E0;"></div>
+        <div class="color-info">
+          <div class="color-name">Mist</div>
+          <div class="color-hex">#E8E5E0</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #8B0415;"></div>
+        <div class="color-info">
+          <div class="color-name">Red Dark</div>
+          <div class="color-hex">#8B0415</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

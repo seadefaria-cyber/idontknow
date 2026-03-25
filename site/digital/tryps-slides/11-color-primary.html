@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Primary Palette</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;500;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.slide {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  position: relative;
+  background: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.logo {
+  position: absolute;
+  right: 40px;
+  top: 36px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #D9071C;
+}
+
+.section-label {
+  position: absolute;
+  left: 80px;
+  top: 48px;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: #8C8279;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.title {
+  position: absolute;
+  left: 80px;
+  top: 100px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: #3D3530;
+}
+
+.subtitle {
+  position: absolute;
+  left: 80px;
+  top: 175px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #8C8279;
+}
+
+.swatches {
+  position: absolute;
+  left: 80px;
+  top: 240px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.swatch-card {
+  width: 400px;
+  height: 760px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #FFFFFF;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.swatch-color {
+  width: 400px;
+  height: 600px;
+  flex-shrink: 0;
+}
+
+.swatch-info {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.swatch-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #3D3530;
+}
+
+.swatch-hex {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  font-weight: 400;
+  color: #8C8279;
+}
+
+.swatch-usage {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #8C8279;
+  margin-top: 4px;
+}
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">09 COLOR SYSTEM</div>
+  <div class="logo">tryps</div>
+  <div class="title">Primary Palette</div>
+  <div class="subtitle">The core colors that define the tryps brand across every touchpoint.</div>
+
+  <div class="swatches">
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: #D9071C;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Tryps Red</div>
+        <div class="swatch-hex">#D9071C</div>
+        <div class="swatch-usage">Primary brand, CTAs, accents</div>
+      </div>
+    </div>
+
+    <div class="swatch-card" style="border: 1px solid #E5E5E5;">
+      <div class="swatch-color" style="background: #FFFFFF; border-bottom: 1px solid #E5E5E5;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">White</div>
+        <div class="swatch-hex">#FFFFFF</div>
+        <div class="swatch-usage">Backgrounds, text on dark</div>
+      </div>
+    </div>
+
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: #3D3530;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name" style="color: #3D3530;">Deep Slate</div>
+        <div class="swatch-hex">#3D3530</div>
+        <div class="swatch-usage">Primary text, dark surfaces</div>
+      </div>
+    </div>
+
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: #8C8279;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Medium Gray</div>
+        <div class="swatch-hex">#8C8279</div>
+        <div class="swatch-usage">Secondary text, labels</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

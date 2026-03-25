@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Brand Assets</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #FFFFFF; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.slide { width: 1920px; height: 1080px; overflow: hidden; position: relative; background: #FFFFFF; }
+.logo { position: absolute; right: 40px; top: 36px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; color: #D9071C; }
+.section-label { position: absolute; left: 80px; top: 48px; font-family: 'Space Mono', monospace; font-weight: 500; font-size: 12px; color: #8C8279; letter-spacing: 3px; text-transform: uppercase; }
+.title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 56px; color: #3D3530; position: absolute; left: 80px; top: 90px; }
+.subtitle { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 20px; color: #8C8279; position: absolute; left: 80px; top: 165px; max-width: 900px; line-height: 1.5; }
+.asset-cards { position: absolute; left: 80px; top: 240px; display: flex; flex-direction: row; gap: 24px; }
+.asset-card { width: 420px; height: 420px; background: #F5F5F5; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
+.asset-icon { font-size: 48px; }
+.asset-name { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 22px; color: #3D3530; }
+.asset-formats { font-family: 'Space Mono', monospace; font-weight: 400; font-size: 14px; color: #8C8279; }
+.asset-badge { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.format-tag { background: #FFFFFF; padding: 6px 14px; border-radius: 8px; font-family: 'Space Mono', monospace; font-weight: 500; font-size: 12px; color: #3D3530; }
+.bottom-bar { position: absolute; left: 80px; top: 720px; width: 1760px; height: 320px; background: #3D3530; border-radius: 16px; padding: 48px 60px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; }
+.bottom-left { display: flex; flex-direction: column; gap: 12px; max-width: 800px; }
+.bottom-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 28px; color: #FFFFFF; }
+.bottom-desc { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 17px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+.bottom-buttons { display: flex; gap: 16px; }
+.btn-red { background: #D9071C; color: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 16px; border: none; border-radius: 10px; padding: 16px 32px; cursor: pointer; }
+.btn-outline-white { background: transparent; color: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 10px; padding: 14px 32px; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">22 Resources</div>
+  <div class="logo">tryps</div>
+  <div class="title">Brand Assets</div>
+  <div class="subtitle">Everything you need to represent tryps correctly.</div>
+  <div class="asset-cards">
+    <div class="asset-card">
+      <div class="asset-icon">📁</div>
+      <div class="asset-name">Logo Files</div>
+      <div class="asset-badge">
+        <div class="format-tag">SVG</div>
+        <div class="format-tag">PNG</div>
+        <div class="format-tag">PDF</div>
+      </div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-icon">🎨</div>
+      <div class="asset-name">Color Tokens</div>
+      <div class="asset-badge">
+        <div class="format-tag">theme.ts</div>
+        <div class="format-tag">export</div>
+      </div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-icon">🔤</div>
+      <div class="asset-name">Font Files</div>
+      <div class="asset-badge">
+        <div class="format-tag">Plus Jakarta Sans</div>
+        <div class="format-tag">Space Mono</div>
+      </div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-icon">🎯</div>
+      <div class="asset-name">Icon Set</div>
+      <div class="asset-badge">
+        <div class="format-tag">Lucide</div>
+        <div class="format-tag">48 icons</div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-bar">
+    <div class="bottom-left">
+      <div class="bottom-title">Need something custom?</div>
+      <div class="bottom-desc">If you need a specific asset format, custom color configuration, or brand element not included in the standard kit, reach out to the brand team.</div>
+    </div>
+    <div class="bottom-buttons">
+      <div class="btn-red">Contact Brand Team</div>
+      <div class="btn-outline-white">Download Kit</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

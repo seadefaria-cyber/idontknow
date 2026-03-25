@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Iconography</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #F7F5F2; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.slide { width: 1920px; height: 1080px; overflow: hidden; position: relative; background: #F7F5F2; }
+.logo { position: absolute; right: 40px; top: 36px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; color: #D9071C; }
+.section-label { position: absolute; left: 80px; top: 48px; font-family: 'Space Mono', monospace; font-weight: 500; font-size: 12px; color: #8C8279; letter-spacing: 3px; text-transform: uppercase; }
+.title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 64px; color: #3D3530; position: absolute; left: 80px; top: 90px; }
+.subtitle { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 20px; color: #8C8279; position: absolute; left: 80px; top: 170px; max-width: 900px; line-height: 1.5; }
+.grid { position: absolute; left: 80px; top: 230px; width: 1760px; display: flex; flex-wrap: wrap; gap: 24px; }
+.icon-card { width: 416px; height: 180px; background: #FFFFFF; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+.icon-emoji { font-size: 36px; }
+.icon-name { font-family: 'Space Mono', monospace; font-weight: 400; font-size: 13px; color: #8C8279; }
+.rule-bar { position: absolute; left: 80px; bottom: 48px; width: 1760px; display: flex; align-items: center; justify-content: center; }
+.rule-text { font-family: 'Space Mono', monospace; font-weight: 400; font-size: 14px; color: #8C8279; letter-spacing: 1px; }
+.rule-dot { width: 4px; height: 4px; background: #D9071C; border-radius: 50%; margin: 0 16px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">Visual Language</div>
+  <div class="logo">tryps</div>
+  <div class="title">Iconography</div>
+  <div class="subtitle">A consistent icon set using Lucide icons ensures visual clarity and recognition.</div>
+  <div class="grid">
+    <div class="icon-card"><div class="icon-emoji">🔍</div><div class="icon-name">Search</div></div>
+    <div class="icon-card"><div class="icon-emoji">📅</div><div class="icon-name">Calendar</div></div>
+    <div class="icon-card"><div class="icon-emoji">📍</div><div class="icon-name">Map Pin</div></div>
+    <div class="icon-card"><div class="icon-emoji">👥</div><div class="icon-name">Users</div></div>
+    <div class="icon-card"><div class="icon-emoji">❤️</div><div class="icon-name">Heart</div></div>
+    <div class="icon-card"><div class="icon-emoji">✈️</div><div class="icon-name">Plane</div></div>
+    <div class="icon-card"><div class="icon-emoji">📷</div><div class="icon-name">Camera</div></div>
+    <div class="icon-card"><div class="icon-emoji">⚙️</div><div class="icon-name">Settings</div></div>
+    <div class="icon-card"><div class="icon-emoji">🔔</div><div class="icon-name">Bell</div></div>
+    <div class="icon-card"><div class="icon-emoji">💬</div><div class="icon-name">Message</div></div>
+    <div class="icon-card"><div class="icon-emoji">🏠</div><div class="icon-name">Home</div></div>
+    <div class="icon-card"><div class="icon-emoji">⭐</div><div class="icon-name">Star</div></div>
+    <div class="icon-card"><div class="icon-emoji">📊</div><div class="icon-name">Chart</div></div>
+    <div class="icon-card"><div class="icon-emoji">🔗</div><div class="icon-name">Link</div></div>
+    <div class="icon-card"><div class="icon-emoji">↗️</div><div class="icon-name">Share</div></div>
+    <div class="icon-card"><div class="icon-emoji">✓</div><div class="icon-name">Check</div></div>
+  </div>
+  <div class="rule-bar">
+    <span class="rule-text">Lucide Icons</span>
+    <span class="rule-dot"></span>
+    <span class="rule-text">1.5px stroke</span>
+    <span class="rule-dot"></span>
+    <span class="rule-text">Rounded caps</span>
+    <span class="rule-dot"></span>
+    <span class="rule-text">24px default</span>
+  </div>
+</div>
+</body>
+</html>

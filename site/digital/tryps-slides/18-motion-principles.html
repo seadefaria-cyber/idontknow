@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Motion Principles</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #FFFFFF; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.slide { width: 1920px; height: 1080px; overflow: hidden; position: relative; background: #FFFFFF; }
+.logo { position: absolute; right: 40px; top: 36px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; color: #D9071C; }
+.section-label { position: absolute; left: 80px; top: 48px; font-family: 'Space Mono', monospace; font-weight: 500; font-size: 12px; color: #8C8279; letter-spacing: 3px; text-transform: uppercase; }
+.title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 64px; color: #3D3530; position: absolute; left: 80px; top: 90px; }
+.subtitle { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 20px; color: #8C8279; position: absolute; left: 80px; top: 170px; max-width: 900px; line-height: 1.5; }
+.cards { position: absolute; left: 80px; top: 240px; display: flex; flex-direction: row; gap: 20px; }
+.card { width: 420px; height: 760px; background: #F5F5F5; border: 1px solid #E5E7EB; border-radius: 16px; padding: 36px; display: flex; flex-direction: column; align-items: flex-start; }
+.icon-circle { width: 64px; height: 64px; background: #D9071C; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px; }
+.card-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 28px; color: #3D3530; margin-bottom: 16px; }
+.card-desc { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 17px; color: #8C8279; line-height: 1.6; margin-bottom: 32px; }
+.specs { margin-top: auto; width: 100%; }
+.specs-title { font-family: 'Space Mono', monospace; font-weight: 500; font-size: 12px; color: #8C8279; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+.spec-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-top: 1px solid #E5E7EB; }
+.spec-label { font-family: 'Space Mono', monospace; font-weight: 400; font-size: 14px; color: #8C8279; }
+.spec-value { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 14px; color: #3D3530; background: #FFFFFF; padding: 4px 10px; border-radius: 6px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">18 Motion</div>
+  <div class="logo">tryps</div>
+  <div class="title">Motion Principles</div>
+  <div class="subtitle">Every animation in tryps follows four core principles to create a cohesive, delightful experience.</div>
+  <div class="cards">
+    <div class="card">
+      <div class="icon-circle">⚡</div>
+      <div class="card-title">Purposeful</div>
+      <div class="card-desc">Every animation serves a goal. Nothing moves without intent, guiding users through the interface with clarity.</div>
+      <div class="specs">
+        <div class="specs-title">Specs</div>
+        <div class="spec-row"><span class="spec-label">duration</span><span class="spec-value">200-400ms</span></div>
+        <div class="spec-row"><span class="spec-label">easing</span><span class="spec-value">ease-in-out</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="icon-circle">🏃</div>
+      <div class="card-title">Swift</div>
+      <div class="card-desc">Fast and responsive. Animations complete before the user notices them, keeping the experience fluid and snappy.</div>
+      <div class="specs">
+        <div class="specs-title">Specs</div>
+        <div class="spec-row"><span class="spec-label">standard</span><span class="spec-value">200ms</span></div>
+        <div class="spec-row"><span class="spec-label">complex</span><span class="spec-value">400ms</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="icon-circle">🌊</div>
+      <div class="card-title">Natural</div>
+      <div class="card-desc">Ease-in-out curves mimic real-world physics. Objects accelerate and decelerate like they have weight.</div>
+      <div class="specs">
+        <div class="specs-title">Specs</div>
+        <div class="spec-row"><span class="spec-label">damping</span><span class="spec-value">20</span></div>
+        <div class="spec-row"><span class="spec-label">stiffness</span><span class="spec-value">300</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="icon-circle">✨</div>
+      <div class="card-title">Delightful</div>
+      <div class="card-desc">Micro-interactions add personality. Small moments of joy that make the app feel alive and rewarding.</div>
+      <div class="specs">
+        <div class="specs-title">Specs</div>
+        <div class="spec-row"><span class="spec-label">confetti</span><span class="spec-value">on booking</span></div>
+        <div class="spec-row"><span class="spec-label">haptic</span><span class="spec-value">on vote</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

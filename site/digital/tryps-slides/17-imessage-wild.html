@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>iMessage in the Wild</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #FFFFFF; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.slide { width: 1920px; height: 1080px; overflow: hidden; position: relative; background: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; }
+.logo { position: absolute; top: 48px; right: 80px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800; color: #D9071C; }
+.section-label { position: absolute; top: 48px; left: 80px; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 500; color: #8C8279; letter-spacing: 3px; text-transform: uppercase; }
+.title { position: absolute; top: 90px; left: 80px; font-size: 64px; font-weight: 800; color: #3D3530; }
+.subtitle { position: absolute; top: 170px; left: 80px; font-size: 18px; font-weight: 400; color: #8C8279; max-width: 1400px; line-height: 1.5; }
+.phones-row { position: absolute; top: 230px; left: 0; width: 1920px; display: flex; justify-content: center; gap: 60px; }
+.phone-wrapper { display: flex; flex-direction: column; align-items: center; }
+.phone { width: 400px; height: 740px; background: #FFFFFF; border-radius: 44px; border: 1px solid #E5E7EB; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 8px 40px rgba(0,0,0,0.08); }
+.phone-label { font-family: 'Space Mono', monospace; font-size: 14px; color: #8C8279; text-align: center; margin-top: 16px; }
+.statusbar { height: 48px; display: flex; align-items: center; justify-content: center; background: #F9F9F9; border-bottom: 1px solid #E5E7EB; }
+.statusbar span { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #3D3530; }
+.chat-header { padding: 12px 20px; display: flex; align-items: center; gap: 12px; background: #F9F9F9; border-bottom: 1px solid #E5E7EB; }
+.chat-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #FFFFFF; }
+.chat-name { font-size: 17px; font-weight: 700; color: #3D3530; }
+.chat-members { font-size: 12px; color: #8C8279; }
+.chat-body { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 6px; background: #FFFFFF; overflow: hidden; }
+.bubble { max-width: 78%; padding: 10px 16px; border-radius: 20px; font-size: 14px; line-height: 1.45; }
+.recv { background: #E5E5EA; color: #3D3530; align-self: flex-start; }
+.send { background: #007AFF; color: #FFFFFF; align-self: flex-end; }
+.tryps-msg { background: #D9071C; color: #FFFFFF; align-self: flex-start; }
+.sender-name { font-size: 11px; font-weight: 600; color: #8C8279; margin-bottom: 2px; margin-top: 6px; padding-left: 4px; }
+.reaction { font-size: 11px; color: #8C8279; margin-top: 2px; padding-left: 8px; }
+.input-bar { height: 52px; background: #F9F9F9; border-top: 1px solid #E5E7EB; display: flex; align-items: center; padding: 0 16px; gap: 10px; }
+.input-field { flex: 1; height: 34px; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 17px; padding: 0 14px; font-size: 14px; color: #8C8279; display: flex; align-items: center; }
+.send-btn { width: 30px; height: 30px; background: #007AFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.send-arrow { color: #FFFFFF; font-size: 16px; font-weight: 700; }
+.link-preview { background: #F5F5F5; border-radius: 14px; padding: 12px; margin: 4px 0; align-self: flex-start; max-width: 78%; border: 1px solid #E8E5E0; }
+.link-title { font-size: 13px; font-weight: 700; color: #3D3530; }
+.link-desc { font-size: 11px; color: #8C8279; margin-top: 2px; }
+.link-url { font-size: 10px; color: #D9071C; margin-top: 4px; font-family: 'Space Mono', monospace; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">17 Brand Applications</div>
+  <div class="logo">tryps</div>
+  <div class="title">iMessage in the Wild</div>
+  <div class="subtitle">How tryps lives inside everyday conversations between friends planning trips together.</div>
+  <div class="phones-row">
+    <!-- Phone 1: Trip Creation -->
+    <div class="phone-wrapper">
+      <div class="phone">
+        <div class="statusbar"><span>9:41</span></div>
+        <div class="chat-header">
+          <div class="chat-avatar" style="background: #007AFF;">B</div>
+          <div>
+            <div class="chat-name">Bali Crew</div>
+            <div class="chat-members">5 people</div>
+          </div>
+        </div>
+        <div class="chat-body">
+          <div class="sender-name">Sarah</div>
+          <div class="bubble recv">ok so bali in march. who's in?</div>
+          <div class="sender-name">Jake</div>
+          <div class="bubble recv">I'M IN</div>
+          <div class="sender-name">Emma</div>
+          <div class="bubble recv">yesss finally</div>
+          <div class="bubble send">let me add martin. he'll handle everything</div>
+          <div class="sender-name">Martin (tryps)</div>
+          <div class="bubble tryps-msg">Hey Bali Crew! I'm Martin, your trip planner. Let's make this happen. First up: what dates work for everyone?</div>
+          <div class="sender-name">Jake</div>
+          <div class="bubble recv">wait who is this lol</div>
+          <div class="bubble send">trust me bro. just answer his questions</div>
+        </div>
+        <div class="input-bar">
+          <div class="input-field">iMessage</div>
+          <div class="send-btn"><span class="send-arrow">^</span></div>
+        </div>
+      </div>
+      <div class="phone-label">Trip Creation</div>
+    </div>
+    <!-- Phone 2: Group Voting -->
+    <div class="phone-wrapper">
+      <div class="phone">
+        <div class="statusbar"><span>9:41</span></div>
+        <div class="chat-header">
+          <div class="chat-avatar" style="background: #007AFF;">B</div>
+          <div>
+            <div class="chat-name">Bali Crew</div>
+            <div class="chat-members">5 people</div>
+          </div>
+        </div>
+        <div class="chat-body">
+          <div class="sender-name">Martin (tryps)</div>
+          <div class="bubble tryps-msg">I found 3 villas that fit your group. Vote for your favorite!</div>
+          <div class="link-preview">
+            <div class="link-title">Villa Sunset - 5BR, Private Pool</div>
+            <div class="link-desc">$320/night | Seminyak | 4.8 stars</div>
+            <div class="link-url">tryps.co/vote/bali-crew</div>
+          </div>
+          <div class="sender-name">Sarah</div>
+          <div class="bubble recv">omg option 1 is gorgeous</div>
+          <div class="reaction">Sarah, Emma, Jake liked "Villa Sunset"</div>
+          <div class="sender-name">Jake</div>
+          <div class="bubble recv">option 1 for sure. that pool though</div>
+          <div class="sender-name">Martin (tryps)</div>
+          <div class="bubble tryps-msg">Villa Sunset wins! 3 votes. I'll lock it in. Flights are next.</div>
+          <div class="sender-name">Emma</div>
+          <div class="bubble recv">this is so easy wtf</div>
+        </div>
+        <div class="input-bar">
+          <div class="input-field">iMessage</div>
+          <div class="send-btn"><span class="send-arrow">^</span></div>
+        </div>
+      </div>
+      <div class="phone-label">Group Voting</div>
+    </div>
+    <!-- Phone 3: Post-Trip Nostalgia -->
+    <div class="phone-wrapper">
+      <div class="phone">
+        <div class="statusbar"><span>9:41</span></div>
+        <div class="chat-header">
+          <div class="chat-avatar" style="background: #007AFF;">B</div>
+          <div>
+            <div class="chat-name">Bali Crew</div>
+            <div class="chat-members">5 people</div>
+          </div>
+        </div>
+        <div class="chat-body">
+          <div class="sender-name">Martin (tryps)</div>
+          <div class="bubble tryps-msg">Welcome home, Bali Crew! Here's your trip recap and shared photo album.</div>
+          <div class="link-preview">
+            <div class="link-title">Bali 2026 - Trip Recap</div>
+            <div class="link-desc">7 days | 47 photos | $1,850/person</div>
+            <div class="link-url">tryps.co/trips/bali-crew</div>
+          </div>
+          <div class="sender-name">Sarah</div>
+          <div class="bubble recv">i'm already sad it's over</div>
+          <div class="sender-name">Emma</div>
+          <div class="bubble recv">that sunset dinner though</div>
+          <div class="sender-name">Jake</div>
+          <div class="bubble recv">when are we going back?</div>
+          <div class="bubble send">martin... start planning the next one?</div>
+          <div class="sender-name">Martin (tryps)</div>
+          <div class="bubble tryps-msg">Already on it. Where to next?</div>
+        </div>
+        <div class="input-bar">
+          <div class="input-field">iMessage</div>
+          <div class="send-btn"><span class="send-arrow">^</span></div>
+        </div>
+      </div>
+      <div class="phone-label">Post-Trip Nostalgia</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Tryps Brand Book — Photography Don'ts</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #F7F5F2;
+    position: relative;
+  }
+
+  .logo {
+    position: absolute;
+    top: 40px;
+    right: 56px;
+    font-weight: 800;
+    font-size: 28px;
+    color: #D9071C;
+    letter-spacing: -0.5px;
+  }
+
+  .section-label {
+    position: absolute;
+    top: 44px;
+    left: 56px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #8C8279;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .title-area {
+    position: absolute;
+    top: 90px;
+    left: 56px;
+    width: 1200px;
+  }
+  .title-area h1 {
+    font-size: 48px;
+    font-weight: 800;
+    color: #3D3530;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .title-area p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #8C8279;
+    line-height: 1.5;
+    max-width: 900px;
+  }
+
+  .grid {
+    position: absolute;
+    top: 260px;
+    left: 56px;
+    right: 56px;
+    display: grid;
+    grid-template-columns: repeat(3, 560px);
+    grid-template-rows: repeat(2, 360px);
+    gap: 24px;
+    justify-content: center;
+  }
+
+  .photo-card {
+    background: #F5F5F5;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    height: 280px;
+    position: relative;
+  }
+
+  /* Cool gray gradient variations */
+  .cool-1 { background: linear-gradient(135deg, #E0E0E0 0%, #BDBDBD 100%); }
+  .cool-2 { background: linear-gradient(145deg, #E0E0E0 0%, #CACACA 60%, #BDBDBD 100%); }
+  .cool-3 { background: linear-gradient(120deg, #BDBDBD 0%, #E0E0E0 50%, #CACACA 100%); }
+  .cool-4 { background: linear-gradient(160deg, #CACACA 0%, #E0E0E0 40%, #BDBDBD 100%); }
+  .cool-5 { background: linear-gradient(135deg, #BDBDBD 0%, #CACACA 50%, #E0E0E0 100%); }
+  .cool-6 { background: linear-gradient(150deg, #E0E0E0 20%, #BDBDBD 80%); }
+
+  /* Diagonal line pattern to signal "don't" */
+  .photo-placeholder::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 18px,
+      rgba(0,0,0,0.03) 18px,
+      rgba(0,0,0,0.03) 20px
+    );
+    pointer-events: none;
+  }
+
+  .photo-label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 24px;
+  }
+
+  .x-icon {
+    font-size: 18px;
+    font-weight: 700;
+    color: #D9071C;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: rgba(217, 7, 28, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .photo-label span {
+    font-size: 18px;
+    font-weight: 600;
+    color: #3D3530;
+  }
+</style>
+</head>
+<body>
+
+<div class="section-label">10 &mdash; PHOTOGRAPHY</div>
+<div class="logo">tryps</div>
+
+<div class="title-area">
+  <h1>Photography Don'ts</h1>
+  <p>Avoid imagery that feels forced, generic, or disconnected from the warmth of group travel.</p>
+</div>
+
+<div class="grid">
+  <!-- Row 1 -->
+  <div class="photo-card">
+    <div class="photo-placeholder cool-1"></div>
+    <div class="photo-label">
+      <div class="x-icon">&#10005;</div>
+      <span>Stock photography</span>
+    </div>
+  </div>
+
+  <div class="photo-card">
+    <div class="photo-placeholder cool-2"></div>
+    <div class="photo-label">
+      <div class="x-icon">&#10005;</div>
+      <span>Luxury resort porn</span>
+    </div>
+  </div>
+
+  <div class="photo-card">
+    <div class="photo-placeholder cool-3"></div>
+    <div class="photo-label">
+      <div class="x-icon">&#10005;</div>
+      <span>Posed studio shots</span>
+    </div>
+  </div>
+
+  <!-- Row 2 -->
+  <div class="photo-card">
+    <div class="photo-placeholder cool-4"></div>
+    <div class="photo-label">
+      <div class="x-icon">&#10005;</div>
+      <span>Instagram influencer filters</span>
+    </div>
+  </div>
+
+  <div class="photo-card">
+    <div class="photo-placeholder cool-5"></div>
+    <div class="photo-label">
+      <div class="x-icon">&#10005;</div>
+      <span>Empty landscapes (no people)</span>
+    </div>
+  </div>
+
+  <div class="photo-card">
+    <div class="photo-placeholder cool-6"></div>
+    <div class="photo-label">
+      <div class="x-icon">&#10005;</div>
+      <span>Corporate headshots</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

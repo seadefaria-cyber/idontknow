@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Content Pillars</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #FFFFFF; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.slide { width: 1920px; height: 1080px; overflow: hidden; position: relative; background: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; }
+.logo { position: absolute; top: 48px; right: 80px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800; color: #D9071C; }
+.section-label { position: absolute; top: 48px; left: 80px; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 500; color: #8C8279; letter-spacing: 3px; text-transform: uppercase; }
+.title { position: absolute; top: 90px; left: 80px; font-size: 64px; font-weight: 800; color: #3D3530; }
+.subtitle { position: absolute; top: 170px; left: 80px; font-size: 18px; font-weight: 400; color: #8C8279; max-width: 1400px; line-height: 1.5; }
+.cards { position: absolute; top: 220px; left: 80px; display: flex; flex-direction: row; gap: 20px; }
+.card { width: 420px; height: 800px; border-radius: 14px; padding: 36px; color: #FFFFFF; display: flex; flex-direction: column; }
+.card-1 { background: #D9071C; }
+.card-2 { background: #3D3530; }
+.card-3 { background: #1A1A1A; }
+.card-4 { background: #3D3530; }
+.card-icon { font-size: 48px; margin-bottom: 20px; }
+.card-title { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+.card-desc { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.8); margin-bottom: 28px; }
+.card-divider { width: 100%; height: 1px; background: rgba(255,255,255,0.15); margin-bottom: 24px; }
+.topics-label { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+.topics-list { display: flex; flex-direction: column; gap: 12px; }
+.topic-item { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; line-height: 1.5; color: rgba(255,255,255,0.85); }
+.topic-bullet { color: rgba(255,255,255,0.4); flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">Content Pillars</div>
+  <div class="logo">tryps</div>
+  <div class="title">Content Pillars</div>
+  <div class="subtitle">Four strategic themes that guide every piece of content we create.</div>
+  <div class="cards">
+    <div class="card card-1">
+      <div class="card-icon">&#x1F9ED;</div>
+      <div class="card-title">Trip Inspiration</div>
+      <div class="card-desc">Spark wanderlust. Show people places they didn't know they needed to visit. Make the scroll stop and the group chat start buzzing.</div>
+      <div class="card-divider"></div>
+      <div class="topics-label">Example Topics</div>
+      <div class="topics-list">
+        <div class="topic-item"><span class="topic-bullet">-</span> Hidden gems in Southeast Asia</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> Weekend trips under $500</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> "You need to go here" Reels</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> Seasonal destination roundups</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> Dream trip mood boards</div>
+      </div>
+    </div>
+    <div class="card card-2">
+      <div class="card-icon">&#x1F4A1;</div>
+      <div class="card-title">Planning Tips</div>
+      <div class="card-desc">Remove friction from group travel planning. Practical, actionable advice that makes the hard parts easy and the easy parts obvious.</div>
+      <div class="card-divider"></div>
+      <div class="topics-label">Example Topics</div>
+      <div class="topics-list">
+        <div class="topic-item"><span class="topic-bullet">-</span> How to split costs without drama</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> The 48-hour trip planning sprint</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> Booking hacks for group rates</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> When to book flights (data-backed)</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> Packing lists by destination</div>
+      </div>
+    </div>
+    <div class="card card-3">
+      <div class="card-icon">&#x2764;&#xFE0F;</div>
+      <div class="card-title">Friend Stories</div>
+      <div class="card-desc">Real stories from real friend groups. The chaos, the memories, the moments that only happen when you actually go. User-generated, authentic, emotional.</div>
+      <div class="card-divider"></div>
+      <div class="topics-label">Example Topics</div>
+      <div class="topics-list">
+        <div class="topic-item"><span class="topic-bullet">-</span> "How we planned our trip in 20 min"</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> Group trip photo dumps</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> Before/after trip transformations</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> Friendship milestone trips</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> Trip disaster stories (funny ones)</div>
+      </div>
+    </div>
+    <div class="card card-4">
+      <div class="card-icon">&#x1F4CD;</div>
+      <div class="card-title">Destination Guides</div>
+      <div class="card-desc">Deep-dive guides that go beyond the tourist traps. Local favorites, hidden spots, the places your friend who lives there would actually take you.</div>
+      <div class="card-divider"></div>
+      <div class="topics-label">Example Topics</div>
+      <div class="topics-list">
+        <div class="topic-item"><span class="topic-bullet">-</span> 72 hours in Tokyo with friends</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> Bali on a budget (for real)</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> The local's guide to Tulum</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> Best group-friendly Airbnbs</div>
+        <div class="topic-item"><span class="topic-bullet">-</span> Restaurants with big tables</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

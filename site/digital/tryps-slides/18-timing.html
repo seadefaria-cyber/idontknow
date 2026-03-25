@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Timing</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #F7F5F2; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.slide { width: 1920px; height: 1080px; overflow: hidden; position: relative; background: #F7F5F2; }
+.logo { position: absolute; right: 40px; top: 36px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; color: #D9071C; }
+.section-label { position: absolute; left: 80px; top: 48px; font-family: 'Space Mono', monospace; font-weight: 500; font-size: 12px; color: #8C8279; letter-spacing: 3px; text-transform: uppercase; }
+.title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 64px; color: #3D3530; position: absolute; left: 80px; top: 90px; }
+.subtitle { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 20px; color: #8C8279; position: absolute; left: 80px; top: 170px; max-width: 1000px; line-height: 1.5; }
+.cards { position: absolute; left: 80px; top: 230px; display: flex; flex-direction: row; gap: 32px; }
+.card { flex: 1; width: 552px; height: 780px; border-radius: 20px; padding: 40px; display: flex; flex-direction: column; }
+.card-dark { background: #3D3530; }
+.card-red { background: #D9071C; }
+.card-black { background: #1A1A1A; }
+.card-phase { font-family: 'Space Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
+.card-phase-light { color: rgba(255,255,255,0.5); }
+.card-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 32px; color: #FFFFFF; margin-bottom: 32px; }
+.timeline { display: flex; flex-direction: column; gap: 0; flex: 1; }
+.timeline-item { display: flex; flex-direction: row; align-items: flex-start; gap: 20px; padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.12); }
+.time-marker { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 13px; color: rgba(255,255,255,0.6); min-width: 100px; padding-top: 2px; }
+.time-marker-red { color: rgba(255,255,255,0.8); }
+.notif-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; font-size: 16px; color: #FFFFFF; line-height: 1.5; }
+.notif-desc { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">Notification Strategy</div>
+  <div class="logo">tryps</div>
+  <div class="title">Timing</div>
+  <div class="subtitle">A strategic notification system that respects user attention while keeping groups engaged.</div>
+  <div class="cards">
+    <div class="card card-dark">
+      <div class="card-phase card-phase-light">Phase 01</div>
+      <div class="card-title">Pre-Trip</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-marker">7 days</div>
+          <div>
+            <div class="notif-text">"Your Tokyo trip is one week away"</div>
+            <div class="notif-desc">Packing checklist + weather forecast</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-marker">3 days</div>
+          <div>
+            <div class="notif-text">"3 days until takeoff"</div>
+            <div class="notif-desc">Final itinerary confirmation</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-marker">1 day</div>
+          <div>
+            <div class="notif-text">"Tomorrow is the day"</div>
+            <div class="notif-desc">Boarding passes + meetup details</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-marker">Day of</div>
+          <div>
+            <div class="notif-text">"Let's go! Your crew is ready"</div>
+            <div class="notif-desc">Live group status + airport nav</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-red">
+      <div class="card-phase card-phase-light">Phase 02</div>
+      <div class="card-title">During Trip</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-marker time-marker-red">Real-time</div>
+          <div>
+            <div class="notif-text">"Alex just checked in at Shibuya"</div>
+            <div class="notif-desc">Live location updates from crew</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-marker time-marker-red">Daily</div>
+          <div>
+            <div class="notif-text">"Today's recap: 12 spots visited"</div>
+            <div class="notif-desc">Daily summary with photos + expenses</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-marker time-marker-red">Triggered</div>
+          <div>
+            <div class="notif-text">"Budget alert: 70% spent"</div>
+            <div class="notif-desc">Smart expense tracking alerts</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-marker time-marker-red">Scheduled</div>
+          <div>
+            <div class="notif-text">"Dinner reservation in 1 hour"</div>
+            <div class="notif-desc">Activity and booking reminders</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-black">
+      <div class="card-phase card-phase-light">Phase 03</div>
+      <div class="card-title">Post-Trip</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-marker">Day 1</div>
+          <div>
+            <div class="notif-text">"Your Tokyo trip summary is ready"</div>
+            <div class="notif-desc">Stats, highlights, total spend</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-marker">Day 3</div>
+          <div>
+            <div class="notif-text">"Share your best moments"</div>
+            <div class="notif-desc">Photo sharing prompt to group</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-marker">Day 7</div>
+          <div>
+            <div class="notif-text">"How was your trip?"</div>
+            <div class="notif-desc">Review request for visited spots</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-marker">Day 14</div>
+          <div>
+            <div class="notif-text">"Ready for the next one?"</div>
+            <div class="notif-desc">Rebooking nudge with suggestions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

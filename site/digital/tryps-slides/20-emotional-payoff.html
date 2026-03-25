@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>The Emotional Payoff</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #F7F5F2; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.slide { width: 1920px; height: 1080px; overflow: hidden; position: relative; background: #F7F5F2; }
+.logo { position: absolute; right: 40px; top: 36px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; color: #D9071C; }
+.section-label { position: absolute; left: 80px; top: 48px; font-family: 'Space Mono', monospace; font-weight: 500; font-size: 12px; color: #8C8279; letter-spacing: 3px; text-transform: uppercase; }
+.title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 56px; color: #3D3530; position: absolute; left: 80px; top: 90px; }
+.subtitle { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 20px; color: #8C8279; position: absolute; left: 80px; top: 165px; max-width: 1200px; line-height: 1.5; }
+.cards { position: absolute; left: 80px; top: 240px; display: flex; flex-direction: row; gap: 24px; }
+.card { width: 416px; height: 780px; border-radius: 20px; padding: 36px; display: flex; flex-direction: column; }
+.card-white { background: #FFFFFF; }
+.card-light { background: #F5F5F5; }
+.card-emoji { font-size: 40px; margin-bottom: 20px; }
+.card-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 24px; color: #3D3530; margin-bottom: 24px; }
+.card-mockup { flex: 1; background: #EAEAEA; border-radius: 16px; margin-bottom: 24px; display: flex; flex-direction: column; padding: 24px; overflow: hidden; }
+.mock-header { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 16px; color: #3D3530; margin-bottom: 12px; }
+.mock-bubble { background: #FFFFFF; border-radius: 14px; padding: 14px 18px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: #3D3530; margin-bottom: 8px; max-width: 240px; }
+.mock-bubble-user { background: #D9071C; color: #FFFFFF; align-self: flex-end; margin-left: auto; }
+.mock-trip-card { background: #FFFFFF; border-radius: 14px; padding: 16px; }
+.mock-trip-bar { height: 80px; background: linear-gradient(135deg, #D9071C, #FF6B4A); border-radius: 10px; margin-bottom: 12px; }
+.mock-trip-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 15px; color: #3D3530; }
+.mock-trip-sub { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 12px; color: #8C8279; margin-top: 4px; }
+.mock-vote-row { display: flex; gap: 8px; margin-bottom: 8px; }
+.mock-vote-chip { background: #FFFFFF; border: 2px solid #E5E7EB; border-radius: 999px; padding: 8px 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; color: #3D3530; }
+.mock-vote-chip-active { border-color: #D9071C; background: rgba(217,7,28,0.06); }
+.mock-vote-bar { height: 6px; background: #E5E7EB; border-radius: 3px; margin-bottom: 6px; }
+.mock-vote-fill { height: 6px; background: #D9071C; border-radius: 3px; }
+.mock-summary-stat { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #E5E7EB; }
+.mock-stat-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: #8C8279; }
+.mock-stat-value { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 13px; color: #3D3530; }
+.feeling { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; font-size: 18px; color: #D9071C; font-style: italic; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">20 Emotional Design</div>
+  <div class="logo">tryps</div>
+  <div class="title">The Emotional Payoff</div>
+  <div class="subtitle">Every interaction is designed to evoke a feeling. We don't just book trips — we build anticipation.</div>
+  <div class="cards">
+    <div class="card card-white">
+      <div class="card-emoji">💬</div>
+      <div class="card-title">The Text</div>
+      <div class="card-mockup" style="background: #F0EDEA;">
+        <div class="mock-header">Martin</div>
+        <div class="mock-bubble">Hey! Where do you want to go?</div>
+        <div class="mock-bubble mock-bubble-user">Tokyo with the crew</div>
+        <div class="mock-bubble">On it. Let me build something amazing for you.</div>
+      </div>
+      <div class="feeling">"This is so easy"</div>
+    </div>
+    <div class="card card-light">
+      <div class="card-emoji">🗺️</div>
+      <div class="card-title">The Plan</div>
+      <div class="card-mockup" style="background: #EAEAEA;">
+        <div class="mock-trip-card">
+          <div class="mock-trip-bar"></div>
+          <div class="mock-trip-title">Tokyo Summer 2026</div>
+          <div class="mock-trip-sub">Jul 12-19  ·  4 friends  ·  $2,400/person</div>
+        </div>
+      </div>
+      <div class="feeling">"This is actually happening"</div>
+    </div>
+    <div class="card card-light">
+      <div class="card-emoji">🗳️</div>
+      <div class="card-title">The Vote</div>
+      <div class="card-mockup" style="background: #EAEAEA;">
+        <div class="mock-header">Where should we stay?</div>
+        <div class="mock-vote-row">
+          <div class="mock-vote-chip mock-vote-chip-active">Shibuya</div>
+          <div class="mock-vote-chip">Shinjuku</div>
+        </div>
+        <div class="mock-vote-bar"><div class="mock-vote-fill" style="width: 75%;"></div></div>
+        <div style="font-family: 'Space Mono', monospace; font-size: 11px; color: #8C8279;">3 of 4 voted</div>
+      </div>
+      <div class="feeling">"We're doing this together"</div>
+    </div>
+    <div class="card card-light">
+      <div class="card-emoji">✨</div>
+      <div class="card-title">The Trip</div>
+      <div class="card-mockup" style="background: #EAEAEA;">
+        <div class="mock-header" style="text-align: center;">Trip Complete!</div>
+        <div class="mock-summary-stat"><span class="mock-stat-label">Days</span><span class="mock-stat-value">7</span></div>
+        <div class="mock-summary-stat"><span class="mock-stat-label">Spots visited</span><span class="mock-stat-value">23</span></div>
+        <div class="mock-summary-stat"><span class="mock-stat-label">Photos shared</span><span class="mock-stat-value">412</span></div>
+        <div class="mock-summary-stat"><span class="mock-stat-label">Total saved</span><span class="mock-stat-value">$1,200</span></div>
+      </div>
+      <div class="feeling">"I need to do this again"</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

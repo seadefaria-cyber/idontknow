@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Glimmer Vote</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #FFFFFF; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.slide { width: 1920px; height: 1080px; overflow: hidden; position: relative; background: #FFFFFF; }
+.logo { position: absolute; right: 40px; top: 36px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; color: #D9071C; }
+.section-label { position: absolute; left: 80px; top: 48px; font-family: 'Space Mono', monospace; font-weight: 500; font-size: 12px; color: #8C8279; letter-spacing: 3px; text-transform: uppercase; }
+.title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 56px; color: #3D3530; position: absolute; left: 80px; top: 90px; }
+.subtitle { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 20px; color: #8C8279; position: absolute; left: 80px; top: 160px; max-width: 900px; line-height: 1.5; }
+.phone { position: absolute; left: 80px; top: 230px; width: 340px; height: 760px; background: #F5F5F5; border-radius: 32px; padding: 40px 24px; display: flex; flex-direction: column; }
+.phone-header { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 24px; color: #3D3530; margin-bottom: 8px; }
+.phone-caption { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 14px; color: #8C8279; margin-bottom: 32px; }
+.vote-options { display: flex; flex-direction: column; gap: 14px; flex: 1; }
+.vote-option { background: #FFFFFF; border-radius: 14px; padding: 18px 20px; display: flex; align-items: center; gap: 14px; border: 2px solid #E5E7EB; }
+.vote-option-active { border-color: #D9071C; }
+.radio { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #E5E7EB; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.radio-active { border-color: #D9071C; }
+.radio-dot { width: 12px; height: 12px; border-radius: 50%; background: #D9071C; }
+.vote-name { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 16px; color: #3D3530; }
+.vote-sub { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 13px; color: #8C8279; }
+.phone-btn { background: #D9071C; color: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 16px; border: none; border-radius: 14px; padding: 16px; text-align: center; margin-top: auto; }
+.right-content { position: absolute; left: 520px; top: 260px; width: 1320px; }
+.right-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 40px; color: #3D3530; margin-bottom: 40px; }
+.steps { display: flex; flex-direction: column; gap: 32px; margin-bottom: 48px; }
+.step { display: flex; align-items: flex-start; gap: 20px; }
+.step-num { width: 48px; height: 48px; background: #D9071C; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 20px; color: #FFFFFF; flex-shrink: 0; }
+.step-content { display: flex; flex-direction: column; gap: 4px; }
+.step-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 20px; color: #3D3530; }
+.step-desc { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 16px; color: #8C8279; line-height: 1.5; }
+.step-spec { font-family: 'Space Mono', monospace; font-weight: 400; font-size: 13px; color: #D9071C; background: rgba(217,7,28,0.06); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-top: 6px; }
+.quote-card { background: #F7F5F2; border-radius: 16px; padding: 32px 40px; border-left: 4px solid #D9071C; }
+.quote-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; font-size: 20px; color: #3D3530; font-style: italic; line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">20 Emotional Design</div>
+  <div class="logo">tryps</div>
+  <div class="title">Glimmer Vote</div>
+  <div class="subtitle">The micro-interaction that makes group decisions feel exciting, not exhausting.</div>
+  <div class="phone">
+    <div class="phone-header">Where should we eat?</div>
+    <div class="phone-caption">Tokyo Trip  ·  4 votes needed</div>
+    <div class="vote-options">
+      <div class="vote-option vote-option-active">
+        <div class="radio radio-active"><div class="radio-dot"></div></div>
+        <div>
+          <div class="vote-name">Sushi Dai</div>
+          <div class="vote-sub">Tsukiji Market  ·  $$$$</div>
+        </div>
+      </div>
+      <div class="vote-option">
+        <div class="radio"></div>
+        <div>
+          <div class="vote-name">Ichiran Ramen</div>
+          <div class="vote-sub">Shibuya  ·  $$</div>
+        </div>
+      </div>
+      <div class="vote-option">
+        <div class="radio"></div>
+        <div>
+          <div class="vote-name">Robot Restaurant</div>
+          <div class="vote-sub">Shinjuku  ·  $$$</div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-btn">Submit Vote</div>
+  </div>
+  <div class="right-content">
+    <div class="right-title">How Glimmer Works</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">User taps their vote</div>
+          <div class="step-desc">Instant haptic feedback confirms the selection with a satisfying pulse.</div>
+          <div class="step-spec">haptic: impact-medium</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Vote bar animates with spring physics</div>
+          <div class="step-desc">The progress bar stretches and settles using natural spring dynamics.</div>
+          <div class="step-spec">damping: 12, stiffness: 300</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Threshold reached: confetti burst + sound</div>
+          <div class="step-desc">When everyone has voted, the screen erupts in celebration.</div>
+          <div class="step-spec">confetti: 120 particles, sound: chime.wav</div>
+        </div>
+      </div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-text">"Voting should feel like a celebration, not a chore."</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Type in Context</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.slide {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  position: relative;
+  background: #F7F5F2;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.logo {
+  position: absolute;
+  right: 40px;
+  top: 36px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #D9071C;
+}
+
+.section-label {
+  position: absolute;
+  left: 80px;
+  top: 48px;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: #8C8279;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.title {
+  position: absolute;
+  left: 80px;
+  top: 100px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 64px;
+  font-weight: 800;
+  color: #3D3530;
+}
+
+.subtitle {
+  position: absolute;
+  left: 80px;
+  top: 185px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #8C8279;
+}
+
+.cards-row {
+  position: absolute;
+  left: 80px;
+  top: 260px;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.context-card {
+  width: 540px;
+  height: 740px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+}
+
+.card-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: #8C8279;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Card 1 - Trip Card */
+.trip-photo {
+  width: 540px;
+  height: 280px;
+  background: linear-gradient(135deg, #D9071C 0%, #F5EADB 50%, #3D3530 100%);
+  flex-shrink: 0;
+}
+
+.trip-content {
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.trip-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #3D3530;
+}
+
+.trip-dates {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #8C8279;
+}
+
+.trip-travelers {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #8C8279;
+  margin-top: 4px;
+}
+
+.trip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #E8F5EE;
+  color: #2D6B4F;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 100px;
+  width: fit-content;
+  margin-top: 12px;
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2D6B4F;
+}
+
+/* Card 2 - Notification */
+.notif-content {
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.notif-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #FFF3E0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-top: 12px;
+}
+
+.notif-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #3D3530;
+  margin-top: 8px;
+}
+
+.notif-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #8C8279;
+  line-height: 1.6;
+}
+
+.notif-time {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #B5ADA5;
+  margin-top: 4px;
+}
+
+.notif-button {
+  width: 100%;
+  height: 52px;
+  background: #D9071C;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-top: auto;
+}
+
+/* Card 3 - Settings */
+.settings-content {
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.settings-heading {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #3D3530;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.toggle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.toggle-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid #F0EDEA;
+}
+
+.toggle-row:last-child { border-bottom: none; }
+
+.toggle-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #3D3530;
+}
+
+.toggle-switch {
+  width: 48px;
+  height: 28px;
+  border-radius: 14px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.toggle-switch.on { background: #D9071C; }
+.toggle-switch.off { background: #E8E5E0; }
+
+.toggle-knob {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  position: absolute;
+  top: 3px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.toggle-switch.on .toggle-knob { left: 23px; }
+.toggle-switch.off .toggle-knob { left: 3px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">TYPOGRAPHY</div>
+  <div class="logo">tryps</div>
+  <div class="title">Type in Context</div>
+  <div class="subtitle">How our type scale works across real product surfaces.</div>
+
+  <div class="cards-row">
+    <!-- Card 1: Trip Card -->
+    <div class="context-card">
+      <div class="trip-photo"></div>
+      <div class="trip-content">
+        <div class="card-label">TRIP CARD</div>
+        <div class="trip-title">Bali 2026</div>
+        <div class="trip-dates">Mar 12 -- Mar 19</div>
+        <div class="trip-travelers">4 travelers</div>
+        <div class="trip-badge">
+          <div class="badge-dot"></div>
+          All booked
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Notification -->
+    <div class="context-card">
+      <div class="notif-content">
+        <div class="card-label">NOTIFICATION</div>
+        <div class="notif-icon">
+          <span style="color: #E67E22;">&#9679;</span>
+        </div>
+        <div class="notif-title">Sara joined your trip!</div>
+        <div class="notif-body">Your crew for Bali 2026 is growing. Sara has accepted your invite and is ready to explore.</div>
+        <div class="notif-time">2 minutes ago</div>
+        <div class="notif-button">View Trip</div>
+      </div>
+    </div>
+
+    <!-- Card 3: Settings -->
+    <div class="context-card">
+      <div class="settings-content">
+        <div class="card-label">SETTINGS</div>
+        <div class="settings-heading">Preferences</div>
+        <div class="toggle-list">
+          <div class="toggle-row">
+            <div class="toggle-label">Push Notifications</div>
+            <div class="toggle-switch on">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-label">Email Updates</div>
+            <div class="toggle-switch on">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-label">Location Services</div>
+            <div class="toggle-switch off">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-label">Dark Mode</div>
+            <div class="toggle-switch off">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

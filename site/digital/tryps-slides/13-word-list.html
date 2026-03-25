@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Word List</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #F7F5F2; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.slide { width: 1920px; height: 1080px; overflow: hidden; position: relative; background: #F7F5F2; font-family: 'Plus Jakarta Sans', sans-serif; }
+.logo { position: absolute; top: 48px; right: 80px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800; color: #D9071C; }
+.section-label { position: absolute; top: 48px; left: 80px; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 500; color: #8C8279; letter-spacing: 3px; text-transform: uppercase; }
+.title { position: absolute; top: 90px; left: 80px; font-size: 64px; font-weight: 800; color: #3D3530; }
+.subtitle { position: absolute; top: 170px; left: 80px; font-size: 18px; font-weight: 400; color: #8C8279; max-width: 1200px; line-height: 1.5; }
+.columns { position: absolute; top: 220px; left: 80px; display: flex; flex-direction: row; gap: 40px; }
+.col { width: 840px; height: 800px; border-radius: 16px; padding: 48px; }
+.col-we-say { background: #3D3530; }
+.col-never-say { background: #D9071C; }
+.col-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.col-header-icon { font-size: 24px; }
+.col-header-text { font-size: 24px; font-weight: 700; color: #FFFFFF; }
+.divider { width: 100%; height: 1px; background: rgba(255,255,255,0.2); margin-bottom: 28px; }
+.row { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 28px; }
+.row-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+.row-content { display: flex; flex-direction: column; gap: 4px; }
+.row-word { font-size: 20px; font-weight: 600; color: #FFFFFF; }
+.row-explain { font-size: 16px; color: rgba(255,255,255,0.6); }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">Voice & Tone</div>
+  <div class="logo">tryps</div>
+  <div class="title">Word List</div>
+  <div class="subtitle">The words we choose shape how people feel about the brand.</div>
+  <div class="columns">
+    <div class="col col-we-say">
+      <div class="col-header">
+        <span class="col-header-icon" style="color: #4ADE80;">&#10003;</span>
+        <span class="col-header-text">We Say</span>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <span class="row-icon" style="color: #4ADE80;">&#10003;</span>
+        <div class="row-content">
+          <span class="row-word">your friends</span>
+          <span class="row-explain">not "users" or "travelers"</span>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-icon" style="color: #4ADE80;">&#10003;</span>
+        <div class="row-content">
+          <span class="row-word">trip</span>
+          <span class="row-explain">not "journey" or "adventure"</span>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-icon" style="color: #4ADE80;">&#10003;</span>
+        <div class="row-content">
+          <span class="row-word">vibe</span>
+          <span class="row-explain">casual, real, approachable</span>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-icon" style="color: #4ADE80;">&#10003;</span>
+        <div class="row-content">
+          <span class="row-word">welcome</span>
+          <span class="row-explain">warm and inviting</span>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-icon" style="color: #4ADE80;">&#10003;</span>
+        <div class="row-content">
+          <span class="row-word">easy</span>
+          <span class="row-explain">our promise</span>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-icon" style="color: #4ADE80;">&#10003;</span>
+        <div class="row-content">
+          <span class="row-word">obvious</span>
+          <span class="row-explain">how everything should feel</span>
+        </div>
+      </div>
+    </div>
+    <div class="col col-never-say">
+      <div class="col-header">
+        <span class="col-header-icon" style="color: #FFFFFF;">&#10007;</span>
+        <span class="col-header-text">We Never Say</span>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <span class="row-icon" style="color: #FFFFFF;">&#10007;</span>
+        <div class="row-content">
+          <span class="row-word">journey</span>
+          <span class="row-explain">too formal</span>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-icon" style="color: #FFFFFF;">&#10007;</span>
+        <div class="row-content">
+          <span class="row-word">adventure</span>
+          <span class="row-explain">too aspirational</span>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-icon" style="color: #FFFFFF;">&#10007;</span>
+        <div class="row-content">
+          <span class="row-word">users</span>
+          <span class="row-explain">too corporate</span>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-icon" style="color: #FFFFFF;">&#10007;</span>
+        <div class="row-content">
+          <span class="row-word">travelers</span>
+          <span class="row-explain">too travel-industry</span>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-icon" style="color: #FFFFFF;">&#10007;</span>
+        <div class="row-content">
+          <span class="row-word">explore / unlock</span>
+          <span class="row-explain">too app-marketing</span>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-icon" style="color: #FFFFFF;">&#10007;</span>
+        <div class="row-content">
+          <span class="row-word">seamless / curated</span>
+          <span class="row-explain">banned buzzwords</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

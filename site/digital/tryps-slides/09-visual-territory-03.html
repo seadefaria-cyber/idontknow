@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Tryps Brand Book — Visual Territory 03</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #F7F5F2;
+    position: relative;
+  }
+
+  .logo {
+    position: absolute;
+    top: 40px;
+    right: 56px;
+    font-weight: 800;
+    font-size: 28px;
+    color: #D9071C;
+    letter-spacing: -0.5px;
+  }
+
+  .section-label {
+    position: absolute;
+    top: 44px;
+    left: 56px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #8C8279;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .title-area {
+    position: absolute;
+    top: 90px;
+    left: 56px;
+    width: 1200px;
+  }
+  .title-area h1 {
+    font-size: 64px;
+    font-weight: 800;
+    color: #3D3530;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .title-area p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #8C8279;
+    line-height: 1.5;
+    max-width: 1000px;
+  }
+
+  .grid {
+    position: absolute;
+    top: 260px;
+    left: 56px;
+    right: 56px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 24px;
+    height: 720px;
+  }
+
+  .brand-card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: box-shadow 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  .brand-card h3 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #3D3530;
+    margin-bottom: 16px;
+  }
+
+  .brand-card p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #8C8279;
+    line-height: 1.6;
+  }
+
+  /* Subtle brand icon placeholder */
+  .brand-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: #FFF;
+  }
+  .icon-partiful { background: linear-gradient(135deg, #A855F7, #EC4899); }
+  .icon-wispr { background: linear-gradient(135deg, #3B82F6, #06B6D4); }
+  .icon-venmo { background: linear-gradient(135deg, #3B82F6, #2563EB); }
+  .icon-airbnb { background: linear-gradient(135deg, #FF385C, #E31C5F); }
+  .icon-a24 { background: linear-gradient(135deg, #1C1C1E, #3D3530); }
+  .icon-strava { background: linear-gradient(135deg, #FC4C02, #E8913A); }
+</style>
+</head>
+<body>
+
+<div class="section-label">09 &mdash; VISUAL TERRITORY</div>
+<div class="logo">tryps</div>
+
+<div class="title-area">
+  <h1>Brands We Admire</h1>
+  <p>Companies that nail the balance of fun, trust, and beautiful simplicity we aspire to.</p>
+</div>
+
+<div class="grid">
+  <!-- Row 1 -->
+  <div class="brand-card">
+    <div class="brand-icon icon-partiful">P</div>
+    <h3>Partiful</h3>
+    <p>Made event planning feel like a party, not a chore. Personality-first design that people actually share.</p>
+  </div>
+
+  <div class="brand-card">
+    <div class="brand-icon icon-wispr">W</div>
+    <h3>Wispr Flow</h3>
+    <p>Invisible AI that just works. No settings, no dashboards. You talk, it types. That's the whole product.</p>
+  </div>
+
+  <div class="brand-card">
+    <div class="brand-icon icon-venmo">V</div>
+    <h3>Venmo</h3>
+    <p>Turned boring payments into a social feed. Made splitting the bill feel fun instead of awkward.</p>
+  </div>
+
+  <!-- Row 2 -->
+  <div class="brand-card">
+    <div class="brand-icon icon-airbnb">A</div>
+    <h3>Airbnb</h3>
+    <p>Proved that trust between strangers is a design problem. Their brand made staying in someone's home feel safe and exciting.</p>
+  </div>
+
+  <div class="brand-card">
+    <div class="brand-icon icon-a24">A</div>
+    <h3>A24</h3>
+    <p>Built a brand people wear on a t-shirt. Taste as identity. Their audience feels like they discovered something, not sold something.</p>
+  </div>
+
+  <div class="brand-card">
+    <div class="brand-icon icon-strava">S</div>
+    <h3>Strava</h3>
+    <p>Made exercise social without being cringe. The feed, the kudos, the segments. Activity as content.</p>
+  </div>
+</div>
+
+</body>
+</html>

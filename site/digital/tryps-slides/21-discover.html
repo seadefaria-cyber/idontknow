@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Discover</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #FFFFFF; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.slide { width: 1920px; height: 1080px; overflow: hidden; position: relative; background: #FFFFFF; }
+.logo { position: absolute; right: 40px; top: 36px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; color: #D9071C; }
+.section-label { position: absolute; left: 80px; top: 48px; font-family: 'Space Mono', monospace; font-weight: 500; font-size: 12px; color: #8C8279; letter-spacing: 3px; text-transform: uppercase; }
+.title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 56px; color: #3D3530; position: absolute; left: 80px; top: 90px; }
+.subtitle { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 20px; color: #8C8279; position: absolute; left: 80px; top: 160px; max-width: 1000px; line-height: 1.5; }
+.phone { position: absolute; left: 80px; top: 230px; width: 360px; height: 780px; background: #F5F5F5; border-radius: 32px; padding: 40px 24px; display: flex; flex-direction: column; }
+.phone-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 28px; color: #3D3530; margin-bottom: 4px; }
+.phone-sub { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 14px; color: #8C8279; margin-bottom: 24px; }
+.dest-card { border-radius: 16px; overflow: hidden; margin-bottom: 16px; position: relative; height: 200px; }
+.dest-gradient-1 { background: linear-gradient(135deg, #D9071C 0%, #FF8A65 50%, #FFD54F 100%); }
+.dest-gradient-2 { background: linear-gradient(135deg, #1A1A1A 0%, #3D3530 50%, #D9071C 100%); }
+.dest-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 20px; background: linear-gradient(transparent, rgba(0,0,0,0.7)); }
+.dest-name { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 20px; color: #FFFFFF; }
+.dest-price { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 14px; color: #FFFFFF; background: rgba(217,7,28,0.9); padding: 4px 10px; border-radius: 8px; position: absolute; top: 16px; right: 16px; }
+.dest-meta { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 12px; color: rgba(255,255,255,0.8); margin-top: 2px; }
+.right-area { position: absolute; left: 520px; top: 240px; width: 1320px; padding: 0 40px; }
+.right-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 40px; color: #3D3530; margin-bottom: 36px; }
+.feature-cards { display: flex; flex-direction: column; gap: 20px; margin-bottom: 48px; }
+.feature-card { background: #F7F5F2; border-radius: 16px; padding: 28px 32px; display: flex; align-items: flex-start; gap: 20px; }
+.feature-icon { font-size: 28px; flex-shrink: 0; width: 48px; height: 48px; background: rgba(217,7,28,0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+.feature-info { display: flex; flex-direction: column; gap: 4px; }
+.feature-name { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 20px; color: #3D3530; }
+.feature-desc { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 16px; color: #8C8279; line-height: 1.5; }
+.stats-row { display: flex; gap: 40px; padding: 32px 0; border-top: 1px solid #E5E7EB; }
+.stat { display: flex; flex-direction: column; gap: 4px; }
+.stat-value { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 32px; color: #D9071C; }
+.stat-label { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; font-size: 14px; color: #8C8279; }
+.stat-divider { width: 1px; background: #E5E7EB; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">21 Product Vision</div>
+  <div class="logo">tryps</div>
+  <div class="title">Discover</div>
+  <div class="subtitle">A curated feed of destination inspiration, powered by your crew's travel history and shared wishlists.</div>
+  <div class="phone">
+    <div class="phone-title">Discover</div>
+    <div class="phone-sub">Trending with your crew</div>
+    <div class="dest-card dest-gradient-1">
+      <div class="dest-price">$1,200</div>
+      <div class="dest-overlay">
+        <div class="dest-name">Tokyo, Japan</div>
+        <div class="dest-meta">3 friends interested  ·  Jul-Aug</div>
+      </div>
+    </div>
+    <div class="dest-card dest-gradient-2">
+      <div class="dest-price">$890</div>
+      <div class="dest-overlay">
+        <div class="dest-name">Barcelona, Spain</div>
+        <div class="dest-meta">5 friends interested  ·  Sep</div>
+      </div>
+    </div>
+  </div>
+  <div class="right-area">
+    <div class="right-title">Powered by Your Crew</div>
+    <div class="feature-cards">
+      <div class="feature-card">
+        <div class="feature-icon">🧬</div>
+        <div class="feature-info">
+          <div class="feature-name">Travel DNA</div>
+          <div class="feature-desc">Learns from past trips to surface destinations your group will love. Adventure crew? Beach people? We know.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <div class="feature-info">
+          <div class="feature-name">Friend Activity</div>
+          <div class="feature-desc">See where friends are going and get inspired. Social proof drives discovery and sparks FOMO.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⏰</div>
+        <div class="feature-info">
+          <div class="feature-name">Smart Timing</div>
+          <div class="feature-desc">Suggests when flights are cheapest, when weather is best, and when your group is most likely free.</div>
+        </div>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-value">87%</div>
+        <div class="stat-label">trip completion rate</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <div class="stat-value">4.2</div>
+        <div class="stat-label">avg group size</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <div class="stat-value">12</div>
+        <div class="stat-label">destinations trending</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

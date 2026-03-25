@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Tone Spectrum</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #FFFFFF; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.slide { width: 1920px; height: 1080px; overflow: hidden; position: relative; background: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; }
+.logo { position: absolute; top: 48px; right: 80px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800; color: #D9071C; }
+.section-label { position: absolute; top: 48px; left: 80px; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 500; color: #8C8279; letter-spacing: 3px; text-transform: uppercase; }
+.title { position: absolute; top: 90px; left: 80px; font-size: 64px; font-weight: 800; color: #3D3530; }
+.subtitle { position: absolute; top: 170px; left: 80px; font-size: 18px; font-weight: 400; color: #8C8279; max-width: 1400px; line-height: 1.5; }
+.spectrum-container { position: absolute; top: 250px; left: 80px; width: 1760px; }
+.spectrum-bar { width: 1760px; height: 56px; border-radius: 28px; background: linear-gradient(to right, #FFB347, #D9071C, #1E1B19); position: relative; }
+.spectrum-labels { display: flex; justify-content: space-between; margin-top: 8px; }
+.spectrum-labels span { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #8C8279; letter-spacing: 2px; text-transform: uppercase; }
+.dot { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 24px; height: 24px; border-radius: 50%; border: 3px solid #FFFFFF; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.dot-label { position: absolute; top: 70px; transform: translateX(-50%); font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #3D3530; white-space: nowrap; }
+.dot-social { left: 8%; background: #FFB347; }
+.dot-push { left: 28%; background: #E8812A; }
+.dot-inapp { left: 50%; background: #D9071C; }
+.dot-email { left: 72%; background: #5C3A2A; }
+.dot-press { left: 92%; background: #1E1B19; }
+.example-cards { position: absolute; top: 380px; left: 80px; display: flex; flex-direction: row; gap: 20px; }
+.example-card { width: 332px; height: 620px; background: #F5F5F5; border-radius: 12px; padding: 32px; display: flex; flex-direction: column; }
+.tag { display: inline-block; padding: 6px 16px; border-radius: 20px; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: #FFFFFF; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; align-self: flex-start; }
+.tag-social { background: #FFB347; }
+.tag-push { background: #E8812A; }
+.tag-inapp { background: #D9071C; }
+.tag-email { background: #5C3A2A; }
+.tag-press { background: #1E1B19; }
+.example-label { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #3D3530; margin-bottom: 16px; letter-spacing: 1px; }
+.example-text { font-size: 17px; color: #3D3530; font-style: italic; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="section-label">13 Voice & Tone</div>
+  <div class="logo">tryps</div>
+  <div class="title">Tone Spectrum</div>
+  <div class="subtitle">Our tone shifts across channels — casual on social, formal in press — but the voice always stays tryps.</div>
+  <div class="spectrum-container">
+    <div class="spectrum-bar">
+      <div class="dot dot-social"></div>
+      <div class="dot-label" style="left: 8%;">Social</div>
+      <div class="dot dot-push"></div>
+      <div class="dot-label" style="left: 28%;">Push Notifications</div>
+      <div class="dot dot-inapp"></div>
+      <div class="dot-label" style="left: 50%;">In-App</div>
+      <div class="dot dot-email"></div>
+      <div class="dot-label" style="left: 72%;">Email</div>
+      <div class="dot dot-press"></div>
+      <div class="dot-label" style="left: 92%;">Press</div>
+    </div>
+    <div class="spectrum-labels">
+      <span>Casual</span>
+      <span>Formal</span>
+    </div>
+  </div>
+  <div class="example-cards">
+    <div class="example-card">
+      <div class="tag tag-social">Social</div>
+      <div class="example-label">Instagram / TikTok</div>
+      <div class="example-text">"omg this hidden beach in Bali though. your next trip starts here"</div>
+    </div>
+    <div class="example-card">
+      <div class="tag tag-push">Push</div>
+      <div class="example-label">Push Notifications</div>
+      <div class="example-text">"Heads up — your flight to Tokyo leaves in 3 hours. Don't forget your passport!"</div>
+    </div>
+    <div class="example-card">
+      <div class="tag tag-inapp">In-App</div>
+      <div class="example-label">In-App Messaging</div>
+      <div class="example-text">"Your itinerary for Rome is ready. We've added a few local favorites."</div>
+    </div>
+    <div class="example-card">
+      <div class="tag tag-email">Email</div>
+      <div class="example-label">Email Communications</div>
+      <div class="example-text">"We're pleased to share your upcoming trip details. Please review your booking confirmation below."</div>
+    </div>
+    <div class="example-card">
+      <div class="tag tag-press">Press</div>
+      <div class="example-label">Press Releases</div>
+      <div class="example-text">"Tryps Inc. today announced the expansion of its platform to 12 new markets across Southeast Asia."</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
